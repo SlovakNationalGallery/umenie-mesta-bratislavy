@@ -1,0 +1,8 @@
+vendor
+storage
+config
+
+package-lock.json
+composer.lock
+README.md
+/index.php
