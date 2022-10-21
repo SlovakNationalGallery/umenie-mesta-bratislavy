@@ -1,0 +1,73 @@
+name: Test & Deploy
+
+on: push
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-18.04
+    services:
+      mysql:
+        image: mysql:5.7.29
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: test
+        ports:
+          - 3306
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Restore Composer cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - run: composer install --prefer-dist
+      - name: Restore npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm install && npm run build
+      - run: php artisan test
+        env:
+          APP_KEY: base64:HXaE/pTpPoSNdHFMl5SpgX2XKtdph3EjrdmvWFDKisE=
+          DATABASE_URL: mysql://root:@127.0.0.1:${{ job.services.mysql.ports[3306] }}/test
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-18.04
+    needs: [test]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v1
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Restore Composer cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - run: composer install --prefer-dist
+      - name: Deploy
+        uses: deployphp/action@v1
+        with:
+          private-key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          known-hosts: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+          dep: deploy
