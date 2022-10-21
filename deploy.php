@@ -5,7 +5,6 @@ require 'recipe/laravel.php';
 
 // Config
 set('bin/php', 'php8.1');
-set('bin/npm', 'npm');
 
 set(
     'repository',
@@ -23,8 +22,10 @@ host('webumenia.sk')
 // Tasks
 task('build', function () {
     cd('{{release_path}}');
-    run('{{bin/npm}} install');
-    run('{{bin/npm}} run build');
+
+    run(
+        'source "$HOME/.nvm/nvm.sh" && nvm use 16.16.0 && npm ci && npm run build'
+    );
 });
 
 // Hooks
