@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'airtable' => [
+        'base' => env('AIRTABLE_BASE'),
+        'api_key' => env('AIRTABLE_API_KEY'),
+    ]
+
 ];
