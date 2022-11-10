@@ -25,4 +25,9 @@ class Artwork extends Model
             ->wherePivot('role', 'coauthor')
             ->orderByPivot('order');
     }
+
+    public function photos()
+    {
+        return $this->belongsToMany(Photo::class)->orderByPivot('order');
+    }
 }

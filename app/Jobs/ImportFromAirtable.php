@@ -3,10 +3,9 @@
 namespace App\Jobs;
 
 use App\Models\Artwork;
-use App\Models\ArtworkAuthor;
 use App\Models\Author;
+use App\Models\Photo;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,6 +26,7 @@ class ImportFromAirtable implements ShouldQueue
                 'name' => 'fldIL8binV6omIxcP',
                 'authors' => 'fld6JFDyetXLQTFXK',
                 'coauthors' => 'fldr8pojoo7MoDwHs',
+                'photos' => 'fldNn5tr9pq8VBxnu',
             ],
         ],
         'authors' => [
@@ -35,6 +35,12 @@ class ImportFromAirtable implements ShouldQueue
                 'first_name' => 'fldLxr7puFcJ8rFmk',
                 'last_name' => 'fld75ZIsJi1VIuB5S',
                 'other_name' => 'fldAKxihfS6r6OqHv',
+            ],
+        ],
+        'photos' => [
+            'id' => 'tbl8P5wGh0p4tYMQL',
+            'fields' => [
+                'description' => 'fldNBjZxPtG0Ib7er',
             ],
         ],
     ];
@@ -58,11 +64,19 @@ class ImportFromAirtable implements ShouldQueue
     {
         $artworks = $this->listRecords('artworks')->collect();
         $authors = $this->listRecords('authors')->collect();
+        $photos = $this->listRecords('photos')->collect();
 
-        DB::transaction(function () use ($artworks, $authors) {
+        DB::transaction(function () use ($artworks, $authors, $photos) {
             DB::table('artwork_author')->delete();
             Artwork::whereNotIn('id', $artworks->pluck('id'))->delete();
             Author::whereNotIn('id', $authors->pluck('id'))->delete();
+            Photo::whereNotIn('id', $photos->pluck('id'))->delete();
+
+            $photos
+                ->chunk(100)
+                ->each(
+                    fn($photos) => Photo::upsert($photos->toArray(), ['id'])
+                );
 
             $authors
                 ->chunk(100)
@@ -72,11 +86,13 @@ class ImportFromAirtable implements ShouldQueue
 
             $artworks->chunk(100)->each(function ($artworks) {
                 Artwork::upsert(
-                    $artworks->map->except(['authors', 'coauthors'])->toArray(),
+                    $artworks->map
+                        ->except(['authors', 'coauthors', 'photos'])
+                        ->toArray(),
                     ['id']
                 );
 
-                // Authors
+                // Relationships
                 DB::table('artwork_author')->insert(
                     $artworks
                         ->flatMap(
@@ -101,6 +117,20 @@ class ImportFromAirtable implements ShouldQueue
                                     'artwork_id' => $artwork['id'],
                                     'author_id' => $author_id,
                                     'role' => 'coauthor',
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
+                DB::table('artwork_photo')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect($artwork['photos'])->map(
+                                fn($photo_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'photo_id' => $photo_id,
                                     'order' => $index,
                                 ]
                             )
