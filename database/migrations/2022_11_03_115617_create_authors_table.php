@@ -30,11 +30,13 @@ return new class extends Migration {
             $table
                 ->foreign('artwork_id')
                 ->references('id')
-                ->on('artworks');
+                ->on('artworks')
+                ->cascadeOnDelete();
             $table
                 ->foreign('author_id')
                 ->references('id')
-                ->on('authors');
+                ->on('authors')
+                ->cascadeOnDelete();
         });
     }
 
