@@ -9,6 +9,9 @@ class Artwork extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     public function authors()
     {
         return $this->belongsToMany(Author::class)
