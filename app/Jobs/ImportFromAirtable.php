@@ -14,6 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\LazyCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImportFromAirtable implements ShouldQueue
 {
@@ -41,6 +42,7 @@ class ImportFromAirtable implements ShouldQueue
             'id' => 'tbl8P5wGh0p4tYMQL',
             'fields' => [
                 'description' => 'fldNBjZxPtG0Ib7er',
+                'media' => 'fld2TGDfLmdo3YcAS',
             ],
         ],
     ];
@@ -75,7 +77,10 @@ class ImportFromAirtable implements ShouldQueue
             $photos
                 ->chunk(100)
                 ->each(
-                    fn($photos) => Photo::upsert($photos->toArray(), ['id'])
+                    fn($photos) => Photo::upsert(
+                        $photos->map->except(['media'])->toArray(),
+                        ['id']
+                    )
                 );
 
             $authors
@@ -108,7 +113,6 @@ class ImportFromAirtable implements ShouldQueue
                         ->toArray()
                 );
 
-                // Co-authors
                 DB::table('artwork_author')->insert(
                     $artworks
                         ->flatMap(
@@ -139,6 +143,47 @@ class ImportFromAirtable implements ShouldQueue
                 );
             });
         });
+
+        // Photo media (Airtable attachments)
+        $upstreamMediaAirtableIds = $photos
+            ->flatMap(fn($p) => $p['media'])
+            ->pluck('id');
+
+        // Cleanup media no longer in upstream
+        Media::destroy(
+            Media::whereNotIn(
+                'custom_properties->airtable_id',
+                $upstreamMediaAirtableIds
+            )->pluck('id')
+        );
+
+        $importedAirtableIds = Media::pluck('custom_properties')->pluck([
+            'airtable_id',
+        ]);
+
+        $unimportedAirtableIds = $upstreamMediaAirtableIds->diff(
+            $importedAirtableIds
+        );
+
+        if ($unimportedAirtableIds->isNotEmpty()) {
+            $photos->each(function ($photo) use ($unimportedAirtableIds) {
+                collect($photo['media'])->each(function ($media) use (
+                    $unimportedAirtableIds,
+                    $photo
+                ) {
+                    if ($unimportedAirtableIds->doesntContain($media['id'])) {
+                        return;
+                    }
+
+                    // TODO move to a separate job
+                    Photo::find($photo['id'])
+                        ->addMediaFromUrl($media['url'])
+                        ->withCustomProperties(['airtable_id' => $media['id']])
+                        ->usingFilename($media['filename'])
+                        ->toMediaCollection();
+                });
+            });
+        }
     }
 
     private function listRecords(string $tableName)
