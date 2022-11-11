@@ -201,13 +201,13 @@ class ImportFromAirtable implements ShouldQueue
                     fn($m) => $m['id'] == $airtableId
                 );
 
-                // TODO move to a separate job
                 $photo
                     ->addMediaFromUrl($upstreamMedia['url'])
                     ->withCustomProperties([
                         'airtable_id' => $upstreamMedia['id'],
                     ])
                     ->usingFilename($upstreamMedia['filename'])
+                    ->withResponsiveImages()
                     ->toMediaCollection();
             });
         });
