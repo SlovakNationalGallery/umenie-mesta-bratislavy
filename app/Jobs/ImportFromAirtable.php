@@ -206,7 +206,6 @@ class ImportFromAirtable implements ShouldQueue
                     ->withCustomProperties([
                         'airtable_id' => $upstreamMedia['id'],
                     ])
-                    ->usingFilename($upstreamMedia['filename'])
                     ->withResponsiveImages()
                     ->toMediaCollection();
             });
