@@ -25,7 +25,6 @@ return new class extends Migration {
             $table->string('author_id');
             $table->string('role');
             $table->smallInteger('order');
-            $table->timestamps();
 
             $table
                 ->foreign('artwork_id')
@@ -37,6 +36,8 @@ return new class extends Migration {
                 ->references('id')
                 ->on('authors')
                 ->cascadeOnDelete();
+
+            $table->unique(['artwork_id', 'author_id', 'role']);
         });
     }
 

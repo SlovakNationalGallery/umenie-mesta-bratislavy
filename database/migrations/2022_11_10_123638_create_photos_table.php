@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->string('artwork_id');
             $table->string('photo_id');
             $table->smallInteger('order');
-            $table->timestamps();
 
             $table
                 ->foreign('artwork_id')
@@ -34,6 +33,8 @@ return new class extends Migration {
                 ->references('id')
                 ->on('photos')
                 ->cascadeOnDelete();
+
+            $table->unique(['artwork_id', 'photo_id']);
         });
     }
 

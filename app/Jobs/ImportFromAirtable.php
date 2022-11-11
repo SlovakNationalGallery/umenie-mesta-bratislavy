@@ -69,7 +69,6 @@ class ImportFromAirtable implements ShouldQueue
         $photos = $this->listRecords('photos')->collect();
 
         DB::transaction(function () use ($artworks, $authors, $photos) {
-            DB::table('artwork_author')->delete();
             Artwork::whereNotIn('id', $artworks->pluck('id'))->delete();
             Author::whereNotIn('id', $authors->pluck('id'))->delete();
             Photo::whereNotIn('id', $photos->pluck('id'))->delete();
@@ -98,7 +97,7 @@ class ImportFromAirtable implements ShouldQueue
                 );
 
                 // Relationships
-                DB::table('artwork_author')->insert(
+                DB::table('artwork_author')->upsert(
                     $artworks
                         ->flatMap(
                             fn($artwork) => collect($artwork['authors'])->map(
@@ -110,10 +109,12 @@ class ImportFromAirtable implements ShouldQueue
                                 ]
                             )
                         )
-                        ->toArray()
+                        ->toArray(),
+                    ['artwork_id', 'author_id', 'role'],
+                    ['order']
                 );
 
-                DB::table('artwork_author')->insert(
+                DB::table('artwork_author')->upsert(
                     $artworks
                         ->flatMap(
                             fn($artwork) => collect($artwork['coauthors'])->map(
@@ -125,10 +126,11 @@ class ImportFromAirtable implements ShouldQueue
                                 ]
                             )
                         )
-                        ->toArray()
+                        ->toArray(),
+                    ['artwork_id', 'author_id', 'role'],
+                    ['order']
                 );
-
-                DB::table('artwork_photo')->insert(
+                DB::table('artwork_photo')->upsert(
                     $artworks
                         ->flatMap(
                             fn($artwork) => collect($artwork['photos'])->map(
@@ -139,7 +141,9 @@ class ImportFromAirtable implements ShouldQueue
                                 ]
                             )
                         )
-                        ->toArray()
+                        ->toArray(),
+                    ['artwork_id', 'photo_id'],
+                    ['order']
                 );
             });
         });
@@ -157,33 +161,56 @@ class ImportFromAirtable implements ShouldQueue
             )->pluck('id')
         );
 
-        $importedAirtableIds = Media::pluck('custom_properties')->pluck([
-            'airtable_id',
-        ]);
+        $photos->each(function ($upstreamPhoto) {
+            $photo = Photo::find($upstreamPhoto['id']);
+            $importedAirtableIds = $photo
+                ->media()
+                ->pluck('custom_properties')
+                ->pluck(['airtable_id']);
 
-        $unimportedAirtableIds = $upstreamMediaAirtableIds->diff(
-            $importedAirtableIds
-        );
+            $upstreamAirtableIds = collect($upstreamPhoto['media'])->pluck(
+                'id'
+            );
 
-        if ($unimportedAirtableIds->isNotEmpty()) {
-            $photos->each(function ($photo) use ($unimportedAirtableIds) {
-                collect($photo['media'])->each(function ($media) use (
-                    $unimportedAirtableIds,
-                    $photo
-                ) {
-                    if ($unimportedAirtableIds->doesntContain($media['id'])) {
-                        return;
-                    }
+            if ($importedAirtableIds == $upstreamAirtableIds) {
+                return;
+            }
 
-                    // TODO move to a separate job
-                    Photo::find($photo['id'])
-                        ->addMediaFromUrl($media['url'])
-                        ->withCustomProperties(['airtable_id' => $media['id']])
-                        ->usingFilename($media['filename'])
-                        ->toMediaCollection();
-                });
+            // Sorting
+            $upstreamAirtableIds->each(function ($airtableId, $index) use (
+                $photo
+            ) {
+                $photo
+                    ->media()
+                    ->where('custom_properties->airtable_id', $airtableId)
+                    ->update([
+                        'order_column' => $index + 1, // medialibrary sorts from 1 by default
+                    ]);
             });
-        }
+
+            // Inserts
+            $unimportedAirtableIds = $upstreamAirtableIds->diff(
+                $importedAirtableIds
+            );
+
+            $unimportedAirtableIds->each(function ($airtableId) use (
+                $photo,
+                $upstreamPhoto
+            ) {
+                $upstreamMedia = collect($upstreamPhoto['media'])->firstOrFail(
+                    fn($m) => $m['id'] == $airtableId
+                );
+
+                // TODO move to a separate job
+                $photo
+                    ->addMediaFromUrl($upstreamMedia['url'])
+                    ->withCustomProperties([
+                        'airtable_id' => $upstreamMedia['id'],
+                    ])
+                    ->usingFilename($upstreamMedia['filename'])
+                    ->toMediaCollection();
+            });
+        });
     }
 
     private function listRecords(string $tableName)
