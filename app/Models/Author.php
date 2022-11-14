@@ -11,4 +11,10 @@ class Author extends Model
 
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function getNameAttribute()
+    {
+        return $this->other_name ??
+            collect([$this->first_name, $this->last_name])->join(' ');
+    }
 }

@@ -55,15 +55,18 @@
 
         <div class="pt-2 pb-14">
             @php
-                $comps = [['imgSrc' => 'https://picsum.photos/id/16/200/300'], ['imgSrc' => 'https://picsum.photos/id/17/300/200']];
+                $artworks = \App\Models\Artwork::with(['authors', 'coverPhotoMedia'])
+                    ->has('coverPhotoMedia')
+                    ->take(2)
+                    ->get();
             @endphp
-            @foreach ($comps as $c)
+            @foreach ($artworks as $a)
                 <a class="mt-8 block" href="TODO">
-                    <img src="{{ $c['imgSrc'] }}" class="w-full rounded-2xl max-h-60 object-cover object-center">
-                    <h4 class="text-2xl font-medium mt-2">Dievča s knihou</h4>
-                    <span class="block text-sm">Michal Zdravecký</span>
-                    <span class="block text-sm">1988&mdash;2015</span>
+                    {{ $a->coverPhotoMedia->img()->attributes(['class' => 'w-full rounded-2xl max-h-60 object-cover object-center']) }}
                 </a>
+                <h4 class="text-2xl font-medium mt-2">{{ $a->name }}</h4>
+                <span class="block text-sm">{{ $a->authors->map->name->join(', ') }}</span>
+                <span class="block text-sm">1988&mdash;2015</span>
             @endforeach
         </div>
     </section>
