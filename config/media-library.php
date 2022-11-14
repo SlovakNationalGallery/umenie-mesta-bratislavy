@@ -6,4 +6,9 @@ return [
      * If you set this to `/my-subdir`, all your media will be stored in a `/my-subdir` directory.
      */
     'prefix' => env('MEDIA_PREFIX', '/media'),
+
+    /*
+     * The fully qualified class name of the media model.
+     */
+    'media_model' => App\Models\Media::class,
 ];
