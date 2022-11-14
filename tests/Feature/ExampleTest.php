@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
@@ -10,6 +10,7 @@ use Tests\TestCase;
 class ExampleTest extends TestCase
 {
     use WithoutMiddleware; // Disable auth
+    use RefreshDatabase;
 
     /**
      * A basic test example.
