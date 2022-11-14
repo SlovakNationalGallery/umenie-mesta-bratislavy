@@ -31,4 +31,5 @@ task('build', function () {
 // Hooks
 before('artisan:migrate', 'artisan:cache:clear');
 after('deploy:vendors', 'build');
+after('deploy:symlink', 'artisan:queue:restart');
 after('deploy:failed', 'deploy:unlock');
