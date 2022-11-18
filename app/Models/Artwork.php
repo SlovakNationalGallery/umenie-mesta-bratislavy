@@ -33,6 +33,14 @@ class Artwork extends Model
         return $this->belongsToMany(Location::class)->orderByPivot('order');
     }
 
+    public function currentLocation()
+    {
+        return $this->hasOneDeepFromRelations($this->locations())
+            ->where('is_current', true)
+            ->orderBy('artwork_location.order')
+            ->limit(1);
+    }
+
     public function photos()
     {
         return $this->belongsToMany(Photo::class)->orderByPivot('order');
