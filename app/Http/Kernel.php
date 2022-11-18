@@ -30,7 +30,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\AuthenticateWithBasicAuthInProduction::class,
+            \App\Http\Middleware\AuthenticateWithBasicAuthInProduction::class, // TODO remove after launch
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -57,6 +57,8 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' =>
             \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'auth.basic.prod-only' =>
+            \App\Http\Middleware\AuthenticateWithBasicAuthInProduction::class,
         'auth.session' =>
             \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

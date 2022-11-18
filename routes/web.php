@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\ImportFromAirtable;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware('auth.basic.prod-only')
+    ->group(function () {
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('index');
+
+        Route::put('imports/create', function () {
+            ImportFromAirtable::dispatch();
+            return back()->with('import-dispatched', 'Import bol spustený');
+        })->name('imports.create');
+    });
