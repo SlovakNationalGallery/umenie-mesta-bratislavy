@@ -69,6 +69,8 @@ class ImportFromAirtable implements ShouldQueue
         $photos = $this->listRecords('photos')->collect();
 
         DB::transaction(function () use ($artworks, $authors, $photos) {
+            DB::table('artwork_author')->delete();
+            DB::table('artwork_photo')->delete();
             Artwork::whereNotIn('id', $artworks->pluck('id'))->delete();
             Author::whereNotIn('id', $authors->pluck('id'))->delete();
             Photo::whereNotIn('id', $photos->pluck('id'))->delete();
@@ -97,7 +99,7 @@ class ImportFromAirtable implements ShouldQueue
                 );
 
                 // Relationships
-                DB::table('artwork_author')->upsert(
+                DB::table('artwork_author')->insert(
                     $artworks
                         ->flatMap(
                             fn($artwork) => collect($artwork['authors'])->map(
@@ -109,12 +111,10 @@ class ImportFromAirtable implements ShouldQueue
                                 ]
                             )
                         )
-                        ->toArray(),
-                    ['artwork_id', 'author_id', 'role'],
-                    ['order']
+                        ->toArray()
                 );
 
-                DB::table('artwork_author')->upsert(
+                DB::table('artwork_author')->insert(
                     $artworks
                         ->flatMap(
                             fn($artwork) => collect($artwork['coauthors'])->map(
@@ -126,11 +126,9 @@ class ImportFromAirtable implements ShouldQueue
                                 ]
                             )
                         )
-                        ->toArray(),
-                    ['artwork_id', 'author_id', 'role'],
-                    ['order']
+                        ->toArray()
                 );
-                DB::table('artwork_photo')->upsert(
+                DB::table('artwork_photo')->insert(
                     $artworks
                         ->flatMap(
                             fn($artwork) => collect($artwork['photos'])->map(
@@ -141,9 +139,7 @@ class ImportFromAirtable implements ShouldQueue
                                 ]
                             )
                         )
-                        ->toArray(),
-                    ['artwork_id', 'photo_id'],
-                    ['order']
+                        ->toArray()
                 );
             });
         });
