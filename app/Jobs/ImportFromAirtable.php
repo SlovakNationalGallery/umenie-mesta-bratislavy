@@ -176,18 +176,6 @@ class ImportFromAirtable implements ShouldQueue
                 return;
             }
 
-            // Sorting
-            $upstreamAirtableIds->each(function ($airtableId, $index) use (
-                $photo
-            ) {
-                $photo
-                    ->media()
-                    ->where('custom_properties->airtable_id', $airtableId)
-                    ->update([
-                        'order_column' => $index + 1, // medialibrary sorts from 1 by default
-                    ]);
-            });
-
             // Inserts
             $unimportedAirtableIds = $upstreamAirtableIds->diff(
                 $importedAirtableIds
@@ -208,6 +196,18 @@ class ImportFromAirtable implements ShouldQueue
                     ])
                     ->withResponsiveImages()
                     ->toMediaCollection();
+            });
+
+            // Sorting
+            $upstreamAirtableIds->each(function ($airtableId, $index) use (
+                $photo
+            ) {
+                $photo
+                    ->media()
+                    ->where('custom_properties->airtable_id', $airtableId)
+                    ->update([
+                        'order_column' => $index + 1, // medialibrary sorts from 1 by default
+                    ]);
             });
         });
     }
