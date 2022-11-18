@@ -6,6 +6,7 @@ use App\Models\Artwork;
 use App\Models\Author;
 use App\Models\Location;
 use App\Models\Photo;
+use App\Models\Year;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -30,6 +31,7 @@ class ImportFromAirtable implements ShouldQueue
                 'coauthors' => 'fldr8pojoo7MoDwHs',
                 'photos' => 'fldNn5tr9pq8VBxnu',
                 'locations' => 'fldGr3FprjBwznUPD',
+                'years' => 'fldxCrnyBQOhsqRXv',
             ],
         ],
         'authors' => [
@@ -61,6 +63,15 @@ class ImportFromAirtable implements ShouldQueue
                 'is_current' => 'fld0WqONl2LalL9Ge',
             ],
         ],
+        'years' => [
+            'id' => 'tbljEwk8Rdf4wLzzA',
+            'fields' => [
+                'earliest' => 'fldz9DplXEJyOCvlk',
+                'latest' => 'fldJ5uM3QSS6Cwlrw',
+                'description' => 'fldAZcKpbmoWF36LP',
+                'type' => 'fldxvXBDVHRpCYyga',
+            ],
+        ],
     ];
 
     /**
@@ -84,20 +95,34 @@ class ImportFromAirtable implements ShouldQueue
         $authors = $this->listRecords('authors')->collect();
         $locations = $this->listRecords('locations')->collect();
         $photos = $this->listRecords('photos')->collect();
+        $years = $this->listRecords('years')->collect();
 
         DB::transaction(function () use (
             $artworks,
             $authors,
             $locations,
-            $photos
+            $photos,
+            $years
         ) {
             DB::table('artwork_author')->delete();
             DB::table('artwork_location')->delete();
             DB::table('artwork_photo')->delete();
-            Artwork::whereNotIn('id', $artworks->pluck('id'))->delete();
+            DB::table('artwork_year')->delete();
             Author::whereNotIn('id', $authors->pluck('id'))->delete();
-            Author::whereNotIn('id', $locations->pluck('id'))->delete();
+            Location::whereNotIn('id', $locations->pluck('id'))->delete();
             Photo::whereNotIn('id', $photos->pluck('id'))->delete();
+            Year::whereNotIn('id', $years->pluck('id'))->delete();
+            Artwork::whereNotIn('id', $artworks->pluck('id'))->delete();
+
+            $authors
+                ->chunk(100)
+                ->each(fn($chunk) => Author::upsert($chunk->toArray(), ['id']));
+
+            $locations
+                ->chunk(100)
+                ->each(
+                    fn($chunk) => Location::upsert($chunk->toArray(), ['id'])
+                );
 
             $photos
                 ->chunk(100)
@@ -108,15 +133,9 @@ class ImportFromAirtable implements ShouldQueue
                     )
                 );
 
-            $authors
+            $years
                 ->chunk(100)
-                ->each(
-                    fn($authors) => Author::upsert($authors->toArray(), ['id'])
-                );
-
-            $locations
-                ->chunk(100)
-                ->each(fn($l) => Location::upsert($l->toArray(), ['id']));
+                ->each(fn($chunk) => Year::upsert($chunk->toArray(), ['id']));
 
             $artworks->chunk(100)->each(function ($artworks) {
                 Artwork::upsert(
@@ -126,6 +145,7 @@ class ImportFromAirtable implements ShouldQueue
                             'coauthors',
                             'locations',
                             'photos',
+                            'years',
                         ])
                         ->toArray(),
                     ['id']
@@ -183,6 +203,20 @@ class ImportFromAirtable implements ShouldQueue
                                 fn($photo_id, $index) => [
                                     'artwork_id' => $artwork['id'],
                                     'photo_id' => $photo_id,
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
+                DB::table('artwork_year')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect($artwork['years'])->map(
+                                fn($year_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'year_id' => $year_id,
                                     'order' => $index,
                                 ]
                             )

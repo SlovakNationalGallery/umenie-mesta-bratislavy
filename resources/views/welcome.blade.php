@@ -23,7 +23,7 @@
 
         <div class="pt-2 pb-14">
             @php
-                $artworks = \App\Models\Artwork::with(['authors', 'coverPhotoMedia'])
+                $artworks = \App\Models\Artwork::with(['authors', 'coverPhotoMedia', 'yearBuilt'])
                     ->has('coverPhotoMedia')
                     ->take(2)
                     ->get();
@@ -34,7 +34,7 @@
                 </a>
                 <h4 class="text-2xl font-medium mt-2">{{ $a->name }}</h4>
                 <span class="block text-sm">{{ $a->authors->map->name->join(', ') }}</span>
-                <span class="block text-sm">1988&mdash;2015</span>
+                <span class="block text-sm">{{ optional($a->yearBuilt)->toFormattedString() }}</span>
             @endforeach
         </div>
     </section>

@@ -33,6 +33,18 @@ class Artwork extends Model
         return $this->belongsToMany(Location::class)->orderByPivot('order');
     }
 
+    public function years()
+    {
+        return $this->belongsToMany(Year::class)->orderBy('earliest');
+    }
+
+    public function yearBuilt()
+    {
+        return $this->hasOneDeepFromRelations($this->years())
+            ->where('type', 'realizácia')
+            ->limit(1);
+    }
+
     public function currentLocation()
     {
         return $this->hasOneDeepFromRelations($this->locations())
