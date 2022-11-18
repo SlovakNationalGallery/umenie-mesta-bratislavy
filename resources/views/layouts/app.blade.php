@@ -17,9 +17,11 @@
     <div class="p-4 bg-neutral-100">
         <div class="p-4 border rounded-lg border-neutral-800 flex flex-col">
             <h1 class="text-2xl text-center">
-                <span class="font-medium">Umenie</span>
-                mesta
-                <span class="font-medium">Bratislavy</span>
+                <a href="/">
+                    <span class="font-medium">Umenie</span>
+                    mesta
+                    <span class="font-medium">Bratislavy</span>
+                </a>
             </h1>
             <nav>
                 <ul class="text-lg flex justify-around mt-4 font-medium">
