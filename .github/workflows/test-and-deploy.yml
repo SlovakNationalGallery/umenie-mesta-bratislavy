@@ -45,6 +45,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-18.04
+    concurrency: deploy
     needs: [test]
     if: github.ref == 'refs/heads/main'
     steps:
