@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Artwork;
 use App\Models\Author;
+use App\Models\Location;
 use App\Models\Photo;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,6 +29,7 @@ class ImportFromAirtable implements ShouldQueue
                 'authors' => 'fld6JFDyetXLQTFXK',
                 'coauthors' => 'fldr8pojoo7MoDwHs',
                 'photos' => 'fldNn5tr9pq8VBxnu',
+                'locations' => 'fldGr3FprjBwznUPD',
             ],
         ],
         'authors' => [
@@ -43,6 +45,20 @@ class ImportFromAirtable implements ShouldQueue
             'fields' => [
                 'description' => 'fldNBjZxPtG0Ib7er',
                 'media' => 'fld2TGDfLmdo3YcAS',
+            ],
+        ],
+        'locations' => [
+            'id' => 'tbl07Ra5HNp9XQnUL',
+            'fields' => [
+                'address' => 'fldqcO0CRqUN5qH3t',
+                'postal_code' => 'fldzSGWB2hjBo56cs',
+                'district' => 'fldiFyzXnZEglcyTm',
+                'borough' => 'fld35CIDrs7EteVLs',
+                'plot' => 'fldHh4AY6wlDz5YWD',
+                'description' => 'fldN1WHmHFc4bauIW',
+                'gps_lon' => 'fld0WizNrlIkCytHO',
+                'gps_lat' => 'fldt1nvc3bN1sKU3r',
+                'is_current' => 'fld0WqONl2LalL9Ge',
             ],
         ],
     ];
@@ -66,13 +82,21 @@ class ImportFromAirtable implements ShouldQueue
     {
         $artworks = $this->listRecords('artworks')->collect();
         $authors = $this->listRecords('authors')->collect();
+        $locations = $this->listRecords('locations')->collect();
         $photos = $this->listRecords('photos')->collect();
 
-        DB::transaction(function () use ($artworks, $authors, $photos) {
+        DB::transaction(function () use (
+            $artworks,
+            $authors,
+            $locations,
+            $photos
+        ) {
             DB::table('artwork_author')->delete();
+            DB::table('artwork_location')->delete();
             DB::table('artwork_photo')->delete();
             Artwork::whereNotIn('id', $artworks->pluck('id'))->delete();
             Author::whereNotIn('id', $authors->pluck('id'))->delete();
+            Author::whereNotIn('id', $locations->pluck('id'))->delete();
             Photo::whereNotIn('id', $photos->pluck('id'))->delete();
 
             $photos
@@ -90,10 +114,19 @@ class ImportFromAirtable implements ShouldQueue
                     fn($authors) => Author::upsert($authors->toArray(), ['id'])
                 );
 
+            $locations
+                ->chunk(100)
+                ->each(fn($l) => Location::upsert($l->toArray(), ['id']));
+
             $artworks->chunk(100)->each(function ($artworks) {
                 Artwork::upsert(
                     $artworks->map
-                        ->except(['authors', 'coauthors', 'photos'])
+                        ->except([
+                            'authors',
+                            'coauthors',
+                            'locations',
+                            'photos',
+                        ])
                         ->toArray(),
                     ['id']
                 );
@@ -128,6 +161,21 @@ class ImportFromAirtable implements ShouldQueue
                         )
                         ->toArray()
                 );
+
+                DB::table('artwork_location')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect($artwork['locations'])->map(
+                                fn($author_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'location_id' => $author_id,
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
                 DB::table('artwork_photo')->insert(
                     $artworks
                         ->flatMap(

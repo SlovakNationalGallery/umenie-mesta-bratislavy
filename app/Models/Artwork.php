@@ -28,6 +28,11 @@ class Artwork extends Model
             ->orderByPivot('order');
     }
 
+    public function locations()
+    {
+        return $this->belongsToMany(Location::class)->orderByPivot('order');
+    }
+
     public function photos()
     {
         return $this->belongsToMany(Photo::class)->orderByPivot('order');
