@@ -29,12 +29,7 @@
                     ->get();
             @endphp
             @foreach ($artworks as $a)
-                <a class="mt-8 block" href="TODO">
-                    {{ $a->coverPhotoMedia->img()->attributes(['class' => 'w-full rounded-2xl max-h-60 object-cover object-center']) }}
-                </a>
-                <h4 class="text-2xl font-medium mt-2">{{ $a->name }}</h4>
-                <span class="block text-sm">{{ $a->authors->map->name->join(', ') }}</span>
-                <span class="block text-sm">{{ optional($a->yearBuilt)->toFormattedString() }}</span>
+                <x-artwork-card :artwork="$a" />
             @endforeach
         </div>
     </section>

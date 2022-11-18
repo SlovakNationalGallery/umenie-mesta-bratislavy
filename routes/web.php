@@ -1,6 +1,7 @@
 <?php
 
 use App\Jobs\ImportFromAirtable;
+use App\Http\Controllers\ArtworkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('diela', ArtworkController::class)->names('artworks');
 
 Route::prefix('admin')
     ->name('admin.')

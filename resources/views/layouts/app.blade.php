@@ -27,7 +27,7 @@
                         <a href="TODO">O projekte</a>
                     </li>
                     <li>
-                        <a href="TODO">Mapa a katalóg diel</a>
+                        <a href="{{ route('artworks.index') }}">Mapa a katalóg diel</a>
                     </li>
                 </ul>
             </nav>
