@@ -25,12 +25,14 @@
             @php
                 $artworks = \App\Models\Artwork::with(['authors', 'coverPhotoMedia', 'yearBuilt'])
                     ->has('coverPhotoMedia')
-                    ->take(2)
+                    ->take(4)
                     ->get();
             @endphp
-            @foreach ($artworks as $a)
-                <x-artwork-card :artwork="$a" />
-            @endforeach
+            <div class="-mt-2 -mx-4" data-masonry='{ "itemSelector": ".grid-item" }'>
+                @foreach ($artworks as $a)
+                    <x-artwork-card :artwork="$a" class="grid-item sm:w-1/4 p-4" />
+                @endforeach
+            </div>
         </div>
     </section>
 @endsection
