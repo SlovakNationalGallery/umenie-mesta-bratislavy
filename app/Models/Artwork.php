@@ -41,7 +41,7 @@ class Artwork extends Model
     public function yearBuilt()
     {
         return $this->hasOneDeepFromRelations($this->years())
-            ->where('type', 'realizácia')
+            ->where('type', 'realizácia') // TODO use a constant
             ->limit(1);
     }
 
