@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -15,6 +17,9 @@ module.exports = {
                 red: {
                     500: '#F94D46',
                 },
+            },
+            fontFamily: {
+                sans: ['Denim', ...defaultTheme.fontFamily.sans],
             },
         },
     },
