@@ -16,7 +16,7 @@ class Year extends Model
             return $this->description;
         }
         if ($this->latest) {
-            return sprintf('%s&mdash;%s', [$this->earliest, $this->latest]);
+            return sprintf('%s—%s', $this->earliest, $this->latest);
         }
         return $this->earliest;
     }
