@@ -43,6 +43,16 @@ class Artwork extends Model
         return $this->belongsToMany(Location::class)->orderByPivot('order');
     }
 
+    public function materials()
+    {
+        return $this->belongsToMany(Material::class)->orderByPivot('order');
+    }
+
+    public function techniques()
+    {
+        return $this->belongsToMany(Technique::class)->orderByPivot('order');
+    }
+
     public function years()
     {
         return $this->belongsToMany(Year::class)->orderBy('earliest');
