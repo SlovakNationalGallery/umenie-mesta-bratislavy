@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Artwork;
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Keyword;
 use App\Models\Location;
 use App\Models\Photo;
@@ -29,6 +30,7 @@ class ImportFromAirtable implements ShouldQueue
             'fields' => [
                 'name' => 'fldIL8binV6omIxcP',
                 'authors' => 'fld6JFDyetXLQTFXK',
+                'categories' => 'fldKTRr8kha4cLFwy',
                 'coauthors' => 'fldr8pojoo7MoDwHs',
                 'photos' => 'fldNn5tr9pq8VBxnu',
                 'keywords' => 'fldra8AriumQ5s7j7',
@@ -42,6 +44,12 @@ class ImportFromAirtable implements ShouldQueue
                 'first_name' => 'fldLxr7puFcJ8rFmk',
                 'last_name' => 'fld75ZIsJi1VIuB5S',
                 'other_name' => 'fldAKxihfS6r6OqHv',
+            ],
+        ],
+        'categories' => [
+            'id' => 'tbl2CT17u55nLhJ79',
+            'fields' => [
+                'name' => 'fldXmrH67ZVAyZNu6',
             ],
         ],
         'photos' => [
@@ -101,6 +109,7 @@ class ImportFromAirtable implements ShouldQueue
     {
         $artworks = $this->listRecords('artworks')->collect();
         $authors = $this->listRecords('authors')->collect();
+        $categories = $this->listRecords('categories')->collect();
         $keywords = $this->listRecords('keywords')->collect();
         $locations = $this->listRecords('locations')->collect();
         $photos = $this->listRecords('photos')->collect();
@@ -109,12 +118,14 @@ class ImportFromAirtable implements ShouldQueue
         DB::transaction(function () use (
             $artworks,
             $authors,
+            $categories,
             $keywords,
             $locations,
             $photos,
             $years
         ) {
             DB::table('artwork_author')->delete();
+            DB::table('artwork_category')->delete();
             DB::table('artwork_keyword')->delete();
             DB::table('artwork_location')->delete();
             DB::table('artwork_photo')->delete();
@@ -128,6 +139,12 @@ class ImportFromAirtable implements ShouldQueue
             $authors
                 ->chunk(100)
                 ->each(fn($chunk) => Author::upsert($chunk->toArray(), ['id']));
+
+            $categories
+                ->chunk(100)
+                ->each(
+                    fn($chunk) => Category::upsert($chunk->toArray(), ['id'])
+                );
 
             $keywords
                 ->chunk(100)
@@ -159,6 +176,7 @@ class ImportFromAirtable implements ShouldQueue
                     $artworks->map
                         ->except([
                             'authors',
+                            'categories',
                             'coauthors',
                             'keywords',
                             'locations',
@@ -193,6 +211,22 @@ class ImportFromAirtable implements ShouldQueue
                                     'artwork_id' => $artwork['id'],
                                     'author_id' => $author_id,
                                     'role' => 'coauthor',
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
+                DB::table('artwork_category')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect(
+                                $artwork['categories']
+                            )->map(
+                                fn($category_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'category_id' => $category_id,
                                     'order' => $index,
                                 ]
                             )

@@ -21,6 +21,11 @@ class Artwork extends Model
             ->orderByPivot('order');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->orderByPivot('order');
+    }
+
     public function coauthors()
     {
         return $this->belongsToMany(Author::class)
