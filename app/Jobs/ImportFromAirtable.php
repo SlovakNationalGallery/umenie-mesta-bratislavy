@@ -31,6 +31,9 @@ class ImportFromAirtable implements ShouldQueue
             'id' => 'tblsQiI0KYuaDvPZ5',
             'fields' => [
                 'name' => 'fldIL8binV6omIxcP',
+                'description' => 'fldbWUQYGERjPapaX',
+
+                // Relations
                 'authors' => 'fld6JFDyetXLQTFXK',
                 'categories' => 'fldKTRr8kha4cLFwy',
                 'coauthors' => 'fldr8pojoo7MoDwHs',
