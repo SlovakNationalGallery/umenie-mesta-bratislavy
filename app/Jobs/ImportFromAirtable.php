@@ -5,10 +5,14 @@ namespace App\Jobs;
 use App\Models\Artwork;
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Condition;
 use App\Models\Keyword;
 use App\Models\Location;
 use App\Models\Material;
 use App\Models\Photo;
+use App\Models\Proprietor;
+use App\Models\Registration;
+use App\Models\Signature;
 use App\Models\Technique;
 use App\Models\Year;
 use Illuminate\Bus\Queueable;
@@ -35,13 +39,18 @@ class ImportFromAirtable implements ShouldQueue
 
                 // Relations
                 'authors' => 'fld6JFDyetXLQTFXK',
+                'conditions' => 'fldDaputAeuEh0WZ5',
                 'categories' => 'fldKTRr8kha4cLFwy',
                 'coauthors' => 'fldr8pojoo7MoDwHs',
                 'keywords' => 'fldra8AriumQ5s7j7',
                 'locations' => 'fldGr3FprjBwznUPD',
+                'maintainers' => 'fld6JQDNUVa58i0I9',
                 'materials' => 'fldTwT5dGIqO1QQz0',
-                'techniques' => 'fldQvlhYOOwsNApxP',
+                'owners' => 'fldDDkeZtu0c5USXJ',
                 'photos' => 'fldNn5tr9pq8VBxnu',
+                'registrations' => 'fld3QTOf9rIgq3BCc',
+                'signatures' => 'fld5nS8uaxaA94iQD',
+                'techniques' => 'fldQvlhYOOwsNApxP',
                 'years' => 'fldxCrnyBQOhsqRXv',
             ],
         ],
@@ -59,16 +68,10 @@ class ImportFromAirtable implements ShouldQueue
                 'name' => 'fldXmrH67ZVAyZNu6',
             ],
         ],
-        'materials' => [
-            'id' => 'tbld0wpd9VTkQqTRK',
+        'conditions' => [
+            'id' => 'tbluGKJiqF0S2lquJ',
             'fields' => [
-                'name' => 'fldtXXMqJJ6UiuuGG',
-            ],
-        ],
-        'techniques' => [
-            'id' => 'tbl2cfMKmDVSoZUYx',
-            'fields' => [
-                'name' => 'fldi9G9XWr8sQ3vNt',
+                'name' => 'fldcnXdKUzSbPgUUm',
             ],
         ],
         'keywords' => [
@@ -91,11 +94,43 @@ class ImportFromAirtable implements ShouldQueue
                 'is_current' => 'fld0WqONl2LalL9Ge',
             ],
         ],
+        'materials' => [
+            'id' => 'tbld0wpd9VTkQqTRK',
+            'fields' => [
+                'name' => 'fldtXXMqJJ6UiuuGG',
+            ],
+        ],
         'photos' => [
             'id' => 'tbl8P5wGh0p4tYMQL',
             'fields' => [
                 'description' => 'fldNBjZxPtG0Ib7er',
                 'media' => 'fld2TGDfLmdo3YcAS',
+            ],
+        ],
+        'proprietors' => [
+            'id' => 'tblOVO8k7h3C82yEd',
+            'fields' => [
+                'name' => 'fldAZjKX8TsBXSAXc',
+            ],
+        ],
+        'registrations' => [
+            'id' => 'tblLwfi4CSDGmdwML',
+            'fields' => [
+                'name' => 'fldvYUnv89v6fYw6C',
+            ],
+        ],
+        'signatures' => [
+            'id' => 'tblDPUj5zx4QqVKnO',
+            'fields' => [
+                'name' => 'flds4UTRuxSPhLCdr',
+                'position' => 'fldkuHRn75klSHF7w',
+                'description' => 'fld3ezrQkWNMYdqj1',
+            ],
+        ],
+        'techniques' => [
+            'id' => 'tbl2cfMKmDVSoZUYx',
+            'fields' => [
+                'name' => 'fldi9G9XWr8sQ3vNt',
             ],
         ],
         'years' => [
@@ -127,42 +162,61 @@ class ImportFromAirtable implements ShouldQueue
     public function handle()
     {
         $artworks = $this->listRecords('artworks')->collect();
+        $conditions = $this->listRecords('conditions')->collect();
         $authors = $this->listRecords('authors')->collect();
         $categories = $this->listRecords('categories')->collect();
         $keywords = $this->listRecords('keywords')->collect();
         $locations = $this->listRecords('locations')->collect();
         $materials = $this->listRecords('materials')->collect();
-        $techniques = $this->listRecords('techniques')->collect();
         $photos = $this->listRecords('photos')->collect();
+        $proprietors = $this->listRecords('proprietors')->collect();
+        $registrations = $this->listRecords('registrations')->collect();
+        $signatures = $this->listRecords('signatures')->collect();
+        $techniques = $this->listRecords('techniques')->collect();
         $years = $this->listRecords('years')->collect();
 
         DB::transaction(function () use (
             $artworks,
+            $conditions,
             $authors,
             $categories,
             $keywords,
             $locations,
             $materials,
-            $techniques,
             $photos,
+            $proprietors,
+            $registrations,
+            $signatures,
+            $techniques,
             $years
         ) {
             DB::table('artwork_author')->delete();
+            DB::table('artwork_condition')->delete();
             DB::table('artwork_category')->delete();
             DB::table('artwork_keyword')->delete();
             DB::table('artwork_location')->delete();
             DB::table('artwork_material')->delete();
-            DB::table('artwork_technique')->delete();
             DB::table('artwork_photo')->delete();
+            DB::table('artwork_proprietor')->delete();
+            DB::table('artwork_registration')->delete();
+            DB::table('artwork_signature')->delete();
+            DB::table('artwork_technique')->delete();
             DB::table('artwork_year')->delete();
 
             Author::whereNotIn('id', $authors->pluck('id'))->delete();
             Category::whereNotIn('id', $categories->pluck('id'))->delete();
+            Condition::whereNotIn('id', $conditions->pluck('id'))->delete();
             Keyword::whereNotIn('id', $keywords->pluck('id'))->delete();
             Location::whereNotIn('id', $locations->pluck('id'))->delete();
             Material::whereNotIn('id', $materials->pluck('id'))->delete();
-            Technique::whereNotIn('id', $techniques->pluck('id'))->delete();
             Photo::whereNotIn('id', $photos->pluck('id'))->delete();
+            Proprietor::whereNotIn('id', $proprietors->pluck('id'))->delete();
+            Registration::whereNotIn(
+                'id',
+                $registrations->pluck('id')
+            )->delete();
+            Signature::whereNotIn('id', $signatures->pluck('id'))->delete();
+            Technique::whereNotIn('id', $techniques->pluck('id'))->delete();
             Year::whereNotIn('id', $years->pluck('id'))->delete();
             Artwork::whereNotIn('id', $artworks->pluck('id'))->delete();
 
@@ -174,6 +228,12 @@ class ImportFromAirtable implements ShouldQueue
                 ->chunk(100)
                 ->each(
                     fn($chunk) => Category::upsert($chunk->toArray(), ['id'])
+                );
+
+            $conditions
+                ->chunk(100)
+                ->each(
+                    fn($chunk) => Condition::upsert($chunk->toArray(), ['id'])
                 );
 
             $keywords
@@ -194,12 +254,6 @@ class ImportFromAirtable implements ShouldQueue
                     fn($chunk) => Material::upsert($chunk->toArray(), ['id'])
                 );
 
-            $techniques
-                ->chunk(100)
-                ->each(
-                    fn($chunk) => Technique::upsert($chunk->toArray(), ['id'])
-                );
-
             $photos
                 ->chunk(100)
                 ->each(
@@ -207,6 +261,32 @@ class ImportFromAirtable implements ShouldQueue
                         $photos->map->except(['media'])->toArray(),
                         ['id']
                     )
+                );
+
+            $proprietors
+                ->chunk(100)
+                ->each(
+                    fn($chunk) => Proprietor::upsert($chunk->toArray(), ['id'])
+                );
+
+            $registrations
+                ->chunk(100)
+                ->each(
+                    fn($chunk) => Registration::upsert($chunk->toArray(), [
+                        'id',
+                    ])
+                );
+
+            $signatures
+                ->chunk(100)
+                ->each(
+                    fn($chunk) => Signature::upsert($chunk->toArray(), ['id'])
+                );
+
+            $techniques
+                ->chunk(100)
+                ->each(
+                    fn($chunk) => Technique::upsert($chunk->toArray(), ['id'])
                 );
 
             $years
@@ -219,12 +299,17 @@ class ImportFromAirtable implements ShouldQueue
                         ->except([
                             'authors',
                             'categories',
+                            'conditions',
                             'coauthors',
                             'keywords',
                             'locations',
                             'materials',
+                            'maintainers',
                             'techniques',
+                            'owners',
                             'photos',
+                            'registrations',
+                            'signatures',
                             'years',
                         ])
                         ->toArray(),
@@ -262,6 +347,38 @@ class ImportFromAirtable implements ShouldQueue
                         ->toArray()
                 );
 
+                DB::table('artwork_proprietor')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect($artwork['owners'])->map(
+                                fn($author_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'proprietor_id' => $author_id,
+                                    'role' => 'owner',
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
+                DB::table('artwork_proprietor')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect(
+                                $artwork['maintainers']
+                            )->map(
+                                fn($author_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'proprietor_id' => $author_id,
+                                    'role' => 'maintainer',
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
                 DB::table('artwork_category')->insert(
                     $artworks
                         ->flatMap(
@@ -271,6 +388,22 @@ class ImportFromAirtable implements ShouldQueue
                                 fn($category_id, $index) => [
                                     'artwork_id' => $artwork['id'],
                                     'category_id' => $category_id,
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
+                DB::table('artwork_condition')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect(
+                                $artwork['conditions']
+                            )->map(
+                                fn($author_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'condition_id' => $author_id,
                                     'order' => $index,
                                 ]
                             )
@@ -320,6 +453,52 @@ class ImportFromAirtable implements ShouldQueue
                         ->toArray()
                 );
 
+                DB::table('artwork_photo')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect($artwork['photos'])->map(
+                                fn($photo_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'photo_id' => $photo_id,
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
+                DB::table('artwork_registration')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect(
+                                $artwork['registrations']
+                            )->map(
+                                fn($registration_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'registration_id' => $registration_id,
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
+                DB::table('artwork_signature')->insert(
+                    $artworks
+                        ->flatMap(
+                            fn($artwork) => collect(
+                                $artwork['signatures']
+                            )->map(
+                                fn($signature_id, $index) => [
+                                    'artwork_id' => $artwork['id'],
+                                    'signature_id' => $signature_id,
+                                    'order' => $index,
+                                ]
+                            )
+                        )
+                        ->toArray()
+                );
+
                 DB::table('artwork_technique')->insert(
                     $artworks
                         ->flatMap(
@@ -329,20 +508,6 @@ class ImportFromAirtable implements ShouldQueue
                                 fn($author_id, $index) => [
                                     'artwork_id' => $artwork['id'],
                                     'technique_id' => $author_id,
-                                    'order' => $index,
-                                ]
-                            )
-                        )
-                        ->toArray()
-                );
-
-                DB::table('artwork_photo')->insert(
-                    $artworks
-                        ->flatMap(
-                            fn($artwork) => collect($artwork['photos'])->map(
-                                fn($photo_id, $index) => [
-                                    'artwork_id' => $artwork['id'],
-                                    'photo_id' => $photo_id,
                                     'order' => $index,
                                 ]
                             )

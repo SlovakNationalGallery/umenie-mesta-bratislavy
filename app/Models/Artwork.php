@@ -38,9 +38,21 @@ class Artwork extends Model
         return $this->belongsToMany(Keyword::class)->orderByPivot('order');
     }
 
+    public function conditions()
+    {
+        return $this->belongsToMany(Condition::class)->orderByPivot('order');
+    }
+
     public function locations()
     {
         return $this->belongsToMany(Location::class)->orderByPivot('order');
+    }
+
+    public function maintainers()
+    {
+        return $this->belongsToMany(Proprietor::class)
+            ->wherePivot('role', 'maintainer')
+            ->orderByPivot('order');
     }
 
     public function materials()
@@ -48,9 +60,31 @@ class Artwork extends Model
         return $this->belongsToMany(Material::class)->orderByPivot('order');
     }
 
+    public function owners()
+    {
+        return $this->belongsToMany(Proprietor::class)
+            ->wherePivot('role', 'owner')
+            ->orderByPivot('order');
+    }
+
+    public function registrations()
+    {
+        return $this->belongsToMany(Registration::class)->orderByPivot('order');
+    }
+
+    public function signatures()
+    {
+        return $this->belongsToMany(Signature::class)->orderByPivot('order');
+    }
+
     public function techniques()
     {
         return $this->belongsToMany(Technique::class)->orderByPivot('order');
+    }
+
+    public function photos()
+    {
+        return $this->belongsToMany(Photo::class)->orderByPivot('order');
     }
 
     public function years()
@@ -58,9 +92,12 @@ class Artwork extends Model
         return $this->belongsToMany(Year::class)->orderBy('earliest');
     }
 
-    public function photos()
+    // Special queries
+    public function signature()
     {
-        return $this->belongsToMany(Photo::class)->orderByPivot('order');
+        return $this->hasOneDeepFromRelations($this->signatures())
+            ->orderBy('artwork_signature.order')
+            ->limit(1);
     }
 
     public function yearBuilt()
