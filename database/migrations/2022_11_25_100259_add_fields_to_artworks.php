@@ -13,10 +13,11 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('artworks', function (Blueprint $table) {
-            $table
-                ->text('description')
-                ->nullable()
-                ->after('name');
+            $table->after('name', function ($table) {
+                $table->text('description')->nullable();
+                $table->text('dimensions')->nullable();
+                $table->text('condition_note')->nullable();
+            });
         });
     }
 
@@ -28,6 +29,8 @@ return new class extends Migration {
     public function down()
     {
         Schema::table('artworks', function (Blueprint $table) {
+            $table->dropColumn('condition_note');
+            $table->dropColumn('dimensions');
             $table->dropColumn('description');
         });
     }

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Technique extends Model
 {
     use HasFactory;
+
+    public $incrementing = false;
+    protected $keyType = 'string';
 }
