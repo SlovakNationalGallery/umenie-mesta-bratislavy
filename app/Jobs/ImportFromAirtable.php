@@ -122,7 +122,6 @@ class ImportFromAirtable implements ShouldQueue
         'signatures' => [
             'id' => 'tblDPUj5zx4QqVKnO',
             'fields' => [
-                'name' => 'flds4UTRuxSPhLCdr',
                 'position' => 'fldkuHRn75klSHF7w',
                 'description' => 'fld3ezrQkWNMYdqj1',
             ],

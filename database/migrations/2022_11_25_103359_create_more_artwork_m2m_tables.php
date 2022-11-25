@@ -89,7 +89,6 @@ return new class extends Migration {
 
         Schema::create('signatures', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('name')->nullable();
             $table->string('position')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
