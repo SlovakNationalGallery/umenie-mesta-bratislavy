@@ -12,6 +12,7 @@ module.exports = {
             colors: {
                 neutral: {
                     100: '#EBF0F1',
+                    500: '#666666',
                     800: '#171717',
                 },
                 red: {
@@ -20,6 +21,9 @@ module.exports = {
             },
             fontFamily: {
                 sans: ['Denim', ...defaultTheme.fontFamily.sans],
+            },
+            fontSize: {
+                '3xl': '2rem',
             },
         },
     },
