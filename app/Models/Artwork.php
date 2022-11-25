@@ -28,6 +28,11 @@ class Artwork extends Model
             ->orderByPivot('order');
     }
 
+    public function keywords()
+    {
+        return $this->belongsToMany(Keyword::class)->orderByPivot('order');
+    }
+
     public function locations()
     {
         return $this->belongsToMany(Location::class)->orderByPivot('order');
@@ -36,6 +41,11 @@ class Artwork extends Model
     public function years()
     {
         return $this->belongsToMany(Year::class)->orderBy('earliest');
+    }
+
+    public function photos()
+    {
+        return $this->belongsToMany(Photo::class)->orderByPivot('order');
     }
 
     public function yearBuilt()
@@ -51,11 +61,6 @@ class Artwork extends Model
             ->where('is_current', true)
             ->orderBy('artwork_location.order')
             ->limit(1);
-    }
-
-    public function photos()
-    {
-        return $this->belongsToMany(Photo::class)->orderByPivot('order');
     }
 
     public function coverPhotoMedia()
