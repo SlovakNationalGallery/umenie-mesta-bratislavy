@@ -51,7 +51,14 @@ class ArtworkController extends Controller
      */
     public function show(Artwork $artwork)
     {
-        return view('artworks.show', compact('artwork'));
+        // TODO related by distance from $artwork
+        $relatedArtworks = Artwork::inRandomOrder()
+            ->with('coverPhotoMedia', 'authors', 'yearBuilt')
+            ->has('coverPhotoMedia')
+            ->limit(4)
+            ->get();
+
+        return view('artworks.show', compact('artwork', 'relatedArtworks'));
     }
 
     /**
