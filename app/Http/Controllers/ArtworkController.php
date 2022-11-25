@@ -17,7 +17,7 @@ class ArtworkController extends Controller
         $artworks = Artwork::with(['authors', 'coverPhotoMedia', 'yearBuilt'])
             // TODO published scope
             ->has('coverPhotoMedia')
-            ->paginate(12);
+            ->get(); // ->paginate(12);
 
         return view('artworks.index', compact('artworks'));
     }
