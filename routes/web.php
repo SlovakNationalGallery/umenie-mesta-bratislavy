@@ -19,7 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('diela', ArtworkController::class)->names('artworks');
+Route::resource('diela', ArtworkController::class)
+    ->names('artworks')
+    ->parameter('diela', 'artwork');
 
 Route::prefix('admin')
     ->name('admin.')
