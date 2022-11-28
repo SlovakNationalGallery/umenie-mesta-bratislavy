@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <example-component message="Hello World"></example-component>
-
     <div class="p-4 bg-neutral-100">
         <div class="relative">
             <img src="https://placeholder.pics/svg/300/DEDEDE/555555/mapa" class="w-full">
