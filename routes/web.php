@@ -36,3 +36,7 @@ Route::prefix('admin')
             return back()->with('import-dispatched', 'Import bol spustený');
         })->name('imports.create');
     });
+
+Route::get('/vue', function () {
+    return view('vue');
+});

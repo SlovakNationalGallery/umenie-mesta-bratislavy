@@ -36,7 +36,9 @@
         </div>
     </div>
 
-    @yield('content')
+    <div id="app">
+        @yield('content')
+    </div>
 
     <footer class="bg-red-500 p-6 font-medium">
         <h3 class="text-2xl mt-4">Partneri projektu</h3>
