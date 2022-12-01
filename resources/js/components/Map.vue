@@ -96,11 +96,9 @@ import DistrictIV from './districts/DistrictIV.vue';
 import DistrictV from './districts/DistrictV.vue';
 import Danube from './districts/Danube.vue';
 
-import { ref, defineProps, computed } from 'vue';
+import { defineProps, computed } from 'vue';
 
 const props = defineProps(['locations']);
-const isHovered = ref(false);
-const handleHoverChange = (value) => (isHovered.value = value);
 const mapLabels = computed(() =>
     props.locations.reduce((acc, location) => {
         const { district, borough, total } = location

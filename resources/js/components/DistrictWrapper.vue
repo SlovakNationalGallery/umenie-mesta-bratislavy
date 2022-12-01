@@ -15,10 +15,7 @@
                 class="absolute bg-red-500 w-8 h-8 left-1/4 top-1/2 rounded-full font-semibold flex justify-center items-center"
             >
                 <span class="absolute z-10 bg-red-500">{{
-                    locations.reduce(
-                        (acc, currentValue) => acc + currentValue.total,
-                        0
-                    )
+                    locationCount
                 }}</span>
                 <div
                     class="animate-[ping_3s_ease-in-out_infinite] w-6 h-6 bg-red-500 rounded-full"
@@ -47,18 +44,14 @@
     </div>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script setup>
+import { ref, defineProps, computed } from 'vue';
 
-export default {
-    props: {
-        title: String,
-        locations: Object,
-    },
-    setup() {
-        const isHovered = ref(false);
-        const handleHoverChange = (value) => (isHovered.value = value);
-        return { handleHoverChange, isHovered };
-    },
-};
+const props = defineProps(['title', 'locations']);
+const locationCount = computed(() =>
+    props.locations.reduce((acc, currentValue) => acc + currentValue.total, 0)
+);
+
+const isHovered = ref(false);
+const handleHoverChange = (value) => (isHovered.value = value);
 </script>
