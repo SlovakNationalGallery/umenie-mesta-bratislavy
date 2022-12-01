@@ -2,6 +2,7 @@
 
 use App\Jobs\ImportFromAirtable;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/o-projekte', function () {
     return view('about');
