@@ -1,5 +1,8 @@
 <template>
     <div class="relative m-12 aspect-[674/720] h-96">
+        <div class="absolute left-[34.07%] top-[52.08%] bottom-[15%] right-[24.87%]">
+            <Danube class="absolute w-full h-full" />
+        </div>
         <DistrictWrapper
             class="absolute left-[37.55%] top-[37.22%] bottom-[49.64%] right-[46.23%]"
             v-slot="{ isHovered, handleHoverChange }"
@@ -8,7 +11,7 @@
             <DistrictI
                 :class="[
                     isHovered ? 'stroke-red-500' : 'stroke-neutral-800',
-                    'transition-colors',
+                    'transition-colors absolute w-full h-full',
                 ]"
                 :handleHoverChange="handleHoverChange"
             >
@@ -22,7 +25,7 @@
             <DistrictII
                 :class="[
                     isHovered ? 'stroke-red-500' : 'stroke-neutral-800',
-                    'transition-colors',
+                    'transition-colors absolute w-full h-full',
                 ]"
                 :isHovered="isHovered"
                 :handleHoverChange="handleHoverChange"
@@ -37,7 +40,7 @@
             <DistrictIII
                 :class="[
                     isHovered ? 'stroke-red-500' : 'stroke-neutral-800',
-                    'transition-colors',
+                    'transition-colors absolute w-full h-full',
                 ]"
                 :isHovered="isHovered"
                 :handleHoverChange="handleHoverChange"
@@ -52,7 +55,7 @@
             <DistrictIV
                 :class="[
                     isHovered ? 'stroke-red-500' : 'stroke-neutral-800',
-                    'transition-colors',
+                    'transition-colors absolute w-full h-full',
                 ]"
                 :isHovered="isHovered"
                 :handleHoverChange="handleHoverChange"
@@ -67,7 +70,7 @@
             <DistrictV
                 :class="[
                     isHovered ? 'stroke-red-500' : 'stroke-neutral-800',
-                    'transition-colors duration-200',
+                    'transition-colors absolute w-full h-full',
                 ]"
                 :isHovered="isHovered"
                 :handleHoverChange="handleHoverChange"
@@ -84,6 +87,7 @@ import DistrictII from './districts/DistrictII.vue';
 import DistrictIII from './districts/DistrictIII.vue';
 import DistrictIV from './districts/DistrictIV.vue';
 import DistrictV from './districts/DistrictV.vue';
+import Danube from './districts/Danube.vue';
 
 import { ref } from 'vue';
 
