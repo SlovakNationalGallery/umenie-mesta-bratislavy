@@ -14,7 +14,12 @@
                 v-if="!isHovered"
                 class="absolute bg-red-500 w-8 h-8 left-1/4 top-1/2 rounded-full font-semibold flex justify-center items-center"
             >
-                <span class="absolute z-10 bg-red-500">11</span>
+                <span class="absolute z-10 bg-red-500">{{
+                    locations.reduce(
+                        (acc, currentValue) => acc + currentValue.total,
+                        0
+                    )
+                }}</span>
                 <div
                     class="animate-[ping_3s_ease-in-out_infinite] w-6 h-6 bg-red-500 rounded-full"
                 ></div>
@@ -32,10 +37,10 @@
             >
                 <h4 class="text-2xl font-semibold">{{ title }}</h4>
                 <ul class="text-xl font-medium">
-                    <li>Nieco</li>
-                    <li>Nieco</li>
-                    <li>Nieco</li>
-                    <li>Nieco</li>
+                    <li v-for="location in locations">
+                        {{ location.borough
+                        }}{{ location.total && ` (${location.total})` }}
+                    </li>
                 </ul>
             </div>
         </transition>
@@ -48,6 +53,7 @@ import { ref } from 'vue';
 export default {
     props: {
         title: String,
+        locations: Object,
     },
     setup() {
         const isHovered = ref(false);
