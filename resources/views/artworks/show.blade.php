@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="py-4 flex space-x-2 bg-neutral-100">
-        <div class="bg-neutral-200 border-2 border-neutral-400 w-1/3 h-60"></div>
-        <div class="bg-neutral-200 border-2 border-neutral-400 w-2/3 h-60"></div>
-    </div>
+        <artwork-carousel :artwork-photos="{{$artwork->photos}}"></artwork-carousel>
     <div class="p-4 max-w-5xl mx-auto">
         <a href="{{ route('artworks.index') }}" class="mt-4 -ml-1 text-xs underline inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
