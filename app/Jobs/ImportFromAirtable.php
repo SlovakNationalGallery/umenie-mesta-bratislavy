@@ -617,7 +617,9 @@ class ImportFromAirtable implements ShouldQueue
 
                 $offset = $response->json('offset');
 
-                yield from $response->collect('records');
+                foreach ($response->json('records') as $record) {
+                    yield $record;
+                }
             } while ($offset);
         })->map(function ($record) use ($tableName) {
             $mappedFields = collect(self::$tables[$tableName]['fields'])->map(
