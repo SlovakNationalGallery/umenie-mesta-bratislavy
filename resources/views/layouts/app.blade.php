@@ -11,8 +11,8 @@
 </head>
 
 <body class="antialiased text-neutral-800">
-    <div class="p-4 md:px-10 md:pt-10 bg-neutral-100">
-        <div class="border-b md:border-b-2 pb-3 md:px-2 border-neutral-800 flex flex-col md:flex-row">
+    <div class="p-4 md:px-14 md:pt-10 bg-neutral-100">
+        <div class="md:px-2 flex pb-3 flex-col md:flex-row">
             <h1 class="text-[1.75rem] md:text-5xl text-center">
                 <a href="/">
                     <span class="font-medium">Umenie</span>
@@ -32,6 +32,7 @@
                 </ul>
             </nav>
         </div>
+        <div class="border-b-2 -mx-0.5 md:-mx-2 border-neutral-800"></div>
     </div>
 
     <div id="app">

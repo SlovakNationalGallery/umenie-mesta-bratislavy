@@ -8,7 +8,7 @@
                 <a href="TODO" class="text-lg bg-neutral-800 text-white inline-flex items-center rounded-full px-4 py-2">
                     Objavte diela v okolí
                     {{-- TODO get right icon --}}
-                    <x-icons.map-pin class="ml-1" />
+                    <x-icons.map-pin class="w-6 h-6 ml-1" />
                 </a>
             </div>
         </div>
@@ -36,3 +36,4 @@
         </div>
     </section>
 @endsection
+

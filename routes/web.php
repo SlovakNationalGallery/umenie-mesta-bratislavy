@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/o-projekte', function () {
-    return 'TODO';
+    return view('about');
 })->name('about');
 
 Route::resource('diela', ArtworkController::class)
