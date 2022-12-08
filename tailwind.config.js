@@ -19,6 +19,9 @@ module.exports = {
                 red: {
                     500: '#F94D46',
                 },
+                blue: {
+                    500: '#389ed8',
+                }
             },
             fontFamily: {
                 sans: ['Denim', ...defaultTheme.fontFamily.sans],
