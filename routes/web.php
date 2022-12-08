@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/o-projekte', function () {
+    return 'TODO';
+})->name('about');
+
 Route::resource('diela', ArtworkController::class)
     ->names('artworks')
     ->parameter('diela', 'artwork');
