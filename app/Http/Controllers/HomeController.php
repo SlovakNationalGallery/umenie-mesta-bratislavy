@@ -6,21 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Location;
 
-
 class HomeController extends Controller
 {
     public function index()
     {
-        $locations = DB::table('artworks')
-            ->join('artwork_location', 'artwork_location.artwork_id', '=', 'artworks.id')
-            ->join('locations', 'artwork_location.location_id', "=", 'locations.id')
-            ->select('borough', 'district' , DB::raw('count(*) as total'))
-            ->groupBy('borough', 'district')
-            ->get();
+        $locations = Location::select(DB::raw('count(id) as count'), 'borough')
+            ->where('is_current', true)
+            ->groupBy('borough')
+            ->get()
+            ->groupBy('district');
 
-        return view('welcome')->with(
-            compact(['locations'])
-        );
-
+        return view('welcome')->with(compact(['locations']));
     }
 }
