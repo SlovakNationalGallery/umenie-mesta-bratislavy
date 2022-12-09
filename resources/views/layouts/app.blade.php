@@ -12,7 +12,7 @@
 
 <body class="antialiased text-neutral-800 bg-neutral-100">
     <div class="p-4 md:px-14 md:pt-10 max-w-screen-3xl mx-auto">
-        <div class="flex pb-3 flex-col md:flex-row">
+        <div class="flex pb-3 flex-col md:flex-row md:items-center">
             <h1 class="text-[1.75rem] md:text-5xl text-center">
                 <a href="/">
                     <span class="font-medium">Umenie</span>
