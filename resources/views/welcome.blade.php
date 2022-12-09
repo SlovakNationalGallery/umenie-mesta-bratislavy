@@ -16,8 +16,9 @@
 
         <div class="pt-2 pb-14">
             @php
-                $artworks = \App\Models\Artwork::with(['authors', 'coverPhotoMedia', 'yearBuilt'])
+                $artworks = \App\Models\Artwork::published()
                     ->has('coverPhotoMedia')
+                    ->with(['authors', 'coverPhotoMedia', 'yearBuilt'])
                     ->take(4)
                     ->get();
             @endphp

@@ -15,7 +15,7 @@ class ArtworkController extends Controller
     public function index()
     {
         $artworks = Artwork::with(['authors', 'coverPhotoMedia', 'yearBuilt'])
-            // TODO published scope
+            ->published()
             ->has('coverPhotoMedia')
             ->get(); // ->paginate(12);
 
@@ -52,7 +52,8 @@ class ArtworkController extends Controller
     public function show(Artwork $artwork)
     {
         // TODO related by distance from $artwork
-        $relatedArtworks = Artwork::inRandomOrder()
+        $relatedArtworks = Artwork::published()
+            ->inRandomOrder()
             ->with('coverPhotoMedia', 'authors', 'yearBuilt')
             ->has('coverPhotoMedia')
             ->limit(4)
