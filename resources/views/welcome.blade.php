@@ -18,7 +18,7 @@
                     <span class="leading-none mt-[0.15rem] text-base">mestských<br />častí</span>
                 </div>
                 <div class="flex items-start gap-x-2">
-                    <span class="text-4xl font-medium">{{ $stats['lastUpdate']->isoFormat('DD/MM/YY') }}</span>
+                    <span class="text-4xl font-medium">{{ optional($stats['lastUpdate'])->isoFormat('DD/MM/YY') }}</span>
                     <span class="leading-none mt-[0.15rem] text-base">naposledy<br />aktualizované</span>
                 </div>
             </div>
