@@ -21,8 +21,9 @@ class Artwork extends Model
         return Cache::rememberForever(
             'artworks.stats',
             fn() => [
-                'lastUpdate' => self::orderByDesc('updated_at')->first()
-                    ->updated_at,
+                'lastUpdate' => optional(
+                    self::orderByDesc('updated_at')->first()
+                )->updated_at,
                 'count' => self::published()->count(),
                 'locations' => Location::selectRaw(
                     'count(id) as count, borough'
