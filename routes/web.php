@@ -4,6 +4,7 @@ use App\Jobs\ImportFromAirtable;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\HomeController;
 use App\Models\Artwork;
+use App\Models\Location;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    $stats = Artwork::getStats();
+    return view('welcome', [
+        'artworks' => Artwork::published()
+            ->has('coverPhotoMedia')
+            ->with(['authors', 'coverPhotoMedia', 'yearBuilt'])
+            ->orderByDesc('created_at')
+            ->take(4)
+            ->get(),
+
+        'locations' => $stats['locations'],
+        'stats' => [
+            'artworks' => $stats['count'],
+            'boroughs' => $stats['locations']
+                ->values()
+                ->flatten()
+                ->count(),
+            'lastUpdate' => $stats['lastUpdate'],
+        ],
+    ]);
+});
 
 Route::get('/o-projekte', function () {
     $stats = Artwork::getStats();

@@ -15,13 +15,6 @@
         </h2>
 
         <div class="pt-2 pb-14">
-            @php
-                $artworks = \App\Models\Artwork::published()
-                    ->has('coverPhotoMedia')
-                    ->with(['authors', 'coverPhotoMedia', 'yearBuilt'])
-                    ->take(4)
-                    ->get();
-            @endphp
             <div class="-mt-2 -mx-4" data-masonry='{ "itemSelector": ".grid-item" }'>
                 @foreach ($artworks as $a)
                     <x-artwork-card :artwork="$a" class="grid-item sm:w-1/4 p-4" />
