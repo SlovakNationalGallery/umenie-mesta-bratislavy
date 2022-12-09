@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use App\Models\Location;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ArtworkController extends Controller
 {
@@ -19,7 +22,30 @@ class ArtworkController extends Controller
             ->has('coverPhotoMedia')
             ->get(); // ->paginate(12);
 
-        return view('artworks.index', compact('artworks'));
+        // TODO combine with Artwork::getStats
+        $boroughCounts = Location::selectRaw('count(id) as count, borough')
+            ->current()
+            ->whereHas('artworks', function (Builder $query) {
+                $query->published();
+            })
+            ->groupBy('borough')
+            ->pluck('count', 'borough');
+
+        $filters = [
+            'boroughs' => Location::getBoroughs()->map(function ($b) use (
+                $boroughCounts
+            ) {
+                return [
+                    'value' => $b['name'],
+                    'label' => $b['name'],
+                    'district_short' => $b['district_short'],
+                    'count' => Arr::get($boroughCounts, $b['name'], 0),
+                    'selected' => false, // TODO
+                ];
+            }),
+        ];
+
+        return view('artworks.index', compact(['artworks', 'filters']));
     }
 
     /**
