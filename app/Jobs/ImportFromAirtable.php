@@ -86,7 +86,7 @@ class ImportFromAirtable implements ShouldQueue
         'locations' => [
             'id' => 'tbl07Ra5HNp9XQnUL',
             'fields' => [
-                'address' => 'fldqcO0CRqUN5qH3t',
+                'address' => 'fldPoUw8nxFc0mXnM',
                 'postal_code' => 'fldzSGWB2hjBo56cs',
                 'borough' => 'fldiFyzXnZEglcyTm',
                 'quarter' => 'fld35CIDrs7EteVLs',
