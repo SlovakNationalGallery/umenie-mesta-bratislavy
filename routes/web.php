@@ -20,7 +20,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/o-projekte', function () {
-    return view('about', ['stats' => Artwork::getStats()]);
+    $stats = Artwork::getStats();
+
+    return view('about', [
+        'stats' => [
+            'artworks' => $stats['count'],
+            'boroughs' => $stats['locations']
+                ->values()
+                ->flatten()
+                ->count(),
+            'lastUpdate' => $stats['lastUpdate'],
+        ],
+    ]);
 })->name('about');
 
 Route::resource('diela', ArtworkController::class)
