@@ -26,7 +26,7 @@
 
         <div class="md:grid grid-cols-3 gap-x-8 mt-6 md:mt-8">
             <div class="col-span-2 flex flex-col">
-                <article class="prose">
+                <article class="prose text-neutral-800">
                     {!! Str::markdown($artwork->description ?? '') !!}
                 </article>
 

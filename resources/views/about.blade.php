@@ -6,7 +6,7 @@
             O projekte
         </h3>
         <div>
-            <div class="prose mt-8 md:mt-2 md:text-2xl">
+            <div class="prose mt-8 md:mt-2 md:text-2xl text-neutral-800">
                 <p>
                     Databázu diel vo verejnom priestore ako svoj vedecko-výskumný projekt založila a spravuje
                     <strong> Galéria mesta Bratislavy</strong>. Od roku 2022 vzniká kurátorský výber diel, pričom
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="mt-8 md:mt-0">
-                <div class="prose mt-2 md:text-2xl">
+                <div class="prose mt-2 md:text-2xl text-neutral-800">
                     <p>
                         Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od 2. polovice
                         20.
