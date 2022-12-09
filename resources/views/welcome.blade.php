@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-neutral-100">
         <div class="max-w-screen-3xl px-4 md:px-14 mx-auto md:grid grid-cols-2">
-            <div class="relative">
+            <div class="hidden md:block">
                 <home-map :locations="{{ $locations }}" class="mx-auto"></home-map>
             </div>
             <div class="mt-auto pt-4 md:mb-28 md:ml-24">
