@@ -14,6 +14,20 @@ class Artwork extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    public static function getStats()
+    {
+        return [
+            'lastUpdate' => self::orderByDesc('updated_at')->first()
+                ->updated_at,
+        ];
+    }
+
+    public function scopePublished($query)
+    {
+        // TODO enable before launch
+        // $query->where('is_published', true);
+    }
+
     public function authors()
     {
         return $this->belongsToMany(Author::class)

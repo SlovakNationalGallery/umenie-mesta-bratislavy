@@ -54,6 +54,7 @@ class ImportFromAirtable implements ShouldQueue
                 'signatures' => 'fld5nS8uaxaA94iQD',
                 'techniques' => 'fldQvlhYOOwsNApxP',
                 'years' => 'fldxCrnyBQOhsqRXv',
+                'is_published' => 'fldJxcrmeYf6DUThi',
             ],
         ],
         'authors' => [
