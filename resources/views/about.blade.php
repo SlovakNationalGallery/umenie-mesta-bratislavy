@@ -83,14 +83,14 @@
             </div>
         </div>
     </div>
-    <div class="max-w-screen-3xl p-4 md:p-14 mx-auto">
+    <div class="max-w-screen-3xl p-4 md:p-14 mx-auto md:text-2xl">
         <div class="md:flex">
             <div class="md:w-2/5 flex-shrink-0">
                 {{-- TODO real data --}}
-                <h3 class="text-xl md:text-4xl mt-6 md:mt-0 font-medium">
+                <h4 class="text-lg md:text-3xl mt-6 md:mt-0 font-medium">
                     Aktuálne spracované dáta
-                </h3>
-                <div class="mt-8 md:mt-4 flex flex-col gap-y-2">
+                </h4>
+                <div class="mt-8 md:mt-10 flex flex-col gap-y-6">
                     <div class="flex items-start gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['artworks'] }}</span>
                         <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
@@ -136,6 +136,7 @@
             </div>
         </div>
         <hr class="h-0.5 md:h-[0.15rem] my-8 md:my-16 -mx-0.5 md:-mx-2 bg-neutral-800">
+
         <div class="md:flex">
             <h3 class="text-xl md:text-4xl mt-6 md:mt-0 font-medium md:w-2/5 flex-shrink-0">
                 Podieľali/jú sa na projekte
