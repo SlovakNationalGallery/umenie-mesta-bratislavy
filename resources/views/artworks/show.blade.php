@@ -5,7 +5,7 @@
         <div class="bg-neutral-200 border-2 border-neutral-400 w-1/3 h-60"></div>
         <div class="bg-neutral-200 border-2 border-neutral-400 w-2/3 h-60"></div>
     </div>
-    <div class="p-4 max-w-5xl mx-auto">
+    <div class="max-w-screen-3xl px-4 md:px-14 mx-auto">
         <a href="{{ route('artworks.index') }}" class="mt-4 -ml-1 text-xs underline inline-flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                 class="w-4 h-4">
@@ -148,7 +148,7 @@
     </div>
 
     <div class="mt-8 bg-neutral-200 border-2 border-neutral-400 h-80 flex items-center justify-center">mapa</div>
-    <div class="pt-10 pb-6 px-4 bg-neutral-100">
+    <div class="pt-10 pb-6 px-4 max-w-screen-3xl md:px-14 mx-auto">
         <h3 class="text-3xl font-medium mt-3">Ďalšie diela v okolí</h3>
 
         {{-- TODO --}}
