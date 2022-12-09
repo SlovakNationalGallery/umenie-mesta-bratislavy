@@ -3,7 +3,7 @@
 @section('content')
     <div class="p-4 bg-neutral-100">
         <div class="relative">
-            <map-component :locations="{{ $locations }}"></map-component>
+            <home-map :locations="{{ $locations }}"></home-map>
         </div>
     </div>
 
