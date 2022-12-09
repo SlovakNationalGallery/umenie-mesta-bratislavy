@@ -32,7 +32,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="border-b-2 -mx-0.5 md:-mx-2 border-neutral-800"></div>
+        <hr class="h-0.5 md:h-[0.15rem] -mx-0.5 md:-mx-2 bg-neutral-800">
     </div>
 
     <div id="app">
