@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Artwork extends Model
 {
@@ -16,10 +18,26 @@ class Artwork extends Model
 
     public static function getStats()
     {
-        return [
-            'lastUpdate' => self::orderByDesc('updated_at')->first()
-                ->updated_at,
-        ];
+        return Cache::rememberForever(
+            'artworks.stats',
+            fn() => [
+                'lastUpdate' => self::orderByDesc('updated_at')->first()
+                    ->updated_at,
+                'count' => self::published()->count(),
+                'locations' => Location::selectRaw(
+                    'count(id) as count, borough'
+                )
+                    ->current()
+                    ->whereHas('artworks', function (Builder $query) {
+                        $query->published();
+                    })
+                    ->groupBy('borough')
+                    ->get()
+                    ->groupBy('district')
+                    ->collect() // Turn to Laravel collection
+                    ->except(''), // Filter out locations with empty district
+            ]
+        );
     }
 
     public function scopePublished($query)
@@ -124,7 +142,7 @@ class Artwork extends Model
     public function currentLocation()
     {
         return $this->hasOneDeepFromRelations($this->locations())
-            ->where('is_current', true)
+            ->current()
             ->orderBy('artwork_location.order')
             ->limit(1);
     }

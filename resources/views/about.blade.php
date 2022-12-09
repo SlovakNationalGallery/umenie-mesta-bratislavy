@@ -93,15 +93,16 @@
                     </h3>
                     <div class="mt-8 md:mt-4 flex flex-col gap-y-2">
                         <div class="flex items-start gap-x-2">
-                            <span class="text-4xl font-medium">96</span>
+                            <span class="text-4xl font-medium">{{ $stats['count'] }}</span>
                             <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
                         </div>
                         <div class="flex items-start gap-x-2">
-                            <span class="text-4xl font-medium">16/17</span>
+                            <span
+                                class="text-4xl font-medium">{{ $stats['locations']->values()->flatten()->count() }}/17</span>
                             <span class="leading-none mt-[0.15rem] text-base">mestských<br />častí</span>
                         </div>
                         <div class="flex items-start gap-x-2">
-                            <span class="text-4xl font-medium">13/12/22</span>
+                            <span class="text-4xl font-medium">{{ $stats['lastUpdate']->isoFormat('DD/MM/YY') }}</span>
                             <span class="leading-none mt-[0.15rem] text-base">naposledy<br />aktualizované</span>
                         </div>
                     </div>

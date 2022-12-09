@@ -21,6 +21,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\LazyCollection;
@@ -595,6 +596,8 @@ class ImportFromAirtable implements ShouldQueue
                     ]);
             });
         });
+
+        Cache::forget('artworks.stats');
     }
 
     private function listRecords(string $tableName)

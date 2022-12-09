@@ -3,6 +3,7 @@
 use App\Jobs\ImportFromAirtable;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\HomeController;
+use App\Models\Artwork;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/o-projekte', function () {
-    return view('about');
+    return view('about', ['stats' => Artwork::getStats()]);
 })->name('about');
 
 Route::resource('diela', ArtworkController::class)
