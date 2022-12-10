@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class Artwork extends Model
@@ -47,10 +48,61 @@ class Artwork extends Model
         // $query->where('is_published', true);
     }
 
+    // default scope for those artworks that we can actually display
+    public function scopePresentable($query)
+    {
+        $query->published()->has('coverPhotoMedia');
+    }
+
+    public function scopeFilteredBySearchRequest($query, Request $request)
+    {
+        $request->whenFilled('boroughs', function ($boroughs) use ($query) {
+            $query->whereHas('locations', function (Builder $query) use (
+                $boroughs
+            ) {
+                $query->current()->whereIn('borough', $boroughs);
+            });
+        });
+
+        $request->whenFilled('authors', function ($authorIds) use ($query) {
+            $query->whereHas('authorsAndCoauthors', function (
+                Builder $query
+            ) use ($authorIds) {
+                $query->whereIn('id', $authorIds);
+            });
+        });
+
+        $request->whenFilled('categories', function ($categoryIds) use (
+            $query
+        ) {
+            $query->whereHas('categories', function (Builder $query) use (
+                $categoryIds
+            ) {
+                $query->whereIn('id', $categoryIds);
+            });
+        });
+
+        $request->whenFilled('keywords', function ($keywordIds) use ($query) {
+            $query->whereHas('keywords', function (Builder $query) use (
+                $keywordIds
+            ) {
+                $query->whereIn('id', $keywordIds);
+            });
+        });
+    }
+
     public function authors()
     {
         return $this->belongsToMany(Author::class)
             ->wherePivot('role', 'author')
+            ->orderByPivot('order');
+    }
+
+    public function authorsAndCoauthors()
+    {
+        return $this->belongsToMany(Author::class)
+            ->withPivot('role')
+            ->orderByPivot('role')
             ->orderByPivot('order');
     }
 

@@ -1,10 +1,20 @@
 <script>
 import queryString from 'query-string';
+import axios from 'axios';
 
 function getParsedUrl() {
     return queryString.parseUrl(window.location.href, {
         arrayFormat: 'bracket',
     });
+}
+
+function stringifyUrl({ url, query }) {
+    return queryString.stringifyUrl(
+        { url, query },
+        {
+            arrayFormat: 'bracket',
+        }
+    );
 }
 
 export default {
@@ -16,7 +26,7 @@ export default {
 
     data() {
         return {
-            filters: this.initialFilters ?? {},
+            filters: {},
             query: {
                 boroughs: [],
                 authors: [],
@@ -26,7 +36,9 @@ export default {
             },
         };
     },
-
+    async created() {
+        this.fetchFilters();
+    },
     render() {
         return this.$slots.default({
             filters: this.filters,
@@ -53,9 +65,20 @@ export default {
                 [name]: this.query[name].filter((v) => v !== value),
             };
         },
+        async fetchFilters() {
+            const url = stringifyUrl({
+                url: '/api/artworks/filters',
+                query: this.query,
+            });
+
+            const filtersResponse = await axios.get(url);
+            this.filters = filtersResponse.data;
+        },
     },
     watch: {
         query(newQuery) {
+            this.fetchFilters();
+
             const { url } = getParsedUrl();
 
             const newUrl = queryString.stringifyUrl(

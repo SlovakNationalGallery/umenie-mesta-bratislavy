@@ -18,84 +18,15 @@ class ArtworkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $filteredArtworkIds = $artworks = Artwork::query()
-            ->select('id')
-            ->published()
-            ->has('coverPhotoMedia')
-            ->get()
-            ->modelKeys();
-
         $artworks = Artwork::query()
+            ->presentable()
+            ->filteredBySearchRequest($request)
             ->with(['authors', 'coverPhotoMedia', 'yearBuilt'])
-            ->whereIn('id', $filteredArtworkIds)
             ->paginate(12);
 
-        $boroughCounts = Location::selectRaw('count(id) as count, borough')
-            ->current()
-            ->whereHas('artworks', function (Builder $query) use (
-                $filteredArtworkIds
-            ) {
-                $query->whereIn('id', $filteredArtworkIds);
-            })
-            ->groupBy('borough')
-            ->pluck('count', 'borough');
-
-        $filters = [
-            'boroughs' => Location::getBoroughs()->map(function ($b) use (
-                $boroughCounts
-            ) {
-                return [
-                    'value' => $b['name'],
-                    'label' => $b['name'],
-                    'district_short' => $b['district_short'],
-                    'count' => Arr::get($boroughCounts, $b['name'], 0),
-                    'selected' => false, // TODO
-                ];
-            }),
-            'authors' => Author::query()
-                ->select('id', 'first_name', 'last_name', 'other_name')
-                ->withFilteredArtworksCount($filteredArtworkIds)
-                ->orderByDesc('artworks_count')
-                ->orderByRaw('COALESCE(last_name, other_name)')
-                ->get()
-                ->map(
-                    fn($a) => [
-                        'value' => $a->id,
-                        'label' => $a->name,
-                        'count' => $a->artworks_count,
-                    ]
-                ),
-
-            'categories' => Category::query()
-                ->select('id', 'name')
-                ->withFilteredArtworksCount($filteredArtworkIds)
-                ->orderByDesc('artworks_count')
-                ->get()
-                ->map(
-                    fn($a) => [
-                        'value' => $a->id,
-                        'label' => $a->name,
-                        'count' => $a->artworks_count,
-                    ]
-                ),
-
-            'keywords' => Keyword::query()
-                ->select('id', 'keyword')
-                ->withFilteredArtworksCount($filteredArtworkIds)
-                ->orderByDesc('artworks_count')
-                ->get()
-                ->map(
-                    fn($a) => [
-                        'value' => $a->id,
-                        'label' => $a->keyword,
-                        'count' => $a->artworks_count,
-                    ]
-                ),
-        ];
-
-        return view('artworks.index', compact(['artworks', 'filters']));
+        return view('artworks.index', compact(['artworks']));
     }
 
     /**

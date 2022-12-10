@@ -3,9 +3,8 @@
 @section('content')
     <section class="max-w-screen-3xl px-4 md:px-14 mx-auto">
         <div class="my-4">
-            <search.filters-controller v-cloak :initial-filters="{{ Js::from($filters) }}"
-                v-slot="{ filters, query, onCheckboxChange }">
-                <div class="flex">
+            <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange }">
+                <div class="grid grid-cols-4">
                     <div>
                         <div v-for="option in filters.boroughs" :key="option.value">
                             <input :id="`filter-borough-${option.value}`" type="checkbox" name="boroughs"

@@ -17,93 +17,76 @@ class Location extends Model
 
     public static function getBoroughs()
     {
-        return collect([
+        return [
             'Staré Mesto' => [
-                'name' => 'Staré Mesto',
                 'district' => 'Bratislava I',
                 'district_short' => 'I',
             ],
             'Ružinov' => [
-                'name' => 'Ružinov',
                 'district' => 'Bratislava II',
                 'district_short' => 'II',
             ],
             'Vrakuňa' => [
-                'name' => 'Vrakuňa',
                 'district' => 'Bratislava II',
                 'district_short' => 'II',
             ],
             'Podunajské Biskupice' => [
-                'name' => 'Podunajské Biskupice',
                 'district' => 'Bratislava II',
                 'district_short' => 'II',
             ],
             'Nové Mesto' => [
-                'name' => 'Nové Mesto',
                 'district' => 'Bratislava III',
                 'district_short' => 'III',
             ],
             'Rača' => [
-                'name' => 'Rača',
                 'district' => 'Bratislava III',
                 'district_short' => 'III',
             ],
             'Vajnory' => [
-                'name' => 'Vajnory',
                 'district' => 'Bratislava III',
                 'district_short' => 'III',
             ],
             'Karlova Ves' => [
-                'name' => 'Karlova Ves',
                 'district' => 'Bratislava IV',
                 'district_short' => 'IV',
             ],
             'Dúbravka' => [
-                'name' => 'Dúbravka',
                 'district' => 'Bratislava IV',
                 'district_short' => 'IV',
             ],
             'Lamač' => [
-                'name' => 'Lamač',
                 'district' => 'Bratislava IV',
                 'district_short' => 'IV',
             ],
             'Devín' => [
-                'name' => 'Devín',
                 'district' => 'Bratislava IV',
                 'district_short' => 'IV',
             ],
             'Devínska Nová Ves' => [
-                'name' => 'Devínska Nová Ves',
                 'district' => 'Bratislava IV',
                 'district_short' => 'IV',
             ],
             'Záhorská Bystrica' => [
-                'name' => 'Záhorská Bystrica',
                 'district' => 'Bratislava IV',
                 'district_short' => 'IV',
             ],
             'Petržalka' => [
-                'name' => 'Petržalka',
                 'district' => 'Bratislava V',
                 'district_short' => 'V',
             ],
             'Jarovce' => [
-                'name' => 'Jarovce',
                 'district' => 'Bratislava V',
                 'district_short' => 'V',
             ],
             'Rusovce' => [
-                'name' => 'Rusovce',
                 'district' => 'Bratislava V',
                 'district_short' => 'V',
             ],
             'Čunovo' => [
-                'name' => 'Čunovo',
                 'district' => 'Bratislava V',
                 'district_short' => 'V',
             ],
-        ]);
+        ];
     }
 
     public function scopeCurrent($query)
