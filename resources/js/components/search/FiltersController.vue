@@ -68,7 +68,7 @@ export default {
                 }
             );
 
-            window.history.pushState(
+            window.history.replaceState(
                 newUrl,
                 '', // unused param
                 newUrl
