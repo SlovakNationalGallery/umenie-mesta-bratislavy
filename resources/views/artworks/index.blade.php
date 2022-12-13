@@ -15,6 +15,14 @@
                             </label>
                         </div>
                     </div>
+                    {{-- TODO use or lose --}}
+                    {{-- <search.multi-select id="filter-borough-"
+                        :options="filters.borough.map(b => ({
+                            label: `${b.label} ${b.count} ${b.district_short}`,
+                            value: v.value,
+                            checked: query.boroughs.includes(option.value)
+                        }))">
+                    </search.multi-select> --}}
                     <div>
                         <div v-for="option in filters.authors" :key="option.value">
                             <input :id="`filter-author-${option.value}`" type="checkbox" name="authors"
