@@ -12,7 +12,7 @@
                 :name="name"
                 :value="option.value"
                 @change="onCheckboxChange"
-                :checked="options.checked"
+                :checked="option.checked"
             />
             <label :for="id + option.value">
                 {{ option.label }}
