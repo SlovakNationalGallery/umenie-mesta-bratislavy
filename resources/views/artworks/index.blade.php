@@ -5,7 +5,7 @@
         <div class="my-4">
             <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange }">
                 <div class="grid grid-cols-4">
-                    <div>
+                    <search.multi-select :options="filters.boroughs" v-slot="{ options }">
                         <div v-for="option in filters.boroughs" :key="option.value">
                             <input :id="`filter-borough-${option.value}`" type="checkbox" name="boroughs"
                                 :value="option.value" @change="onCheckboxChange"
@@ -14,16 +14,8 @@
                                 @{{ option.label }} (@{{ option.count }}) (@{{ option.district_short }})
                             </label>
                         </div>
-                    </div>
-                    {{-- TODO use or lose --}}
-                    {{-- <search.multi-select id="filter-borough-"
-                        :options="filters.borough.map(b => ({
-                            label: `${b.label} ${b.count} ${b.district_short}`,
-                            value: v.value,
-                            checked: query.boroughs.includes(option.value)
-                        }))">
-                    </search.multi-select> --}}
-                    <div>
+                    </search.multi-select>
+                    <search.multi-select :options="filters.authors" v-slot="{ options }">
                         <div v-for="option in filters.authors" :key="option.value">
                             <input :id="`filter-author-${option.value}`" type="checkbox" name="authors"
                                 :value="option.value" @change="onCheckboxChange"
@@ -32,9 +24,9 @@
                                 @{{ option.label }} (@{{ option.count }})
                             </label>
                         </div>
-                    </div>
-                    <div>
-                        <div v-for="option in filters.categories" :key="option.value">
+                    </search.multi-select>
+                    <search.multi-select :options="filters.categories" v-slot="{ options }">
+                        <div v-for="option in options" :key="option.value">
                             <input :id="`filter-category-${option.value}`" type="checkbox" name="categories"
                                 :value="option.value" @change="onCheckboxChange"
                                 :checked="query.categories.includes(option.value)" />
@@ -42,9 +34,9 @@
                                 @{{ option.label }} (@{{ option.count }})
                             </label>
                         </div>
-                    </div>
-                    <div>
-                        <div v-for="option in filters.keywords" :key="option.value">
+                    </search.multi-select>
+                    <search.multi-select :options="filters.keywords" v-slot="{ options }">
+                        <div v-for="option in options" :key="option.value">
                             <input :id="`filter-keyword-${option.value}`" type="checkbox" name="keywords"
                                 :value="option.value" @change="onCheckboxChange"
                                 :checked="query.keywords.includes(option.value)" />
@@ -52,7 +44,7 @@
                                 @{{ option.label }} (@{{ option.count }})
                             </label>
                         </div>
-                    </div>
+                    </search.multi-select>
 
                 </div>
             </search.filters-controller>
