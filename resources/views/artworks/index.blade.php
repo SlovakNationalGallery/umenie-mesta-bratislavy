@@ -6,7 +6,7 @@
             <search.filters-controller v-cloak
                 v-slot="{ filters, query, onCheckboxChange, onOpenedFilterChange, openedFilterName }">
                 <div class="grid grid-cols-4">
-                    <search.multi-select id="filter-borough-" label="borough" name="boroughs"
+                    <search.multi-select id="filter-borough-" label="Obvod / mestská časť" name="boroughs"
                         :is-filter-opened="openedFilterName === 'boroughs'" :on-checkbox-change="onCheckboxChange"
                         :on-label-click="onOpenedFilterChange"
                         :options="filters.boroughs?.map(option =>
@@ -17,7 +17,7 @@
                             })
                         )">
                     </search.multi-select>
-                    <search.multi-select id="filter-author-" label="author" name="authors"
+                    <search.multi-select id="filter-author-" label="Autori / Spoluautori" name="authors"
                         :is-filter-opened="openedFilterName === 'authors'" :on-checkbox-change="onCheckboxChange"
                         :on-label-click="onOpenedFilterChange"
                         :options="filters.authors?.map(option =>
@@ -28,7 +28,7 @@
                             })
                         )">
                     </search.multi-select>
-                    <search.multi-select id="filter-category-" label="category" name="categories"
+                    <search.multi-select id="filter-category-" label="Druh diela" name="categories"
                         :is-filter-opened="openedFilterName === 'categories'" :on-checkbox-change="onCheckboxChange"
                         :on-label-click="onOpenedFilterChange"
                         :options="filters.categories?.map(option =>
@@ -39,7 +39,7 @@
                             })
                         )">
                     </search.multi-select>
-                    <search.multi-select id="filter-keyword-" label="keyword" name="keywords"
+                    <search.multi-select id="filter-keyword-" label="Kľúčové slová" name="keywords"
                         :is-filter-opened="openedFilterName === 'keywords'" :on-checkbox-change="onCheckboxChange"
                         :on-label-click="onOpenedFilterChange"
                         :options="filters.keywords?.map(option =>
