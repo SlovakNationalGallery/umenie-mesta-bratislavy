@@ -3,57 +3,21 @@
 @section('content')
     <section class="max-w-screen-3xl px-4 md:px-14 mx-auto">
         <div class="my-4">
-            <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange }">
+            <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, onOpenedFilterChange, openedFilterName }">
                 <div class="grid grid-cols-4">
-                    <div>
-                        <div v-for="option in filters.boroughs" :key="option.value">
-                            <input :id="`filter-borough-${option.value}`" type="checkbox" name="boroughs"
-                                :value="option.value" @change="onCheckboxChange"
-                                :checked="query.boroughs.includes(option.value)" />
-                            <label :for="`filter-borough-${option.value}`">
-                                @{{ option.label }} (@{{ option.count }}) (@{{ option.district_short }})
-                            </label>
-                        </div>
-                    </div>
-                    {{-- TODO use or lose --}}
-                    {{-- <search.multi-select id="filter-borough-"
-                        :options="filters.borough.map(b => ({
-                            label: `${b.label} ${b.count} ${b.district_short}`,
-                            value: v.value,
-                            checked: query.boroughs.includes(option.value)
-                        }))">
-                    </search.multi-select> --}}
-                    <div>
-                        <div v-for="option in filters.authors" :key="option.value">
-                            <input :id="`filter-author-${option.value}`" type="checkbox" name="authors"
-                                :value="option.value" @change="onCheckboxChange"
-                                :checked="query.authors.includes(option.value)" />
-                            <label :for="`filter-author-${option.value}`">
-                                @{{ option.label }} (@{{ option.count }})
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <div v-for="option in filters.categories" :key="option.value">
-                            <input :id="`filter-category-${option.value}`" type="checkbox" name="categories"
-                                :value="option.value" @change="onCheckboxChange"
-                                :checked="query.categories.includes(option.value)" />
-                            <label :for="`filter-category-${option.value}`">
-                                @{{ option.label }} (@{{ option.count }})
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <div v-for="option in filters.keywords" :key="option.value">
-                            <input :id="`filter-keyword-${option.value}`" type="checkbox" name="keywords"
-                                :value="option.value" @change="onCheckboxChange"
-                                :checked="query.keywords.includes(option.value)" />
-                            <label :for="`filter-keyword-${option.value}`">
-                                @{{ option.label }} (@{{ option.count }})
-                            </label>
-                        </div>
-                    </div>
-
+                    <search.multi-select id="filter-borough-" label="borough" name="boroughs"
+                        :is-filter-opened="openedFilterName === 'boroughs'"
+                        :on-checkbox-change="onCheckboxChange"
+                        :on-label-click="onOpenedFilterChange"
+                        :options="filters.boroughs?.map(option =>
+                            ({
+                                label: `${option.label} ${option.count} ${option.district_short}`,
+                                value: option.value,
+                                checked: query.boroughs.includes(option.value)
+                            })
+                        )"
+                        >
+                    </search.multi-select>
                 </div>
             </search.filters-controller>
         </div>

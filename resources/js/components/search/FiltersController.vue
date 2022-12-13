@@ -26,6 +26,7 @@ export default {
 
     data() {
         return {
+            openedFilterName: null,
             filters: {},
             query: {
                 boroughs: [],
@@ -43,13 +44,19 @@ export default {
         return this.$slots.default({
             filters: this.filters,
             query: this.query,
+            openedFilterName: this.openedFilterName,
             onCheckboxChange: this.onCheckboxChange,
+            onOpenedFilterChange: this.onOpenedFilterChange,
         });
     },
     methods: {
+        onOpenedFilterChange(name) {
+            this.openedFilterName === name
+                ? (this.openedFilterName = null)
+                : (this.openedFilterName = name);
+        },
         onCheckboxChange(event) {
             const { name, value, checked } = event.target;
-
             if (checked) {
                 // Add to query
                 this.query = {

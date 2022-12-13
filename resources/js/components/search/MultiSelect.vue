@@ -1,35 +1,35 @@
 <template>
     <div>
-        <div v-for="option in options" :key="option.value">
+        <button @click="onLabelClick(name)">{{ label }}</button>
+        <div
+            v-if="isFilterOpened"
+            v-for="option in options"
+            :key="option.value"
+        >
             <input
-                :id="props.id + option.value"
                 type="checkbox"
-                :name="props.name"
+                :id="id + option.value"
+                :name="name"
                 :value="option.value"
-                @change="props.onChange"
+                @change="onCheckboxChange"
                 :checked="options.checked"
             />
-            <label :for="props.id + option.value">
+            <label :for="id + option.value">
                 {{ option.label }}
             </label>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        options: {
-            // shape label, value, selected
-            type: Object,
-        },
-        id: {
-            type: String,
-            required: true,
-        },
-        onChange: {
-            //  function
-        },
-    },
-};
+<script setup>
+import { defineProps } from 'vue';
+const props = defineProps([
+    'options',
+    'id',
+    'name',
+    'label',
+    'isFilterOpened',
+    'onCheckboxChange',
+    'onLabelClick',
+]);
 </script>
