@@ -1,22 +1,20 @@
 <template>
     <div>
-        <button @click="onLabelClick(name)">{{ label }}</button>
-        <div
-            v-if="isFilterOpened"
-            v-for="option in options"
-            :key="option.value"
-        >
-            <input
-                type="checkbox"
-                :id="id + option.value"
-                :name="name"
-                :value="option.value"
-                @change="onCheckboxChange"
-                :checked="option.checked"
-            />
-            <label :for="id + option.value">
-                {{ option.label }}
-            </label>
+        <button @click="onOpenedFilterChange(name)">{{ label }}</button>
+        <div v-if="isFilterOpened" v-click-away="onClickAway">
+            <div v-for="option in options" :key="option.value">
+                <input
+                    type="checkbox"
+                    :id="id + option.value"
+                    :name="name"
+                    :value="option.value"
+                    @change="onCheckboxChange"
+                    :checked="option.checked"
+                />
+                <label :for="id + option.value">
+                    {{ option.label }}
+                </label>
+            </div>
         </div>
     </div>
 </template>
@@ -30,6 +28,10 @@ const props = defineProps([
     'label',
     'isFilterOpened',
     'onCheckboxChange',
-    'onLabelClick',
+    'onOpenedFilterChange',
 ]);
+
+const onClickAway = (event) => {
+    props.onOpenedFilterChange(event.name);
+};
 </script>

@@ -8,7 +8,7 @@
                 <div class="grid grid-cols-4">
                     <search.multi-select id="filter-borough-" label="Obvod / mestská časť" name="boroughs"
                         :is-filter-opened="openedFilterName === 'boroughs'" :on-checkbox-change="onCheckboxChange"
-                        :on-label-click="onOpenedFilterChange"
+                        :on-opened-filter-change="onOpenedFilterChange"
                         :options="filters.boroughs?.map(option =>
                             ({
                                 label: `${option.label} ${option.count} ${option.district_short}`,
@@ -19,7 +19,7 @@
                     </search.multi-select>
                     <search.multi-select id="filter-author-" label="Autori / Spoluautori" name="authors"
                         :is-filter-opened="openedFilterName === 'authors'" :on-checkbox-change="onCheckboxChange"
-                        :on-label-click="onOpenedFilterChange"
+                        :on-opened-filter-change="onOpenedFilterChange"
                         :options="filters.authors?.map(option =>
                             ({
                                 label: `${option.label} ${option.count}`,
@@ -30,7 +30,7 @@
                     </search.multi-select>
                     <search.multi-select id="filter-category-" label="Druh diela" name="categories"
                         :is-filter-opened="openedFilterName === 'categories'" :on-checkbox-change="onCheckboxChange"
-                        :on-label-click="onOpenedFilterChange"
+                        :on-opened-filter-change="onOpenedFilterChange"
                         :options="filters.categories?.map(option =>
                             ({
                                 label: `${option.label} ${option.count}`,
@@ -41,7 +41,7 @@
                     </search.multi-select>
                     <search.multi-select id="filter-keyword-" label="Kľúčové slová" name="keywords"
                         :is-filter-opened="openedFilterName === 'keywords'" :on-checkbox-change="onCheckboxChange"
-                        :on-label-click="onOpenedFilterChange"
+                        :on-opened-filter-change="onOpenedFilterChange"
                         :options="filters.keywords?.map(option =>
                             ({
                                 label: `${option.label} ${option.count}`,
