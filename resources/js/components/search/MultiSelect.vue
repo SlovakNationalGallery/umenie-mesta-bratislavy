@@ -32,6 +32,8 @@ const props = defineProps([
 ]);
 
 const onClickAway = (event) => {
-    props.onOpenedFilterChange(event.name);
+    //this gets executed despite display:none on component - mobile/desktop. did not find nice solution yet
+   // props.onOpenedFilterChange(event.name);
 };
+
 </script>
