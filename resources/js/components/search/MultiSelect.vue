@@ -2,7 +2,7 @@
     <div>
         <button @click="onOpenedFilterChange(name)">{{ label }}</button>
         <div v-if="isFilterOpened" v-click-away="onClickAway">
-            <div v-for="option in options" :key="option.value">
+            <div @click.stop @touchstart.stop v-for="option in options" :key="option.value">
                 <input
                     type="checkbox"
                     :id="id + option.value"
@@ -32,8 +32,6 @@ const props = defineProps([
 ]);
 
 const onClickAway = (event) => {
-    //this gets executed despite display:none on component - mobile/desktop. did not find nice solution yet
-   // props.onOpenedFilterChange(event.name);
+    props.onOpenedFilterChange(event.name);
 };
-
 </script>
