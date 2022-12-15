@@ -21,7 +21,7 @@ module.exports = {
                 },
                 blue: {
                     500: '#389ed8',
-                }
+                },
             },
             fontFamily: {
                 sans: ['Denim', ...defaultTheme.fontFamily.sans],
@@ -34,5 +34,8 @@ module.exports = {
             },
         },
     },
-    plugins: [require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/forms'),
+    ],
 };
