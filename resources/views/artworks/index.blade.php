@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <search.filters-controller v-cloak
-        v-slot="{ filters, query, onCheckboxChange, onOpenedFilterChange, openedFilterName }">
+    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks }">
         <div class="max-w-screen-3xl px-4 md:px-14 mx-auto">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
@@ -116,16 +115,27 @@
             </headless.popover-group>
         </div>
 
-        <div class="bg-white">
-            <div class="rx-4 max-w-screen-3xl md:pr-14 mx-auto mt-4 md:mt-5 flex">
-                <div class="w-1/3 relative flex-shrink-0">
+        <div class="bg-white min-h-screen">
+            <div class="md:px-14 px-4 max-w-screen-3xl mx-auto mt-4 md:mt-5 md:flex">
+                <div class="-mx-4 md:-ml-14 md:mr-14 md:w-1/3 relative flex-shrink-0">
                     <img src="https://placeholder.pics/svg/300/DEDEDE/555555/mapa" class="w-full top-5 sticky">
                 </div>
 
-                <div class="w-2/3">
-                    <search.artworks-masonry :query="query" item-selector=".grid-item">
+                <div class="md:flex-grow mt-8">
+                    <div v-if="artworks.length" class="mt-5">
+                        <span v-if="artworks.length === 1">
+                            Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} dielo</span>
+                        </span>
+                        <span v-else-if="artworks.length < 5">
+                            Filtrom zodpovedajú <span class="font-semibold">@{{ artworks.length }} diela</span>
+                        </span>
+                        <span v-else>
+                            Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} diel</span>
+                        </span>
+                    </div>
+                    <search.artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-6 md:-mx-8">
                         @foreach ($artworks as $a)
-                            <x-artwork-card :artwork="$a" class="grid-item sm:w-1/3 p-4" imgSizes="19vw" />
+                            <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 md:p-4" imgSizes="19vw" />
                         @endforeach
                     </search.artworks-masonry>
                 </div>

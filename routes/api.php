@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ArtworkFiltersController;
+use App\Models\Artwork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('artworks/filters', ArtworkFiltersController::class)->names(
     'artworks-filters'
 );
+
+// TODO combine with API for Map endpoints
+Route::get('artworks', function (Request $request) {
+    return Artwork::query()
+        ->presentable()
+        ->filteredBySearchRequest($request)
+        ->select('id')
+        ->get();
+})->name('artworks.index');

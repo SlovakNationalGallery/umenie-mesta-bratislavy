@@ -26,7 +26,8 @@ export default {
 
     data() {
         return {
-            openedFilterName: null,
+            isFetching: false,
+            artworks: [],
             filters: {},
             query: {
                 boroughs: [],
@@ -38,23 +39,18 @@ export default {
         };
     },
     async created() {
-        this.fetchFilters();
+        this.fetchData();
     },
     render() {
         return this.$slots.default({
             filters: this.filters,
             query: this.query,
-            openedFilterName: this.openedFilterName,
             onCheckboxChange: this.onCheckboxChange,
-            onOpenedFilterChange: this.onOpenedFilterChange,
+            artworks: this.artworks,
+            isFetching: this.isFetching,
         });
     },
     methods: {
-        onOpenedFilterChange(name) {
-            this.openedFilterName === name
-                ? (this.openedFilterName = null)
-                : (this.openedFilterName = name);
-        },
         onCheckboxChange(event) {
             const { name, value, checked } = event.target;
             if (checked) {
@@ -72,19 +68,39 @@ export default {
                 [name]: this.query[name].filter((v) => v !== value),
             };
         },
-        async fetchFilters() {
-            const url = stringifyUrl({
-                url: '/api/artworks/filters',
-                query: this.query,
-            });
+        async fetchData() {
+            this.isFetching = true;
 
-            const filtersResponse = await axios.get(url);
-            this.filters = filtersResponse.data;
+            try {
+                this.filters = await axios
+                    .get(
+                        stringifyUrl({
+                            url: '/api/artworks/filters',
+                            query: this.query,
+                        })
+                    )
+                    .then(({ data }) => data);
+
+                // TODO merge into one call
+                this.artworks = await axios
+                    .get(
+                        stringifyUrl({
+                            url: '/api/artworks',
+                            query: this.query,
+                        })
+                    )
+                    .then(({ data }) => data);
+
+                this.isFetching = false;
+            } catch (e) {
+                this.isFetching = false;
+                throw e;
+            }
         },
     },
     watch: {
         query(newQuery) {
-            this.fetchFilters();
+            this.fetchData();
 
             const { url } = getParsedUrl();
 

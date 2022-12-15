@@ -1,6 +1,10 @@
 <template>
-    <div ref="container" class="-mt-4 -mr-4">
-        <slot></slot>
+    <div ref="container">
+        <slot>
+            <div class="flex justify-center h-24 text-center text-neutral-500">
+                Zadaným filtrom nevyhovujú žiadne diela.
+            </div>
+        </slot>
     </div>
 </template>
 
