@@ -62,7 +62,7 @@
             </search.mobile-filter-dialog>
 
             {{-- Desktop filter --}}
-            <div class="flex justify-between transition-opacity" :class="{ 'opacity-50': isFetching }">
+            <div class="flex justify-between">
                 <headless.popover-group class="gap-x-2 hidden md:flex">
                     <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
@@ -117,7 +117,8 @@
                     </search.popover-filter>
                 </headless.popover-group>
 
-                <div v-if="artworks.length" class="mt-5 hidden md:block">
+                <div v-if="artworks.length" class="mt-5 hidden md:block transition-opacity"
+                    :class="{ 'opacity-50': isFetching }">
                     <span v-if="artworks.length === 1">
                         Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} dielo</span>
                     </span>
