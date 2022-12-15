@@ -61,7 +61,7 @@
     </div>
 
     <footer class="bg-neutral-700 text-white text-sm">
-        <div class="max-w-screen-3xl mx-auto p-6 md:p-14 flex">
+        <div class="max-w-screen-3xl mx-auto py-14 px-6 md:px-14 md:flex">
             <div class="shrink md:pr-9">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 532.125 178.656" fill="currentColor"
                     class="h-12">
@@ -71,7 +71,7 @@
                 </svg>
             </div>
 
-            <div class="grow">
+            <div class="grow my-10 md:my-0">
                 <div class="max-w-5xl">
                     Galéria mesta Bratislavy v spolupráci s ďalšími partnermi, odbornými inštitúciami a expertmi mapuje
                     existujúce diela, ako aj fragmenty a diela presunuté, odstránené alebo zničené. Cieľom je
@@ -80,7 +80,7 @@
                     autoroch, použitých materiáloch a výtvarných technikách.
                 </div>
                 <div>
-                    <h3 class="text-xl mt-8 font-medium">Partneri projektu</h3>
+                    <h3 class="text-xl mt-10 md:mt-14 font-medium">Partneri projektu</h3>
                     <div class="flex mt-4 gap-10 items-center">
                         <svg viewBox="0 0 93 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                             class="h-10 w-auto">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="md:flex gap-x-16">
                         <div>
-                            <h3 class="text-xl mt-8 font-medium">Zapojte sa</h3>
+                            <h3 class="text-xl mt-10 md:mt-14 font-medium">Zapojte sa</h3>
                             <ul class="flex flex-col gap-y-4 mt-4">
                                 <li><x-link-underline
                                         href="mailto:umeniemesta@gmb.sk">umeniemesta@gmb.sk</x-link-underline></li>
@@ -109,7 +109,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl mt-8 font-medium">Sociálne siete</h3>
+                            <h3 class="text-xl mt-10 md:mt-14 font-medium">Sociálne siete</h3>
                             <ul class="flex flex-col gap-y-4 mt-4">
                                 <li><x-link-underline href="https://www.instagram.com/galeria_mesta_bratislavy/"
                                         target="_blank">Instagram</x-link-underline></li>
@@ -117,7 +117,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl mt-8 font-medium">Dokumenty</h3>
+                            <h3 class="text-xl mt-10 md:mt-14 font-medium">Dokumenty</h3>
                             <ul class="flex flex-col gap-y-4 mt-4">
                                 <li><x-link-underline href="https://gmb.sk/detail/ochrana-osobnych-udajov"
                                         target="_blank">Ochrana osobných údajov</x-link-underline></li>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            <div class="shrink text-right self-end md:pl-9 whitespace-nowrap">
+            <div class="shrink self-end md:pl-9 whitespace-nowrap">
                 Copyright © {{ now()->format('Y') }} <x-link-underline href="https://gmb.sk/" target="_blank">Galéria
                     mesta
                     Bratislavy</x-link-underline>
