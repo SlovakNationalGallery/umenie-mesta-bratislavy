@@ -1,7 +1,6 @@
 @props(['artwork', 'imgSizes' => null])
 <div {{ $attributes }}>
     <a class="block" href="{{ route('artworks.show', $artwork) }}">
-        {{-- onload="window.requestAnimationFrame(function(){if(!(size=getBoundingClientRect().width))return;onload=null;sizes=Math.ceil(size/window.innerWidth*100)+'vw';});" --}}
         <img srcset="{{ $artwork->coverPhotoMedia->getSrcset() }}" src="{{ $artwork->coverPhotoMedia->getUrl() }}"
             class="object-cover object-top transition-all grayscale hover:grayscale-0 w-full"
             sizes="{{ $imgSizes ?? '1px' }}"
