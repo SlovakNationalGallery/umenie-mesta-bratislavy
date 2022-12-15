@@ -31,4 +31,4 @@ Route::get('artworks', function (Request $request) {
         ->filteredBySearchRequest($request)
         ->select('id')
         ->get();
-})->name('artworks.index');
+})->name('api.artworks.index');
