@@ -21,7 +21,7 @@
         </div>
         <button
             @click="handleOpenLightbox(0)"
-            class="absolute bottom-4 right-4 bg-white uppercase font-medium py-2.5 px-5"
+            class="absolute min-w-max bottom-4 left-1/2 -translate-x-1/2 bg-white uppercase font-medium py-2.5 px-5 md:right-4 md:left-auto md:transform-none"
         >
             zobraziť galériu <span>({{ photoMedias.length }})</span>
         </button>
