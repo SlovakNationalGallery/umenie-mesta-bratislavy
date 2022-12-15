@@ -1,5 +1,5 @@
 <template>
-    <div class="relative m-12 aspect-[674/720] h-96">
+    <div class="relative aspect-[674/720]">
         <div
             class="absolute left-[34.07%] top-[52.08%] bottom-[15%] right-[24.87%]"
         >
