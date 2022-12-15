@@ -19,7 +19,7 @@
                 <div class="prose text-neutral-500">
                     <span class="uppercase text-neutral-500 font-medium">Aktuálne spracované data</span>
                     <div
-                        class="flex overflow-x-auto justify-between md:items-center gap-x-2 gap-y-2 pb-2 mb-6 md:mb-20 leading-none">
+                        class="flex flex-col md:flex-row overflow-x-auto justify-between md:items-center gap-x-2 gap-y-2 pb-2 mb-6 md:mb-20 leading-none">
                         <div class="flex gap-x-2 items-center min-w-max">
                             <span class="text-4xl font-medium pr-1">{{ $stats['artworks'] }}</span>
                             <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
