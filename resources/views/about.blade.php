@@ -13,12 +13,12 @@
             <div class="prose mt-8 md:mt-2 md:text-2xl text-neutral-800">
                 <p>
                     Databázu diel vo verejnom priestore ako svoj vedeckovýskumný projekt založila a spravuje <a
-                        href="https://gmb.sk/" class="font-medium hover:no-underline" target="_blank">Galéria mesta
+                        href="https://gmb.sk/" class="hover:text-red-500" target="_blank">Galéria mesta
                         Bratislavy</a>. Kurátorský
                     výber diel vzniká od roku 2022, pričom jednotlivé informácie sa budú pravidelne dopĺňať a aktualizovať.
                     Postupne tak pribudnú diela všetkých <a
-                        href="https://bratislava.sk/mesto-bratislava/sprava-mesta/mestske-casti"
-                        class="font-medium hover:no-underline" target="_blank">piatich mestských
+                        href="https://bratislava.sk/mesto-bratislava/sprava-mesta/mestske-casti" class="hover:text-red-500"
+                        target="_blank">piatich mestských
                         okresov a sedemnástich samosprávnych mestských častí</a>.
                 </p>
 
@@ -55,19 +55,19 @@
                     Aktuálne spracované dáta
                 </h4>
                 <div class="mt-8 md:mt-10 flex flex-col gap-y-6">
-                    <div class="flex items-start gap-x-2">
+                    <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['artworks'] }}</span>
-                        <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
+                        <span class="text-base whitespace-nowrap">diel v katalógu</span>
                     </div>
-                    <div class="flex items-start gap-x-2">
+                    <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['boroughs'] }}/17</span>
-                        <span class="leading-none mt-[0.15rem] text-base">mestských<br />častí</span>
+                        <span class="text-base whitespace-nowrap">mestských častí</span>
                     </div>
-                    <div class="flex items-start gap-x-2">
+                    <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">
                             {{ optional($stats['lastUpdate'])->isoFormat('DD/MM/YY') }}
                         </span>
-                        <span class="leading-none mt-[0.15rem] text-base">naposledy<br />aktualizované</span>
+                        <span class="text-base whitespace-nowrap">naposledy aktualizované</span>
                     </div>
                 </div>
             </div>
