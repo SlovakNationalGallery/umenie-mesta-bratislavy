@@ -1,9 +1,8 @@
 @font-face {
     font-family: 'Denim';
-    src: url('../fonts/Denim/TTF/Denim-Regular.ttf');
+    src: url('../fonts/Denim/WEB/Denim-Regular.woff');
     src: url('../fonts/Denim/WEB/Denim-Regular.woff2') format('woff2'),
-        url('../fonts/Denim/WEB/Denim-Regular.woff') format('woff'),
-        url('../fonts/Denim/TTF/Denim-Regular.ttf') format('truetype');
+        url('../fonts/Denim/WEB/Denim-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -11,10 +10,9 @@
 
 @font-face {
     font-family: 'Denim';
-    src: url('../fonts/Denim/TTF/Denim-Medium.ttf');
+    src: url('../fonts/Denim/WEB/Denim-Medium.woff');
     src: url('../fonts/Denim/WEB/Denim-Medium.woff2') format('woff2'),
-        url('../fonts/Denim/WEB/Denim-Medium.woff') format('woff'),
-        url('../fonts/Denim/TTF/Denim-Medium.ttf') format('truetype');
+        url('../fonts/Denim/WEB/Denim-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -22,10 +20,9 @@
 
 @font-face {
     font-family: 'Denim';
-    src: url('../fonts/Denim/TTF/Denim-SemiBold.ttf');
+    src: url('../fonts/Denim/WEB/Denim-SemiBold.woff');
     src: url('../fonts/Denim/WEB/Denim-SemiBold.woff2') format('woff2'),
-        url('../fonts/Denim/WEB/Denim-SemiBold.woff') format('woff'),
-        url('../fonts/Denim/TTF/Denim-SemiBold.ttf') format('truetype');
+        url('../fonts/Denim/WEB/Denim-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
