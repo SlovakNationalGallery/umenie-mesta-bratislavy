@@ -81,9 +81,19 @@
                         starostlivosti a nevhodného zaobchádzania.
                     </p>
 
+                    <p>Ambíciou projektu je dynamická a otvorená databáza, ktorá sa bude pravidelne doplňovať
+                        o nové poznatky z výskumu, aktualizovať a revidovať. Základným kritériom pre kurátorského
+                        výberu do databázy UVP GMB je tvorba profesionálnych autorov (výtvarných umelcov, ar-
+                        chitektov, dizajnérov a súvisiacich odborov) z obdobia po roku 1945, zastúpených v zbierkach
+                        GMB aj iných zbierkotvorných a výskumných inštitúcií. Pozornosť sa zameriava na najviac
+                        ohrozené diela, ktoré potrebujú ochranu a odborné postupy pri údržbe a obnove.
+                        V ďalších rokoch je cieľom dopĺňať do databázy aj diela zo starších období.</p>
+
                     <p>
-                        Údaje v databáze sú tvorené tak, aby iba bolo možné postupne prepájať na Web umenia a ďalšie
-                        registre a katalógy zamerané napríklad na galerijné a múzejne zbierky, modernú architektúru,
+                        Údaje v databáze sú tvorené tak, aby iba bolo možné postupne prepájať na <a
+                            href="https://www.webumenia.sk/" class="hover:text-red-500" target="_blank">Web umenia</a> a
+                        ďalšie
+                        registre a katalógy zamerané napríklad na galerijné a múzejne zbierky, modernú architektúru,
                         národné
                         kultúrne pamiatky a na databázy diel vo verejnom priestore v iných mestách.
                     </p>
