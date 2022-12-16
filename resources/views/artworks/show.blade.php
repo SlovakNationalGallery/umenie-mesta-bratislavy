@@ -147,7 +147,9 @@
                         {{ $artwork->currentLocation->description }}
 
                         <h4 class="font-medium mt-6">GPS</h4>
-                        {{ $artwork->currentLocation->gps_lat }}, {{ $artwork->currentLocation->gps_lon }}
+                        @if ($artwork->currentLocation->gps_lat && $artwork->currentLocation->gps_lon)
+                            {{ $artwork->currentLocation->gps_lat }}, {{ $artwork->currentLocation->gps_lon }}
+                        @endif
 
                         <h4 class="font-medium mt-6">Číslo parcely</h4>
                         {{ $artwork->currentLocation->plot }}
