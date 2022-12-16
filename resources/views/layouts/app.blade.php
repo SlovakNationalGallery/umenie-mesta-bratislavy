@@ -110,8 +110,11 @@
                             <ul class="flex flex-col gap-y-4 mt-4">
                                 <li><x-link-underline
                                         href="mailto:umeniemesta@gmb.sk">umeniemesta@gmb.sk</x-link-underline></li>
-                                <li><x-link-underline href="@TODO">Nahlásiť dielo</x-link-underline>
-                                </li>
+
+                                {{-- TODO --}}
+                                {{-- <li>
+                                    <x-link-underline href="@TODO">Nahlásiť dielo</x-link-underline>
+                                </li> --}}
                             </ul>
                         </div>
 
@@ -147,3 +150,4 @@
 </body>
 
 </html>
+
