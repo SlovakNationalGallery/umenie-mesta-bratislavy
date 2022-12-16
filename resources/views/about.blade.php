@@ -57,17 +57,17 @@
                 <div class="mt-8 md:mt-10 flex flex-col gap-y-6">
                     <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['artworks'] }}</span>
-                        <span class="text-base whitespace-nowrap">diel v katalógu</span>
+                        <span class="text-base">diel v katalógu</span>
                     </div>
                     <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['boroughs'] }}/17</span>
-                        <span class="text-base whitespace-nowrap">mestských častí</span>
+                        <span class="text-base">mestských častí</span>
                     </div>
                     <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">
                             {{ optional($stats['lastUpdate'])->isoFormat('DD/MM/YY') }}
                         </span>
-                        <span class="text-base whitespace-nowrap">naposledy aktualizované</span>
+                        <span class="text-base">naposledy aktualizované</span>
                     </div>
                 </div>
             </div>
