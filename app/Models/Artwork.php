@@ -228,4 +228,24 @@ class Artwork extends Model
             )
         );
     }
+
+    public function photoMediaForCarousel(): Attribute
+    {
+        return Attribute::get(function () {
+            return $this->photos()
+                ->select(['id', 'description'])
+                ->with('media:id,model_id,responsive_images,disk,file_name')
+                ->get()
+                ->flatMap(
+                    fn($photo) => $photo->media->map(
+                        fn($m) => [
+                            'id' => $m->id,
+                            'srcSet' => $m->getSrcset(),
+                            'url' => $m->getUrl(),
+                            'description' => $photo->description,
+                        ]
+                    )
+                );
+        });
+    }
 }
