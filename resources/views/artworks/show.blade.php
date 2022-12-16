@@ -156,21 +156,21 @@
             </div>
         </div>
     </div>
-    <div class="mt-8 h-[330px] lg:h-[500px]">
+    <div class="h-[330px] md:h-[500px]">
         <map-container class="h-full" :cluster="false"
             :center="[{{ $artwork->currentLocation->gps_lon }}, {{ $artwork->currentLocation->gps_lat }}]"
             :zoom="16" highlight-id="{{ $artwork->id }}" />
     </div>
-    <div class="pt-10 pb-6 px-4 max-w-screen-3xl md:px-14 mx-auto">
+    {{-- TODO -- GMBUVP-18 --}}
+    {{-- <div class="pt-10 pb-6 px-4 max-w-screen-3xl md:px-14 mx-auto">
         <h3 class="text-3xl font-medium mt-3">Ďalšie diela v okolí</h3>
 
-        {{-- TODO --}}
         <div class="mt-4 -mx-4" data-masonry='{ "itemSelector": ".grid-item" }'>
             @foreach ($relatedArtworks as $a)
                 <x-artwork-card :artwork="$a" class="grid-item sm:w-1/4 p-4" />
             @endforeach
         </div>
-    </div>
+    </div> --}}
 
     <div class="hidden">
         <article id="popup">
@@ -187,3 +187,4 @@
         </article>
     </div>
 @endsection
+
