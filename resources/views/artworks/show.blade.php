@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ $artwork->name }} — Umenie mesta Bratislavy
+@endsection
+
 @section('content')
     @php
         $photoMedias = $artwork->photos->filter(fn($p) => $p->hasMedia())->map(
