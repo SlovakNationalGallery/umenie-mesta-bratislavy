@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -44,8 +45,7 @@ class Artwork extends Model
 
     public function scopePublished($query)
     {
-        // TODO enable before launch
-        // $query->where('is_published', true);
+        $query->where('is_published', true);
     }
 
     // default scope for those artworks that we can actually display
@@ -200,6 +200,13 @@ class Artwork extends Model
             ->limit(1);
     }
 
+    public function primaryCategory()
+    {
+        return $this->hasOneDeepFromRelations($this->categories())
+            ->orderBy('artwork_category.order')
+            ->limit(1);
+    }
+
     public function coverPhotoMedia()
     {
         return $this->hasOneDeepFromRelations(
@@ -209,5 +216,16 @@ class Artwork extends Model
             ->orderBy('artwork_photo.order')
             ->orderBy('media.order_column')
             ->limit(1);
+    }
+
+    public function defunct(): Attribute
+    {
+        return Attribute::get(
+            fn() => $this->conditions->contains(
+                fn(Condition $condition) => str($condition->name)
+                    ->trim()
+                    ->exactly('zničené, odstránené')
+            )
+        );
     }
 }

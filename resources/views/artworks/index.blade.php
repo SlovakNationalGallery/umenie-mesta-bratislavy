@@ -135,7 +135,7 @@
         <div class="bg-white min-h-screen">
             <div class="md:px-14 px-4 max-w-screen-3xl mx-auto mt-4 md:mt-5 md:flex">
                 <div class="-mx-4 md:-ml-14 md:mr-14 md:w-1/3 relative flex-shrink-0">
-                    <img src="https://placeholder.pics/svg/300/DEDEDE/555555/mapa" class="w-full top-5 sticky">
+                    <search.map class="relative lg:sticky top-0" :query="query"></search.map>
                 </div>
 
                 <div class="md:flex-grow mt-8 md:mt-0">
@@ -162,4 +162,3 @@
         </div>
     </search.filters-controller>
 @endsection
-
