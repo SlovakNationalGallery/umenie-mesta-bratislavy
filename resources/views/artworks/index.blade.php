@@ -20,7 +20,7 @@
                         </div>
                     </search.disclosure-filter>
 
-                    <search.disclosure-filter label="Autori / Spoluautor" :selected-count="query.authors.length"
+                    <search.disclosure-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.authors.' + index" name="authors" :value="option.value"
@@ -78,7 +78,7 @@
                         </div>
                     </search.popover-filter>
 
-                    <search.popover-filter label="Autori / Spoluautori" :selected-count="query.authors.length"
+                    <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.authors.' + index" name="authors" :value="option.value"
