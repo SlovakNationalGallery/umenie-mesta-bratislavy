@@ -12,26 +12,18 @@
         <div>
             <div class="prose mt-8 md:mt-2 md:text-2xl text-neutral-800">
                 <p>
-                    Databázu diel vo verejnom priestore ako svoj vedecko-výskumný projekt založila a spravuje
-                    <strong> Galéria mesta Bratislavy</strong>. Od roku 2022 vzniká kurátorský výber diel, pričom
-                    jednotlivé
-                    informácie sa na pravidelnej ročnej báze dopĺňajú a aktualizujú. Postupne tak pribudnú diela
-                    všetkých
-                    piatich mestských okresov a sedemnástich samosprávnych mestských častí.
+                    Databázu diel vo verejnom priestore ako svoj vedeckovýskumný projekt založila a spravuje <a
+                        href="https://gmb.sk/" class="hover:text-red-500" target="_blank">Galéria mesta
+                        Bratislavy</a>. Kurátorský
+                    výber diel vzniká od roku 2022, pričom jednotlivé informácie sa budú pravidelne dopĺňať a aktualizovať.
+                    Postupne tak pribudnú diela všetkých <a
+                        href="https://bratislava.sk/mesto-bratislava/sprava-mesta/mestske-casti" class="hover:text-red-500"
+                        target="_blank">piatich mestských
+                        okresov a sedemnástich samosprávnych mestských častí</a>.
                 </p>
-                <p>
-                    Okrem existujúcich diel, sa mapujú aj fragmenty a diela presunuté, odstránené alebo zničené.
-                </p>
-                <p>
-                    Ambíciou projektu je dynamická a otvorená databáza, ktorá sa bude pravidelne doplňovať
-                    o nové poznatky z výskumu. Cieľom je aktualizovať a revidovať informácie z iných čiastkových
-                    databáz a súpisov. Základným kritériom pre výber diel do databázy UVP GMB je tvorba
-                    profesionálnych autorov (výtvarných umelcov, architektov, dizajnérov a súvisiacich odborov) z
-                    obdobia po roku 1945, zastúpených v zbierkach GMB aj iných zbierkotvorných a výskumných
-                    inštitúcií. Pozornosť sa zameriava na najviac ohrozené diela, ktoré potrebujú ochranu a
-                    odborné postupy pri údržbe a obnove. V ďalších rokoch je cieľom dopĺňať do databázy aj diela
-                    zo starších období.
-                </p>
+
+                <p>Okrem diel existujúcich na pôvodných miestach sa mapujú aj fragmenty a diela presunuté, odstránené alebo
+                    zničené v kategóriách:</p>
             </div>
         </div>
     </div>
@@ -42,47 +34,15 @@
                 Kategórie diel v katalógu
             </h3>
             <div class="text-xl md:text-2xl mt-8 md:mt-0">
-                <div class="gap-x-6 grid gap-y-2 md:grid-rows-5 md:grid-flow-col flex-grow">
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Pamätník
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Pomník
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Plastika, socha voľná
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Fontána, studňa vodný prvok
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Dielo do architektúry
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Drobná architektúra, dizajn, herný prvok
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Pamätná tabuľa
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Reliéf
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Nové médiá, streetart, inštalácia
-                    </div>
+                <div class="gap-x-6 grid gap-y-6 md:grid-rows-5 md:grid-flow-col flex-grow">
+                    @foreach ($categories as $category)
+                        <x-category-with-icon :icon="$category->icon"
+                            :id="$category->id">{{ $category->name }}</x-category-with-icon>
+                    @endforeach
                 </div>
-                <div class="flex items-center gap-x-4 md:gap-x-6 mt-12">
-                    <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                    Symbol označenia zničeného diela
+                <div class="flex items-center gap-x-4 md:gap-x-6 mt-16">
+                    <x-icons.pins.defunct class="w-10 h-10 md:w-12 md:h-auto flex-shrink-0" />
+                    Označenie zaniknutého diela
                 </div>
             </div>
         </div>
@@ -95,19 +55,19 @@
                     Aktuálne spracované dáta
                 </h4>
                 <div class="mt-8 md:mt-10 flex flex-col gap-y-6">
-                    <div class="flex items-start gap-x-2">
+                    <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['artworks'] }}</span>
-                        <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
+                        <span class="text-base">diel v katalógu</span>
                     </div>
-                    <div class="flex items-start gap-x-2">
+                    <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['boroughs'] }}/17</span>
-                        <span class="leading-none mt-[0.15rem] text-base">mestských<br />častí</span>
+                        <span class="text-base">mestských častí</span>
                     </div>
-                    <div class="flex items-start gap-x-2">
+                    <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">
                             {{ optional($stats['lastUpdate'])->isoFormat('DD/MM/YY') }}
                         </span>
-                        <span class="leading-none mt-[0.15rem] text-base">naposledy<br />aktualizované</span>
+                        <span class="text-base">naposledy aktualizované</span>
                     </div>
                 </div>
             </div>
@@ -125,9 +85,19 @@
                         starostlivosti a nevhodného zaobchádzania.
                     </p>
 
+                    <p>Ambíciou projektu je dynamická a otvorená databáza, ktorá sa bude pravidelne doplňovať
+                        o nové poznatky z výskumu, aktualizovať a revidovať. Základným kritériom pre kurátorského
+                        výberu do databázy UVP GMB je tvorba profesionálnych autorov (výtvarných umelcov, ar-
+                        chitektov, dizajnérov a súvisiacich odborov) z obdobia po roku 1945, zastúpených v zbierkach
+                        GMB aj iných zbierkotvorných a výskumných inštitúcií. Pozornosť sa zameriava na najviac
+                        ohrozené diela, ktoré potrebujú ochranu a odborné postupy pri údržbe a obnove.
+                        V ďalších rokoch je cieľom dopĺňať do databázy aj diela zo starších období.</p>
+
                     <p>
-                        Údaje v databáze sú tvorené tak, aby iba bolo možné postupne prepájať na Web umenia a ďalšie
-                        registre a katalógy zamerané napríklad na galerijné a múzejne zbierky, modernú architektúru,
+                        Údaje v databáze sú tvorené tak, aby iba bolo možné postupne prepájať na <a
+                            href="https://www.webumenia.sk/" class="hover:text-red-500" target="_blank">Web umenia</a> a
+                        ďalšie
+                        registre a katalógy zamerané napríklad na galerijné a múzejne zbierky, modernú architektúru,
                         národné
                         kultúrne pamiatky a na databázy diel vo verejnom priestore v iných mestách.
                     </p>
@@ -197,4 +167,3 @@
         </div>
     </div>
 @endsection
-
