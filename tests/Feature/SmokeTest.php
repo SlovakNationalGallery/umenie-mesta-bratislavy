@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class SmokeTest extends TestCase
 {
     use WithoutMiddleware; // Disable auth
     use RefreshDatabase;
@@ -17,9 +17,16 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function test_the_application_returns_a_successful_response()
+    public function test_home_page_works()
     {
         $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_about_page_works()
+    {
+        $response = $this->get('/o-projekte');
 
         $response->assertStatus(200);
     }
