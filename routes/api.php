@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ArtworkFiltersController;
 use App\Models\Artwork;
+use App\Http\Controllers\Api\ArtworkMapPointsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,8 @@ Route::get('artworks', function (Request $request) {
         ->select('id')
         ->get();
 })->name('api.artworks.index');
+
+Route::resource(
+    'artworks/map-points',
+    ArtworkMapPointsController::class
+)->names('artwork-map-points');
