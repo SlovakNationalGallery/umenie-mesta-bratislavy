@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.gif" type="image/gif" />
     <meta property="og:url" content="@yield('og.url', url()->current())" />
     <meta property="og:type" content="@yield('og.type', 'website')" />
     <meta property="og:title" content="@yield('og.title', 'Umenie mesta Bratislavy')" />
