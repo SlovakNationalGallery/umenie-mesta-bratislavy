@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ArtworkMapPointCollection;
 use App\Models\Artwork;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ArtworkMapPointsController extends Controller
@@ -13,7 +14,9 @@ class ArtworkMapPointsController extends Controller
     {
         $artworks = Artwork::query()
             ->with(['currentLocation', 'conditions', 'primaryCategory'])
-            ->has('currentLocation')
+            ->whereHas('currentLocation', function (Builder $query) {
+                $query->whereNotNull(['gps_lon', 'gps_lat']);
+            })
             ->presentable()
             ->filteredBySearchRequest($request)
             ->get();
