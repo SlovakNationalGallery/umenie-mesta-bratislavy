@@ -150,15 +150,15 @@
                             Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} diel</span>
                         </span>
                     </div>
-                    <search.artworks-masonry :query="query" item-selector=".grid-item"
-                        class="-mx-2 mt-4 md:-mx-8">
+                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 md:-mx-8">
                         @foreach ($artworks as $a)
                             <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 md:p-4"
                                 imgSizes="19vw" />
                         @endforeach
-                    </search.artworks-masonry>
+                    </artworks-masonry>
                 </div>
             </div>
         </div>
     </search.filters-controller>
 @endsection
+

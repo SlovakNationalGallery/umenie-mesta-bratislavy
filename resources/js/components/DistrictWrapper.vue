@@ -3,6 +3,7 @@
         <slot
             :handleHoverChange="handleHoverChange"
             :locationCount="locationCount"
+            :filterURL="filterURL"
         ></slot>
         <transition
             enter-from-class="opacity-0"
@@ -36,7 +37,7 @@
         >
             <div
                 v-if="isHovered"
-                class="rounded-lg absolute drop-shadow-md bg-white py-4 px-6 z-20 whitespace-nowrap left-1/2 top-1/2"
+                class="hidden md:block rounded-lg absolute drop-shadow-md bg-white py-4 px-6 z-20 whitespace-nowrap left-1/2 top-1/2"
             >
                 <h4 class="text-2xl font-medium">{{ name }}</h4>
                 <ul v-if="locations" class="text-xl pb-3">
@@ -44,7 +45,7 @@
                         {{ location.borough }}{{ ` (${location.count})` }}
                     </li>
                 </ul>
-                <ul class="text-xl">
+                <ul v-if="unProcessedBoroughs.length" class="text-xl">
                     Pripravujeme:
                     <li
                         class="text-neutral-500"
@@ -60,6 +61,7 @@
 
 <script setup>
 import { ref, defineProps, computed } from 'vue';
+import queryString from 'query-string';
 
 const DISTRICTS = {
     'Bratislava I': ['Staré Mesto'],
@@ -84,6 +86,15 @@ const locationCount = computed(
             (acc, currentValue) => acc + currentValue.count,
             0
         )
+);
+
+const filterURL = computed(() =>
+    queryString.stringifyUrl(
+        { url: '/diela', query: { boroughs: DISTRICTS[props.name] } },
+        {
+            arrayFormat: 'bracket',
+        }
+    )
 );
 
 const unProcessedBoroughs = computed(() =>

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    O projekte — Umenie mesta Bratislavy
+@endsection
+
 @section('content')
     <div class="max-w-screen-3xl p-4 md:p-14 mx-auto md:text-2xl md:flex">
         <h3 class="text-xl md:text-4xl font-medium md:w-2/5 flex-shrink-0">

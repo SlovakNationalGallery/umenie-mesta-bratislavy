@@ -25,6 +25,12 @@ export default {
         this.masonry = new Masonry(this.$refs.container, {
             itemSelector: this.itemSelector,
         });
+
+        for (let img of this.$refs.container.querySelectorAll('img')) {
+            img.addEventListener('load', () => {
+                this.masonry.layout();
+            });
+        }
     },
     watch: {
         async query() {

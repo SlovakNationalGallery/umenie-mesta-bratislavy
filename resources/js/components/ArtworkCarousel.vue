@@ -1,36 +1,43 @@
 <template>
-    <div class="relative" v-if="photoMedias.length">
+    <div class="relative" v-if="photos.length">
         <div
-            v-if="photoMedias.length === 1"
+            v-if="photos.length === 1"
             class="h-96 w-full overflow-hidden cursor-pointer"
+            @click="handleOpenLightbox(0)"
         >
-            <div
-                class="[&>img]:object-cover [&>img]:h-full h-full w-full hover:scale-105 transition-all duration-500"
-                @click="handleOpenLightbox(0)"
-                v-html="photoMedias[0]"
-            ></div>
+            <img
+                :src="photos[0].url"
+                :srcset="photos[0].srcSet"
+                class="object-cover h-full w-full hover:scale-105 transition-all duration-500"
+            />
         </div>
-        <div class="flex space-x-1" v-else="photoMedias.length > 1">
-            <div class="h-96 w-2/3 overflow-hidden cursor-pointer">
-                <div
-                    class="[&>img]:object-cover [&>img]:h-full h-full w-full hover:scale-105 transition-all duration-500"
-                    @click="handleOpenLightbox(0)"
-                    v-html="photoMedias[0]"
-                ></div>
+        <div class="flex space-x-1" v-else-if="photos.length > 1">
+            <div
+                class="h-96 w-2/3 overflow-hidden cursor-pointer"
+                @click="handleOpenLightbox(0)"
+            >
+                <img
+                    :src="photos[0].url"
+                    :srcset="photos[0].srcSet"
+                    class="h-full w-full object-cover hover:scale-105 transition-all duration-500"
+                />
             </div>
-            <div class="h-96 w-1/3 overflow-hidden cursor-pointer">
-                <div
-                    class="[&>img]:object-cover [&>img]:h-full hover:scale-105 transition-all duration-500 w-full h-full"
-                    @click="handleOpenLightbox(1)"
-                    v-html="photoMedias[1]"
-                ></div>
+            <div
+                class="h-96 w-1/3 overflow-hidden cursor-pointer"
+                @click="handleOpenLightbox(1)"
+            >
+                <img
+                    :src="photos[1].url"
+                    :srcset="photos[1].srcSet"
+                    class="h-full w-full object-cover hover:scale-105 transition-all duration-500"
+                />
             </div>
         </div>
         <button
             @click="handleOpenLightbox(0)"
             class="absolute min-w-max bottom-4 left-1/2 -translate-x-1/2 bg-white uppercase font-medium py-2.5 px-5 md:right-4 md:left-auto md:transform-none"
         >
-            zobraziť galériu <span>({{ photoMedias.length }})</span>
+            zobraziť galériu <span>({{ photos.length }})</span>
         </button>
     </div>
     <div v-if="openedLightbox !== -1">
@@ -62,14 +69,10 @@
                 </svg>
             </button>
         </div>
-        <div class="flex top-0 left-0 z-20 fixed w-screen h-screen">
-            <div class="flex items-center justify-between w-screen">
+        <div class="inset-0 z-20 fixed">
+            <div class="flex h-full w-full items-center">
                 <button
-                    :class="`${
-                        openedLightbox === 0
-                            ? 'bg-neutral-400'
-                            : 'bg-neutral-800'
-                    } m-4 rounded-full w-10 h-10 flex items-center justify-center stroke-white`"
+                    class="flex-shrink-0 m-4 rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:bg-neutral-400"
                     @click="handleOpenLightbox(openedLightbox - 1)"
                     :disabled="openedLightbox === 0"
                 >
@@ -86,25 +89,24 @@
                         />
                     </svg>
                 </button>
-                <div class="pb-4 w-2/3 h-2/3">
-                    <div
-                        class="flex items-center h-full [&>img]:object-contain [&>img]:h-full"
-                        v-html="photoMedias[openedLightbox]"
-                    ></div>
+                <div class="flex-grow h-full py-6">
+                    <div class="flex items-center justify-center h-full">
+                        <img
+                            :src="photos[openedLightbox].url"
+                            :srcset="photos[openedLightbox].srcSet"
+                            class="object-contain h-full w-full"
+                        />
+                    </div>
                     <div
                         class="pb-4 pt-6 font-medium text-xl text-center text-neutral-800"
                     >
-                        {{ artworkPhotos[openedLightbox].description }}
+                        {{ photos[openedLightbox].description }}
                     </div>
                 </div>
                 <button
-                    :class="`${
-                        openedLightbox === artworkPhotos.length - 1
-                            ? 'bg-neutral-400'
-                            : 'bg-neutral-800'
-                    } m-4 rounded-full w-10 h-10 flex items-center justify-center stroke-white`"
+                    class="flex-shrink-0 m-4 rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:bg-neutral-400"
                     @click="handleOpenLightbox(openedLightbox + 1)"
-                    :disabled="openedLightbox === artworkPhotos.length - 1"
+                    :disabled="openedLightbox === photos.length - 1"
                 >
                     <svg
                         width="21"
@@ -127,7 +129,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const props = defineProps(['artworkPhotos', 'photoMedias']);
+const props = defineProps(['photos']);
 const openedLightbox = ref(-1);
 
 const handleOpenLightbox = (index) => {
