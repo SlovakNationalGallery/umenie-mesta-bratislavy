@@ -19,6 +19,7 @@
             })(window, document, “clarity”, “script”, “enuuzaniox”);
         </script>
 
+        {{-- GA4 --}}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0SY85J90C4"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -26,6 +27,15 @@
             gtag('js', new Date());
 
             gtag('config', 'G-0SY85J90C4');
+        </script>
+
+        {{-- UA --}}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-250179477-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-250179477-1');
         </script>
         {{-- prettier-ignore-end --}}
     @endproduction
