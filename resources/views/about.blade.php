@@ -50,7 +50,6 @@
     <div class="max-w-screen-3xl p-4 md:p-14 mx-auto md:text-2xl">
         <div class="md:flex">
             <div class="md:w-2/5 flex-shrink-0">
-                {{-- TODO real data --}}
                 <h4 class="text-lg md:text-3xl mt-6 md:mt-0 font-medium">
                     Aktuálne spracované dáta
                 </h4>
@@ -167,3 +166,4 @@
         </div>
     </div>
 @endsection
+
