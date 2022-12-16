@@ -6,7 +6,6 @@ import { PopoverGroup } from '@headlessui/vue';
 
 import HomeMap from './components/HomeMap.vue';
 import ArtworksMasonry from './components/search/ArtworksMasonry.vue';
-import MultiSelect from './components/search/MultiSelect.vue';
 import PopoverFilter from './components/search/PopoverFilter.vue';
 import DisclosureFilter from './components/search/DisclosureFilter.vue';
 import FiltersController from './components/search/FiltersController.vue';
@@ -23,7 +22,6 @@ app.component('map-container', MapContainer);
 app.component('artworks-masonry', ArtworksMasonry);
 app.component('search.filters-controller', FiltersController);
 app.component('search.map', SearchMap);
-app.component('search.multi-select', MultiSelect);
 app.component('search.mobile-filter', MobileFilter);
 app.component('search.mobile-filter-dialog', MobileFilterDialog);
 app.component('search.popover-filter', PopoverFilter);
