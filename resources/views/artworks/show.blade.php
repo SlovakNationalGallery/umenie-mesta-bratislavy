@@ -5,7 +5,7 @@
 @endsection
 @section('og.type', 'article')
 @section('og.title', $artwork->name)
-{{-- @section('og.description', Str::limit(strip_tags($artwork->descriptionHtml), 255)) --}}
+@section('og.description', Str::limit(strip_tags($artwork->descriptionHtml), 255))
 @section('og.image', $artwork->coverPhotoMedia->getUrl())
 
 @section('content')
