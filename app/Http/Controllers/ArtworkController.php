@@ -65,7 +65,7 @@ class ArtworkController extends Controller
         //     ->limit(4)
         //     ->get();
 
-        return view('artworks.show', compact('artwork', 'relatedArtworks'));
+        return view('artworks.show', compact('artwork'));
     }
 
     /**
