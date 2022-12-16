@@ -45,8 +45,7 @@ class Artwork extends Model
 
     public function scopePublished($query)
     {
-        // TODO enable before launch
-        // $query->where('is_published', true);
+        $query->where('is_published', true);
     }
 
     // default scope for those artworks that we can actually display
