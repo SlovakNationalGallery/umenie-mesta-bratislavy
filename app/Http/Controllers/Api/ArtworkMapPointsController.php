@@ -12,11 +12,7 @@ class ArtworkMapPointsController extends Controller
     public function index(Request $request)
     {
         $artworks = Artwork::query()
-            ->with([
-                'currentLocation',
-                'conditions',
-                // 'primaryCategory', // does not work
-            ])
+            ->with(['currentLocation', 'conditions', 'primaryCategory'])
             ->has('currentLocation')
             ->presentable()
             ->filteredBySearchRequest($request)

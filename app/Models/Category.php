@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
     public $incrementing = false;
     protected $keyType = 'string';
