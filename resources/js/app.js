@@ -14,13 +14,13 @@ import MapContainer from './components/MapContainer.vue';
 import MobileFilter from './components/search/MobileFilter.vue';
 import MobileFilterDialog from './components/search/MobileFilterDialog.vue';
 import SearchMap from './components/search/Map.vue';
-import ArtworkCarousel from './components/ArtworkCarousel.vue'
+import ArtworkCarousel from './components/ArtworkCarousel.vue';
 
 const app = createApp({});
 app.component('headless.popover-group', PopoverGroup);
 app.component('home-map', HomeMap);
 app.component('map-container', MapContainer);
-app.component('search.artworks-masonry', ArtworksMasonry);
+app.component('artworks-masonry', ArtworksMasonry);
 app.component('search.filters-controller', FiltersController);
 app.component('search.map', SearchMap);
 app.component('search.multi-select', MultiSelect);
@@ -29,6 +29,5 @@ app.component('search.mobile-filter-dialog', MobileFilterDialog);
 app.component('search.popover-filter', PopoverFilter);
 app.component('search.disclosure-filter', DisclosureFilter);
 app.component('artwork-carousel', ArtworkCarousel);
-
 
 app.mount('#app');
