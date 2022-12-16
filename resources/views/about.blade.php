@@ -8,26 +8,18 @@
         <div>
             <div class="prose mt-8 md:mt-2 md:text-2xl text-neutral-800">
                 <p>
-                    Databázu diel vo verejnom priestore ako svoj vedecko-výskumný projekt založila a spravuje
-                    <strong> Galéria mesta Bratislavy</strong>. Od roku 2022 vzniká kurátorský výber diel, pričom
-                    jednotlivé
-                    informácie sa na pravidelnej ročnej báze dopĺňajú a aktualizujú. Postupne tak pribudnú diela
-                    všetkých
-                    piatich mestských okresov a sedemnástich samosprávnych mestských častí.
+                    Databázu diel vo verejnom priestore ako svoj vedeckovýskumný projekt založila a spravuje <a
+                        href="https://gmb.sk/" class="font-medium hover:no-underline" target="_blank">Galéria mesta
+                        Bratislavy</a>. Kurátorský
+                    výber diel vzniká od roku 2022, pričom jednotlivé informácie sa budú pravidelne dopĺňať a aktualizovať.
+                    Postupne tak pribudnú diela všetkých <a
+                        href="https://bratislava.sk/mesto-bratislava/sprava-mesta/mestske-casti"
+                        class="font-medium hover:no-underline" target="_blank">piatich mestských
+                        okresov a sedemnástich samosprávnych mestských častí</a>.
                 </p>
-                <p>
-                    Okrem existujúcich diel, sa mapujú aj fragmenty a diela presunuté, odstránené alebo zničené.
-                </p>
-                <p>
-                    Ambíciou projektu je dynamická a otvorená databáza, ktorá sa bude pravidelne doplňovať
-                    o nové poznatky z výskumu. Cieľom je aktualizovať a revidovať informácie z iných čiastkových
-                    databáz a súpisov. Základným kritériom pre výber diel do databázy UVP GMB je tvorba
-                    profesionálnych autorov (výtvarných umelcov, architektov, dizajnérov a súvisiacich odborov) z
-                    obdobia po roku 1945, zastúpených v zbierkach GMB aj iných zbierkotvorných a výskumných
-                    inštitúcií. Pozornosť sa zameriava na najviac ohrozené diela, ktoré potrebujú ochranu a
-                    odborné postupy pri údržbe a obnove. V ďalších rokoch je cieľom dopĺňať do databázy aj diela
-                    zo starších období.
-                </p>
+
+                <p>Okrem diel existujúcich na pôvodných miestach sa mapujú aj fragmenty a diela presunuté, odstránené alebo
+                    zničené v kategóriách:</p>
             </div>
         </div>
     </div>
@@ -193,4 +185,3 @@
         </div>
     </div>
 @endsection
-
