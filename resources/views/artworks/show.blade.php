@@ -22,7 +22,8 @@
             <h1 class="text-2xl md:text-4xl font-medium mt-3 md:mt-7">{{ $artwork->name }}</h1>
             <div class="mt-1">
                 @foreach ($artwork->authors as $author)
-                    <a href="#TODO" class="underline">{{ $author->name }}</a>{{ $loop->last ? '' : ', ' }}
+                    <a href="{{ route('artworks.index', ['authors[]' => $author->id]) }}"
+                        class="underline">{{ $author->name }}</a>{{ $loop->last ? '' : ', ' }}
                 @endforeach
                 @if ($artwork->yearBuilt)
                     / {{ $artwork->yearBuilt->toFormattedString() }}
@@ -40,7 +41,10 @@
 
                         <div class="mt-4 flex gap-4 md:mt-8">
                             @foreach ($artwork->keywords as $keyword)
-                                <a href="TODO" class="px-2 py-1 border border-neutral-800">{{ $keyword->keyword }}</a>
+                                <a href="{{ route('artworks.index', ['keywords[]' => $keyword->id]) }}"
+                                    class="px-2 py-1 border border-neutral-800">
+                                    {{ $keyword->keyword }}
+                                </a>
                             @endforeach
                         </div>
                     </div>
@@ -48,18 +52,27 @@
                     <div>
                         <hr class="neutral-100 mt-6 md:mt-8" />
 
-                        {{-- TODO: dynamically plural/singular --}}
                         <h4 class="font-medium mt-6 md:mt-8">Autori</h4>
                         <ul>
                             @foreach ($artwork->authors as $author)
-                                <li><a href="TODO" class="underline">{{ $author->name }}</a></li>
+                                <li>
+                                    <a href="{{ route('artworks.index', ['authors[]' => $author->id]) }}"
+                                        class="underline">
+                                        {{ $author->name }}
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
 
                         <h4 class="font-medium mt-4 md:mt-6">Spoluautori</h4>
                         <ul>
                             @foreach ($artwork->coauthors as $coauthor)
-                                <li><a href="TODO" class="underline">{{ $coauthor->name }}</a></li>
+                                <li>
+                                    <a href="{{ route('artworks.index', ['authors[]' => $coauthor->id]) }}"
+                                        class="underline">
+                                        {{ $coauthor->name }}
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
 
@@ -80,7 +93,10 @@
                     <h4 class="font-medium mt-6 md:mt-0">Druh</h4>
                     <ul>
                         @foreach ($artwork->categories as $category)
-                            <li><a href="TODO" class="underline">{{ $category->name }}</a></li>
+                            <li>
+                                <a href="{{ route('artworks.index', ['categories[]' => $category->id]) }}"
+                                    class="underline">{{ $category->name }}</a>
+                            </li>
                         @endforeach
                     </ul>
 
