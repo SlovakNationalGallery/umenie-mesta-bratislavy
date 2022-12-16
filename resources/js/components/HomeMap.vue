@@ -292,7 +292,7 @@
             :locations="locations['Bratislava V']"
             class="absolute left-[31.07%] top-[54.53%] bottom-[-0.12%] right-[22.87%]"
             name="Bratislava V"
-            v-slot="{ locationCount, handleHoverChange }"
+            v-slot="{ locationCount, handleHoverChange, filterURL }"
         >
             <svg
                 viewBox="0 0 301 332"
@@ -302,7 +302,7 @@
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <a
-                    href="diela?boroughs[]=Karlova%20Ves&boroughs[]=Petržalka&boroughs[]=Jarovce&boroughs[]=Rusovce&boroughs[]=Čunovo"
+                    :href="filterURL"
                 >
                     <g
                         class="group pointer-events-auto"
