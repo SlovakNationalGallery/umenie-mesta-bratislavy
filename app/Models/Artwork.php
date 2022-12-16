@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class Artwork extends Model
 {
@@ -227,6 +228,11 @@ class Artwork extends Model
                     ->exactly('zničené, odstránené')
             )
         );
+    }
+
+    public function descriptionHtml(): Attribute
+    {
+        return Attribute::get(fn() => Str::markdown($this->description ?? ''));
     }
 
     public function photoMediaForCarousel(): Attribute

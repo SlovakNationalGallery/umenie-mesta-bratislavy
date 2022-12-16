@@ -3,6 +3,10 @@
 @section('title')
     {{ $artwork->name }} — Umenie mesta Bratislavy
 @endsection
+@section('og.type', 'article')
+@section('og.title', $artwork->name)
+@section('og.description', Str::limit(strip_tags($artwork->descriptionHtml), 255))
+@section('og.image', $artwork->coverPhotoMedia->getUrl())
 
 @section('content')
     <div class="pt-10 max-w-5xl mx-auto bg-neutral-100">
@@ -33,7 +37,7 @@
             <div class="md:grid grid-cols-3 gap-x-8 mt-6 md:mt-8">
                 <div class="col-span-2 flex flex-col">
                     <article class="prose text-neutral-800">
-                        {!! Str::markdown($artwork->description ?? '') !!}
+                        {!! $artwork->descriptionHtml !!}
                     </article>
 
                     <div class="md:order-last">

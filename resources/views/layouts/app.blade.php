@@ -4,6 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url" content="@yield('og.url', url()->current())" />
+    <meta property="og:type" content="@yield('og.type', 'website')" />
+    <meta property="og:title" content="@yield('og.title', 'Umenie mesta Bratislavy')" />
+    <meta property="og:description" content="@yield('og.description', 'Objavujte umenie v uliciach Bratislavy')" />
+    <meta property="og:image" content="@yield('og.image', asset('images/og_image.png'))" />
 
     <title>@yield('title', 'Umenie mesta Bratislavy')</title>
 
@@ -111,7 +116,7 @@
                             </svg>
                         </a>
                         <a href="http://muop.bratislava.sk/" target="_blank">
-                            <img src="{{ asset('muop_logo.png') }}" class="invert h-12 w-auto" />
+                            <img src="{{ asset('images/muop_logo.png') }}" class="invert h-12 w-auto" />
                         </a>
                     </div>
                     <div class="md:flex gap-x-16">
