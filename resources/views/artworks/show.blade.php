@@ -5,17 +5,8 @@
 @endsection
 
 @section('content')
-    @php
-        $photoMedias = $artwork->photos->filter(fn($p) => $p->hasMedia())->map(
-            fn($photo) => $photo
-                ->getFirstMedia()
-                ->img()
-                ->toHtml(),
-        );
-    @endphp
     <div class="pt-10 max-w-5xl mx-auto bg-neutral-100">
-        <artwork-carousel :artwork-photos="{{ $artwork->photos }}" :photo-medias="{{ $photoMedias }}"
-            :photos="{{ Js::from($artwork->photoMediaForCarousel) }}">
+        <artwork-carousel :photos="{{ Js::from($artwork->photoMediaForCarousel) }}">
         </artwork-carousel>
     </div>
     <div class="bg-white">
