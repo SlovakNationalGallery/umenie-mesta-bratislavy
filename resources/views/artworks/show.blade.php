@@ -93,7 +93,7 @@
                     <h4 class="font-medium mt-6">Rozmer</h4>
                     {{ $artwork->dimensions }}
 
-                    <h4 class="font-medium mt-6">Signatúra</h4>
+                    <h4 class="font-medium mt-6">Značenie</h4>
                     {{ optional($artwork->signature)->position }} {{ optional($artwork->signature)->description }}
 
                     <h4 class="font-medium mt-6">Stav</h4>
