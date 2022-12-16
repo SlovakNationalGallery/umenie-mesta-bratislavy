@@ -44,7 +44,7 @@
                         {{ location.borough }}{{ ` (${location.count})` }}
                     </li>
                 </ul>
-                <ul class="text-xl">
+                <ul v-if="unProcessedBoroughs.length" class="text-xl">
                     Pripravujeme:
                     <li
                         class="text-neutral-500"
