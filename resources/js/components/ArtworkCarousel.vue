@@ -2,19 +2,22 @@
     <div class="relative" v-if="photoMedias.length">
         <div
             v-if="photoMedias.length === 1"
-            class="[&>img]:object-cover [&>img]:h-full h-96 w-full"
+            class="[&>img]:object-cover [&>img]:h-full h-96 w-full cursor-pointer"
+            @click="handleOpenLightbox(0)"
             v-html="photoMedias[0]"
         ></div>
         <div class="flex space-x-1" v-else-if="photoMedias.length > 1">
             <div class="h-96 w-2/3 overflow-hidden cursor-pointer">
                 <div
                     class="[&>img]:object-cover hover:scale-105 transition-all duration-500 w-full h-full first:h-full"
+                    @click="handleOpenLightbox(0)"
                     v-html="photoMedias[0]"
                 ></div>
             </div>
             <div class="h-96 w-1/3 overflow-hidden cursor-pointer">
                 <div
                     class="[&>img]:object-cover [&>img]:h-full hover:scale-105 transition-all duration-500 w-full h-full"
+                    @click="handleOpenLightbox(1)"
                     v-html="photoMedias[1]"
                 ></div>
             </div>
