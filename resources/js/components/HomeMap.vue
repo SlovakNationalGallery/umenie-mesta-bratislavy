@@ -32,7 +32,7 @@
         </div>
         <DistrictWrapper
             class="absolute left-[37.55%] top-[37.22%] bottom-[49.64%] right-[46.23%]"
-            v-slot="{ locationCount, handleHoverChange }"
+            v-slot="{ locationCount, handleHoverChange, filterURL }"
             name="Bratislava I"
             :locations="locations['Bratislava I']"
         >
@@ -43,7 +43,7 @@
                     locationCount ? 'stroke-black' : 'stroke-neutral-500'
                 } w-full h-full fill-none pointer-events-none`"
             >
-                <a href="/diela?boroughs[]=Staré%20Mesto">
+                <a :href="filterURL">
                     <path
                         @mouseenter.self="handleHoverChange(true)"
                         @mouseleave.self="handleHoverChange(false)"
@@ -64,7 +64,7 @@
             name="Bratislava II"
             :locations="locations['Bratislava II']"
             class="absolute left-[55.64%] top-[33.45%] bottom-[17.29%] right-[-0.02%]"
-            v-slot="{ locationCount, handleHoverChange }"
+            v-slot="{ locationCount, handleHoverChange, filterURL }"
         >
             <svg
                 viewBox="0 0 289 357"
@@ -74,7 +74,7 @@
                 } w-full h-full fill-none pointer-events-none`"
             >
                 <a
-                    href="/diela?boroughs[]=Ružinov&boroughs[]=Vrakuňa&boroughs[]=Podunajské%20Biskupice"
+                    :href="filterURL"
                 >
                     <g
                         class="group pointer-events-auto"
@@ -139,7 +139,7 @@
         <DistrictWrapper
             class="absolute left-[39.57%] top-[10.83%] bottom-[59.59%] right-[18.7%]"
             :locations="locations['Bratislava III']"
-            v-slot="{ locationCount, handleHoverChange }"
+            v-slot="{ locationCount, handleHoverChange, filterURL }"
             name="Bratislava III"
         >
             <svg
@@ -150,7 +150,7 @@
                 } w-full h-full fill-none pointer-events-none`"
             >
                 <a
-                    href="/diela?boroughs[]=Nové%20Mesto&boroughs[]=Rača&boroughs[]=Vajnory"
+                    :href="filterURL"
                 >
                     <g
                         class="group pointer-events-auto"
@@ -207,7 +207,7 @@
         <DistrictWrapper
             class="absolute left-[0%] top-[0%] bottom-[55.35%] right-[49.46%]"
             :locations="locations['Bratislava IV']"
-            v-slot="{ locationCount, handleHoverChange }"
+            v-slot="{ locationCount, handleHoverChange, filterURL }"
             name="Bratislava IV"
         >
             <svg
@@ -218,7 +218,7 @@
                 } w-full h-full fill-none pointer-events-none`"
             >
                 <a
-                    href="/diela?boroughs[]=Karlova%20Ves&boroughs[]=Dúbravka&boroughs[]=Lamač&boroughs[]=Devín&boroughs[]=Devínska%20Nová%20Ves&boroughs[]=Záhorská%20Bystrica"
+                    :href="filterURL"
                 >
                     <g
                         class="group pointer-events-auto"

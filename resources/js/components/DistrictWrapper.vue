@@ -3,6 +3,7 @@
         <slot
             :handleHoverChange="handleHoverChange"
             :locationCount="locationCount"
+            :filterURL="filterURL"
         ></slot>
         <transition
             enter-from-class="opacity-0"
@@ -60,6 +61,7 @@
 
 <script setup>
 import { ref, defineProps, computed } from 'vue';
+import queryString from 'query-string';
 
 const DISTRICTS = {
     'Bratislava I': ['Staré Mesto'],
@@ -84,6 +86,15 @@ const locationCount = computed(
             (acc, currentValue) => acc + currentValue.count,
             0
         )
+);
+
+const filterURL = computed(() =>
+    queryString.stringifyUrl(
+        { url: '/diela', query: { boroughs: DISTRICTS[props.name] } },
+        {
+            arrayFormat: 'bracket',
+        }
+    )
 );
 
 const unProcessedBoroughs = computed(() =>
