@@ -30,47 +30,15 @@
                 Kategórie diel v katalógu
             </h3>
             <div class="text-xl md:text-2xl mt-8 md:mt-0">
-                <div class="gap-x-6 grid gap-y-2 md:grid-rows-5 md:grid-flow-col flex-grow">
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Pamätník
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Pomník
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Plastika, socha voľná
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Fontána, studňa vodný prvok
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Dielo do architektúry
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Drobná architektúra, dizajn, herný prvok
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Pamätná tabuľa
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Reliéf
-                    </div>
-                    <div class="flex items-center gap-x-4 md:gap-x-6">
-                        <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                        Nové médiá, streetart, inštalácia
-                    </div>
+                <div class="gap-x-6 grid gap-y-6 md:grid-rows-5 md:grid-flow-col flex-grow">
+                    @foreach ($categories as $category)
+                        <x-category-with-icon :icon="$category->icon"
+                            :id="$category->id">{{ $category->name }}</x-category-with-icon>
+                    @endforeach
                 </div>
-                <div class="flex items-center gap-x-4 md:gap-x-6 mt-12">
-                    <x-icons.pins.pomnik class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
-                    Symbol označenia zničeného diela
+                <div class="flex items-center gap-x-4 md:gap-x-6 mt-16">
+                    <x-icons.pins.defunct class="w-10 h-10 md:w-12 md:h-auto flex-shrink-0" />
+                    Označenie zaniknutého diela
                 </div>
             </div>
         </div>
