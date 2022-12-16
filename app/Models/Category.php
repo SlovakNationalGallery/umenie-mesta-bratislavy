@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -13,6 +14,18 @@ class Category extends Model
 
     public $incrementing = false;
     protected $keyType = 'string';
+
+    protected static array $icons = [
+        'fontána, studňa, vodný prvok' => 'fontain',
+        'nové médiá, streetart, inštalácia' => 'new-media',
+        'pomník' => 'monument',
+        'plastika, voľná socha' => 'statue',
+        'dielo spojené s architektúrou' => 'architecture',
+        'reliéf' => 'relief',
+        'pamätná tabuľa' => 'tableau',
+        'pamätník' => 'memorial',
+        'drobná architektúra, dizajn, herný prvok' => 'playground',
+    ];
 
     public static function scopeWithFilteredArtworksCount(
         Builder $query,
@@ -32,5 +45,11 @@ class Category extends Model
     public function artworks()
     {
         return $this->belongsToMany(Artwork::class);
+    }
+
+    public function getIconAttribute()
+    {
+        $categoryName = (string) Str::of($this->name)->trim();
+        return self::$icons[$categoryName] ?? 'default';
     }
 }

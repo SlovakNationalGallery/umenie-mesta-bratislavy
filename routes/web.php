@@ -1,11 +1,12 @@
 <?php
 
-use App\Jobs\ImportFromAirtable;
-use App\Http\Controllers\ArtworkController;
-use App\Http\Controllers\HomeController;
 use App\Models\Artwork;
+use App\Models\Category;
 use App\Models\Location;
+use App\Jobs\ImportFromAirtable;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ArtworkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,9 @@ Route::get('/', function () {
 
 Route::get('/o-projekte', function () {
     $stats = Artwork::getStats();
-
+    $categories = Category::orderBy('name', 'asc')->get();
     return view('about', [
+        'categories' => $categories,
         'stats' => [
             'artworks' => $stats['count'],
             'boroughs' => $stats['locations']
