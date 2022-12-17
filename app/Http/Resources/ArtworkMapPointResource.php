@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Str;
 
 class ArtworkMapPointResource extends JsonResource
 {
@@ -28,6 +27,11 @@ class ArtworkMapPointResource extends JsonResource
                 'id' => $this->id,
                 'name' => $this->name,
                 'icon' => $this->icon(),
+                'location_address' => $this->currentLocation->address,
+                'location_description' => $this->currentLocation->description,
+                'detail_url' => route('artworks.show', [
+                    'artwork' => $this->resource,
+                ]),
             ],
         ];
     }
