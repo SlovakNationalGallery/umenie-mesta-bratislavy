@@ -1,11 +1,13 @@
 <template>
-    <div ref="mapRef"></div>
+    <div class="h-full" ref="mapEl"></div>
+    <MapPopup v-if="mapRef" :map="mapRef" :feature="popupFeature" />
 </template>
 
 <script setup>
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
 import { onMounted, ref } from 'vue';
+import MapPopup from './MapPopup.vue';
 
 const props = defineProps({
     center: {
@@ -24,6 +26,8 @@ const props = defineProps({
     },
 });
 
+const popupFeature = ref(null);
+const mapEl = ref(null);
 const mapRef = ref(null);
 const dataLoading = axios.get(
     `/api/artworks/map-points${window.location.search}`
@@ -32,7 +36,7 @@ const dataLoading = axios.get(
 onMounted(() => {
     const mapLoading = new Promise((resolve, reject) => {
         new mapboxgl.Map({
-            container: mapRef.value,
+            container: mapEl.value,
             style:
                 import.meta.env.VITE_MAPBOX_STYLE ||
                 'mapbox://styles/mapbox/streets-v11',
@@ -103,6 +107,7 @@ const loaded = ([{ data }, map]) => {
     }
 
     observeResize(map);
+    mapRef.value = map;
 };
 
 const getBounds = (points) => {
@@ -118,7 +123,7 @@ const observeResize = (map) => {
         entries.forEach(() => {
             map.resize();
         });
-    }).observe(mapRef.value);
+    }).observe(mapEl.value);
 };
 
 const clusterLayer = {
@@ -151,10 +156,7 @@ const clusterCountLayer = {
     filter: ['has', 'point_count'],
     layout: {
         'text-field': '{point_count_abbreviated}',
-        'text-font': [
-            // 'Denim SemiBold', // does not work
-            'Arial Unicode MS Bold',
-        ],
+        'text-font': ['Denim SemiBold', 'Arial Unicode MS Bold'],
         'text-size': 16,
     },
     paint: {
@@ -209,16 +211,7 @@ const zoomCluster = function (e) {
 };
 
 const openPopup = function (e) {
-    const feature = e.features[0];
-
-    new mapboxgl.Popup({
-        offset: [0, 10],
-        closeButton: false,
-        anchor: 'top',
-    })
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML(feature.properties.name)
-        .addTo(this);
+    popupFeature.value = e.features[0];
 };
 
 const setCursorPointer = function () {

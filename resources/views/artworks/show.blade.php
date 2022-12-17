@@ -176,7 +176,7 @@
     </div>
     @if ($artwork->currentLocation && $artwork->currentLocation->gps_lon && $artwork->currentLocation->gps_lat)
         <div class="h-[330px] lg:h-[500px]">
-            <map-container class="h-full" :cluster="false"
+            <map-container :cluster="false"
                 :center="[{{ $artwork->currentLocation->gps_lon }}, {{ $artwork->currentLocation->gps_lat }}]"
                 :zoom="16" highlight-id="{{ $artwork->id }}" />
         </div>
@@ -196,9 +196,9 @@
         <article id="popup">
             <h1 class="font-medium mb-3 text-lg">{{ $artwork->name }}</h1>
             <div class="leading-none space-y-2 text-sm">
-                <p class="font-medium mb-2">{{ $artwork->currentLocation->address }}</p>
-                <p class="mb-2">{{ $artwork->currentLocation->description }}</p>
-                <p class="mb-2">
+                <p class="font-medium">{{ $artwork->currentLocation->address }}</p>
+                <p>{{ $artwork->currentLocation->description }}</p>
+                <p>
                     <a class="underline hover:no-underline"
                         href="https://www.google.com/maps/place/{{ $artwork->currentLocation->gps_lat }},{{ $artwork->currentLocation->gps_lon }}">Otvoriť
                         v Google Maps</a>
@@ -207,4 +207,3 @@
         </article>
     </div>
 @endsection
-

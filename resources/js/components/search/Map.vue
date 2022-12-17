@@ -1,7 +1,7 @@
 <template>
     <div class="relative lg:sticky top-0">
         <div :class="[expanded ? 'h-screen' : 'h-[270px] lg:h-screen']">
-            <MapContainer class="h-full" :key="componentKey" />
+            <MapContainer :key="componentKey" />
         </div>
         <button
             @click="expanded = !expanded"
