@@ -38,19 +38,37 @@
             leave-to-class="translate-y-1 opacity-0"
         >
             <PopoverPanel
-                class="absolute z-10 p-6 bg-white border flex flex-col gap-y-2 max-h-60 overflow-auto"
+                class="absolute z-10 p-6 bg-white border"
             >
-                <input
-                    name="f-artworks"
-                    id="f-artworks"
-                    :placeholder="props.placeholder"
-                    v-model="search"
-                />
-                <slot :options="searchResults">
-                    <span class="text-neutral-500 italic whitespace-nowrap"
-                        >Žiadne možnosti</span
+                <div
+                    class="flex items-center justify-between py-1.5 px-2.5 mb-4 border border-neutral-700 rounded-full"
+                >
+                    <input
+                        class="text-sm w-full focus:outline-0"
+                        name="f-artworks"
+                        id="f-artworks"
+                        :placeholder="props.placeholder"
+                        v-model="search"
+                    />
+                    <svg
+                        width="14"
+                        height="13"
+                        viewBox="0 0 14 13"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-neutral-700 stroke-[1.4px]"
                     >
-                </slot>
+                        <circle cx="5.5" cy="5.25" r="4.5" />
+                        <path d="M9 8.75L13 12.25" />
+                    </svg>
+                </div>
+                <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
+                    <slot :options="searchResults">
+                        <span class="text-neutral-500 italic whitespace-nowrap"
+                            >Žiadne možnosti</span
+                        >
+                    </slot>
+                </div>
             </PopoverPanel>
         </transition>
     </Popover>
