@@ -35,7 +35,7 @@
         </div>
         <button
             @click="handleOpenLightbox(0)"
-            class="absolute min-w-max bottom-4 left-1/2 -translate-x-1/2 bg-white uppercase font-medium py-2.5 px-5 md:right-4 md:left-auto md:transform-none"
+            class="absolute min-w-max bottom-4 left-1/2 -translate-x-1/2 bg-white uppercase font-medium py-2.5 px-5 md:right-4 md:left-auto md:transform-none hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
         >
             zobraziť galériu <span>({{ photos.length }})</span>
         </button>
