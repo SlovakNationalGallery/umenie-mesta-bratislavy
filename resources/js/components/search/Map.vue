@@ -33,6 +33,13 @@ export default {
         query() {
             this.componentKey++;
         },
+        expanded(value) {
+            if (value) {
+                this.$el.scrollIntoView({
+                    behavior: 'smooth',
+                });
+            }
+        },
     },
 };
 </script>
