@@ -176,7 +176,7 @@
     </div>
     @if ($artwork->currentLocation && $artwork->currentLocation->gps_lon && $artwork->currentLocation->gps_lat)
         <div class="h-[330px] lg:h-[500px]">
-            <map-container :cluster="false"
+            <map-container class="h-full" :cluster="false"
                 :center="[{{ $artwork->currentLocation->gps_lon }}, {{ $artwork->currentLocation->gps_lat }}]"
                 :zoom="16" highlight-id="{{ $artwork->id }}" />
         </div>

@@ -1,14 +1,19 @@
 <template>
-    <div class="relative lg:sticky top-0">
-        <div :class="[expanded ? 'h-screen' : 'h-[270px] lg:h-screen']">
-            <MapContainer :key="componentKey" />
-        </div>
-        <button
-            @click="expanded = !expanded"
-            class="-translate-x-1/2 absolute bg-white bottom-3 font-medium lg:hidden p-2 left-1/2"
+    <div
+        class="relative lg:sticky top-0"
+        :class="[expanded ? 'h-screen' : 'h-[270px] lg:h-screen']"
+    >
+        <MapContainer class="absolute inset-0" :key="componentKey" />
+        <div
+            class="absolute inset-0 flex items-end justify-center p-3 pointer-events-none"
         >
-            {{ expanded ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
-        </button>
+            <button
+                @click="expanded = !expanded"
+                class="bg-white bottom-3 font-medium lg:hidden p-2 pointer-events-auto sticky"
+            >
+                {{ expanded ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
+            </button>
+        </div>
     </div>
 </template>
 

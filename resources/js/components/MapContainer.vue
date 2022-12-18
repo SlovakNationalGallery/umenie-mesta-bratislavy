@@ -1,6 +1,8 @@
 <template>
-    <div class="h-full" ref="mapEl"></div>
-    <MapPopup v-if="mapRef" :map="mapRef" :feature="popupFeature" />
+    <div>
+        <div class="h-full" ref="mapEl"></div>
+        <MapPopup v-if="mapRef" :map="mapRef" :feature="popupFeature" />
+    </div>
 </template>
 
 <script setup>
