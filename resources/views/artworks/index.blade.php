@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, ...controller }">
         <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto">
@@ -11,11 +10,28 @@
                         :options="filters.boroughs" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs" :value="option.value"
-                                @change="onCheckboxChange" :checked="query.boroughs.includes(option.value)"
-                                class="checked:text-neutral-800 text-red-600 h-6 w-6 rounded mr-2 focus:ring-0" />
-                            <label :for="'filters.boroughs.' + index" class="whitespace-nowrap">
-                                @{{ option.label }} (@{{ option.district_short }})
-                                <span class="font-semibold">(@{{ option.count }})</span>
+                                @change="onCheckboxChange" :checked="query.boroughs.includes(option.value)" class="hidden" />
+                            <label
+                                :class="[{ 'bg-gray-100': query.boroughs.includes(option.value) },
+                                    'w-full p-4 border border-gray-100 flex items-center justify-start rounded'
+                                ]"
+                                :for="'filters.boroughs.' + index">
+                                <div class="flex items-center justify-center h-11 w-14">
+                                    <search.borough-icon :borough-name="option.district_short"></search.boroughIcon>
+                                </div>
+                                <span class="min-w-max inline-block font-semibold pr-1 pr-1">
+                                    @{{ option.district_short }}
+                                    @{{ option.label }}
+                                    (@{{ option.count }})
+                                </span>
+                                <div v-if="query.boroughs.includes(option.value)"
+                                    class="ml-auto bg-red-500 w-[1.625rem] h-[1.625rem] rounded-full flex justify-center items-center">
+                                    <svg class="stroke-neutral-800 stroke-2" width="14" height="10"
+                                        viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.818 1L4.818 9L1.18164 5.36364" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
                             </label>
                         </div>
                     </search.disclosure-filter>
@@ -73,17 +89,31 @@
                 <headless.popover-group class="gap-x-2 hidden lg:flex">
                     <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
-                        <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
-                            <div v-for="option, index in options" :key="option.value" class="flex">
-                                <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
-                                    :value="option.value" @change="onCheckboxChange"
-                                    :checked="query.boroughs.includes(option.value)"
-                                    class="checked:text-neutral-800 text-red-600 h-6 w-6 rounded mr-2 focus:ring-0" />
-                                <label :for="'filters.boroughs.' + index" class="whitespace-nowrap pr-4">
-                                    @{{ option.label }} (@{{ option.district_short }})
-                                    <span class="font-semibold">(@{{ option.count }})</span>
-                                </label>
-                            </div>
+                        <div v-for="option, index in options" :key="option.value" class="flex">
+                            <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
+                                :value="option.value" @change="onCheckboxChange"
+                                :checked="query.boroughs.includes(option.value)" class="hidden" />
+                            <label
+                                :class="[{ 'bg-gray-100': query.boroughs.includes(option.value) },
+                                    'w-full p-4 border border-gray-100 flex items-center justify-start rounded'
+                                ]"
+                                :for="'filters.boroughs.' + index">
+                                <div class="flex items-center justify-center h-11 w-14">
+                                    <search.borough-icon :borough-name="option.district_short"></search.boroughIcon>
+                                </div>
+                                <span class="min-w-max inline-block font-semibold pr-1">
+                                    @{{ option.district_short }}
+                                    @{{ option.label }}
+                                    (@{{ option.count }})
+                                </span>
+                                <div v-if="query.boroughs.includes(option.value)"
+                                    class="ml-auto bg-red-500 w-[1.625rem] h-[1.625rem] rounded-full flex justify-center items-center">
+                                    <svg class="stroke-neutral-800 stroke-2" width="14" height="10"
+                                        viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.818 1L4.818 9L1.18164 5.36364" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
                         </div>
                     </search.popover-filter>
                     <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
