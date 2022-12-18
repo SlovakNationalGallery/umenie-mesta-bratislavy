@@ -64,7 +64,7 @@
             {{-- Desktop filter --}}
             <div class="flex justify-between">
                 <headless.popover-group class="gap-x-2 hidden md:flex">
-                    <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
+                    <search.popover-filter placeholder="Zadajte obvod / mestskú časť" label="Obvod / mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
@@ -78,7 +78,7 @@
                         </div>
                     </search.popover-filter>
 
-                    <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
+                    <search.popover-filter placeholder="Zadajte meno autora / autorky" label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.authors.' + index" name="authors" :value="option.value"
@@ -90,7 +90,7 @@
                         </div>
                     </search.popover-filter>
 
-                    <search.popover-filter label="Druh diela" :selected-count="query.categories.length"
+                    <search.popover-filter placeholder="Zadajte druh diela" label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.categories.' + index" name="categories"
@@ -103,7 +103,7 @@
                         </div>
                     </search.popover-filter>
 
-                    <search.popover-filter label="Kľúčové slová" :selected-count="query.keywords.length"
+                    <search.popover-filter placeholder="Zadajte kľúčové slovo" label="Kľúčové slová" :selected-count="query.keywords.length"
                         :options="filters.keywords" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"

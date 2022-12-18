@@ -40,7 +40,13 @@
             <PopoverPanel
                 class="absolute z-10 p-6 bg-white border flex flex-col gap-y-2 max-h-60 overflow-auto"
             >
-                <slot :options="props.options">
+                <input
+                    name="f-artworks"
+                    id="f-artworks"
+                    :placeholder="props.placeholder"
+                    v-model="search"
+                />
+                <slot :options="searchResults">
                     <span class="text-neutral-500 italic whitespace-nowrap"
                         >Žiadne možnosti</span
                     >
@@ -52,10 +58,19 @@
 
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue';
+import { ref, computed } from 'vue';
+
+const search = ref(null);
+const searchResults = computed(() =>
+    props.options.filter(
+        (option) => !search.value || option.value.includes(search.value)
+    )
+);
 
 const props = defineProps({
     options: Object,
     label: String,
+    placeholder: String,
     selectedCount: Number,
 });
 </script>
