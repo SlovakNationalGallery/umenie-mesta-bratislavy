@@ -64,56 +64,67 @@
             {{-- Desktop filter --}}
             <div class="flex justify-between">
                 <headless.popover-group class="gap-x-2 hidden md:flex">
-                    <search.popover-filter placeholder="Zadajte obvod / mestskú časť" label="Obvod / mestská časť" :selected-count="query.boroughs.length"
+                    <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
-                        <div v-for="option, index in options" :key="option.value" class="flex">
-                            <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
-                                :value="option.value" @change="onCheckboxChange"
-                                :checked="query.boroughs.includes(option.value)"
-                                class="checked:text-neutral-800 text-red-600 h-6 w-6 rounded mr-2 focus:ring-0" />
-                            <label :for="'filters.boroughs.' + index" class="whitespace-nowrap">
-                                @{{ option.label }} (@{{ option.district_short }})
-                                <span class="font-semibold">(@{{ option.count }})</span>
-                            </label>
+                        <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
+                            <div v-for="option, index in options" :key="option.value" class="flex">
+                                <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
+                                    :value="option.value" @change="onCheckboxChange"
+                                    :checked="query.boroughs.includes(option.value)"
+                                    class="checked:text-neutral-800 text-red-600 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                <label :for="'filters.boroughs.' + index" class="whitespace-nowrap">
+                                    @{{ option.label }} (@{{ option.district_short }})
+                                    <span class="font-semibold">(@{{ option.count }})</span>
+                                </label>
+                            </div>
                         </div>
                     </search.popover-filter>
-
-                    <search.popover-filter placeholder="Zadajte meno autora / autorky" label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
+                    <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
-                        <div v-for="option, index in options" :key="option.value" class="flex">
-                            <input type="checkbox" :id="'filters.authors.' + index" name="authors" :value="option.value"
-                                @change="onCheckboxChange" :checked="query.authors.includes(option.value)"
-                                class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
-                            <label :for="'filters.authors.' + index" class="whitespace-nowrap">
-                                @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
-                            </label>
-                        </div>
+                        <search.filter-search placeholder="Napíšte meno autora / autorky" :options="options"
+                            v-slot="{ searchResults }">
+                            <div v-for="option, index in searchResults" :key="option.value" class="flex">
+                                <input type="checkbox" :id="'filters.authors.' + index" name="authors"
+                                    :value="option.value" @change="onCheckboxChange"
+                                    :checked="query.authors.includes(option.value)"
+                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                <label :for="'filters.authors.' + index" class="whitespace-nowrap">
+                                    @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                </label>
+                            </div>
+                        </search.filter-search>
                     </search.popover-filter>
 
-                    <search.popover-filter placeholder="Zadajte druh diela" label="Druh diela" :selected-count="query.categories.length"
+                    <search.popover-filter label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
-                        <div v-for="option, index in options" :key="option.value" class="flex">
-                            <input type="checkbox" :id="'filters.categories.' + index" name="categories"
-                                :value="option.value" @change="onCheckboxChange"
-                                :checked="query.categories.includes(option.value)"
-                                class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
-                            <label :for="'filters.categories.' + index" class="whitespace-nowrap">
-                                @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
-                            </label>
-                        </div>
+                        <search.filter-search placeholder="Zadajte druh diela" :options="options"
+                            v-slot="{ searchResults }">
+                            <div v-for="option, index in options" :key="option.value" class="flex">
+                                <input type="checkbox" :id="'filters.categories.' + index" name="categories"
+                                    :value="option.value" @change="onCheckboxChange"
+                                    :checked="query.categories.includes(option.value)"
+                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                <label :for="'filters.categories.' + index" class="whitespace-nowrap">
+                                    @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                </label>
+                            </div>
+                        </search.filter-search>
                     </search.popover-filter>
 
-                    <search.popover-filter placeholder="Zadajte kľúčové slovo" label="Kľúčové slová" :selected-count="query.keywords.length"
+                    <search.popover-filter label="Kľúčové slová" :selected-count="query.keywords.length"
                         :options="filters.keywords" v-slot="{ options }">
-                        <div v-for="option, index in options" :key="option.value" class="flex">
-                            <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
-                                :value="option.value" @change="onCheckboxChange"
-                                :checked="query.keywords.includes(option.value)"
-                                class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
-                            <label :for="'filters.keywords.' + index" class="whitespace-nowrap">
-                                @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
-                            </label>
-                        </div>
+                        <search.filter-search placeholder="Zadajte kľúčové slovo" :options="options"
+                            v-slot="{ searchResults }">
+                            <div v-for="option, index in options" :key="option.value" class="flex">
+                                <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
+                                    :value="option.value" @change="onCheckboxChange"
+                                    :checked="query.keywords.includes(option.value)"
+                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                <label :for="'filters.keywords.' + index" class="whitespace-nowrap">
+                                    @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                </label>
+                            </div>
+                        </search.filter-search>
                     </search.popover-filter>
                 </headless.popover-group>
 
