@@ -30,11 +30,7 @@
         <DisclosurePanel
             class="p-6 bg-white flex flex-col gap-y-2 max-h-64 overflow-auto"
         >
-            <slot :options="options">
-                <span class="text-neutral-500 italic whitespace-nowrap">
-                    Žiadne možnosti
-                </span>
-            </slot>
+            <slot :options="options"></slot>
         </DisclosurePanel>
     </Disclosure>
 </template>
