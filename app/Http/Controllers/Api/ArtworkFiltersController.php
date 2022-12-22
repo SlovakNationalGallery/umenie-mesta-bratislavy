@@ -11,6 +11,7 @@ use App\Models\Location;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class ArtworkFiltersController extends Controller
 {
@@ -45,6 +46,7 @@ class ArtworkFiltersController extends Controller
                         'value' => $name,
                         'label' => $name,
                         'district_short' => $b['district_short'],
+                        'icon' => 'images/boroughs/' . Str::snake($name) . '.svg',
                         'count' => Arr::get($boroughCounts, $name, 0),
                     ];
                 })

@@ -12,7 +12,6 @@ import MapContainer from './components/MapContainer.vue';
 import MobileFilter from './components/search/MobileFilter.vue';
 import MobileFilterDialog from './components/search/MobileFilterDialog.vue';
 import SearchMap from './components/search/Map.vue';
-import BoroughIcon from './components/search/BoroughIcon.vue'
 import ArtworkCarousel from './components/ArtworkCarousel.vue';
 import FilterSearch from './components/search/FilterSearch.vue';
     
@@ -28,7 +27,6 @@ app.component('search.mobile-filter-dialog', MobileFilterDialog);
 app.component('search.popover-filter', PopoverFilter);
 app.component('search.disclosure-filter', DisclosureFilter);
 app.component('search.filter-search', FilterSearch)
-app.component('search.borough-icon', BoroughIcon)
 app.component('artwork-carousel', ArtworkCarousel);
 
 app.mount('#app');
