@@ -232,7 +232,11 @@ class Artwork extends Model
 
     public function descriptionHtml(): Attribute
     {
-        return Attribute::get(fn() => Str::markdown($this->description ?? ''));
+        return Attribute::get(
+            fn() => Str::of($this->description)
+                ->replace("\n", "\n\n")
+                ->markdown()
+        );
     }
 
     public function photoMediaForCarousel(): Attribute
