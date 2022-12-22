@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -244,7 +245,19 @@ class Artwork extends Model
         return Attribute::get(function () {
             return $this->photos()
                 ->select(['id', 'description'])
-                ->with('media:id,model_id,responsive_images,disk,file_name')
+                ->with([
+                    'media' => function (MorphMany $query) {
+                        $query
+                            ->select([
+                                'id',
+                                'model_id',
+                                'responsive_images',
+                                'disk',
+                                'file_name',
+                            ])
+                            ->orderBy('order_column');
+                    },
+                ])
                 ->get()
                 ->flatMap(
                     fn($photo) => $photo->media->map(
