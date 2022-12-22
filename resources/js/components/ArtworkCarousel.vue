@@ -71,7 +71,7 @@
             >
                 <button
                     class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
-                    @click="handleOpenLightbox(openedLightbox - 1)"
+                    @click="previousPhoto"
                     :disabled="openedLightbox === 0"
                 >
                     <svg
@@ -89,7 +89,7 @@
                 </button>
                 <button
                     class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
-                    @click="handleOpenLightbox(openedLightbox + 1)"
+                    @click="nextPhoto"
                     :disabled="openedLightbox === photos.length - 1"
                 >
                     <svg
@@ -134,10 +134,35 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps(['photos']);
 const openedLightbox = ref(null);
+
+const onKeyDown = ({ code }) => {
+    if (code === 'ArrowRight') nextPhoto();
+    if (code === 'ArrowLeft') previousPhoto();
+};
+
+onMounted(() => {
+    window.addEventListener('keydown', onKeyDown);
+});
+
+onUnmounted(() => {
+    window.addEventListener('keydown', onKeyDown);
+});
+
+const nextPhoto = () => {
+    if (openedLightbox.value === null) return;
+    if (openedLightbox.value === props.photos.length - 1) return;
+    openedLightbox.value += 1;
+};
+
+const previousPhoto = () => {
+    if (openedLightbox.value === null) return;
+    if (openedLightbox.value === 0) return;
+    openedLightbox.value -= 1;
+};
 
 const handleOpenLightbox = (index) => {
     openedLightbox.value = index;
