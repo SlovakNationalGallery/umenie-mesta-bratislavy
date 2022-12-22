@@ -40,7 +40,7 @@
             <PopoverPanel
                 :class="[
                     {
-                        'mt-5 w-[calc(100vw-6rem)] flex-wrap':
+                        'mt-5 w-[calc(100vw-6rem)] max-w-screen-3xl flex-wrap':
                             fullScreen,
                     },
                     { 'flex-col overflow-auto max-h-60': !fullScreen },
