@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex items-center justify-between py-1.5 px-2.5 mb-4 border border-neutral-700 rounded-full"
+        class="flex items-center justify-between py-1.5 px-2.5 mb-4 border border-neutral-700 rounded"
     >
         <input
             class="text-sm w-full focus:outline-0"
