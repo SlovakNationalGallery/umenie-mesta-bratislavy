@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import './bootstrap';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import 'masonry-layout';
 import { PopoverGroup } from '@headlessui/vue';
 

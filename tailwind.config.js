@@ -9,6 +9,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            backgroundImage: {
+                close: 'var(--bg-close-url)',
+            },
             colors: {
                 neutral: {
                     100: '#EBF0F1',

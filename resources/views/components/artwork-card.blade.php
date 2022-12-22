@@ -10,4 +10,3 @@
     <span class="block text-sm">{{ $artwork->authors->map->name->join(', ') }}</span>
     <span class="block text-sm">{{ optional($artwork->yearBuilt)->toFormattedString() }}</span>
 </div>
-
