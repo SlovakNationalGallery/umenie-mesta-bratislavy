@@ -4,9 +4,7 @@
     >
         <input
             class="text-sm w-full focus:outline-0"
-            name="f-artworks"
-            id="f-artworks"
-            :placeholder="props.placeholder"
+            placeholder="Hľadať..."
             v-model="search"
         />
         <svg
@@ -22,26 +20,25 @@
         </svg>
     </div>
     <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
-    <slot :searchResults="searchResults">
-        <span class="text-neutral-500 italic whitespace-nowrap"
-            >Žiadne možnosti</span
-        >
-    </slot>
+        <slot :searchResults="searchResults">
+            <span class="text-neutral-500 italic whitespace-nowrap"
+                >Žiadne možnosti</span
+            >
+        </slot>
     </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import { matchSorter } from 'match-sorter';
 
 const search = ref(null);
-const searchResults = computed(() =>
-    props.options.filter(
-        (option) => !search.value || option.value.includes(search.value)
-    )
-);
+const searchResults = computed(() => {
+    if (!search.value) return props.options;
+    return matchSorter(props.options, search.value, { keys: ['label'] });
+});
 
 const props = defineProps({
     options: Object,
-    placeholder: String,
 });
 </script>
