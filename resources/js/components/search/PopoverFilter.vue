@@ -46,14 +46,6 @@
 
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue';
-import { ref, computed } from 'vue';
-
-const search = ref(null);
-const searchResults = computed(() =>
-    props.options.filter(
-        (option) => !search.value || option.value.includes(search.value)
-    )
-);
 
 const props = defineProps({
     options: Object,
