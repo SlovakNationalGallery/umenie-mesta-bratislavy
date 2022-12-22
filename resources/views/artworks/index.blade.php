@@ -13,19 +13,19 @@
                                 @change="onCheckboxChange" :checked="query.boroughs.includes(option.value)" class="hidden" />
                             <label
                                 :class="[{ 'bg-gray-100': query.boroughs.includes(option.value) },
-                                    'w-full p-4 border border-gray-100 flex items-center justify-start rounded'
+                                    'w-full border border-gray-100 flex items-center justify-start rounded h-16'
                                 ]"
                                 :for="'filters.boroughs.' + index">
-                                <div class="flex items-center justify-center h-11 w-14">
-                                    <search.borough-icon :borough-name="option.district_short"></search.boroughIcon>
+                                <div class="flex items-center justify-center h-full w-16">
+                                    <img class="w-full h-full p-1" :src="option.icon" />
                                 </div>
-                                <span class="min-w-max inline-block font-semibold pr-1 pr-1">
+                                <span class="min-w-max inline-block py-5 font-semibold pr-1">
                                     @{{ option.district_short }}
                                     @{{ option.label }}
                                     (@{{ option.count }})
                                 </span>
                                 <div v-if="query.boroughs.includes(option.value)"
-                                    class="ml-auto bg-red-500 w-[1.625rem] h-[1.625rem] rounded-full flex justify-center items-center">
+                                    class="ml-auto mr-4 bg-red-500 w-[1.625rem] h-[1.625rem] rounded-full flex justify-center items-center">
                                     <svg class="stroke-neutral-800 stroke-2" width="14" height="10"
                                         viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.818 1L4.818 9L1.18164 5.36364" stroke-linecap="round"
@@ -95,11 +95,11 @@
                                 :checked="query.boroughs.includes(option.value)" class="hidden" />
                             <label
                                 :class="[{ 'bg-gray-100': query.boroughs.includes(option.value) },
-                                    'w-full p-4 border border-gray-100 flex items-center justify-start rounded'
+                                    'w-full p-4 border border-gray-100 flex items-center justify-start rounded h-16'
                                 ]"
                                 :for="'filters.boroughs.' + index">
-                                <div class="flex items-center justify-center h-11 w-14">
-                                    <search.borough-icon :borough-name="option.district_short"></search.boroughIcon>
+                                <div class="flex items-center justify-center h-full w-16">
+                                    <img class="w-full h-full p-1" :src="option.icon" />
                                 </div>
                                 <span class="min-w-max inline-block font-semibold pr-1">
                                     @{{ option.district_short }}
