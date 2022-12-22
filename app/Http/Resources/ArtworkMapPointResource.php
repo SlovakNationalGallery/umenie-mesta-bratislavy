@@ -41,7 +41,7 @@ class ArtworkMapPointResource extends JsonResource
         $icon = str($this->primaryCategory?->icon ?? 'default');
         return $icon->when(
             $this->defunct,
-            fn ($icon) => $icon->append('-defunct')
+            fn($icon) => $icon->append('-defunct')
         );
     }
 }

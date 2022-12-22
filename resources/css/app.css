@@ -1,4 +1,5 @@
 @import 'fonts.css';
+@import 'mapbox-gl/dist/mapbox-gl.css';
 
 @tailwind base;
 @tailwind components;
@@ -6,4 +7,13 @@
 
 [v-cloak] {
     display: none;
+}
+
+.mapboxgl-popup-content {
+    @apply p-4;
+}
+
+.mapboxgl-popup-close-button {
+    @apply bg-close h-6 w-6 text-[0px] hover:bg-transparent;
+    --bg-close-url: url('../img/close.svg');
 }
