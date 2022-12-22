@@ -40,14 +40,75 @@
             zobraziť galériu <span>({{ photos.length }})</span>
         </button>
     </div>
-    <div v-if="openedLightbox !== -1">
-        <div
-            class="z-10 bg-white left-0 top-0 fixed opacity-95 w-screen h-screen"
-        />
-        <div class="z-30 fixed top-10 right-10">
+    <transition
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition duration-150 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+    >
+        <div v-if="openedLightbox !== null" class="fixed inset-0 z-10">
+            <div
+                class="absolute inset-0 flex flex-col justify-center h-full md:px-10 py-20 bg-white/95"
+            >
+                <img
+                    :src="photos[openedLightbox].url"
+                    :srcset="photos[openedLightbox].srcSet"
+                    :alt="photos[openedLightbox].description"
+                    class="object-contain w-full md:h-full"
+                />
+                <div
+                    class="mt-6 mx-6 font-medium text-xl text-center text-neutral-800"
+                >
+                    {{ photos[openedLightbox].description }}
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div
+                class="absolute inset-y-0 md:inset-x-10 inset-x-1 flex justify-between items-center"
+            >
+                <button
+                    class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                    @click="handleOpenLightbox(openedLightbox - 1)"
+                    :disabled="openedLightbox === 0"
+                >
+                    <svg
+                        width="21"
+                        height="18"
+                        viewBox="0 0 21 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path d="M20.25 8.99902H1.75" />
+                        <path
+                            d="M9.15039 16.3996L1.75039 8.99961L9.15039 1.59961"
+                        />
+                    </svg>
+                </button>
+                <button
+                    class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                    @click="handleOpenLightbox(openedLightbox + 1)"
+                    :disabled="openedLightbox === photos.length - 1"
+                >
+                    <svg
+                        width="21"
+                        height="18"
+                        viewBox="0 0 21 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path d="M0.75 8.99902H19.25" />
+                        <path
+                            d="M11.8496 16.3996L19.2496 8.99961L11.8496 1.59961"
+                        />
+                    </svg>
+                </button>
+            </div>
             <button
-                @click="handleOpenLightbox(-1)"
-                class="m-4 bg-neutral-800 rounded-full w-10 h-10 flex items-center justify-center stroke-white"
+                @click="handleOpenLightbox(null)"
+                class="absolute top-9 right-4 md:top-10 md:right-10 bg-neutral-800 rounded-full w-10 h-10 flex items-center justify-center stroke-white"
             >
                 <svg
                     width="26"
@@ -69,68 +130,14 @@
                 </svg>
             </button>
         </div>
-        <div class="inset-0 z-20 fixed">
-            <div class="flex h-full w-full items-center">
-                <button
-                    class="flex-shrink-0 m-4 rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:bg-neutral-400"
-                    @click="handleOpenLightbox(openedLightbox - 1)"
-                    :disabled="openedLightbox === 0"
-                >
-                    <svg
-                        width="21"
-                        height="18"
-                        viewBox="0 0 21 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M20.25 8.99902H1.75" />
-                        <path
-                            d="M9.15039 16.3996L1.75039 8.99961L9.15039 1.59961"
-                        />
-                    </svg>
-                </button>
-                <div class="flex-grow h-full py-6">
-                    <div class="flex items-center justify-center h-full">
-                        <img
-                            :src="photos[openedLightbox].url"
-                            :srcset="photos[openedLightbox].srcSet"
-                            class="object-contain h-full w-full"
-                        />
-                    </div>
-                    <div
-                        class="pb-4 pt-6 font-medium text-xl text-center text-neutral-800"
-                    >
-                        {{ photos[openedLightbox].description }}
-                    </div>
-                </div>
-                <button
-                    class="flex-shrink-0 m-4 rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:bg-neutral-400"
-                    @click="handleOpenLightbox(openedLightbox + 1)"
-                    :disabled="openedLightbox === photos.length - 1"
-                >
-                    <svg
-                        width="21"
-                        height="18"
-                        viewBox="0 0 21 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M0.75 8.99902H19.25" />
-                        <path
-                            d="M11.8496 16.3996L19.2496 8.99961L11.8496 1.59961"
-                        />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
+    </transition>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
 const props = defineProps(['photos']);
-const openedLightbox = ref(-1);
+const openedLightbox = ref(null);
 
 const handleOpenLightbox = (index) => {
     openedLightbox.value = index;
