@@ -37,8 +37,21 @@
             leave-from-class="translate-y-0 opacity-100"
             leave-to-class="translate-y-1 opacity-0"
         >
-            <PopoverPanel class="absolute z-10 p-6 bg-white border">
-                <slot :options="options"></slot>
+            <PopoverPanel
+                :class="[
+                    {
+                        'mt-5 w-[calc(100vw-6rem)] flex-wrap fixed left-0':
+                            fullScreen,
+                    },
+                    { 'flex-col overflow-auto max-h-60': !fullScreen },
+                    'absolute z-10 p-6 bg-white border flex gap-y-2 ',
+                ]"
+            >
+                <slot :options="props.options">
+                    <span class="text-neutral-500 italic whitespace-nowrap"
+                        >Žiadne možnosti</span
+                    >
+                </slot>
             </PopoverPanel>
         </transition>
     </Popover>
@@ -51,5 +64,6 @@ const props = defineProps({
     options: Object,
     label: String,
     selectedCount: Number,
+    fullScreen: Boolean,
 });
 </script>

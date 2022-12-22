@@ -88,32 +88,36 @@
             <div class="flex justify-between">
                 <headless.popover-group class="gap-x-2 hidden lg:flex">
                     <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
-                        :options="filters.boroughs" v-slot="{ options }">
-                        <div v-for="option, index in options" :key="option.value" class="flex">
+                        :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
+                        <div v-for="option, index in options" :key="option.value"
+                            :class="[
+                                { 'bg-gray-100 rounded': query.boroughs.includes(option.value) },
+                                'flex items-center justify-center m-4 w-48 border border-gray-100 py-4'
+                            ]">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
                                 :value="option.value" @change="onCheckboxChange"
                                 :checked="query.boroughs.includes(option.value)" class="hidden" />
-                            <label
-                                :class="[{ 'bg-gray-100': query.boroughs.includes(option.value) },
-                                    'w-full p-4 border border-gray-100 flex items-center justify-start rounded h-16'
-                                ]"
-                                :for="'filters.boroughs.' + index">
-                                <div class="flex items-center justify-center h-full w-16">
-                                    <img class="w-full h-full p-1" :src="option.icon" />
+                            <label :for="'filters.boroughs.' + index" class="w-full">
+                                <div class="flex flex-col items-center justify-center w-full">
+                                    <div class="relative">
+                                        <img :src="option.icon" class="h-16" />
+                                        <div v-if="query.boroughs.includes(option.value)"
+                                            class="absolute z-20 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center bg-red-500 w-[1.625rem] h-[1.625rem] rounded-full">
+                                            <svg class="stroke-neutral-800 stroke-2" width="14" height="10"
+                                                viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.818 1L4.818 9L1.18164 5.36364" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="pt-4">
+                                        @{{ option.district_short }}
+                                    </span>
+                                    <span class="font-medium">
+                                        @{{ option.label }} (@{{ option.count }})
+                                    </span>
                                 </div>
-                                <span class="min-w-max inline-block font-semibold pr-1">
-                                    @{{ option.district_short }}
-                                    @{{ option.label }}
-                                    (@{{ option.count }})
-                                </span>
-                                <div v-if="query.boroughs.includes(option.value)"
-                                    class="ml-auto bg-red-500 w-[1.625rem] h-[1.625rem] rounded-full flex justify-center items-center">
-                                    <svg class="stroke-neutral-800 stroke-2" width="14" height="10"
-                                        viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.818 1L4.818 9L1.18164 5.36364" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                </div>
+                            </label>
                         </div>
                     </search.popover-filter>
                     <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
