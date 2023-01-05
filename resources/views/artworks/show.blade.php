@@ -181,8 +181,7 @@
                 :zoom="16" highlight-id="{{ $artwork->id }}" />
         </div>
     @endif
-    {{-- TODO -- GMBUVP-18 --}}
-    {{-- <div class="pt-10 pb-6 px-4 max-w-screen-3xl md:px-14 mx-auto">
+    <div class="pt-10 pb-6 px-4 max-w-screen-3xl md:px-14 mx-auto">
         <h3 class="text-3xl font-medium mt-3">Ďalšie diela v okolí</h3>
 
         <div class="mt-4 -mx-4" data-masonry='{ "itemSelector": ".grid-item" }'>
@@ -190,7 +189,7 @@
                 <x-artwork-card :artwork="$a" class="grid-item sm:w-1/4 p-4" />
             @endforeach
         </div>
-    </div> --}}
+    </div>
 
     <div class="hidden">
         <article id="popup">
@@ -207,3 +206,4 @@
         </article>
     </div>
 @endsection
+

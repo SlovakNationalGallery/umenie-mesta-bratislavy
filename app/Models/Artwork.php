@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -48,6 +49,30 @@ class Artwork extends Model
     public function scopePublished($query)
     {
         $query->where('is_published', true);
+    }
+
+    public function scopeSelectCurrentLocationDistance($query, $otherArtwork)
+    {
+        $query
+            ->join(
+                'artwork_location',
+                'artwork_location.artwork_id',
+                '=',
+                'artworks.id'
+            )
+            ->join('locations', function (JoinClause $join) {
+                $join
+                    ->on('locations.id', '=', 'artwork_location.location_id')
+                    ->where('locations.is_current', true)
+                    ->whereNotNull(['locations.gps_lat', 'locations.gps_lon']);
+            })
+            ->selectRaw(
+                'ST_Distance_Sphere(point(?, ?), point(locations.gps_lon, locations.gps_lat)) as distance',
+                [
+                    $otherArtwork->currentLocation->gps_lon,
+                    $otherArtwork->currentLocation->gps_lat,
+                ]
+            );
     }
 
     // default scope for those artworks that we can actually display

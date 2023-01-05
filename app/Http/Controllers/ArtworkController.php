@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Keyword;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -59,14 +60,17 @@ class ArtworkController extends Controller
      */
     public function show(Artwork $artwork)
     {
-        // TODO GMBUVP-18
-        // $relatedArtworks = Artwork::published()
-        //     ->with('coverPhotoMedia', 'authors', 'yearBuilt')
-        //     ->has('coverPhotoMedia')
-        //     ->limit(4)
-        //     ->get();
+        $relatedArtworks = Artwork::query()
+            ->select('artworks.*')
+            ->selectCurrentLocationDistance($artwork)
+            ->presentable()
+            ->whereNot('artworks.id', $artwork->id)
+            ->orderBy('distance')
+            ->limit(4)
+            ->with('coverPhotoMedia', 'authors', 'yearBuilt')
+            ->get();
 
-        return view('artworks.show', compact('artwork'));
+        return view('artworks.show', compact('artwork', 'relatedArtworks'));
     }
 
     /**
