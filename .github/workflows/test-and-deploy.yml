@@ -5,7 +5,7 @@ on: push
 jobs:
   test:
     name: Test
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     services:
       mysql:
         image: mysql:5.7.29
@@ -44,7 +44,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     concurrency: deploy
     needs: [test]
     if: github.ref == 'refs/heads/main'
