@@ -48,7 +48,40 @@ export default {
             onCheckboxChange: this.onCheckboxChange,
             artworks: this.artworks,
             isFetching: this.isFetching,
+            filterSelections: this.filterSelections,
+            removeSelection: this.removeSelection,
         });
+    },
+    computed: {
+        filterSelections() {
+            return [
+                ...this.query.boroughs.map((value) => ({
+                    name: 'boroughs',
+                    value,
+                    label: this.filters.boroughs.find((f) => f.value === value)
+                        .label,
+                })),
+                ...this.query.authors.map((value) => ({
+                    name: 'authors',
+                    value,
+                    label: this.filters.authors.find((f) => f.value === value)
+                        .label,
+                })),
+                ...this.query.categories.map((value) => ({
+                    name: 'categories',
+                    value,
+                    label: this.filters.categories.find(
+                        (f) => f.value === value
+                    ).label,
+                })),
+                ...this.query.keywords.map((value) => ({
+                    name: 'keywords',
+                    value,
+                    label: this.filters.keywords.find((f) => f.value === value)
+                        .label,
+                })),
+            ];
+        },
     },
     methods: {
         onCheckboxChange(event) {
@@ -63,6 +96,12 @@ export default {
             }
 
             // Remove from query
+            this.query = {
+                ...this.query,
+                [name]: this.query[name].filter((v) => v !== value),
+            };
+        },
+        removeSelection({ name, value }) {
             this.query = {
                 ...this.query,
                 [name]: this.query[name].filter((v) => v !== value),

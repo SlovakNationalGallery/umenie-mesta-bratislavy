@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching }">
+    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, ...controller }">
         <div class="max-w-screen-3xl px-4 md:px-14 mx-auto">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
@@ -22,8 +22,7 @@
 
                     <search.disclosure-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
-                        <search.filter-search :options="options"
-                            v-slot="{ searchResults }">
+                        <search.filter-search :options="options" v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.authors.' + index" name="authors"
                                     :value="option.value" @change="onCheckboxChange"
@@ -38,8 +37,7 @@
 
                     <search.disclosure-filter label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
-                        <search.filter-search :options="options"
-                            v-slot="{ searchResults }">
+                        <search.filter-search :options="options" v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.categories.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
@@ -54,8 +52,7 @@
 
                     <search.disclosure-filter label="Kľúčové slová" :selected-count="query.keywords.length"
                         :options="filters.keywords" v-slot="{ options }">
-                        <search.filter-search :options="options"
-                            v-slot="{ searchResults }">
+                        <search.filter-search :options="options" v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
                                     :value="option.value" @change="onCheckboxChange"
@@ -91,8 +88,7 @@
                     </search.popover-filter>
                     <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
-                        <search.filter-search :options="options"
-                            v-slot="{ searchResults }">
+                        <search.filter-search :options="options" v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.authors.' + index" name="authors"
                                     :value="option.value" @change="onCheckboxChange"
@@ -107,8 +103,7 @@
 
                     <search.popover-filter label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
-                        <search.filter-search :options="options"
-                            v-slot="{ searchResults }">
+                        <search.filter-search :options="options" v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.categories.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
@@ -123,8 +118,7 @@
 
                     <search.popover-filter label="Kľúčové slová" :selected-count="query.keywords.length"
                         :options="filters.keywords" v-slot="{ options }">
-                        <search.filter-search :options="options"
-                            v-slot="{ searchResults }">
+                        <search.filter-search :options="options" v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
                                     :value="option.value" @change="onCheckboxChange"
@@ -171,6 +165,17 @@
                             Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} diel</span>
                         </span>
                     </div>
+                    <div class="flex -mx-2 md:-mx-4 gap-3 mt-10 flex-wrap">
+                        <button v-for="selection in controller.filterSelections"
+                            class="border rounded-sm uppercase text-xs font-semibold tracking-wide border-neutral-800 flex items-center px-3 py-2"
+                            @click="controller.removeSelection(selection)" v-key="`${selection.name}${selection.value}`">
+                            @{{ selection.label }}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-4 h-4 ml-2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                     <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 md:-mx-8">
                         @foreach ($artworks as $a)
                             <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 md:p-4"
@@ -182,3 +187,4 @@
         </div>
     </search.filters-controller>
 @endsection
+
