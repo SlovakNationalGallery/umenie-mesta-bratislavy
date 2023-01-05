@@ -1,10 +1,10 @@
 <template>
     <article ref="root">
         <template v-if="feature">
-            <h1 class="font-medium mb-3 text-lg">
+            <h1 class="font-medium mb-3 text-lg leading-[20px]">
                 {{ feature.properties.name }}
             </h1>
-            <div class="leading-tight space-y-2 text-sm">
+            <div class="leading-tight space-y-2 text-sm leading-[15px]">
                 <p class="font-medium">
                     {{ feature.properties.location_address }}
                 </p>
@@ -30,8 +30,8 @@ export default {
         return {
             popup: new mapboxgl.Popup({
                 offset: [0, 10],
-                closeButton: false,
                 anchor: 'top',
+                maxWidth: '315px',
             }),
         };
     },

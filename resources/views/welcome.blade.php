@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="font-medium inline-block mb-10 px-4 py-2 md:px-6 md:py-4 border-2 prose md:prose-2xl border-neutral-800 uppercase"
+                <a class="font-medium inline-block mb-10 px-4 py-2 md:px-6 md:py-4 border-2 prose md:prose-2xl border-neutral-800 uppercase hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
                     href="{{ route('artworks.index') }}">
                     Preskúmať diela
                 </a>
@@ -60,4 +60,3 @@
         </div>
     </div>
 @endsection
-

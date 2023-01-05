@@ -97,6 +97,7 @@ const loaded = ([{ data }, map]) => {
             closeOnMove: false,
             focusAfterOpen: false,
             anchor: 'top',
+            maxWidth: '315px',
         })
             .setLngLat(props.center)
             .setHTML(html)
