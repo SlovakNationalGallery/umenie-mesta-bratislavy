@@ -54,6 +54,8 @@ export default {
     },
     computed: {
         filterSelections() {
+            if (Object.keys(this.filters).length === 0) return [];
+
             return [
                 ...this.query.boroughs.map((value) => ({
                     name: 'boroughs',
