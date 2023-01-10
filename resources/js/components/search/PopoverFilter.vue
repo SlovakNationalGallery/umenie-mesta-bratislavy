@@ -1,5 +1,5 @@
 <template>
-    <Popover v-slot="{ open }" class="relative">
+    <Popover v-slot="{ open }">
         <PopoverButton
             class="py-5 px-4 outline-none text-lg"
             :class="[open ? 'bg-neutral-100' : 'bg-white']"
@@ -40,11 +40,11 @@
             <PopoverPanel
                 :class="[
                     {
-                        'mt-5 w-[calc(100vw-6rem)] max-w-screen-3xl flex-wrap':
+                        'mt-5 grid grid-cols-5 max-w-screen-3xl':
                             fullScreen,
                     },
-                    { 'flex-col overflow-auto max-h-60': !fullScreen },
-                    'absolute z-10 p-6 bg-white border flex gap-y-2 ',
+                    { 'flex-col overflow-auto max-h-60 flex': !fullScreen },
+                    'absolute z-10 p-6 bg-white border gap-y-2 ',
                 ]"
             >
                 <slot :options="props.options">
