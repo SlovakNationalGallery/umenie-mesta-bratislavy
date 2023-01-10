@@ -9,10 +9,10 @@
             <div class="mt-auto pt-4 md:mb-14">
                 <div class="prose md:prose-xl leading-snug mb-4 md:mb-8">
                     <h2 class="font-medium md:font-semibold">
-                        Objavujte umenie v uliciach Bratislavy. <br />
+                        Objavujte a chráňte umenie v uliciach Bratislavy.<br />
                         <span class="hidden md:block font-normal">
-                            Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od
-                            2. polovice 20. storočia až po súčasnosť.
+                            Databáza dokumentuje a popularizuje pestrú škálu diel vo verejnom priestore od 2.&nbsppolovice
+                            20.&nbspstoročia až po súčasnosť.
                         </span>
                     </h2>
                 </div>
@@ -25,7 +25,7 @@
                             <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
                         </div>
                         <div class="flex gap-x-2 items-center min-w-max">
-                            <span class="text-4xl font-medium pr-1">{{ $stats['boroughs'] }}/17</span>
+                            <span class="text-4xl font-medium pr-1">{{ $stats['boroughs'] }} zo 17</span>
                             <span class="leading-none mt-[0.15rem] text-base">mestských<br />častí</span>
                         </div>
                         <div class="flex gap-x-2 items-center min-w-max">
