@@ -3,7 +3,7 @@
         <button
             type="button"
             @click="openModal"
-            class="flex uppercase p-3 justify-center border border-neutral-800 w-full gap-x-2 items-center md:hidden"
+            class="flex uppercase p-3 justify-center border border-neutral-800 w-full gap-x-2 items-center lg:hidden"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"

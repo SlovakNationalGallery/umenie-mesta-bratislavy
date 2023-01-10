@@ -23,7 +23,7 @@
                 <span class="x-ml-1">Späť na zoznam diel</span>
             </a>
 
-            <h1 class="text-2xl md:text-4xl font-medium mt-3 md:mt-7">{{ $artwork->name }}</h1>
+            <h1 class="text-2xl lg:text-4xl font-medium mt-3 lg:mt-7">{{ $artwork->name }}</h1>
             <div class="mt-1">
                 @foreach ($artwork->authors as $author)
                     <a href="{{ route('artworks.index', ['authors[]' => $author->id]) }}"
@@ -34,16 +34,16 @@
                 @endif
             </div>
 
-            <div class="md:grid grid-cols-3 gap-x-8 mt-6 md:mt-8">
+            <div class="lg:grid grid-cols-3 gap-x-8 mt-6 lg:mt-8">
                 <div class="col-span-2 flex flex-col">
                     <article class="prose text-neutral-800">
                         {!! $artwork->descriptionHtml !!}
                     </article>
 
-                    <div class="md:order-last">
-                        <hr class="neutral-100 hidden md:block md:mt-8" />
+                    <div class="lg:order-last">
+                        <hr class="neutral-100 hidden lg:block lg:mt-8" />
 
-                        <div class="mt-4 flex gap-4 md:mt-8">
+                        <div class="mt-4 flex gap-4 lg:mt-8">
                             @foreach ($artwork->keywords as $keyword)
                                 <a href="{{ route('artworks.index', ['keywords[]' => $keyword->id]) }}"
                                     class="px-2 py-1 border border-neutral-800">
@@ -54,9 +54,9 @@
                     </div>
 
                     <div>
-                        <hr class="neutral-100 mt-6 md:mt-8" />
+                        <hr class="neutral-100 mt-6 lg:mt-8" />
 
-                        <h4 class="font-medium mt-6 md:mt-8">Autori</h4>
+                        <h4 class="font-medium mt-6 lg:mt-8">Autori</h4>
                         <ul>
                             @foreach ($artwork->authors as $author)
                                 <li>
@@ -68,7 +68,7 @@
                             @endforeach
                         </ul>
 
-                        <h4 class="font-medium mt-4 md:mt-6">Spoluautori</h4>
+                        <h4 class="font-medium mt-4 lg:mt-6">Spoluautori</h4>
                         <ul>
                             @foreach ($artwork->coauthors as $coauthor)
                                 <li>
@@ -91,10 +91,10 @@
                     </div>
                 </div>
 
-                <div class="md:border-l md:pl-8">
-                    <hr class="neutral-100 mt-6 md:hidden" />
+                <div class="lg:border-l lg:pl-8">
+                    <hr class="neutral-100 mt-6 lg:hidden" />
 
-                    <h4 class="font-medium mt-6 md:mt-0">Druh</h4>
+                    <h4 class="font-medium mt-6 lg:mt-0">Druh</h4>
                     <ul>
                         @foreach ($artwork->categories as $category)
                             <li>
@@ -181,7 +181,7 @@
                 :zoom="16" highlight-id="{{ $artwork->id }}" />
         </div>
     @endif
-    <div class="pt-10 pb-6 px-4 max-w-screen-3xl md:px-14 mx-auto">
+    <div class="pt-10 pb-6 px-4 max-w-screen-3xl lg:px-14 mx-auto">
         <h3 class="text-3xl font-medium mt-3">Ďalšie diela v okolí</h3>
 
         <div class="mt-4 -mx-4" data-masonry='{ "itemSelector": ".grid-item" }'>

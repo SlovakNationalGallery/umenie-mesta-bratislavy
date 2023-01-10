@@ -37,7 +37,7 @@
         >
             <div
                 v-if="isHovered"
-                class="hidden md:block rounded-lg absolute drop-shadow-md bg-white py-4 px-6 z-20 whitespace-nowrap left-1/2 top-1/2"
+                class="hidden lg:block rounded-lg absolute drop-shadow-md bg-white py-4 px-6 z-20 whitespace-nowrap left-1/2 top-1/2"
             >
                 <h4 class="text-2xl font-medium">{{ name }}</h4>
                 <ul v-if="locations" class="text-xl pb-3">

@@ -2,7 +2,7 @@
 
 @section('content')
     <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, ...controller }">
-        <div class="max-w-screen-3xl px-4 md:px-14 mx-auto">
+        <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
                 :active-count="query.boroughs.length + query.authors.length + query.categories.length + query.keywords.length">
@@ -70,7 +70,7 @@
 
             {{-- Desktop filter --}}
             <div class="flex justify-between">
-                <headless.popover-group class="gap-x-2 hidden md:flex">
+                <headless.popover-group class="gap-x-2 hidden lg:flex">
                     <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
                         <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
@@ -132,7 +132,7 @@
                     </search.popover-filter>
                 </headless.popover-group>
 
-                <div v-if="artworks.length" class="mt-5 hidden md:block transition-opacity"
+                <div v-if="artworks.length" class="mt-5 hidden lg:block transition-opacity"
                     :class="{ 'opacity-50': isFetching }">
                     <span v-if="artworks.length === 1">
                         Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} dielo</span>
@@ -148,13 +148,13 @@
         </div>
 
         <div class="bg-white min-h-screen">
-            <div class="md:px-14 px-4 max-w-screen-3xl mx-auto mt-4 md:mt-5 md:flex">
-                <div class="-mx-4 md:-ml-14 md:mr-14 md:w-1/3 relative flex-shrink-0">
+            <div class="lg:px-14 px-4 max-w-screen-3xl mx-auto mt-4 lg:mt-5 lg:flex">
+                <div class="-mx-4 lg:-ml-14 lg:mr-14 lg:w-1/3 relative flex-shrink-0">
                     <search.map :query="query"></search.map>
                 </div>
 
-                <div class="md:flex-grow mt-8 md:mt-0">
-                    <div v-if="artworks.length" class="mt-5 md:hidden">
+                <div class="lg:flex-grow mt-8 lg:mt-0">
+                    <div v-if="artworks.length" class="mt-5 lg:hidden">
                         <span v-if="artworks.length === 1">
                             Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} dielo</span>
                         </span>
@@ -165,7 +165,7 @@
                             Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} diel</span>
                         </span>
                     </div>
-                    <div class="flex -mx-2 md:-mx-4 gap-3 mt-10 flex-wrap">
+                    <div class="flex -mx-2 lg:-mx-4 gap-3 mt-10 flex-wrap">
                         <button v-for="selection in controller.filterSelections"
                             class="border rounded-sm uppercase text-xs font-semibold tracking-wide border-neutral-800 flex items-center px-3 py-2"
                             @click="controller.removeSelection(selection)" v-key="`${selection.name}${selection.value}`">
@@ -176,9 +176,9 @@
                             </svg>
                         </button>
                     </div>
-                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 md:-mx-8">
+                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 lg:-mx-8">
                         @foreach ($artworks as $a)
-                            <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 md:p-4"
+                            <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 lg:p-4"
                                 imgSizes="19vw" />
                         @endforeach
                     </artworks-masonry>
