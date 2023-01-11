@@ -39,12 +39,10 @@
         >
             <PopoverPanel
                 :class="[
-                    {
-                        'mt-5 grid grid-cols-5 max-w-screen-3xl':
-                            fullScreen,
-                    },
-                    { 'flex-col overflow-auto max-h-60 flex': !fullScreen },
-                    'absolute z-10 p-6 bg-white border gap-y-2 ',
+                    fullScreen
+                        ? 'mt-5 w-[calc(100%-6rem)] flex-wrap gap-y-1 gap-x-1 grid grid-cols-6'
+                        : 'flex-col overflow-auto max-h-60 flex gap-y-2',
+                    'absolute z-10 p-6 bg-white border',
                 ]"
             >
                 <slot :options="props.options">
