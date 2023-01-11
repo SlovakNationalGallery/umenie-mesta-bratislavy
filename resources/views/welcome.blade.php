@@ -11,8 +11,8 @@
                     <h2 class="font-medium md:font-semibold">
                         Objavujte a chráňte umenie v uliciach Bratislavy.<br />
                         <span class="hidden md:block font-normal">
-                            Databáza dokumentuje a popularizuje pestrú škálu diel vo verejnom priestore od 2.&nbsppolovice
-                            20.&nbspstoročia až po súčasnosť.
+                            Databáza dokumentuje a popularizuje pestrú škálu diel vo verejnom priestore od 2.&nbsp;polovice
+                            20.&nbsp;storočia až po súčasnosť.
                         </span>
                     </h2>
                 </div>
