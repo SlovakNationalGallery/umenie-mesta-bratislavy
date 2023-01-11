@@ -1,6 +1,6 @@
 <template>
     <Disclosure v-slot="{ open }">
-        <DisclosureButton class="py-5 px-4 text-lg bg-white w-full">
+        <DisclosureButton class="py-4 px-4 text-lg bg-white w-full">
             <span class="flex items-center justify-between">
                 <div class="flex gap-x-2">
                     {{ props.label }}
@@ -28,7 +28,7 @@
             </span>
         </DisclosureButton>
         <DisclosurePanel
-            class="p-6 bg-white flex flex-col gap-y-2 max-h-64 overflow-auto"
+            class="p-6 bg-white flex flex-col gap-y-2 max-h-96 overflow-auto"
         >
             <slot :options="options"></slot>
         </DisclosurePanel>
