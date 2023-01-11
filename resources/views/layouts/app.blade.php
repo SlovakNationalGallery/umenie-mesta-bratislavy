@@ -48,8 +48,8 @@
 </head>
 
 <body class="antialiased text-neutral-800 bg-neutral-100">
-    <div class="p-4 lg:px-14 lg:pt-10 max-w-screen-3xl mx-auto">
-        <div class="flex pb-3 flex-col lg:flex-row lg:items-center">
+    <div class="p-6 lg:px-14 max-w-screen-3xl mx-auto">
+        <div class="flex pb-6 flex-col lg:flex-row lg:items-center">
             <h1 class="text-[1.75rem] lg:text-5xl text-center">
                 <a href="/">
                     <span class="font-medium">Umenie</span>
@@ -57,9 +57,9 @@
                     <span class="font-medium">Bratislavy</span>
                 </a>
             </h1>
-            <nav class="flex-grow">
+            <nav class="flex-grow lg:flex lg:items-center lg:justify-end">
                 <ul
-                    class="text-lg flex flex-wrap justify-around lg:justify-end mt-4 font-medium uppercase whitespace-nowrap lg:gap-x-6">
+                    class="text-lg flex flex-wrap justify-around lg:justify-end lg:items-center mt-4 lg:mt-0 font-medium uppercase whitespace-nowrap lg:gap-x-6">
                     <li>
                         <a href="{{ route('about') }}" @class(['text-red-500' => request()->routeIs('about')])>O projekte</a>
                     </li>
