@@ -86,7 +86,7 @@
 
             {{-- Desktop filter --}}
             <div class="flex justify-between">
-                <headless.popover-group class="gap-x-2 hidden lg:flex">
+                <headless.popover-group class="gap-x-1 hidden lg:flex">
                     <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value"
