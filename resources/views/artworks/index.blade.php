@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, ...controller }">
-        <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto">
+        <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto relative">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
                 :active-count="query.boroughs.length + query.authors.length + query.categories.length + query.keywords.length">
@@ -92,7 +92,7 @@
                         <div v-for="option, index in options" :key="option.value"
                             :class="[
                                 { 'bg-gray-100 rounded': query.boroughs.includes(option.value) },
-                                'flex items-center justify-center m-4 w-48 border border-gray-100 py-4'
+                                'flex items-center justify-center w-full border border-gray-100 py-4'
                             ]">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
                                 :value="option.value" @change="onCheckboxChange"
@@ -110,10 +110,10 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <span class="pt-4">
+                                    <span class="pt-3">
                                         @{{ option.district_short }}
                                     </span>
-                                    <span class="font-medium">
+                                    <span class="font-medium text-center px-1">
                                         @{{ option.label }} (@{{ option.count }})
                                     </span>
                                 </div>

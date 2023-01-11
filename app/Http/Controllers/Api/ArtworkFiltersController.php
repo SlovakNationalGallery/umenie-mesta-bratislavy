@@ -46,7 +46,7 @@ class ArtworkFiltersController extends Controller
                         'value' => $name,
                         'label' => $name,
                         'district_short' => $b['district_short'],
-                        'icon_src' => 'images/boroughs/' . Str::snake($name) . '.svg',
+                        'icon_src' => asset('images/boroughs/' . Str::snake($name) . '.svg'),
                         'count' => Arr::get($boroughCounts, $name, 0),
                     ];
                 })
