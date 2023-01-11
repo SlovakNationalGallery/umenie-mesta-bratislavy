@@ -1,10 +1,7 @@
 <template>
     <Popover v-slot="{ open }">
-        <PopoverButton
-            class="py-5 px-4 outline-none text-lg"
-            :class="[open ? 'bg-neutral-100' : 'bg-white']"
-        >
-            <span class="flex gap-x-2">
+        <PopoverButton class="py-4 px-5 outline-none text-lg bg-white">
+            <span class="flex gap-x-2 items-center">
                 {{ props.label }}
                 <div
                     v-if="selectedCount"
@@ -42,7 +39,7 @@
                     fullScreen
                         ? 'mt-5 w-[calc(100%-6rem)] flex-wrap gap-y-1 gap-x-1 grid grid-cols-6'
                         : 'flex-col overflow-auto max-h-60 flex gap-y-2',
-                    'absolute z-10 p-6 bg-white border',
+                    'absolute z-10 p-6 bg-white drop-shadow-lg mt-3',
                 ]"
             >
                 <slot :options="props.options">
