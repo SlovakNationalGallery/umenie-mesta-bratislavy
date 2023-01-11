@@ -35,7 +35,7 @@
         </div>
         <button
             @click="handleOpenLightbox(0)"
-            class="absolute min-w-max bottom-4 left-1/2 -translate-x-1/2 bg-white uppercase font-medium py-2.5 px-5 md:right-4 md:left-auto md:transform-none hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
+            class="absolute min-w-max bottom-4 left-1/2 -translate-x-1/2 bg-white uppercase font-medium py-2.5 px-5 lg:right-4 lg:left-auto lg:transform-none hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
         >
             zobraziť galériu <span>({{ photos.length }})</span>
         </button>
@@ -50,13 +50,13 @@
     >
         <div v-if="openedLightbox !== null" class="fixed inset-0 z-10">
             <div
-                class="absolute inset-0 flex flex-col justify-center h-full md:px-10 py-20 bg-white/95"
+                class="absolute inset-0 flex flex-col justify-center h-full lg:px-10 py-20 bg-white/95"
             >
                 <img
                     :src="photos[openedLightbox].url"
                     :srcset="photos[openedLightbox].srcSet"
                     :alt="photos[openedLightbox].description"
-                    class="object-contain w-full md:h-full"
+                    class="object-contain w-full lg:h-full"
                 />
                 <div
                     class="mt-6 mx-6 font-medium text-xl text-center text-neutral-800"
@@ -67,7 +67,7 @@
 
             <!-- Controls -->
             <div
-                class="absolute inset-y-0 md:inset-x-10 inset-x-1 flex justify-between items-center"
+                class="absolute inset-y-0 lg:inset-x-10 inset-x-1 flex justify-between items-center"
             >
                 <button
                     class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
@@ -108,7 +108,7 @@
             </div>
             <button
                 @click="handleOpenLightbox(null)"
-                class="absolute top-9 right-4 md:top-10 md:right-10 bg-neutral-800 rounded-full w-10 h-10 flex items-center justify-center stroke-white"
+                class="absolute top-9 right-4 lg:top-10 lg:right-10 bg-neutral-800 rounded-full w-10 h-10 flex items-center justify-center stroke-white"
             >
                 <svg
                     width="26"

@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="bg-neutral-100">
-        <div class="max-w-screen-3xl px-4 md:px-14 mx-auto md:grid grid-cols-2">
-            <div class="my-6 mx-10 md:ml-0 md:mr-40">
+        <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto lg:grid grid-cols-2">
+            <div class="my-6 mx-10 lg:ml-0 lg:mr-40">
                 <home-map :locations="{{ $locations }}" class="mx-auto"></home-map>
             </div>
-            <div class="mt-auto pt-4 md:mb-14">
-                <div class="prose md:prose-xl leading-snug mb-4 md:mb-8">
-                    <h2 class="font-medium md:font-semibold">
+            <div class="mt-auto pt-4 lg:mb-14">
+                <div class="prose lg:prose-xl leading-snug mb-4 lg:mb-8">
+                    <h2 class="font-medium lg:font-semibold">
                         Objavujte a chráňte umenie v uliciach Bratislavy.<br />
-                        <span class="hidden md:block font-normal">
+                        <span class="hidden lg:block font-normal">
                             Databáza dokumentuje a popularizuje pestrú škálu diel vo verejnom priestore od 2.&nbsp;polovice
                             20.&nbsp;storočia až po súčasnosť.
                         </span>
@@ -19,7 +19,7 @@
                 <div class="prose text-neutral-500">
                     <span class="uppercase text-neutral-500 font-medium">Aktuálne spracované data</span>
                     <div
-                        class="flex flex-col md:flex-row overflow-x-auto justify-between md:items-center gap-x-2 gap-y-2 pb-2 mb-6 md:mb-10 leading-none">
+                        class="flex flex-col lg:flex-row overflow-x-auto justify-between lg:items-center gap-x-2 gap-y-2 pb-2 mb-6 lg:mb-10 leading-none">
                         <div class="flex gap-x-2 items-center min-w-max">
                             <span class="text-4xl font-medium pr-1">{{ $stats['artworks'] }}</span>
                             <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="font-medium inline-block mb-10 px-4 py-2 md:px-6 md:py-4 border-2 prose md:prose-2xl border-neutral-800 uppercase hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
+                <a class="font-medium inline-block mb-10 px-4 py-2 lg:px-6 lg:py-4 border-2 prose lg:prose-2xl border-neutral-800 uppercase hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
                     href="{{ route('artworks.index') }}">
                     Preskúmať diela
                 </a>
@@ -43,7 +43,7 @@
         </div>
 
         <div class="bg-white">
-            <div class="max-w-screen-3xl px-4 md:px-14 mx-auto pt-16">
+            <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto pt-16">
                 <h2 class="text-3xl font-medium">
                     Najnovšie diela <br class="sm:hidden" />
                     v katalógu

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="toggleMobileFilter" class="block md:hidden">
+        <button @click="toggleMobileFilter" class="block lg:hidden">
             zobraziť filter
         </button>
         <div

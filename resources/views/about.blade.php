@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-    <div class="max-w-screen-3xl p-4 md:p-14 mx-auto md:text-2xl md:flex">
-        <h3 class="text-xl md:text-4xl font-medium md:w-2/5 flex-shrink-0">
+    <div class="max-w-screen-3xl p-4 lg:p-14 mx-auto lg:text-2xl lg:flex">
+        <h3 class="text-xl lg:text-4xl font-medium lg:w-2/5 flex-shrink-0">
             O projekte
         </h3>
         <div>
-            <div class="prose mt-8 md:mt-2 md:text-2xl text-neutral-800">
+            <div class="prose mt-8 lg:mt-2 lg:text-2xl text-neutral-800">
                 <p>
                     Databázu diel vo verejnom priestore ako svoj vedeckovýskumný projekt založila a spravuje <a
                         href="https://gmb.sk/" class="hover:text-red-500" target="_blank">Galéria mesta
@@ -29,31 +29,31 @@
     </div>
 
     <div class="bg-white">
-        <div class="max-w-screen-3xl p-4 md:p-14 mx-auto md:flex">
-            <h3 class="text-xl md:text-4xl mt-6 md:mt-0 font-medium md:w-2/5 flex-shrink-0">
+        <div class="max-w-screen-3xl p-4 lg:p-14 mx-auto lg:flex">
+            <h3 class="text-xl lg:text-4xl mt-6 lg:mt-0 font-medium lg:w-2/5 flex-shrink-0">
                 Kategórie diel v katalógu
             </h3>
-            <div class="text-xl md:text-2xl mt-8 md:mt-0">
-                <div class="gap-x-6 grid gap-y-6 md:grid-rows-5 md:grid-flow-col flex-grow">
+            <div class="text-xl lg:text-2xl mt-8 lg:mt-0">
+                <div class="gap-x-6 grid gap-y-6 lg:grid-rows-5 lg:grid-flow-col flex-grow">
                     @foreach ($categories as $category)
                         <x-category-with-icon :icon="$category->icon"
                             :id="$category->id">{{ $category->name }}</x-category-with-icon>
                     @endforeach
                 </div>
-                <div class="flex items-center gap-x-4 md:gap-x-6 mt-16">
-                    <x-icons.pins.defunct class="w-10 h-10 md:w-12 md:h-auto flex-shrink-0" />
+                <div class="flex items-center gap-x-4 lg:gap-x-6 mt-16">
+                    <x-icons.pins.defunct class="w-10 h-10 lg:w-12 lg:h-auto flex-shrink-0" />
                     Označenie zaniknutého diela
                 </div>
             </div>
         </div>
     </div>
-    <div class="max-w-screen-3xl p-4 md:p-14 mx-auto md:text-2xl">
-        <div class="md:flex">
-            <div class="md:w-2/5 flex-shrink-0">
-                <h4 class="text-lg md:text-3xl mt-6 md:mt-0 font-medium">
+    <div class="max-w-screen-3xl p-4 lg:p-14 mx-auto lg:text-2xl">
+        <div class="lg:flex">
+            <div class="lg:w-2/5 flex-shrink-0">
+                <h4 class="text-lg lg:text-3xl mt-6 lg:mt-0 font-medium">
                     Aktuálne spracované dáta
                 </h4>
-                <div class="mt-8 md:mt-10 flex flex-col gap-y-6">
+                <div class="mt-8 lg:mt-10 flex flex-col gap-y-6">
                     <div class="flex items-end leading-none gap-x-2">
                         <span class="text-4xl font-medium">{{ $stats['artworks'] }}</span>
                         <span class="text-base">diel v katalógu</span>
@@ -70,8 +70,8 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 md:mt-0">
-                <div class="prose mt-2 md:text-2xl text-neutral-800">
+            <div class="mt-8 lg:mt-0">
+                <div class="prose mt-2 lg:text-2xl text-neutral-800">
                     <p>
                         Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od 2. polovice
                         20.
@@ -108,13 +108,13 @@
                 </div>
             </div>
         </div>
-        <hr class="h-0.5 md:h-[0.15rem] my-8 md:my-16 -mx-0.5 md:-mx-2 bg-neutral-800">
+        <hr class="h-0.5 lg:h-[0.15rem] my-8 lg:my-16 -mx-0.5 lg:-mx-2 bg-neutral-800">
 
-        <div class="md:flex">
-            <h3 class="text-xl md:text-4xl mt-6 md:mt-0 font-medium md:w-2/5 flex-shrink-0">
+        <div class="lg:flex">
+            <h3 class="text-xl lg:text-4xl mt-6 lg:mt-0 font-medium lg:w-2/5 flex-shrink-0">
                 Podieľali/jú sa na projekte
             </h3>
-            <dl class="divide-neutral-400 divide-y mt-8 md:mt-0">
+            <dl class="divide-neutral-400 divide-y mt-8 lg:mt-0">
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Odborná garantka</dt>
                     <dd class="col-span-3">Zoja Droppová, droppova@gmb.sk</dd>

@@ -48,9 +48,9 @@
 </head>
 
 <body class="antialiased text-neutral-800 bg-neutral-100">
-    <div class="p-4 md:px-14 md:pt-10 max-w-screen-3xl mx-auto">
-        <div class="flex pb-3 flex-col md:flex-row md:items-center">
-            <h1 class="text-[1.75rem] md:text-5xl text-center">
+    <div class="p-4 lg:px-14 lg:pt-10 max-w-screen-3xl mx-auto">
+        <div class="flex pb-3 flex-col lg:flex-row lg:items-center">
+            <h1 class="text-[1.75rem] lg:text-5xl text-center">
                 <a href="/">
                     <span class="font-medium">Umenie</span>
                     mesta
@@ -59,7 +59,7 @@
             </h1>
             <nav class="flex-grow">
                 <ul
-                    class="text-lg flex flex-wrap justify-around md:justify-end mt-4 font-medium uppercase whitespace-nowrap md:gap-x-6">
+                    class="text-lg flex flex-wrap justify-around lg:justify-end mt-4 font-medium uppercase whitespace-nowrap lg:gap-x-6">
                     <li>
                         <a href="{{ route('about') }}" @class(['text-red-500' => request()->routeIs('about')])>O projekte</a>
                     </li>
@@ -69,7 +69,7 @@
                 </ul>
             </nav>
         </div>
-        <hr class="h-0.5 md:h-[0.15rem] -mx-0.5 md:-mx-2 bg-neutral-800">
+        <hr class="h-0.5 lg:h-[0.15rem] -mx-0.5 lg:-mx-2 bg-neutral-800">
     </div>
 
     <div id="app">
@@ -77,8 +77,8 @@
     </div>
 
     <footer class="bg-neutral-700 text-white text-sm">
-        <div class="max-w-screen-3xl mx-auto py-14 px-6 md:px-14 md:flex">
-            <div class="shrink md:pr-9">
+        <div class="max-w-screen-3xl mx-auto py-14 px-6 lg:px-14 lg:flex">
+            <div class="shrink lg:pr-9">
                 <a href="https://gmb.sk/" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 532.125 178.656" fill="currentColor"
                         class="h-12">
@@ -89,7 +89,7 @@
                 </a>
             </div>
 
-            <div class="grow my-10 md:my-0">
+            <div class="grow my-10 lg:my-0">
                 <div class="max-w-5xl">
                     Galéria mesta Bratislavy v spolupráci s ďalšími partnermi, odbornými inštitúciami a expertmi mapuje
                     existujúce diela, ako aj fragmenty a diela presunuté, odstránené alebo zničené. Cieľom je
@@ -98,7 +98,7 @@
                     autoroch, použitých materiáloch a výtvarných technikách.
                 </div>
                 <div>
-                    <h3 class="text-xl mt-10 md:mt-14 font-medium">Partneri projektu</h3>
+                    <h3 class="text-xl mt-10 lg:mt-14 font-medium">Partneri projektu</h3>
                     <div class="flex mt-4 gap-10 items-center">
                         <a href="https://bratislava.sk/" target="_blank">
                             <svg viewBox="0 0 93 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
@@ -120,9 +120,9 @@
                             <img src="{{ asset('images/muop_logo.png') }}" class="invert h-12 w-auto" />
                         </a>
                     </div>
-                    <div class="md:flex gap-x-16">
+                    <div class="lg:flex gap-x-16">
                         <div>
-                            <h3 class="text-xl mt-10 md:mt-14 font-medium">Zapojte sa</h3>
+                            <h3 class="text-xl mt-10 lg:mt-14 font-medium">Zapojte sa</h3>
                             <ul class="flex flex-col gap-y-4 mt-4">
                                 <li><x-link-underline
                                         href="mailto:umeniemesta@gmb.sk">umeniemesta@gmb.sk</x-link-underline></li>
@@ -135,7 +135,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl mt-10 md:mt-14 font-medium">Sociálne siete</h3>
+                            <h3 class="text-xl mt-10 lg:mt-14 font-medium">Sociálne siete</h3>
                             <ul class="flex flex-col gap-y-4 mt-4">
                                 <li><x-link-underline href="https://www.instagram.com/galeria_mesta_bratislavy/"
                                         target="_blank">Instagram</x-link-underline></li>
@@ -143,7 +143,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl mt-10 md:mt-14 font-medium">Dokumenty</h3>
+                            <h3 class="text-xl mt-10 lg:mt-14 font-medium">Dokumenty</h3>
                             <ul class="flex flex-col gap-y-4 mt-4">
                                 <li><x-link-underline href="https://gmb.sk/detail/ochrana-osobnych-udajov"
                                         target="_blank">Ochrana osobných údajov</x-link-underline></li>
@@ -156,7 +156,7 @@
                     </div>
                 </div>
             </div>
-            <div class="shrink self-end md:pl-9 whitespace-nowrap">
+            <div class="shrink self-end lg:pl-9 whitespace-nowrap">
                 Copyright © {{ now()->format('Y') }} <x-link-underline href="https://gmb.sk/" target="_blank">Galéria
                     mesta
                     Bratislavy</x-link-underline>
