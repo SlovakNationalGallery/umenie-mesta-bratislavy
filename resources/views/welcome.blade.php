@@ -48,7 +48,8 @@
                     <h2 class="text-3xl font-medium">
                         Najnovšie diela v&nbsp;katalógu
                     </h2>
-                    <a href="{{ route('artworks.index') }}" class="flex items-center justify-center px-6 py-2 border-2 border-neutral-800 text-neutral-800 hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150">
+                    <a href="{{ route('artworks.index') }}"
+                        class="flex items-center justify-center px-6 py-2 border-2 border-neutral-800 text-neutral-800 hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150">
                         <span class="uppercase pr-2 font-medium">viac diel</span>
                         <svg width="24" height="19" viewBox="0 0 24 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg" class="stroke-current">
