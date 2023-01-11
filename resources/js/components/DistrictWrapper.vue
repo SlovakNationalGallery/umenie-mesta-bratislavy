@@ -15,8 +15,8 @@
                 v-if="!isHovered && locationCount"
                 :class="[
                     { 'w-[2.5rem] h-[2.5rem]': locationCount < 10 },
-                    { 'w-[3.25rem] h-[3.25rem]': locationCount < 50 },
-                    { 'w-[4rem] h-[4rem]': locationCount < 100 },
+                    { 'w-[3.25rem] h-[3.25rem]': locationCount > 9 && locationCount < 50 },
+                    { 'w-[4rem] h-[4rem]': locationCount > 49 && locationCount < 100 },
                     { 'w-[4.5rem] h-[4.5rem]': locationCount > 99 },
                     'absolute text-white bg-red-500 left-1/4 top-1/2 rounded-full font-semibold flex justify-center items-center',
                 ]"
@@ -27,8 +27,8 @@
                 <div
                 :class="[
                     { 'w-[1.75rem] h-[1.75rem]': locationCount < 10 },
-                    { 'w-[2.125rem] h-[2.125rem]': locationCount < 50 },
-                    { 'w-[2.5rem] h-[2.5rem]': locationCount < 100 },
+                    { 'w-[2.125rem] h-[2.125rem]': locationCount > 9 && locationCount < 50 },
+                    { 'w-[2.5rem] h-[2.5rem]': locationCount > 49 && locationCount < 100 },
                     { 'w-[2.75rem] h-[2.75rem]': locationCount > 99 },
                     'animate-[ping_2s_ease-out_infinite] bg-red-500 rounded-full']"
                 ></div>
