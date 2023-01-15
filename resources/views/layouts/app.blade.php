@@ -78,7 +78,7 @@
 
     <footer class="bg-neutral-700 text-white text-sm">
         <div class="max-w-screen-3xl mx-auto py-14 px-6 lg:px-14 lg:flex">
-            <div class="shrink lg:pr-9">
+            <div class="shrink lg:pr-14">
                 <a href="https://gmb.sk/" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 532.125 178.656" fill="currentColor"
                         class="h-12">
@@ -90,7 +90,7 @@
             </div>
 
             <div class="grow my-10 lg:my-0">
-                <div class="max-w-5xl">
+                <div class="max-w-5xl prose prose-sm lg:prose-xl text-white font-medium">
                     Galéria mesta Bratislavy v spolupráci s ďalšími partnermi, odbornými inštitúciami a expertmi mapuje
                     existujúce diela, ako aj fragmenty a diela presunuté, odstránené alebo zničené. Cieľom je
                     prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od 2. polovice 20. storočia až
@@ -98,11 +98,11 @@
                     autoroch, použitých materiáloch a výtvarných technikách.
                 </div>
                 <div>
-                    <h3 class="text-xl mt-10 lg:mt-14 font-medium">Partneri projektu</h3>
-                    <div class="flex mt-4 gap-10 items-center">
+                    <h3 class="text-xl mt-10 lg:mt-14 font-medium lg:text-3xl">Partneri projektu</h3>
+                    <div class="flex mt-4 lg:mt-6 gap-10 items-center">
                         <a href="https://bratislava.sk/" target="_blank">
                             <svg viewBox="0 0 93 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                class="h-10 w-auto">
+                                class="h-10 lg:h-12 w-auto">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M33.8184 21.3187H37.4117V17.7761H33.8184V21.3187ZM41.0066 21.3187H44.6015V17.7761H41.0066V21.3187ZM48.1314 21.3187H51.7248V17.7761H48.1314V21.3187ZM55.4472 21.3187H59.0406V17.7761H55.4472V21.3187ZM59.0413 14.2334V0H55.4465V3.63697H51.789V0H48.1948V3.63697H37.4125V0H33.8184V14.2334H37.4117V7.18039H48.1956V14.2334H51.789V7.18039H55.4465V14.2334H59.0413ZM41.0066 14.2334H44.6007V10.6597H41.0066V14.2334Z" />
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -122,8 +122,8 @@
                     </div>
                     <div class="lg:flex gap-x-16">
                         <div>
-                            <h3 class="text-xl mt-10 lg:mt-14 font-medium">Zapojte sa</h3>
-                            <ul class="flex flex-col gap-y-4 mt-4">
+                            <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Zapojte sa</h3>
+                            <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
                                 <li><x-link-underline
                                         href="mailto:umeniemesta@gmb.sk">umeniemesta@gmb.sk</x-link-underline></li>
 
@@ -135,16 +135,16 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl mt-10 lg:mt-14 font-medium">Sociálne siete</h3>
-                            <ul class="flex flex-col gap-y-4 mt-4">
+                            <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Sociálne siete</h3>
+                            <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
                                 <li><x-link-underline href="https://www.instagram.com/galeria_mesta_bratislavy/"
                                         target="_blank">Instagram</x-link-underline></li>
                             </ul>
                         </div>
 
                         <div>
-                            <h3 class="text-xl mt-10 lg:mt-14 font-medium">Dokumenty</h3>
-                            <ul class="flex flex-col gap-y-4 mt-4">
+                            <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Dokumenty</h3>
+                            <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
                                 <li><x-link-underline href="https://gmb.sk/detail/ochrana-osobnych-udajov"
                                         target="_blank">Ochrana osobných údajov</x-link-underline></li>
                                 <li><x-link-underline href="https://gmb.sk/detail/vyhlasenie-o-pristupnosti"
