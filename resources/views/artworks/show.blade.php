@@ -206,4 +206,3 @@
         </article>
     </div>
 @endsection
-
