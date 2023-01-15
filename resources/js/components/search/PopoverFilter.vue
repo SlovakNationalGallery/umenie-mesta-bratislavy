@@ -37,9 +37,9 @@
             <PopoverPanel
                 :class="[
                     fullScreen
-                        ? 'mt-5 w-[calc(100%-6rem)] flex-wrap gap-y-1 gap-x-1 grid grid-cols-6'
-                        : 'flex-col overflow-auto max-h-60 flex gap-y-2',
-                    'absolute z-10 p-6 bg-white drop-shadow-lg mt-3',
+                        ? 'mt-5 w-[calc(100%-6rem)] flex-wrap grid grid-cols-6'
+                        : 'flex-col overflow-auto max-h-60 flex',
+                    'absolute z-10 p-6 bg-white drop-shadow-lg mt-3 gap-2',
                 ]"
             >
                 <slot :options="props.options">
