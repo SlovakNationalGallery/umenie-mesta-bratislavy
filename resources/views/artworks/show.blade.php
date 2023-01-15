@@ -9,7 +9,7 @@
 @section('og.image', $artwork->coverPhotoMedia->getUrl())
 
 @section('content')
-    <div class="pt-10 max-w-5xl mx-auto bg-neutral-100">
+    <div class="pt-6 p-4 max-w-5xl mx-auto bg-neutral-100 lg:pb-0">
         <artwork-carousel :photos="{{ Js::from($artwork->photoMediaForCarousel) }}">
         </artwork-carousel>
     </div>
