@@ -73,36 +73,40 @@
             <div class="mt-8 lg:mt-0">
                 <div class="prose mt-2 lg:text-2xl text-neutral-800">
                     <p>
-                        Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od 2. polovice
-                        20.
-                        storočia až po súčasnosť a priniesť čo najviac informácií o význame, okolnostiach vzniku a
-                        príbehoch
-                        diel, o ich autoroch, použitých materiáloch a výtvarných technikách. Zámerom takisto je získať
-                        aktuálneúdaje o stave a presnom umiestnení diel, GPS súradniciach a o ich vlastníkoch a
-                        správcoch. U
-                        väčšiny diel vo verejnom priestore sú práve nejasné vlastnícke vzťahy príčinou chýbajúcej
+                        Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od druhej polovice
+                        20.&nbsp;storočia až po súčasnosť a priniesť čo najviac informácií o význame, okolnostiach vzniku a
+                        príbehoch diel, o ich autoroch, použitých materiáloch či výtvarných technikách. Zámerom je tiež
+                        získať
+                        aktuálne údaje o stave a presnom umiestnení diel, ich GPS súradniciach, vlastníkoch a
+                        správcoch. Pri väčšine diel vo verejnom priestore sú práve nejasné vlastnícke vzťahy príčinou
+                        chýbajúcej
                         starostlivosti a nevhodného zaobchádzania.
                     </p>
 
                     <p>Ambíciou projektu je dynamická a otvorená databáza, ktorá sa bude pravidelne doplňovať
                         o nové poznatky z výskumu, aktualizovať a revidovať. Základným kritériom pre kurátorského
-                        výberu do databázy UVP GMB je tvorba profesionálnych autorov (výtvarných umelcov, ar-
-                        chitektov, dizajnérov a súvisiacich odborov) z obdobia po roku 1945, zastúpených v zbierkach
+                        výberu do databázy UVP GMB je tvorba profesionálnych autorov (výtvarných umelcov, architektov,
+                        dizajnérov a
+                        súvisiacich odborov) z obdobia po roku 1945, zastúpených v zbierkach
                         GMB aj iných zbierkotvorných a výskumných inštitúcií. Pozornosť sa zameriava na najviac
                         ohrozené diela, ktoré potrebujú ochranu a odborné postupy pri údržbe a obnove.
                         V ďalších rokoch je cieľom dopĺňať do databázy aj diela zo starších období.</p>
 
                     <p>
-                        Údaje v databáze sú tvorené tak, aby iba bolo možné postupne prepájať na <a
+                        Údaje v databáze sú tvorené tak, aby iba bolo možné postupne prepájať s <a
                             href="https://www.webumenia.sk/" class="hover:text-red-500" target="_blank">Web umenia</a> a
-                        ďalšie
-                        registre a katalógy zamerané napríklad na galerijné a múzejne zbierky, modernú architektúru,
-                        národné
-                        kultúrne pamiatky a na databázy diel vo verejnom priestore v iných mestách.
+                        ďalšími
+                        registrami či katalógmi zameranými napríklad na galerijné a múzejne zbierky, modernú architektúru i
+                        národné kultúrne pamiatky a s databázami diel vo verejnom priestore v iných mestách.
                     </p>
 
                     <p>
-                        Projekt bol realizovaný vďaka finančnej podpore hlavného mesta SR Bratislava a Fondu na podporu
+                        GMB podniká potrebné kroky na zisťovanie autorov diel a archívnej fotodokumentácie.
+                        Dáta budú na webstránke pravidelne aktualizované.
+                    </p>
+
+                    <p>
+                        Projekt sa realizuje vďaka finančnej podpore hlavného mesta SR Bratislava a Fondu na podporu
                         umenia.
                     </p>
                 </div>
@@ -133,8 +137,11 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Fotografie</dt>
-                    <dd class="col-span-3">Matej Hakár, Jana Hamšíková, Andrej Kapcár, archív fotografií
-                        autorov,inštitúcií, združení</dd>
+                    <dd class="col-span-3">Matej Hakár, Jana Hamšíková, Andrej Kapcár, Zoja Droppová, Sabina Jankovičová;
+                        archívy GMB, AMB, SNA. mestských častí; <a href="https://www.webumenia.sk/"
+                            class="underline hover:text-red-500" target="_blank">webumenia.sk</a>;
+                        archívy bývalých umeleckých zväzov a fondov, projektových ústavov, autorov/iek diel a dedičov/iek.
+                    </dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Grafický dizajn</dt>
@@ -146,7 +153,7 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Používateľský prieskum, testovanie wireframe</dt>
-                    <dd class="col-span-3">Katarína Buzová</dd>
+                    <dd class="col-span-3">Katarína Vass</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Jazyková korektúra</dt>
@@ -154,16 +161,19 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Spolupráca na databáze</dt>
-                    <dd class="col-span-3">Nikoleta Bukovská, Barbara Davidson, Anna Jablonowska Holly</dd>
+                    <dd class="col-span-3">Nikoleta Bukovská, Anna Jablonowska Holly</dd>
+                </div>
+                <div class="grid grid-cols-5 py-4">
+                    <dt class="font-medium col-span-2">Odborné konzultácie</dt>
+                    <dd class="col-span-3">Barbara Davidson</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Poďakovanie</dt>
                     <dd class="col-span-3">Mestský ústav ochrany pamiatok, Slovenská národná galéria, Oddelenie kultúry
                         magistrátu hl.
-                        mesta SR Bratislava</dd>
+                        mesta SR Bratislava, autori/ky diel, pamätníci/čky a dediči/ky</dd>
                 </div>
             </dl>
         </div>
     </div>
 @endsection
-
