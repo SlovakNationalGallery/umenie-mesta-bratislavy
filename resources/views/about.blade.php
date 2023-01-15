@@ -75,15 +75,18 @@
                     <p>
                         Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od druhej polovice
                         20.&nbsp;storočia až po súčasnosť a priniesť čo najviac informácií o význame, okolnostiach vzniku a
-                        príbehoch diel, o ich autoroch, použitých materiáloch či výtvarných technikách. Zámerom je tiež získať
+                        príbehoch diel, o ich autoroch, použitých materiáloch či výtvarných technikách. Zámerom je tiež
+                        získať
                         aktuálne údaje o stave a presnom umiestnení diel, ich GPS súradniciach, vlastníkoch a
-                        správcoch. Pri väčšine diel vo verejnom priestore sú práve nejasné vlastnícke vzťahy príčinou chýbajúcej
+                        správcoch. Pri väčšine diel vo verejnom priestore sú práve nejasné vlastnícke vzťahy príčinou
+                        chýbajúcej
                         starostlivosti a nevhodného zaobchádzania.
                     </p>
 
                     <p>Ambíciou projektu je dynamická a otvorená databáza, ktorá sa bude pravidelne doplňovať
                         o nové poznatky z výskumu, aktualizovať a revidovať. Základným kritériom pre kurátorského
-                        výberu do databázy UVP GMB je tvorba profesionálnych autorov (výtvarných umelcov, architektov, dizajnérov a 
+                        výberu do databázy UVP GMB je tvorba profesionálnych autorov (výtvarných umelcov, architektov,
+                        dizajnérov a
                         súvisiacich odborov) z obdobia po roku 1945, zastúpených v zbierkach
                         GMB aj iných zbierkotvorných a výskumných inštitúcií. Pozornosť sa zameriava na najviac
                         ohrozené diela, ktoré potrebujú ochranu a odborné postupy pri údržbe a obnove.
@@ -134,9 +137,9 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Fotografie</dt>
-                    <dd class="col-span-3">Matej Hakár, Jana Hamšíková, Andrej Kapcár, Zoja Droppová, Sabina Jankovičová; 
-                        archívy GMB, AMB, SNA. mestských častí; <a
-                        href="https://www.webumenia.sk/" class="underline hover:text-red-500" target="_blank">webumenia.sk</a>;
+                    <dd class="col-span-3">Matej Hakár, Jana Hamšíková, Andrej Kapcár, Zoja Droppová, Sabina Jankovičová;
+                        archívy GMB, AMB, SNA. mestských častí; <a href="https://www.webumenia.sk/"
+                            class="underline hover:text-red-500" target="_blank">webumenia.sk</a>;
                         archívy bývalých umeleckých zväzov a fondov, projektových ústavov, autorov/iek diel a dedičov/iek.
                     </dd>
                 </div>
@@ -174,4 +177,3 @@
         </div>
     </div>
 @endsection
-
