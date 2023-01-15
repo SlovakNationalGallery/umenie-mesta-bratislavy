@@ -8,7 +8,7 @@
             </div>
             <div class="mt-auto pt-4 lg:mb-14">
                 <div class="prose lg:prose-xl leading-snug mb-4 lg:mb-8">
-                    <h2 class="font-medium lg:font-semibold">
+                    <h2 class="font-medium lg:font-semibold text-neutral-800">
                         Objavujte a chráňte umenie v uliciach Bratislavy.<br />
                         <span class="hidden lg:block font-normal">
                             Databáza dokumentuje a popularizuje pestrú škálu diel vo verejnom priestore od 2.&nbsp;polovice
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="font-medium inline-block mb-10 px-4 py-2 lg:px-8 lg:py-2.5 border-2 prose lg:prose-xl border-neutral-800 uppercase hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
+                <a class="font-medium text-neutral-800 inline-block mb-10 px-4 py-2 lg:px-8 lg:py-2.5 border-2 prose lg:prose-xl border-neutral-800 uppercase hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150"
                     href="{{ route('artworks.index') }}">
                     Preskúmať diela
                 </a>
