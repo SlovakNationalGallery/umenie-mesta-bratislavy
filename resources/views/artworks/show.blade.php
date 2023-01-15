@@ -9,20 +9,21 @@
 @section('og.image', $artwork->coverPhotoMedia->getUrl())
 
 @section('content')
-    <div class="pt-6 p-4 max-w-5xl mx-auto bg-neutral-100 lg:pb-0">
+    <div class="w-full max-w-screen-3xl px-4 lg:px-14 mx-auto">
+        <a href="{{ route('artworks.index') }}"
+            class="rounded-full w-10 h-10 mb-3 flex items-center justify-center stroke-2 stroke-neutral-800 bg-white">
+            <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.25 8.99902H1.75" />
+                <path d="M9.15039 16.3996L1.75039 8.99961L9.15039 1.59961" />
+            </svg>
+        </a>
+    </div>
+    <div class="p-4 pt-0 max-w-5xl mx-auto bg-neutral-100 lg:pb-0">
         <artwork-carousel :photos="{{ Js::from($artwork->photoMediaForCarousel) }}">
         </artwork-carousel>
     </div>
     <div class="bg-white">
         <div class="p-4 max-w-5xl mx-auto">
-            <a href="{{ route('artworks.index') }}" class="mt-4 -ml-1 text-xs underline inline-flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-                <span class="x-ml-1">Späť na zoznam diel</span>
-            </a>
-
             <h1 class="text-2xl lg:text-4xl font-medium mt-3 lg:mt-7">{{ $artwork->name }}</h1>
             <div class="mt-1">
                 @foreach ($artwork->authors as $author)
