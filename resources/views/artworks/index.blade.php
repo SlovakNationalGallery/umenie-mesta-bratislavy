@@ -221,4 +221,3 @@
         </div>
     </search.filters-controller>
 @endsection
-
