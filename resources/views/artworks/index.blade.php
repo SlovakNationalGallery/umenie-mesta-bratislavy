@@ -201,7 +201,7 @@
                     </div>
                     <div class="flex -mx-2 lg:-mx-4 gap-3 mt-10 flex-wrap">
                         <button v-for="selection in controller.filterSelections"
-                            class="border rounded-sm uppercase text-xs font-semibold tracking-wide border-neutral-800 flex items-center px-3 py-2"
+                            class="border rounded-sm uppercase text-xs font-semibold tracking-wide border-neutral-800 flex items-center px-3 py-1"
                             @click="controller.removeSelection(selection)" v-key="`${selection.name}${selection.value}`">
                             @{{ selection.label }}
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
