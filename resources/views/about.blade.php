@@ -171,7 +171,7 @@
                     <dt class="font-medium col-span-2">Poďakovanie</dt>
                     <dd class="col-span-3">Mestský ústav ochrany pamiatok, Slovenská národná galéria, Oddelenie kultúry
                         magistrátu hl.
-                        mesta SR Bratislava, autori/ky diel, pamätníci/čky a dedič/ky</dd>
+                        mesta SR Bratislava, autori/ky diel, pamätníci/čky a dediči/ky</dd>
                 </div>
             </dl>
         </div>
