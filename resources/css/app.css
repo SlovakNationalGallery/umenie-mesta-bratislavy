@@ -17,3 +17,23 @@
     @apply bg-close h-6 w-6 text-[0px] hover:bg-transparent;
     --bg-close-url: url('../img/close.svg');
 }
+
+.mapboxgl-popup-anchor-right {
+    @apply ml-[-15px];
+}
+
+.mapboxgl-popup-anchor-left {
+    @apply ml-[15px];
+}
+
+.mapboxgl-popup-anchor-bottom,
+.mapboxgl-popup-anchor-bottom-left,
+.mapboxgl-popup-anchor-bottom-right {
+    @apply mt-[-50px];
+}
+
+.mapboxgl-popup-anchor-top,
+.mapboxgl-popup-anchor-top-left,
+.mapboxgl-popup-anchor-top-right {
+    @apply mt-[10px];
+}
