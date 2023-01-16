@@ -91,12 +91,7 @@ const loaded = ([{ data }, map]) => {
 
         const html = document.querySelector('#popup').outerHTML;
         new mapboxgl.Popup({
-            offset: [0, 10],
-            closeButton: false,
-            closeOnClick: false,
-            closeOnMove: false,
             focusAfterOpen: false,
-            anchor: 'top',
             maxWidth: '315px',
         })
             .setLngLat(props.center)
@@ -171,11 +166,7 @@ const unclusteredPointsLayer = {
     id: 'unclustered-points',
     type: 'symbol',
     source: 'artworks',
-    filter: [
-        'all',
-        ['!', ['has', 'point_count']],
-        ['!=', ['get', 'id'], props.highlightId],
-    ],
+    filter: ['all', ['!', ['has', 'point_count']]],
     layout: {
         'icon-allow-overlap': true,
         'icon-image': ['concat', 'artwork-', ['get', 'icon']],

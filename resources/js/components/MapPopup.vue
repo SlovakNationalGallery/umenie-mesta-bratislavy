@@ -29,8 +29,6 @@ export default {
     data() {
         return {
             popup: new mapboxgl.Popup({
-                offset: [0, 10],
-                anchor: 'top',
                 maxWidth: '315px',
             }),
         };
