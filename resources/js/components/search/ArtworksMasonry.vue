@@ -33,11 +33,14 @@ export default {
         query: {
             type: Object,
         },
+        initialHasNext: {
+            type: Boolean,
+        },
     },
     data() {
         return {
             page: 1,
-            hasNext: true,
+            hasNext: this.initialHasNext,
             observer: new IntersectionObserver(this.observed),
         };
     },
@@ -76,7 +79,7 @@ export default {
 
             this.hasNext = items.length;
             this.$nextTick(() => {
-                if (this.$refs.more) {
+                if (this.$refs.more && this.page > 1) {
                     this.observer.observe(this.$refs.more);
                 }
             });
@@ -96,6 +99,7 @@ export default {
         },
         async query() {
             this.page = 1;
+            this.observer.disconnect();
             this.$refs.container.innerHTML = '';
             axios
                 .get(window.location.href)

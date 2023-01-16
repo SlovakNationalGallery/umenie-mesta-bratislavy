@@ -210,7 +210,8 @@
                             </svg>
                         </button>
                     </div>
-                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 lg:-mx-8">
+                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 lg:-mx-8"
+                        :initial-has-next="true">
                         @foreach ($artworks as $a)
                             <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 lg:p-4"
                                 imgSizes="19vw" />
