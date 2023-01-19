@@ -68,7 +68,7 @@
                     locationCount ? 'stroke-black' : 'stroke-neutral-500'
                 } w-full h-full fill-none pointer-events-none`"
             >
-                <a :href="filterURL" @click="(e) => !locationCount && e.preventDefault() ">
+                <a :href="locationCount ? filterURL : null">
                     <path
                         @mouseenter.self="handleHoverChange(true)"
                         @mouseleave.self="handleHoverChange(false)"
@@ -98,7 +98,7 @@
                     locationCount ? 'stroke-black' : 'stroke-neutral-500'
                 } w-full h-full fill-none pointer-events-none`"
             >
-                <a :href="filterURL" @click="(e) => !locationCount && e.preventDefault() ">
+                <a :href="locationCount ? filterURL : null">
                     <g
                         class="group pointer-events-auto"
                         @mouseenter.self="handleHoverChange(true)"
@@ -172,7 +172,7 @@
                     locationCount ? 'stroke-black' : 'stroke-neutral-500'
                 } w-full h-full fill-none pointer-events-none`"
             >
-                <a :href="filterURL" @click="(e) => !locationCount && e.preventDefault() ">
+                <a :href="locationCount ? filterURL : null">
                     <g
                         class="group pointer-events-auto"
                         @mouseenter.self="handleHoverChange(true)"
@@ -238,7 +238,7 @@
                     locationCount ? 'stroke-black' : 'stroke-neutral-500'
                 } w-full h-full fill-none pointer-events-none`"
             >
-                <a :href="filterURL" @click="(e) => !locationCount && e.preventDefault() ">
+                <a :href="locationCount ? filterURL : null">
                     <g
                         class="group pointer-events-auto"
                         @mouseenter.self="handleHoverChange(true)"
@@ -320,7 +320,7 @@
                 } w-full h-full fill-none pointer-events-none`"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <a :href="filterURL" @click="(e) => !locationCount && e.preventDefault() ">
+                <a :href="locationCount ? filterURL : null">
                     <g
                         class="group pointer-events-auto"
                         @mouseenter.self="handleHoverChange(true)"
