@@ -44,13 +44,14 @@
 
         <div class="bg-white">
             <div class="max-w-screen-3xl px-4 mx-auto pt-10 lg:px-14 lg:pt-16">
-                <div class="justify-between items-center flex w-full">
+                <div
+                    class="flex flex-col items-start leading-none pb-4 lg:justify-between lg:items-center lg:w-full lg:flex-row lg:pb-12">
                     <h2 class="text-3xl font-medium">
                         Najnovšie diela v&nbsp;katalógu
                     </h2>
                     <a href="{{ route('artworks.index') }}"
-                        class="hidden lg:flex items-center justify-center px-6 py-2 border-2 border-neutral-800 text-neutral-800 hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150">
-                        <span class="uppercase pr-2 font-medium">viac diel</span>
+                        class="flex items-center justify-center px-4 py-2 mt-4 lg:mt-0 lg:px-6 border-2 border-neutral-800 text-neutral-800 hover:text-white hover:bg-red-500 hover:border-transparent transition-all duration-150">
+                        <span class="uppercase pr-2 font-medium text-sm lg:text-base">viac diel</span>
                         <svg width="24" height="19" viewBox="0 0 24 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg" class="stroke-current">
                             <path d="M0.5 9.5H23" stroke-width="1.4" />
@@ -62,7 +63,7 @@
                 <div class="pt-2 pb-14">
                     <artworks-masonry item-selector=".grid-item" class="-mt-2 -mx-4">
                         @foreach ($artworks as $a)
-                            <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/4 p-4" />
+                            <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/4 p-2 lg:p-4" />
                         @endforeach
                     </artworks-masonry>
                 </div>
@@ -70,4 +71,3 @@
         </div>
     </div>
 @endsection
-
