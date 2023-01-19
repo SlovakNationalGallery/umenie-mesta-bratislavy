@@ -62,7 +62,7 @@
                 <div class="pt-2 pb-14">
                     <artworks-masonry item-selector=".grid-item" class="-mt-2 -mx-4">
                         @foreach ($artworks as $a)
-                            <x-artwork-card :artwork="$a" class="grid-item sm:w-1/4 p-4" />
+                            <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/4 p-4" />
                         @endforeach
                     </artworks-masonry>
                 </div>

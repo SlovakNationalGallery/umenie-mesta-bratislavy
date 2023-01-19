@@ -186,7 +186,7 @@
 
         <div class="mt-4 -mx-4" data-masonry='{ "itemSelector": ".grid-item" }'>
             @foreach ($relatedArtworks as $a)
-                <x-artwork-card :artwork="$a" class="grid-item sm:w-1/4 p-4" />
+                <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/4 p-4" />
             @endforeach
         </div>
     </div>
@@ -206,4 +206,3 @@
         </article>
     </div>
 @endsection
-
