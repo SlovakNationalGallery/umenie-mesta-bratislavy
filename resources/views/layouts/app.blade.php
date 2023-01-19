@@ -61,10 +61,10 @@
                 <ul
                     class="text-lg flex flex-wrap justify-around lg:justify-end lg:items-center mt-4 lg:mt-0 font-medium uppercase whitespace-nowrap lg:gap-x-6">
                     <li>
-                        <a href="{{ route('about') }}" @class(['text-red-500' => request()->routeIs('about')])>O projekte</a>
+                        <a href="{{ route('artworks.index') }}" @class(['text-red-500' => request()->routeIs('artworks.index')])>Mapa a katalóg diel</a>
                     </li>
                     <li>
-                        <a href="{{ route('artworks.index') }}" @class(['text-red-500' => request()->routeIs('artworks.index')])>Mapa a katalóg diel</a>
+                        <a href="{{ route('about') }}" @class(['text-red-500' => request()->routeIs('about')])>O projekte</a>
                     </li>
                 </ul>
             </nav>
@@ -166,3 +166,4 @@
 </body>
 
 </html>
+
