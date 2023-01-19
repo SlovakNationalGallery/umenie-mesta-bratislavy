@@ -13,7 +13,7 @@
             <button
                 v-if="page === 1"
                 @click="page++"
-                class="uppercase font-medium py-2.5 px-6 m-2 lg:m-4 leading-[1.125] border-black border-2"
+                class="uppercase font-medium py-2.5 px-6 mt-10 leading-[1.125] border-black border-2"
             >
                 Načítať ďalšie diela
             </button>
