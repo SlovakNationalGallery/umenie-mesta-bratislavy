@@ -149,7 +149,9 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Vývoj databázy</dt>
-                    <dd class="col-span-3">lab.SNG (Michal Čudrnák, Ernest Walzel, František Sebestyén)</dd>
+                    <dd class="col-span-3">
+                        lab.SNG (Michal Čudrnák, Ernest Walzel, František Sebestyén, Rastislav Chynoranský)
+                    </dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Používateľský prieskum, testovanie wireframe</dt>
@@ -177,3 +179,4 @@
         </div>
     </div>
 @endsection
+
