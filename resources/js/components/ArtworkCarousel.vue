@@ -74,13 +74,11 @@
                 class="absolute inset-y-0 lg:inset-x-10 inset-x-1 flex justify-between items-center"
             >
                 <button
-                    class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                    class="rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
                     @click="previousPhoto"
                     :disabled="openedLightbox === 0"
                 >
-                    <svg
-                        width="21"
-                        height="18"
+                    <svg class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px] "
                         viewBox="0 0 21 18"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -92,13 +90,11 @@
                     </svg>
                 </button>
                 <button
-                    class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                    class="rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
                     @click="nextPhoto"
                     :disabled="openedLightbox === photos.length - 1"
                 >
-                    <svg
-                        width="21"
-                        height="18"
+                    <svg class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px] "
                         viewBox="0 0 21 18"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -112,11 +108,9 @@
             </div>
             <button
                 @click="handleOpenLightbox(null)"
-                class="absolute top-9 right-4 lg:top-10 lg:right-10 bg-neutral-800 rounded-full w-10 h-10 flex items-center justify-center stroke-white"
+                class="absolute top-9 right-4 lg:top-10 lg:right-10 bg-neutral-800 rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white"
             >
-                <svg
-                    width="26"
-                    height="26"
+                <svg class="lg:w-[26px] lg:h-[26px] w-[21px] h-[21px]"
                     viewBox="0 0 26 26"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
