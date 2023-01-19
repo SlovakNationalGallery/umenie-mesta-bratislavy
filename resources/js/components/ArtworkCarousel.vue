@@ -49,9 +49,7 @@
         leave-to-class="opacity-0"
     >
         <div v-if="openedLightbox !== null" class="fixed inset-0 z-10">
-            <div
-                class="absolute inset-0 flex flex-col justify-center h-full lg:px-10 py-20 bg-white/95"
-            >
+            <div class="absolute inset-0 h-full lg:px-10 bg-white/95">
                 <div class="absolute inset-4 mt-24 flex flex-col">
                     <div class="min-h-0 flex-1">
                         <img
@@ -78,7 +76,8 @@
                     @click="previousPhoto"
                     :disabled="openedLightbox === 0"
                 >
-                    <svg class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px] "
+                    <svg
+                        class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
                         viewBox="0 0 21 18"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +93,8 @@
                     @click="nextPhoto"
                     :disabled="openedLightbox === photos.length - 1"
                 >
-                    <svg class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px] "
+                    <svg
+                        class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
                         viewBox="0 0 21 18"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,8 @@
                 @click="handleOpenLightbox(null)"
                 class="absolute top-9 right-4 lg:top-10 lg:right-10 bg-neutral-800 rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white"
             >
-                <svg class="lg:w-[26px] lg:h-[26px] w-[21px] h-[21px]"
+                <svg
+                    class="lg:w-[26px] lg:h-[26px] w-[21px] h-[21px]"
                     viewBox="0 0 26 26"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
