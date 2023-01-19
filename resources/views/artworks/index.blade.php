@@ -11,10 +11,7 @@
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs" :value="option.value"
                                 @change="onCheckboxChange" :checked="query.boroughs.includes(option.value)" class="hidden" />
-                            <label
-                                :class="[{ 'bg-gray-100': query.boroughs.includes(option.value) },
-                                    'w-full border border-gray-100 flex items-center justify-start rounded h-16'
-                                ]"
+                            <label class="w-full border border-neutral-100 flex items-center justify-start rounded h-16"
                                 :for="'filters.boroughs.' + index">
                                 <div class="flex items-center justify-center h-full w-16 flex-none">
                                     <img class="w-full h-full p-1" :src="option.icon_src" />
@@ -90,10 +87,7 @@
                     <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value"
-                            :class="[
-                                { 'bg-gray-100 rounded': query.boroughs.includes(option.value) },
-                                'flex items-center justify-center w-full border border-gray-100 py-4'
-                            ]">
+                            class="flex items-center justify-center w-full border border-neutral-100 py-4">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
                                 :value="option.value" @change="onCheckboxChange"
                                 :checked="query.boroughs.includes(option.value)" class="hidden" />
@@ -222,3 +216,4 @@
         </div>
     </search.filters-controller>
 @endsection
+

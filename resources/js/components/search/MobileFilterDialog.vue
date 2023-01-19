@@ -61,7 +61,7 @@
                             <div class="flex justify-between items-center">
                                 <DialogTitle
                                     as="h3"
-                                    class="text-2xl font-semibold text-gray-900 p-6"
+                                    class="text-2xl font-semibold text-neutral-800 p-6"
                                 >
                                     Filter diel
                                 </DialogTitle>
