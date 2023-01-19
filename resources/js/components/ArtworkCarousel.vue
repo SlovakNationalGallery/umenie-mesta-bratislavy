@@ -52,16 +52,20 @@
             <div
                 class="absolute inset-0 flex flex-col justify-center h-full lg:px-10 py-20 bg-white/95"
             >
-                <img
-                    :src="photos[openedLightbox].url"
-                    :srcset="photos[openedLightbox].srcSet"
-                    :alt="photos[openedLightbox].description"
-                    class="object-contain w-full lg:h-full"
-                />
-                <div
-                    class="mt-6 mx-6 font-medium text-xl text-center text-neutral-800"
-                >
-                    {{ photos[openedLightbox].description }}
+                <div class="absolute inset-4 mt-24 flex flex-col">
+                    <div class="min-h-0 flex-1">
+                        <img
+                            :src="photos[openedLightbox].url"
+                            :srcset="photos[openedLightbox].srcSet"
+                            :alt="photos[openedLightbox].description"
+                            class="object-contain w-full h-full"
+                        />
+                    </div>
+                    <div
+                        class="mt-6 mx-6 mb-2 font-medium text-xl text-center text-neutral-800"
+                    >
+                        {{ photos[openedLightbox].description }}
+                    </div>
                 </div>
             </div>
 
