@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Traits\WithArtworksCountScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -11,6 +11,7 @@ class Category extends Model
 {
     use HasFactory;
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
+    use WithArtworksCountScope;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -26,21 +27,6 @@ class Category extends Model
         'pamätník' => 'memorial',
         'drobná architektúra, dizajn, herný prvok' => 'playground',
     ];
-
-    public static function scopeWithFilteredArtworksCount(
-        Builder $query,
-        array $artworkIds
-    ) {
-        $query
-            ->whereHas('artworks', function (Builder $query) use ($artworkIds) {
-                $query->whereIn('id', $artworkIds);
-            })
-            ->withCount([
-                'artworks' => function (Builder $query) use ($artworkIds) {
-                    $query->whereIn('id', $artworkIds);
-                },
-            ]);
-    }
 
     public function artworks()
     {

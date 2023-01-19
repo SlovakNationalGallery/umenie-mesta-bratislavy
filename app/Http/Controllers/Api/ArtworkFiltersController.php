@@ -22,39 +22,24 @@ class ArtworkFiltersController extends Controller
      */
     public function index(Request $request)
     {
-        $filteredArtworkIds = Artwork::query()
-            ->presentable()
-            ->filteredBySearchRequest($request)
-            ->select('id')
-            ->get()
-            ->modelKeys();
-
-        $boroughCounts = Location::selectRaw('count(id) as count, borough')
-            ->current()
-            ->whereHas('artworks', function (Builder $query) use (
-                $filteredArtworkIds
-            ) {
-                $query->whereIn('id', $filteredArtworkIds);
-            })
-            ->groupBy('borough')
-            ->pluck('count', 'borough');
-
         return [
-            'boroughs' => collect(Location::getBoroughs())
-                ->map(function ($b, $name) use ($boroughCounts) {
-                    return [
-                        'value' => $name,
-                        'label' => $name,
-                        'district_short' => $b['district_short'],
-                        'icon_src' => asset('images/boroughs/' . Str::snake($name) . '.svg'),
-                        'count' => Arr::get($boroughCounts, $name, 0),
-                    ];
-                })
-                ->values(),
+            'boroughs' => Location::getFilteredArtworkCountsByBorough(
+                $request
+            )->map(function ($b) {
+                return [
+                    'value' => $b['borough'],
+                    'label' => $b['borough'],
+                    'district_short' => $b['district_short'],
+                    'icon_src' => asset(
+                        'images/boroughs/' . Str::snake($b['borough']) . '.svg'
+                    ),
+                    'count' => $b['artworks_count'],
+                ];
+            }),
 
             'authors' => Author::query()
                 ->select('id', 'first_name', 'last_name', 'other_name')
-                ->withFilteredArtworksCount($filteredArtworkIds)
+                ->withFilteredArtworksCount($request, except: 'authors')
                 ->orderByDesc('artworks_count')
                 ->orderByRaw('COALESCE(last_name, other_name)')
                 ->get()
@@ -68,7 +53,7 @@ class ArtworkFiltersController extends Controller
 
             'categories' => Category::query()
                 ->select('id', 'name')
-                ->withFilteredArtworksCount($filteredArtworkIds)
+                ->withFilteredArtworksCount($request, except: 'categories')
                 ->orderByDesc('artworks_count')
                 ->get()
                 ->map(
@@ -81,7 +66,7 @@ class ArtworkFiltersController extends Controller
 
             'keywords' => Keyword::query()
                 ->select('id', 'keyword')
-                ->withFilteredArtworksCount($filteredArtworkIds)
+                ->withFilteredArtworksCount($request, except: 'keywords')
                 ->orderByDesc('artworks_count')
                 ->get()
                 ->map(

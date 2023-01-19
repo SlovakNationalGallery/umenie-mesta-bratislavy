@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class Location extends Model
@@ -92,6 +94,46 @@ class Location extends Model
     public function scopeCurrent($query)
     {
         $query->where('is_current', true);
+    }
+
+    public static function getFilteredArtworkCountsByBorough(
+        Request $searchRequest
+    ) {
+        $artworkCounts = self::query()
+            ->current()
+            ->selectRaw('max(locations.borough) as borough')
+            ->selectRaw('count(artworks.id) as artworks_count')
+            ->join(
+                'artwork_location',
+                'artwork_location.location_id',
+                '=',
+                'locations.id'
+            )
+            ->join(
+                'artworks',
+                'artwork_location.artwork_id',
+                '=',
+                'artworks.id'
+            )
+            ->whereHas('artworks', function (Builder $query) use (
+                $searchRequest
+            ) {
+                $searchRequest = Request::createFrom($searchRequest)->replace(
+                    $searchRequest->except('boroughs')
+                );
+
+                $query->presentable()->filteredBySearchRequest($searchRequest);
+            })
+            ->groupBy('borough')
+            ->pluck('artworks_count', 'borough');
+
+        return collect(Location::getBoroughs())->map(
+            fn($borough, $name) => [
+                ...$borough,
+                'borough' => $name,
+                'artworks_count' => Arr::get($artworkCounts, $name, 0),
+            ]
+        );
     }
 
     public function artworks()

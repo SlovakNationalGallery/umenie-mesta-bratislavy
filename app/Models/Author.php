@@ -2,31 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Traits\WithArtworksCountScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
     use HasFactory;
+    use WithArtworksCountScope;
 
     public $incrementing = false;
     protected $keyType = 'string';
-
-    public static function scopeWithFilteredArtworksCount(
-        Builder $query,
-        array $artworkIds
-    ) {
-        $query
-            ->whereHas('artworks', function (Builder $query) use ($artworkIds) {
-                $query->whereIn('id', $artworkIds);
-            })
-            ->withCount([
-                'artworks' => function (Builder $query) use ($artworkIds) {
-                    $query->whereIn('id', $artworkIds);
-                },
-            ]);
-    }
 
     public function getNameAttribute()
     {
