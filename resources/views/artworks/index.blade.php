@@ -6,7 +6,7 @@
             <search.mobile-filter-dialog
                 :active-count="query.boroughs.length + query.authors.length + query.categories.length + query.keywords.length">
                 <div class="bg-neutral-100 p-4 flex flex-col gap-y-3">
-                    <search.disclosure-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
+                    <search.disclosure-filter label="Mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs" :value="option.value"
@@ -84,7 +84,7 @@
             {{-- Desktop filter --}}
             <div class="flex justify-between">
                 <headless.popover-group class="gap-x-1 hidden lg:flex">
-                    <search.popover-filter label="Obvod / mestská časť" :selected-count="query.boroughs.length"
+                    <search.popover-filter label="Mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value"
                             class="flex items-center justify-center w-full border border-neutral-100 py-4">
@@ -176,7 +176,7 @@
         </div>
 
         <div class="bg-white min-h-screen">
-            <div class="lg:px-14 px-4 max-w-screen-3xl mx-auto mt-4 lg:mt-5 lg:flex pb-10">
+            <div class="lg:px-14 px-4 max-w-screen-3xl mx-auto mt-4 lg:mt-5 lg:flex">
                 <div class="-mx-4 lg:-ml-14 lg:mr-14 lg:w-1/3 relative flex-shrink-0">
                     <search.map :query="query"></search.map>
                 </div>
@@ -204,7 +204,7 @@
                             </svg>
                         </button>
                     </div>
-                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 lg:-mx-8"
+                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 pb-10 lg:-mx-8"
                         :initial-has-next="true">
                         @foreach ($artworks as $a)
                             <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 lg:p-4"

@@ -116,7 +116,7 @@
 
         <div class="lg:flex">
             <h3 class="text-xl lg:text-4xl mt-6 lg:mt-0 font-medium lg:w-2/5 flex-shrink-0">
-                Podieľali/jú sa na projekte
+                Tím
             </h3>
             <dl class="divide-neutral-400 divide-y mt-8 lg:mt-0">
                 <div class="grid grid-cols-5 py-4">
@@ -150,11 +150,11 @@
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Vývoj databázy</dt>
                     <dd class="col-span-3">
-                        lab.SNG (Michal Čudrnák, Ernest Walzel, František Sebestyén, Rastislav Chynoranský)
+                        lab.SNG (Michal Čudrnák, Ernest Walzel, František Sebestyén, Rastislav Chynoranský, Igor Rjabinin)
                     </dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
-                    <dt class="font-medium col-span-2">Používateľský prieskum, testovanie wireframe</dt>
+                    <dt class="font-medium col-span-2">Používateľský prieskum</dt>
                     <dd class="col-span-3">Katarína Vass</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">

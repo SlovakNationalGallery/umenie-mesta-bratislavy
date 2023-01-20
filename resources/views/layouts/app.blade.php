@@ -99,7 +99,7 @@
                 <div>
                     <h3 class="text-xl mt-10 lg:mt-14 font-medium lg:text-3xl">Partneri projektu</h3>
                     <div class="flex mt-4 lg:mt-6 gap-10 items-center">
-                        <a href="https://bratislava.sk/" target="_blank">
+                        <a href="https://bratislava.sk/kultura-a-komunity/koncepcia-kultury" target="_blank">
                             <svg viewBox="0 0 93 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                                 class="h-10 lg:h-12 w-auto">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -121,15 +121,14 @@
                     </div>
                     <div class="lg:flex gap-x-16">
                         <div>
-                            <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Zapojte sa</h3>
+                            <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Nahláste dielo</h3>
                             <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
-                                <li><x-link-underline
-                                        href="mailto:umeniemesta@gmb.sk">umeniemesta@gmb.sk</x-link-underline></li>
-
-                                {{-- TODO --}}
-                                {{-- <li>
-                                    <x-link-underline href="@TODO">Nahlásiť dielo</x-link-underline>
-                                </li> --}}
+                                <li>
+                                    <x-link-underline
+                                        href=" https://docs.google.com/forms/d/e/1FAIpQLSdI2GSn_f9E5VNRyFc8nSa5fzmdUbAVWTs_SgiUYSEm_D-Tlg/viewform?usp=sharing">
+                                        Vyplniť formulár
+                                    </x-link-underline>
+                                </li>
                             </ul>
                         </div>
 
