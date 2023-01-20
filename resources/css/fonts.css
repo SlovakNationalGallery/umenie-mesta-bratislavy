@@ -1,4 +1,10 @@
 @font-face {
+    font-family: 'DenimUprights';
+    src: url('../fonts/Denim/GX/DenimUprightsVF.woff2') format('woff2');
+    src: url('../fonts/Denim/GX/DenimUprightsVF.woff') format('woff');
+}
+
+@font-face {
     font-family: 'Denim';
     src: url('../fonts/Denim/WEB/Denim-Regular.woff');
     src: url('../fonts/Denim/WEB/Denim-Regular.woff2') format('woff2'),
