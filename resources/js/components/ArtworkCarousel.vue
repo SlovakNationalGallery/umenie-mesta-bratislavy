@@ -49,19 +49,21 @@
         leave-to-class="opacity-0"
     >
         <div v-if="openedLightbox !== null" class="fixed inset-0 z-10">
-            <div
-                class="absolute inset-0 flex flex-col justify-center h-full lg:px-10 py-20 bg-white/95"
-            >
-                <img
-                    :src="photos[openedLightbox].url"
-                    :srcset="photos[openedLightbox].srcSet"
-                    :alt="photos[openedLightbox].description"
-                    class="object-contain w-full lg:h-full"
-                />
-                <div
-                    class="mt-6 mx-6 font-medium text-xl text-center text-neutral-800"
-                >
-                    {{ photos[openedLightbox].description }}
+            <div class="absolute inset-0 h-full lg:px-10 bg-white/95">
+                <div class="absolute inset-4 mt-24 flex flex-col">
+                    <div class="min-h-0 flex-1">
+                        <img
+                            :src="photos[openedLightbox].url"
+                            :srcset="photos[openedLightbox].srcSet"
+                            :alt="photos[openedLightbox].description"
+                            class="object-contain w-full h-full"
+                        />
+                    </div>
+                    <div
+                        class="mt-6 mx-6 pb-10 lg:pb-20 font-medium text-xl text-center text-neutral-800"
+                    >
+                        {{ photos[openedLightbox].description }}
+                    </div>
                 </div>
             </div>
 
@@ -70,13 +72,12 @@
                 class="absolute inset-y-0 lg:inset-x-10 inset-x-1 flex justify-between items-center"
             >
                 <button
-                    class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                    class="rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
                     @click="previousPhoto"
                     :disabled="openedLightbox === 0"
                 >
                     <svg
-                        width="21"
-                        height="18"
+                        class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
                         viewBox="0 0 21 18"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -88,13 +89,12 @@
                     </svg>
                 </button>
                 <button
-                    class="rounded-full w-10 h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                    class="rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
                     @click="nextPhoto"
                     :disabled="openedLightbox === photos.length - 1"
                 >
                     <svg
-                        width="21"
-                        height="18"
+                        class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
                         viewBox="0 0 21 18"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -108,11 +108,10 @@
             </div>
             <button
                 @click="handleOpenLightbox(null)"
-                class="absolute top-9 right-4 lg:top-10 lg:right-10 bg-neutral-800 rounded-full w-10 h-10 flex items-center justify-center stroke-white"
+                class="absolute top-9 right-4 lg:top-10 lg:right-10 bg-neutral-800 rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white"
             >
                 <svg
-                    width="26"
-                    height="26"
+                    class="lg:w-[26px] lg:h-[26px] w-[21px] h-[21px]"
                     viewBox="0 0 26 26"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
