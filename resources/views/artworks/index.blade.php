@@ -86,7 +86,7 @@
                 <div class="flex justify-between px-14 pb-5 max-w-screen-3xl mx-auto relative">
                     <headless.popover-group class="gap-x-1 hidden lg:flex">
                         <search.popover-filter label="Mestská časť" :selected-count="query.boroughs.length"
-                        :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
+                            :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
                             <div v-for="option, index in options" :key="option.value"
                                 class="flex items-center justify-center w-full border border-neutral-100 py-4">
                                 <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
