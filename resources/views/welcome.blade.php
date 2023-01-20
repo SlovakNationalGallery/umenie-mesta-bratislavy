@@ -7,9 +7,9 @@
                 <home-map :locations="{{ $locations }}" class="mx-auto"></home-map>
             </div>
             <div class="mt-auto pt-4 lg:mb-14">
-                <div class="leading-snug mb-4 lg:mb-8">
-                    <h2 class="text-2xl lg:text-4xl font-medium lg:font-semibold text-neutral-800">
-                        Všímajte si umenie v uliciach Bratislavy
+                <div class="text-2xl lg:text-4xl mb-4 lg:mb-8">
+                    <h2 class="font-medium lg:font-semibold text-neutral-800">
+                        Všímajte si umenie v uliciach Bratislavy.
                     </h2>
 
                     <span class="hidden lg:block">
@@ -19,21 +19,21 @@
 
                 </div>
                 <div class="prose text-neutral-500">
-                    <span class="uppercase text-neutral-500 font-medium">Aktuálne spracované data</span>
+                    <span class="uppercase text-neutral-500 font-medium text-sm">Aktuálne spracované data</span>
                     <div
-                        class="flex flex-col xl:flex-row overflow-x-auto justify-between xl:items-center gap-x-2 gap-y-2 pb-2 mb-6 xl:mb-10 leading-none">
-                        <div class="flex gap-x-2 items-center min-w-max">
-                            <span class="text-4xl font-medium pr-1">{{ $stats['artworks'] }}</span>
-                            <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
+                        class="mt-2 flex flex-col xl:flex-row xl:items-center gap-x-8 gap-y-2 pb-2 mb-6 xl:mb-10 leading-none text-lg">
+                        <div class="flex gap-x-2 items-center">
+                            <span class="text-[2.5rem] mt-0.5">{{ $stats['artworks'] }}</span>
+                            <span class="leading-none">diel<br /> v&nbsp;katalógu</span>
                         </div>
-                        <div class="flex gap-x-2 items-center min-w-max">
-                            <span class="text-4xl font-medium pr-1">{{ $stats['boroughs'] }}/17</span>
-                            <span class="leading-none mt-[0.15rem] text-base">mestských<br />častí</span>
+                        <div class="flex gap-x-2 items-center">
+                            <span class="text-[2.5rem] mt-0.5">{{ $stats['boroughs'] }}/17</span>
+                            <span class="leading-none">mestských<br />častí</span>
                         </div>
-                        <div class="flex gap-x-2 items-center min-w-max">
+                        <div class="flex gap-x-2 items-center">
                             <span
-                                class="text-4xl font-medium pr-1">{{ optional($stats['lastUpdate'])->isoFormat('DD/MM/YY') }}</span>
-                            <span class="leading-none mt-[0.15rem] text-base">naposledy<br />aktualizované</span>
+                                class="text-[2.5rem] mt-0.5">{{ optional($stats['lastUpdate'])->isoFormat('DD/MM/YY') }}</span>
+                            <span class="leading-none">naposledy<br />aktualizované</span>
                         </div>
                     </div>
                 </div>
