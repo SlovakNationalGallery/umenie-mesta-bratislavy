@@ -48,7 +48,7 @@
         leave-from-class="opacity-100"
         leave-to-class="opacity-0"
     >
-        <div v-if="openedLightbox !== null" class="fixed inset-0 z-10">
+        <div v-if="openedLightbox !== null" class="fixed inset-0 z-30">
             <div class="absolute inset-0 h-full lg:px-10 bg-white/95">
                 <div class="absolute inset-4 mt-24 flex flex-col">
                     <div class="min-h-0 flex-1">
