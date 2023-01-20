@@ -60,7 +60,7 @@
                         />
                     </div>
                     <div
-                        class="mt-6 mx-6 mb-2 font-medium text-xl text-center text-neutral-800"
+                        class="mt-6 mx-6 pb-10 lg:pb-20 font-medium text-xl text-center text-neutral-800"
                     >
                         {{ photos[openedLightbox].description }}
                     </div>
