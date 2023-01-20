@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Artwork;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Keyword;
 use App\Models\Location;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ArtworkFiltersController extends Controller
@@ -23,19 +20,21 @@ class ArtworkFiltersController extends Controller
     public function index(Request $request)
     {
         return [
-            'boroughs' => Location::getFilteredArtworkCountsByBorough(
-                $request
-            )->map(function ($b) {
-                return [
-                    'value' => $b['borough'],
-                    'label' => $b['borough'],
-                    'district_short' => $b['district_short'],
-                    'icon_src' => asset(
-                        'images/boroughs/' . Str::snake($b['borough']) . '.svg'
-                    ),
-                    'count' => $b['artworks_count'],
-                ];
-            }),
+            'boroughs' => Location::getFilteredArtworksCountByBorough($request)
+                ->map(function ($b) {
+                    return [
+                        'value' => $b['borough'],
+                        'label' => $b['borough'],
+                        'district_short' => $b['district_short'],
+                        'icon_src' => asset(
+                            'images/boroughs/' .
+                                Str::snake($b['borough']) .
+                                '.svg'
+                        ),
+                        'count' => $b['artworks_count'],
+                    ];
+                })
+                ->values(),
 
             'authors' => Author::query()
                 ->select('id', 'first_name', 'last_name', 'other_name')

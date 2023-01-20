@@ -96,7 +96,7 @@ class Location extends Model
         $query->where('is_current', true);
     }
 
-    public static function getFilteredArtworkCountsByBorough(
+    public static function getFilteredArtworksCountByBorough(
         Request $searchRequest
     ) {
         $artworkCounts = self::query()
