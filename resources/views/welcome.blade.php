@@ -7,14 +7,16 @@
                 <home-map :locations="{{ $locations }}" class="mx-auto"></home-map>
             </div>
             <div class="mt-auto pt-4 lg:mb-14">
-                <div class="prose lg:prose-xl leading-snug mb-4 lg:mb-8">
-                    <h2 class="font-medium lg:font-semibold text-neutral-800">
-                        Objavujte a chráňte umenie v uliciach Bratislavy.<br />
-                        <span class="hidden lg:block font-normal">
-                            Databáza dokumentuje a popularizuje pestrú škálu diel vo verejnom priestore od 2.&nbsp;polovice
-                            20.&nbsp;storočia až po súčasnosť.
-                        </span>
+                <div class="leading-snug mb-4 lg:mb-8">
+                    <h2 class="text-2xl lg:text-4xl font-medium lg:font-semibold text-neutral-800">
+                        Všímajte si umenie v uliciach Bratislavy
                     </h2>
+
+                    <span class="hidden lg:block">
+                        Databáza dokumentuje a popularizuje pestrú škálu diel vo verejnom priestore od 2.&nbsp;polovice
+                        20.&nbsp;storočia až po súčasnosť.
+                    </span>
+
                 </div>
                 <div class="prose text-neutral-500">
                     <span class="uppercase text-neutral-500 font-medium">Aktuálne spracované data</span>
@@ -25,7 +27,7 @@
                             <span class="leading-none mt-[0.15rem] text-base">diel<br /> v katalógu</span>
                         </div>
                         <div class="flex gap-x-2 items-center min-w-max">
-                            <span class="text-4xl font-medium pr-1">{{ $stats['boroughs'] }} zo 17</span>
+                            <span class="text-4xl font-medium pr-1">{{ $stats['boroughs'] }}/17</span>
                             <span class="leading-none mt-[0.15rem] text-base">mestských<br />častí</span>
                         </div>
                         <div class="flex gap-x-2 items-center min-w-max">
