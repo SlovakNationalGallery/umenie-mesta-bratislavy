@@ -39,7 +39,7 @@
                 leave-from="opacity-100"
                 leave-to="opacity-0"
             >
-                <div class="fixed inset-0 bg-neutral-800 bg-opacity-95" />
+                <div class="fixed inset-0 bg-black bg-opacity-25" />
             </TransitionChild>
 
             <div class="fixed inset-0 overflow-y-auto">
@@ -56,7 +56,7 @@
                         leave-to="opacity-0 scale-95"
                     >
                         <DialogPanel
-                            class="absolute inset-x-0 bottom-0 top-12 transform bg-white text-left align-middle shadow-xl transition-all"
+                            class="absolute inset-x-0 bottom-0 top-10 transform bg-white text-left align-middle shadow-xl transition-all"
                         >
                             <div class="flex justify-between items-center">
                                 <DialogTitle
