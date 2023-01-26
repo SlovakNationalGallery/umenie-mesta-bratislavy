@@ -86,6 +86,7 @@
                             style="fill:currentColor;fill-opacity:1;fill-rule:nonzero;stroke:none"
                             transform="matrix(.35278 0 0 .35278 116.527 20.286)" />
                     </svg>
+                </a>
             </div>
 
             <div class="grow my-10 lg:my-0">
