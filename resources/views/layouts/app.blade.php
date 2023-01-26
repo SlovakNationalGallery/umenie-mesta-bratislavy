@@ -122,12 +122,15 @@
                     </div>
                     <div class="lg:flex gap-x-16">
                         <div>
-                            <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Nahláste dielo</h3>
+                            <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Nahlásiť chybu</h3>
                             <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
                                 <li>
-                                    <x-link-underline
-                                        href=" https://docs.google.com/forms/d/e/1FAIpQLSdI2GSn_f9E5VNRyFc8nSa5fzmdUbAVWTs_SgiUYSEm_D-Tlg/viewform?usp=sharing">
+                                    {{-- <x-link-underline
+                                        href="https://docs.google.com/forms/d/e/1FAIpQLSdI2GSn_f9E5VNRyFc8nSa5fzmdUbAVWTs_SgiUYSEm_D-Tlg/viewform?usp=sharing">
                                         Vyplniť formulár
+                                    </x-link-underline> --}}
+                                    <x-link-underline href="mailto:umeniemesta@gmb.sk">
+                                        umeniemesta@gmb.sk
                                     </x-link-underline>
                                 </li>
                             </ul>
