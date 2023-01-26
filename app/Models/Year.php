@@ -17,7 +17,7 @@ class Year extends Model
         }
 
         if ($this->latest && $this->latest != $this->earliest) {
-            return sprintf('%s—%s', $this->earliest, $this->latest);
+            return sprintf('%s – %s', $this->earliest, $this->latest);
         }
 
         return $this->earliest;

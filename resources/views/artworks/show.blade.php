@@ -86,7 +86,7 @@
                         <h4 class="font-medium mt-8">Roky</h4>
                         <ul>
                             @foreach ($artwork->years as $year)
-                                <li>{{ $year->toFormattedString() }} &mdash; {{ $year->type }}</li>
+                                <li>{{ $year->toFormattedString() }} &ndash; {{ $year->type }}</li>
                             @endforeach
                         </ul>
                     </div>
