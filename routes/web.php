@@ -2,10 +2,8 @@
 
 use App\Models\Artwork;
 use App\Models\Category;
-use App\Models\Location;
 use App\Jobs\ImportFromAirtable;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArtworkController;
 
 /*
