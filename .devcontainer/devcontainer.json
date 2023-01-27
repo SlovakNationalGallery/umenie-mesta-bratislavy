@@ -31,7 +31,8 @@
                 "bmewburn.vscode-intelephense-client",
                 "esbenp.prettier-vscode",
                 "bradlc.vscode-tailwindcss",
-                "cjhowe7.laravel-blade"
+                "cjhowe7.laravel-blade",
+                "Vue.volar"
             ]
         }
     },
