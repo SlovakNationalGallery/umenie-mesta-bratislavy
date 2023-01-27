@@ -182,7 +182,25 @@
         <div class="bg-white min-h-screen pt-16 mt-2 lg:pt-10">
             <div class="lg:px-14 px-4 max-w-screen-3xl mx-auto mt-4 lg:mt-12 lg:flex pb-10">
                 <div class="-mx-4 lg:-ml-14 lg:mr-14 lg:w-1/3 relative flex-shrink-0">
-                    <search.map :query="query"></search.map>
+                    <search.map :query="query">
+                        <template v-slot:categories-modal>
+                            <div class="px-6 pb-6">
+                                <div class="flex flex-col gap-4">
+                                    @foreach ($categories as $category)
+                                        <div class="flex items-center gap-x-3">
+                                            <x-dynamic-component :component="'icons.pins.' . $category->icon" class="w-8 flex-shrink-0" />
+                                            {{ $category->name }}
+                                        </div>
+                                    @endforeach
+
+                                    <div class="flex items-center gap-x-3 mt-6">
+                                        <x-icons.pins.defunct class="w-8 flex-shrink-0" />
+                                        Označenie zaniknutého diela
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </search.map>
                 </div>
 
                 <div class="lg:flex-grow mt-8 lg:mt-0">

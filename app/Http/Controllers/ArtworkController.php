@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
-use App\Models\Author;
 use App\Models\Category;
-use App\Models\Keyword;
-use App\Models\Location;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class ArtworkController extends Controller
 {
@@ -21,6 +15,7 @@ class ArtworkController extends Controller
      */
     public function index(Request $request)
     {
+        $categories = Category::orderBy('name', 'asc')->get();
         $artworks = Artwork::query()
             ->presentable()
             ->filteredBySearchRequest($request)
@@ -28,7 +23,7 @@ class ArtworkController extends Controller
             ->orderByDesc('created_at')
             ->paginate(12);
 
-        return view('artworks.index', compact(['artworks']));
+        return view('artworks.index', compact(['artworks', 'categories']));
     }
 
     /**
