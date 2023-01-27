@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative lg:sticky top-0 bg-green-500"
+        class="relative lg:sticky top-0"
         :class="[expanded ? 'h-screen' : 'h-[270px] lg:h-screen']"
     >
         <MapContainer class="absolute inset-0" :key="componentKey" />
