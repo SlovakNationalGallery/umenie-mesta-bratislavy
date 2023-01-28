@@ -8,7 +8,7 @@ function getParsedUrl() {
     });
 }
 
-function stringifyUrl({ url, query }) {
+export function stringifyUrl({ url, query }) {
     return queryString.stringifyUrl(
         { url, query },
         {

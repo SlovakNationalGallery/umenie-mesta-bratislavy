@@ -8,7 +8,8 @@
 <script setup>
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch, computed } from 'vue';
+import { stringifyUrl } from './search/FiltersController.vue';
 import MapPopup from './MapPopup.vue';
 
 const props = defineProps({
@@ -26,7 +27,13 @@ const props = defineProps({
         type: String,
         default: null,
     },
+    query: {
+        type: Object,
+        default: {},
+    },
 });
+
+const query = computed(() => props.query);
 
 const popupFeature = ref(null);
 const mapEl = ref(null);
@@ -34,6 +41,26 @@ const mapRef = ref(null);
 const dataLoading = axios.get(
     `/api/artworks/map-points${window.location.search}`
 );
+
+watch(query, async (newQuery) => {
+    axios
+        .get(
+            stringifyUrl({
+                url: '/api/artworks/map-points',
+                query: newQuery,
+            })
+        )
+        .then(({ data }) => {
+            console.log({ data });
+            mapRef.value.getSource('artworks').setData(data);
+            mapRef.value.fitBounds(
+                getBounds(
+                    data.features.map((feature) => feature.geometry.coordinates)
+                ),
+                { padding: 50, linear: true }
+            );
+        });
+});
 
 onMounted(() => {
     const mapLoading = new Promise((resolve, reject) => {

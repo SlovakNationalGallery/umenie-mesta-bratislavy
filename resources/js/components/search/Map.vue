@@ -3,7 +3,7 @@
         class="relative lg:sticky top-0"
         :class="[expanded ? 'h-screen' : 'h-[270px] lg:h-screen']"
     >
-        <MapContainer class="absolute inset-0" :key="componentKey" />
+        <MapContainer class="absolute inset-0" :query="query" />
         <div
             class="absolute inset-0 flex items-end justify-center p-3 pointer-events-none"
         >
@@ -130,13 +130,9 @@ export default {
         return {
             expanded: false,
             showLegend: false,
-            componentKey: 0,
         };
     },
     watch: {
-        query() {
-            this.componentKey++;
-        },
         expanded(value) {
             if (value) {
                 this.$el.scrollIntoView({
