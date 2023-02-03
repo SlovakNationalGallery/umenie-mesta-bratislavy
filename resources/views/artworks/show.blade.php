@@ -185,11 +185,11 @@
     <div class="pt-10 pb-6 px-4 max-w-screen-3xl lg:px-14 mx-auto">
         <h3 class="text-3xl font-medium mt-3">Ďalšie diela v okolí</h3>
 
-        <div class="mt-4 -mx-4" data-masonry='{ "itemSelector": ".grid-item" }'>
+        <artworks-masonry class="mt-4 -mx-4" item-selector=".grid-item" class="-mt-2 -mx-4">
             @foreach ($relatedArtworks as $a)
                 <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/4 p-2 lg:p-4" />
             @endforeach
-        </div>
+        </artworks-masonry>
     </div>
 
     <div class="hidden">
