@@ -48,33 +48,31 @@
 </head>
 
 <body class="antialiased text-neutral-800 bg-neutral-100">
-    <div class="w-full fixed bg-neutral-100 z-30 pb-4">
-        <div class="px-6 pt-6 lg:px-14 max-w-screen-3xl mx-auto inset-x-0">
-            <div class="flex pb-6 flex-col lg:flex-row lg:items-center">
-                <h1 class="text-[1.75rem] lg:text-5xl text-center">
-                    <a href="/">
-                        <span class="animate-title1 font-variable">Umenie</span>
-                        <span class="animate-title2 font-variable">mesta</span>
-                        <span class="animate-title3 font-variable">Bratislavy</span>
-                    </a>
-                </h1>
-                <nav class="flex-grow lg:flex lg:items-center lg:justify-end">
-                    <ul
-                        class="text-lg flex flex-wrap justify-around lg:justify-end lg:items-center mt-4 lg:mt-0 font-medium uppercase whitespace-nowrap lg:gap-x-6">
-                        <li>
-                            <a href="{{ route('artworks.index') }}" @class(['text-red-500' => request()->routeIs('artworks.index')])>Mapa a katalóg diel</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('about') }}" @class(['text-red-500' => request()->routeIs('about')])>O projekte</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <hr class="h-0.5 lg:h-[0.15rem] -mx-0.5 lg:-mx-2 bg-neutral-800">
+    <div class="p-6 lg:px-14 max-w-screen-3xl mx-auto">
+        <div class="flex pb-6 flex-col lg:flex-row lg:items-center">
+            <h1 class="text-[1.75rem] lg:text-5xl text-center">
+                <a href="/">
+                    <span class="font-medium">Umenie</span>
+                    mesta
+                    <span class="font-medium">Bratislavy</span>
+                </a>
+            </h1>
+            <nav class="flex-grow lg:flex lg:items-center lg:justify-end">
+                <ul
+                    class="text-lg flex flex-wrap justify-around lg:justify-end lg:items-center mt-4 lg:mt-0 font-medium uppercase whitespace-nowrap lg:gap-x-6">
+                    <li>
+                        <a href="{{ route('artworks.index') }}" @class(['text-red-500' => request()->routeIs('artworks.index')])>Mapa a katalóg diel</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('about') }}" @class(['text-red-500' => request()->routeIs('about')])>O projekte</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
+        <hr class="h-0.5 lg:h-[0.15rem] -mx-0.5 lg:-mx-2 bg-neutral-800">
     </div>
 
-    <div id="app" class="pt-36 lg:pt-28">
+    <div id="app">
         @yield('content')
     </div>
 
