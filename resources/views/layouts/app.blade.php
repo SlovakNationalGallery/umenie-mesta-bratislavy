@@ -78,7 +78,7 @@
 
     <footer class="bg-neutral-700 text-white text-sm">
         <div class="max-w-screen-3xl mx-auto py-14 px-6 lg:px-14 lg:flex">
-            <div class="shrink lg:pr-14">
+            <div class="shrink lg:pr-14 lg:pt-2">
                 <a href="https://gmb.sk/" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40.286" class="h-8">
                         <path
@@ -91,11 +91,14 @@
 
             <div class="grow my-10 lg:my-0">
                 <div class="max-w-5xl prose prose-sm lg:prose-xl text-white font-medium">
-                    Galéria mesta Bratislavy v spolupráci s ďalšími partnermi, odbornými inštitúciami a expertmi mapuje
-                    existujúce diela, ako aj fragmenty a diela presunuté, odstránené alebo zničené. Cieľom je
-                    prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od 2. polovice 20. storočia až
-                    po súčasnosť a priniesť čo najviac informácií o význame, okolnostiach vzniku a príbehoch diel, o ich
-                    autoroch, použitých materiáloch a výtvarných technikách.
+                    Galéria mesta Bratislavy v spolupráci s&nbsp;ďalšími partnermi, odbornými inštitúciami
+                    a&nbsp;expertmi mapuje
+                    existujúce diela, ako aj fragmenty a&nbsp;diela presunuté, odstránené alebo zničené. Cieľom je
+                    prezentovať a&nbsp;popularizovať pestrú škálu umenia vo&nbsp;verejnom priestore
+                    od&nbsp;2.&nbsp;polovice 20. storočia až
+                    po&nbsp;súčasnosť a&nbsp;priniesť čo najviac informácií o&nbsp;význame, okolnostiach vzniku
+                    a&nbsp;príbehoch diel, o&nbsp;ich
+                    autoroch, použitých materiáloch a&nbsp;výtvarných technikách.
                 </div>
                 <div>
                     <h3 class="text-xl mt-10 lg:mt-14 font-medium lg:text-3xl">Partneri projektu</h3>
@@ -123,7 +126,7 @@
                     <div class="lg:flex gap-x-16">
                         <div>
                             <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Nahlásiť chybu</h3>
-                            <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
+                            <ul class="flex flex-col gap-y-3 mt-4 lg:text-base">
                                 <li>
                                     {{-- <x-link-underline
                                         href="https://docs.google.com/forms/d/e/1FAIpQLSdI2GSn_f9E5VNRyFc8nSa5fzmdUbAVWTs_SgiUYSEm_D-Tlg/viewform?usp=sharing">
@@ -138,7 +141,7 @@
 
                         <div>
                             <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Sociálne siete</h3>
-                            <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
+                            <ul class="flex flex-col gap-y-3 mt-4 lg:text-base">
                                 <li><x-link-underline href="https://www.instagram.com/galeria_mesta_bratislavy/"
                                         target="_blank">Instagram</x-link-underline></li>
                             </ul>
@@ -146,11 +149,11 @@
 
                         <div>
                             <h3 class="text-xl mt-10 lg:mt-14 lg:text-3xl font-medium">Dokumenty</h3>
-                            <ul class="flex flex-col gap-y-4 mt-4 lg:text-base">
+                            <ul class="flex flex-col gap-y-3 mt-4 lg:text-base">
                                 <li><x-link-underline href="https://gmb.sk/detail/ochrana-osobnych-udajov"
                                         target="_blank">Ochrana osobných údajov</x-link-underline></li>
                                 <li><x-link-underline href="https://gmb.sk/detail/vyhlasenie-o-pristupnosti"
-                                        target="_blank">Vyhlásenie o prístupnosti</x-link-underline></li>
+                                        target="_blank">Vyhlásenie o&nbsp;prístupnosti</x-link-underline></li>
                                 <li><x-link-underline href="https://gmb.sk/detail/autorske-prava"
                                         target="_blank">Autorské práva</x-link-underline></li>
                             </ul>
