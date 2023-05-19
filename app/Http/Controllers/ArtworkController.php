@@ -53,9 +53,9 @@ class ArtworkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $artworkId)
+    public function show(string $artwork)
     {
-        $artwork = Artwork::presentable()->findOrFail($artworkId);
+        $artwork = Artwork::presentable()->findOrFail($artwork);
 
         $relatedArtworks = Artwork::query()
             ->select('artworks.*')
