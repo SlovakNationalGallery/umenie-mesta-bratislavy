@@ -78,7 +78,10 @@ class Artwork extends Model
     // default scope for those artworks that we can actually display
     public function scopePresentable($query)
     {
-        $query->published()->has('coverPhotoMedia');
+        $query
+            ->published()
+            ->has('coverPhotoMedia')
+            ->has('locations');
     }
 
     public function scopeFilteredBySearchRequest($query, Request $request)

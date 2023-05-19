@@ -57,7 +57,7 @@ Route::get('/o-projekte', function () {
 
 Route::resource('diela', ArtworkController::class)
     ->names('artworks')
-    ->parameter('diela', 'artwork');
+    ->parameter('diela', 'artworkId');
 
 Route::prefix('admin')
     ->name('admin.')

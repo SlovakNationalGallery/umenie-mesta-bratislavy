@@ -53,8 +53,10 @@ class ArtworkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Artwork $artwork)
+    public function show(string $artworkId)
     {
+        $artwork = Artwork::presentable()->findOrFail($artworkId);
+
         $relatedArtworks = Artwork::query()
             ->select('artworks.*')
             ->selectCurrentLocationDistance($artwork)
