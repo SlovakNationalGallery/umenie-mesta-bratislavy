@@ -15,7 +15,6 @@ export default {
     data() {
         return {
             page: 1,
-            // observer: new IntersectionObserver(this.observed),
         };
     },
     computed: {
@@ -36,7 +35,6 @@ export default {
     watch: {
         query() {
             this.page = 1;
-            // this.observer.disconnect();
             axios.get(window.location.href).then((response) => {
                 this.$emit('resetquery', response.data);
             });
@@ -46,6 +44,7 @@ export default {
         return this.$slots.default({
             nextPage: this.nextPage,
             hasNextPage: this.hasNextPage,
+            page: this.page,
         });
     },
 };

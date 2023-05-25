@@ -230,16 +230,20 @@
                             @endforeach
                         </template>
                         <template v-slot:controls="masonry">
-                            <search.artworks-query-observer @loadpage="masonry.append" @resetquery="masonry.reset"
-                                :page-size="{{ $artworks->perPage() }}" :total="artworks.length" :query="query"
-                                v-slot="qo">
-                                <div class="flex justify-center py-2">
-                                    <button v-if="qo.hasNextPage" @click="qo.nextPage"
-                                        class="uppercase font-medium py-2.5 px-6 mt-10 border-black border-2">
-                                        Načítať ďalšie diela
-                                    </button>
-                                </div>
-                            </search.artworks-query-observer>
+                            <div class="flex justify-center py-2">
+                                <search.artworks-query-observer @loadpage="masonry.append" @resetquery="masonry.reset"
+                                    :page-size="{{ $artworks->perPage() }}" :total="artworks.length"
+                                    :query="query" v-slot="qo">
+                                    <search.load-more v-if="qo.hasNextPage" :page="qo.page"
+                                        v-on:load-more="qo.nextPage" v-slot="{ loadMore }">
+                                        <button @click="loadMore"
+                                            class="uppercase font-medium py-2.5 px-6 mt-10 border-black border-2">
+                                            Načítať ďalšie diela
+                                        </button>
+                                    </search.load-more>
+
+                                </search.artworks-query-observer>
+                            </div>
                         </template>
                         <template v-slot:empty>
                             <div v-if="artworks.length === 0"
