@@ -222,12 +222,31 @@
                             </svg>
                         </button>
                     </div>
-                    <artworks-masonry :query="query" item-selector=".grid-item" class="-mx-2 mt-4 pb-10 lg:-mx-8"
-                        :initial-has-next="true">
-                        @foreach ($artworks as $a)
-                            <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 lg:p-4"
-                                imgSizes="19vw" />
-                        @endforeach
+                    <artworks-masonry item-selector=".grid-item" class="-mx-2 mt-4 pb-10 lg:-mx-8">
+                        <template v-slot:default>
+                            @foreach ($artworks as $a)
+                                <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 lg:p-4"
+                                    imgSizes="19vw" />
+                            @endforeach
+                        </template>
+                        <template v-slot:controls="masonry">
+                            <search.artworks-query-observer @loadpage="masonry.append" @resetquery="masonry.reset"
+                                :page-size="{{ $artworks->perPage() }}" :total="artworks.length" :query="query"
+                                v-slot="qo">
+                                <div class="flex justify-center py-2">
+                                    <button v-if="qo.hasNextPage" @click="qo.nextPage"
+                                        class="uppercase font-medium py-2.5 px-6 mt-10 border-black border-2">
+                                        Načítať ďalšie diela
+                                    </button>
+                                </div>
+                            </search.artworks-query-observer>
+                        </template>
+                        <template v-slot:empty>
+                            <div v-if="artworks.length === 0"
+                                class="flex justify-center h-24 text-center text-neutral-500">
+                                Zadaným filtrom nevyhovujú žiadne diela.
+                            </div>
+                        </template>
                     </artworks-masonry>
                 </div>
             </div>

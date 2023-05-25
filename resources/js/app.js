@@ -3,10 +3,11 @@ import './bootstrap';
 import { PopoverGroup } from '@headlessui/vue';
 
 import HomeMap from './components/HomeMap.vue';
-import ArtworksMasonry from './components/search/ArtworksMasonry.vue';
+import ArtworksMasonry from './components/ArtworksMasonry.vue';
 import PopoverFilter from './components/search/PopoverFilter.vue';
 import DisclosureFilter from './components/search/DisclosureFilter.vue';
 import FiltersController from './components/search/FiltersController.vue';
+import ArtworksQueryObserver from './components/search/ArtworksQueryObserver.vue';
 import MapContainer from './components/MapContainer.vue';
 import MobileFilter from './components/search/MobileFilter.vue';
 import MobileFilterDialog from './components/search/MobileFilterDialog.vue';
@@ -26,6 +27,7 @@ app.component('search.mobile-filter-dialog', MobileFilterDialog);
 app.component('search.popover-filter', PopoverFilter);
 app.component('search.disclosure-filter', DisclosureFilter);
 app.component('search.filter-search', FilterSearch);
+app.component('search.artworks-query-observer', ArtworksQueryObserver);
 app.component('artwork-carousel', ArtworkCarousel);
 
 app.mount('#app');
