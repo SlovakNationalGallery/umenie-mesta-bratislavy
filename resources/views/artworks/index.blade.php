@@ -177,7 +177,6 @@
 
         <div class="bg-white min-h-screen">
             <div class="lg:px-14 px-4 max-w-screen-3xl mx-auto mt-4 lg:mt-5 lg:flex">
-                <div class="-mx-4 lg:-ml-14 lg:mr-14 lg:w-1/3 relative flex-shrink-0">
                     <search.map :query="query">
                         <template v-slot:categories-modal>
                             <div class="px-6 pb-6">
@@ -197,7 +196,6 @@
                             </div>
                         </template>
                     </search.map>
-                </div>
 
                 <div class="lg:flex-grow mt-8 lg:mt-0">
                     <div v-if="artworks.length" class="mt-5 lg:hidden">

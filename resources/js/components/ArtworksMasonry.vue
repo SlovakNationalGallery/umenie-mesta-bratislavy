@@ -61,6 +61,10 @@ export default {
                 this.masonry.layout();
             });
         }
+
+        const containerResizeObserver = new ResizeObserver(() => this.masonry.layout())
+
+        containerResizeObserver.observe(this.$refs.container)
     },
 };
 </script>
