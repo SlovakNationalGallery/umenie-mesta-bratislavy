@@ -53,6 +53,13 @@ class Artwork extends Model
 
     public function scopeSelectCurrentLocationDistance($query, $otherArtwork)
     {
+        $otherArtworkLocation =
+            $otherArtwork->currentLocation ?? $otherArtwork->locations->last();
+
+        if (!$otherArtworkLocation) {
+            return;
+        }
+
         $query
             ->join(
                 'artwork_location',
@@ -68,10 +75,7 @@ class Artwork extends Model
             })
             ->selectRaw(
                 'ST_Distance_Sphere(point(?, ?), point(locations.gps_lon, locations.gps_lat)) as distance',
-                [
-                    $otherArtwork->currentLocation->gps_lon,
-                    $otherArtwork->currentLocation->gps_lat,
-                ]
+                [$otherArtworkLocation->gps_lon, $otherArtworkLocation->gps_lat]
             );
     }
 
