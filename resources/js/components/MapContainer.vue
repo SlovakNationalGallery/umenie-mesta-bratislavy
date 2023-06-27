@@ -8,7 +8,7 @@
 <script setup>
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
-import { onMounted, ref, watch, computed } from 'vue';
+import { onMounted, ref, watch, computed, onUnmounted } from 'vue';
 import { stringifyUrl } from './search/FiltersController.vue';
 import MapPopup from './MapPopup.vue';
 
@@ -38,6 +38,7 @@ const query = computed(() => props.query);
 const popupFeature = ref(null);
 const mapEl = ref(null);
 const mapRef = ref(null);
+const resizeObserver = ref(null);
 const dataLoading = axios.get(
     `/api/artworks/map-points${window.location.search}`
 );
@@ -77,6 +78,10 @@ onMounted(() => {
     });
 
     Promise.all([dataLoading, mapLoading]).then(loaded);
+});
+
+onUnmounted(() => {
+    resizeObserver.value.disconnect();
 });
 
 const loaded = ([{ data }, map]) => {
@@ -144,7 +149,7 @@ const getBounds = (points) => {
 };
 
 const observeResize = (map) => {
-    new ResizeObserver((entries) => {
+    resizeObserver.value = new ResizeObserver((entries) => {
         entries.forEach(() => {
             map.resize();
         });

@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="-mx-4 lg:-ml-14 lg:mr-14 relative flex-shrink-0 transition-all duration-75 ease-linear"
-        :class="[expandedVertically ? 'lg:w-1/2' : 'lg:w-1/3']"
-    >
+    <div :class="[expandedVertically ? 'lg:w-1/2' : 'lg:w-1/3']">
         <div
             class="relative lg:sticky top-0"
             :class="[
@@ -11,8 +8,8 @@
         >
             <MapContainer class="absolute inset-0" :query="query" />
             <button
-                @click="handleExpandVertically(!expandedVertically)"
-                class="hidden lg:block absolute bottom-12 p-3 right-4 bg-white"
+                @click="toggleExpandVertically"
+                class="hidden font-medium lg:block absolute bottom-12 p-3 right-4 bg-white"
             >
                 {{ expandedVertically ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
             </button>
@@ -20,10 +17,10 @@
                 class="absolute inset-0 flex items-end justify-center p-3 pointer-events-none"
             >
                 <button
-                    @click="handleExpandHorizontally(!expandedHorizontally)"
+                    @click="toggleExpandHorizontally"
                     class="bg-white bottom-3 font-medium lg:hidden p-2 pointer-events-auto sticky"
                 >
-                    {{ expanded ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
+                    {{ expandedHorizontally ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
                 </button>
             </div>
             <div class="absolute top-12 right-2.5">
@@ -84,7 +81,7 @@
                                 leave-to="opacity-0 scale-95"
                             >
                                 <DialogPanel
-                                    class="transform bg-white text-left align-middle shadow-xl transition-all"
+                                    class="transform bg-white text-left align-middle shadow-xl"
                                 >
                                     <div
                                         class="flex justify-between items-center"
@@ -155,16 +152,16 @@ export default {
         };
     },
     methods: {
-        handleExpandHorizontally(expanded) {
-            this.expandedHorizontally = expanded;
-            if (expanded) {
+        toggleExpandHorizontally() {
+            if (this.expandedHorizontally) {
                 this.$el.scrollIntoView({
                     behavior: 'smooth',
                 });
             }
+            this.expandedHorizontally = !this.expandedHorizontally;
         },
-        handleExpandVertically(expanded) {
-            this.expandedVertically = expanded;
+        toggleExpandVertically() {
+            this.expandedVertically = !this.expandedVertically;
         },
     },
 };
