@@ -16,11 +16,19 @@ trait WithArtworksCountScope
             $searchRequest,
             $except
         ) {
-            $searchRequest = Request::createFrom($searchRequest)->replace(
+            $searchRequestExcept = Request::createFrom($searchRequest)->replace(
                 $searchRequest->except($except)
             );
+            $searchRequestOnly = Request::createFrom($searchRequest)->replace(
+                $searchRequest->only($except)
+            );
 
-            $query->presentable()->filteredBySearchRequest($searchRequest);
+            $query
+                ->presentable()
+                ->filteredBySearchRequest($searchRequestExcept)
+                ->orWhere(function (Builder $query) use ($searchRequestOnly) {
+                    $query->filteredBySearchRequest($searchRequestOnly);
+                });
         };
 
         $query
