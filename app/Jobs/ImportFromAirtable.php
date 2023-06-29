@@ -107,6 +107,7 @@ class ImportFromAirtable implements ShouldQueue
         'photos' => [
             'id' => 'tbl8P5wGh0p4tYMQL',
             'fields' => [
+                'source' => 'fldpm6G4gchU3bwJG',
                 'description' => 'fldNBjZxPtG0Ib7er',
                 'media' => 'fld2TGDfLmdo3YcAS',
             ],
