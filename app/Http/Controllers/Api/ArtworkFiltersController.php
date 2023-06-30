@@ -38,7 +38,7 @@ class ArtworkFiltersController extends Controller
 
             'authors' => Author::query()
                 ->select('id', 'first_name', 'last_name', 'other_name')
-                ->withFilteredArtworksCount($request, except: 'authors')
+                ->withFilteredArtworksCount($request, facetField: 'authors')
                 ->orderByDesc('artworks_count')
                 ->orderByRaw('COALESCE(last_name, other_name)')
                 ->get()
@@ -52,7 +52,7 @@ class ArtworkFiltersController extends Controller
 
             'categories' => Category::query()
                 ->select('id', 'name')
-                ->withFilteredArtworksCount($request, except: 'categories')
+                ->withFilteredArtworksCount($request, facetField: 'categories')
                 ->orderByDesc('artworks_count')
                 ->get()
                 ->map(
@@ -65,7 +65,7 @@ class ArtworkFiltersController extends Controller
 
             'keywords' => Keyword::query()
                 ->select('id', 'keyword')
-                ->withFilteredArtworksCount($request, except: 'keywords')
+                ->withFilteredArtworksCount($request, facetField: 'keywords')
                 ->orderByDesc('artworks_count')
                 ->get()
                 ->map(

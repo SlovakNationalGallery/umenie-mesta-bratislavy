@@ -52,16 +52,13 @@ watch(query, async (newQuery) => {
         )
         .then(({ data }) => {
             mapRef.value.getSource('artworks').setData(data);
-            if (data.features.length) {
-                mapRef.value.fitBounds(
-                    getBounds(
-                        data.features.map(
-                            (feature) => feature.geometry.coordinates
-                        )
-                    ),
-                    { padding: 50, linear: true }
-                );
-            }
+            if (!data.features.length) return;
+            mapRef.value.fitBounds(
+                getBounds(
+                    data.features.map((feature) => feature.geometry.coordinates)
+                ),
+                { padding: 50, linear: true }
+            );
         });
 });
 
@@ -128,12 +125,11 @@ const loaded = ([{ data }, map]) => {
             .setHTML(html)
             .addTo(map);
     } else {
-        if (data.features.length) {
-            const bounds = getBounds(
-                data.features.map((feature) => feature.geometry.coordinates)
-            );
-            map.fitBounds(bounds, { padding: 50, duration: 0 });
-        }
+        if (!data.features.length) return;
+        const bounds = getBounds(
+            data.features.map((feature) => feature.geometry.coordinates)
+        );
+        map.fitBounds(bounds, { padding: 50, duration: 0 });
     }
 
     observeResize(map);

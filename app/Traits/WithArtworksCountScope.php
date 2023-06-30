@@ -10,29 +10,27 @@ trait WithArtworksCountScope
     public static function scopeWithFilteredArtworksCount(
         Builder $query,
         Request $searchRequest,
-        string $except
+        string $facetField
     ) {
-        $queryBuilder = function (Builder $query) use (
-            $searchRequest,
-            $except
-        ) {
-            $searchRequestExcept = Request::createFrom($searchRequest)->replace(
-                $searchRequest->except($except)
-            );
-            $searchRequestOnly = Request::createFrom($searchRequest)->replace(
-                $searchRequest->only($except)
-            );
-
-            $query
-                ->presentable()
-                ->filteredBySearchRequest($searchRequestExcept)
-                ->orWhere(function (Builder $query) use ($searchRequestOnly) {
-                    $query->filteredBySearchRequest($searchRequestOnly);
-                });
-        };
+        $searchRequestExcept = Request::createFrom($searchRequest)->replace(
+            $searchRequest->except($facetField)
+        );
 
         $query
-            ->whereHas('artworks', $queryBuilder)
-            ->withCount(['artworks' => $queryBuilder]);
+            ->whereHas(
+                'artworks',
+                fn(Builder $query) => $query
+                    ->presentable()
+                    ->filteredBySearchRequest($searchRequestExcept)
+                    ->orWhereIn(
+                        $facetField . '.id',
+                        $searchRequest->get($facetField, [])
+                    )
+            )
+            ->withCount([
+                'artworks' => fn(Builder $query) => $query
+                    ->presentable()
+                    ->filteredBySearchRequest($searchRequestExcept),
+            ]);
     }
 }
