@@ -65,7 +65,10 @@
                         {{ photos[openedLightbox].description }}
                     </div>
                     <div
-                        class="mx-6 pb-10 lg:pb-20 font-medium text-sm text-center text-neutral-800"
+                        :class="[
+                            { invisible: !photos[openedLightbox].source },
+                            'mx-6 pb-10 lg:pb-20 font-medium text-sm text-center text-neutral-800',
+                        ]"
                     >
                         Zdroj: {{ photos[openedLightbox].source }}
                     </div>
