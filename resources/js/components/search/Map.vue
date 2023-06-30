@@ -8,7 +8,7 @@
         >
             <MapContainer class="absolute inset-0" :query="query" />
             <button
-                @click="toggleExpandVertically"
+                @click="toggleExpandedVertically"
                 class="hidden font-medium lg:block absolute bottom-12 p-3 right-4 bg-white"
             >
                 {{ expandedVertically ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
@@ -17,7 +17,7 @@
                 class="absolute inset-0 flex items-end justify-center p-3 pointer-events-none"
             >
                 <button
-                    @click="toggleExpandHorizontally"
+                    @click="toggleExpandedHorizontally"
                     class="bg-white bottom-3 font-medium lg:hidden p-2 pointer-events-auto sticky"
                 >
                     {{ expandedHorizontally ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
@@ -152,7 +152,7 @@ export default {
         };
     },
     methods: {
-        toggleExpandHorizontally() {
+        toggleExpandedHorizontally() {
             if (this.expandedHorizontally) {
                 this.$el.scrollIntoView({
                     behavior: 'smooth',
@@ -160,7 +160,7 @@ export default {
             }
             this.expandedHorizontally = !this.expandedHorizontally;
         },
-        toggleExpandVertically() {
+        toggleExpandedVertically() {
             this.expandedVertically = !this.expandedVertically;
         },
     },
