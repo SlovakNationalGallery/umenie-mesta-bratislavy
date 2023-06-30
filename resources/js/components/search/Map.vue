@@ -1,26 +1,26 @@
 <template>
-    <div :class="[expandedVertically ? 'lg:w-1/2' : 'lg:w-1/3']">
+    <div :class="[expandedHorizontally ? 'lg:w-1/2' : 'lg:w-1/3']">
         <div
             class="relative lg:sticky top-0"
             :class="[
-                expandedHorizontally ? 'h-screen' : 'h-[270px] lg:h-screen',
+                expandedVertically ? 'h-screen' : 'h-[270px] lg:h-screen',
             ]"
         >
             <MapContainer class="absolute inset-0" :query="query" />
             <button
-                @click="toggleExpandedVertically"
+                @click="toggleExpandedHorizontally"
                 class="hidden font-medium lg:block absolute bottom-12 p-3 right-4 bg-white"
             >
-                {{ expandedVertically ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
+                {{ expandedHorizontally ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
             </button>
             <div
                 class="absolute inset-0 flex items-end justify-center p-3 pointer-events-none"
             >
                 <button
-                    @click="toggleExpandedHorizontally"
+                    @click="toggleExpandedVertically"
                     class="bg-white bottom-3 font-medium lg:hidden p-2 pointer-events-auto sticky"
                 >
-                    {{ expandedHorizontally ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
+                    {{ expandedVertically ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
                 </button>
             </div>
             <div class="absolute top-12 right-2.5">
@@ -153,14 +153,14 @@ export default {
     },
     methods: {
         toggleExpandedHorizontally() {
-            if (this.expandedHorizontally) {
+            this.expandedHorizontally = !this.expandedHorizontally;
+        },
+        toggleExpandedVertically() {
+            if (!this.expandedVertically) {
                 this.$el.scrollIntoView({
                     behavior: 'smooth',
                 });
             }
-            this.expandedHorizontally = !this.expandedHorizontally;
-        },
-        toggleExpandedVertically() {
             this.expandedVertically = !this.expandedVertically;
         },
     },
