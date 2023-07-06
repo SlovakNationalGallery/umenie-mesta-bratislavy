@@ -37,3 +37,9 @@
 .mapboxgl-popup-anchor-top-right {
     @apply mt-[10px];
 }
+
+@layer utilities {
+    .safe-bottom {
+        bottom: env(safe-area-inset-bottom);
+    }
+}
