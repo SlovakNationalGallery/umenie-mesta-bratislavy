@@ -4,8 +4,9 @@
         <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto relative">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
-                :active-count="query.boroughs.length + query.authors.length + query.categories.length + query.keywords.length">
-                <div class="bg-neutral-100 p-4 flex flex-col gap-y-3">
+                :active-count="query.boroughs.length + query.authors.length + query.categories.length + query.keywords.length"
+                @clear="controller.removeAllSelections">
+                <div class="bg-neutral-100 p-4 flex flex-col gap-y-3 grow">
                     <search.disclosure-filter label="Mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
@@ -81,7 +82,6 @@
                         </search.filter-search>
                     </search.disclosure-filter>
                 </div>
-
             </search.mobile-filter-dialog>
 
             {{-- Desktop filter --}}
