@@ -12,8 +12,9 @@
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs" :value="option.value"
                                 @change="onCheckboxChange" :checked="query.boroughs.includes(option.value)" class="hidden" />
                             <label
-                                :class="[{ 'bg-neutral-100': query.boroughs.includes(option.value) },
-                                    'w-full border border-neutral-100 flex items-center justify-start rounded h-16'
+                                :class="[query.boroughs.includes(option.value) ? 'border-neutral-100 bg-neutral-100' :
+                                    'border-neutral-300',
+                                    'w-full border flex items-center justify-start h-16'
                                 ]"
                                 :for="'filters.boroughs.' + index">
                                 <div class="flex items-center justify-center h-full w-16 flex-none">
@@ -38,12 +39,13 @@
 
                     <search.disclosure-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
-                        <search.filter-search :options="options" v-slot="{ searchResults }">
+                        <search.filter-search :options="options" placeholder="Napíšte meno autora"
+                            v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.authors.' + index" name="authors"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.authors.includes(option.value)"
-                                    class="checked:text-neutral-800 text-red-600 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                    class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
                                 <label :for="'filters.authors.' + index" class="whitespace-nowrap">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
@@ -53,8 +55,8 @@
 
                     <search.disclosure-filter label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
-                        <search.filter-search :options="options" v-slot="{ searchResults }">
-                            <div v-for="option, index in searchResults" :key="option.value" class="flex">
+                        <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
+                            <div v-for="option, index in options" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.categories.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.categories.includes(option.value)"
@@ -63,16 +65,17 @@
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
                             </div>
-                        </search.filter-search>
+                        </div>
                     </search.disclosure-filter>
 
                     <search.disclosure-filter label="Kľúčové slová" :selected-count="query.keywords.length"
                         :options="filters.keywords" v-slot="{ options }">
-                        <search.filter-search :options="options" v-slot="{ searchResults }">
-                            <div v-for="option, index in searchResults" :key="option.value" class="flex">
-                                <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
+                        <search.filter-search :options="options" placeholder="Zadajte kľúčové slovo"
+                            v-slot="{ searchResults }">
+                            <div v-for="option, index in options" :key="option.value" class="flex">
+                                <input type="checkbox" :id="'filters.keywords.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
-                                    :checked="query.keywords.includes(option.value)"
+                                    :checked="query.categories.includes(option.value)"
                                     class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
                                 <label :for="'filters.keywords.' + index" class="whitespace-nowrap">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
@@ -90,8 +93,9 @@
                     <search.popover-filter label="Mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value"
-                            :class="[{ 'bg-neutral-100': query.boroughs.includes(option.value) },
-                                'flex items-center justify-center w-full border border-neutral-100 py-4'
+                            :class="[query.boroughs.includes(option.value) ? 'border-neutral-100 bg-neutral-100' :
+                                'border-neutral-300',
+                                'flex items-center justify-center w-full border py-4'
                             ]">
                             <input type="checkbox" :id="'filters.boroughs.' + index" name="boroughs"
                                 :value="option.value" @change="onCheckboxChange"
@@ -121,12 +125,13 @@
                     </search.popover-filter>
                     <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
-                        <search.filter-search :options="options" v-slot="{ searchResults }">
+                        <search.filter-search :options="options" placeholder="Napíšte meno autora"
+                            v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.authors.' + index" name="authors"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.authors.includes(option.value)"
-                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                    class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
                                 <label :for="'filters.authors.' + index" class="whitespace-nowrap pr-4">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
@@ -136,27 +141,28 @@
 
                     <search.popover-filter label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
-                        <search.filter-search :options="options" v-slot="{ searchResults }">
-                            <div v-for="option, index in searchResults" :key="option.value" class="flex">
+                        <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
+                            <div v-for="option, index in options" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.categories.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.categories.includes(option.value)"
-                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                    class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
                                 <label :for="'filters.categories.' + index" class="whitespace-nowrap pr-4">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
                             </div>
-                        </search.filter-search>
+                        </div>
                     </search.popover-filter>
 
                     <search.popover-filter label="Kľúčové slová" :selected-count="query.keywords.length"
                         :options="filters.keywords" v-slot="{ options }">
-                        <search.filter-search :options="options" v-slot="{ searchResults }">
+                        <search.filter-search :options="options" placeholder="Zadajte kľúčové slovo"
+                            v-slot="{ searchResults }">
                             <div v-for="option, index in searchResults" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.keywords.includes(option.value)"
-                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                    class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
                                 <label :for="'filters.keywords.' + index" class="whitespace-nowrap pr-4">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
