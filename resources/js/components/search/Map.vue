@@ -2,14 +2,12 @@
     <div :class="[expandedHorizontally ? 'lg:w-1/2' : 'lg:w-1/3']">
         <div
             class="relative lg:sticky top-0"
-            :class="[
-                expandedVertically ? 'h-screen' : 'h-[270px] lg:h-screen',
-            ]"
+            :class="[expandedVertically ? 'h-screen' : 'h-[270px] lg:h-screen']"
         >
             <MapContainer class="absolute inset-0" :query="query" />
             <button
                 @click="toggleExpandedHorizontally"
-                class="hidden font-medium lg:block absolute bottom-12 p-3 right-4 bg-white"
+                class="hidden font-medium lg:block absolute bottom-12 p-3 right-4 bg-white rounded-sm drop-shadow"
             >
                 {{ expandedHorizontally ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
             </button>
@@ -18,12 +16,12 @@
             >
                 <button
                     @click="toggleExpandedVertically"
-                    class="bg-white bottom-3 font-medium lg:hidden p-2 pointer-events-auto sticky"
+                    class="bg-white bottom-3 font-medium lg:hidden p-2 pointer-events-auto sticky rounded-sm drop-shadow"
                 >
                     {{ expandedVertically ? 'Zmenšiť mapu' : 'Zväčšiť mapu' }}
                 </button>
             </div>
-            <div class="absolute top-12 right-2.5">
+            <div class="absolute top-11 right-2.5">
                 <button
                     id="legend"
                     @click="showLegend = true"
