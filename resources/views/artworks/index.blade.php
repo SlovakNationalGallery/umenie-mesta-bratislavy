@@ -60,7 +60,7 @@
                                 <input type="checkbox" :id="'filters.categories.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.categories.includes(option.value)"
-                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                    class="text-red-500 h-6 w-6 rounded mr-2 focus:ring-0" />
                                 <label :for="'filters.categories.' + index" class="whitespace-nowrap">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
@@ -76,7 +76,7 @@
                                 <input type="checkbox" :id="'filters.keywords.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.categories.includes(option.value)"
-                                    class="checked:text-neutral-800 text-neutral-200 h-6 w-6 rounded mr-2 focus:ring-0" />
+                                    class="text-red-500 h-6 w-6 rounded mr-2 focus:ring-0" />
                                 <label :for="'filters.keywords.' + index" class="whitespace-nowrap">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
