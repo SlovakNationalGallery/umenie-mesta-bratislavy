@@ -48,21 +48,35 @@
         leave-from-class="opacity-100"
         leave-to-class="opacity-0"
     >
-        <div v-if="openedLightbox !== null" class="fixed inset-0 z-10">
-            <div class="absolute inset-0 h-full lg:px-10 bg-white/95">
-                <div class="absolute inset-4 mt-24 flex flex-col">
-                    <div class="min-h-0 flex-1">
-                        <img
-                            :src="photos[openedLightbox].url"
-                            :srcset="photos[openedLightbox].srcSet"
-                            :alt="photos[openedLightbox].description"
-                            class="object-contain w-full h-full"
-                        />
-                    </div>
+        <div v-show="openedLightbox !== null" class="fixed inset-0 z-10">
+            <div
+                class="absolute inset-0 h-full lg:px-10 bg-white/95 overflow-hidden"
+            >
+                <div class="absolute inset-4 flex flex-col mt-24">
                     <div
-                        class="mt-6 mx-6 pb-1 lg:pb-2 font-medium text-xl text-center text-neutral-800"
+                        class="flex h-full overflow-x-auto snap-mandatory snap-x gap-4"
                     >
-                        {{ photos[openedLightbox].description }}
+                        <div
+                            v-for="(photo, i) in photos"
+                            ref="slidesRefs"
+                            :photo-index="i"
+                            class="shrink-0 flex flex-col max-w-full snap-center h-full"
+                        >
+                            <div class="min-h-0 flex-1">
+                                <img
+                                    :src="photo.url"
+                                    :srcset="photo.srcSet"
+                                    :alt="photo.description"
+                                    class="object-contain w-full h-full"
+                                />
+                            </div>
+                            <div
+                                v-if="openedLightbox !== null"
+                                class="mt-6 mx-6 pb-1 lg:pb-2 font-medium text-xl text-center text-neutral-800"
+                            >
+                                {{ photos[openedLightbox].description }}
+                            </div>
+                        </div>
                     </div>
                     <div
                         :class="[
@@ -76,44 +90,40 @@
             </div>
 
             <!-- Controls -->
-            <div
-                class="absolute inset-y-0 lg:inset-x-10 inset-x-1 flex justify-between items-center"
+            <button
+                class="absolute top-1/2 left-1 lg:left-10 rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                @click="previousPhoto"
+                :disabled="openedLightbox === 0"
             >
-                <button
-                    class="rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
-                    @click="previousPhoto"
-                    :disabled="openedLightbox === 0"
+                <svg
+                    class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
+                    viewBox="0 0 21 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    <svg
-                        class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
-                        viewBox="0 0 21 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M20.25 8.99902H1.75" />
-                        <path
-                            d="M9.15039 16.3996L1.75039 8.99961L9.15039 1.59961"
-                        />
-                    </svg>
-                </button>
-                <button
-                    class="rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
-                    @click="nextPhoto"
-                    :disabled="openedLightbox === photos.length - 1"
+                    <path d="M20.25 8.99902H1.75" />
+                    <path
+                        d="M9.15039 16.3996L1.75039 8.99961L9.15039 1.59961"
+                    />
+                </svg>
+            </button>
+            <button
+                class="absolute top-1/2 right-1 lg:right-10 rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white bg-neutral-800 disabled:opacity-30"
+                @click="nextPhoto"
+                :disabled="openedLightbox === photos.length - 1"
+            >
+                <svg
+                    class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
+                    viewBox="0 0 21 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    <svg
-                        class="lg:w-[21px] lg:h-[18px] w-[17px] h-[15px]"
-                        viewBox="0 0 21 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M0.75 8.99902H19.25" />
-                        <path
-                            d="M11.8496 16.3996L19.2496 8.99961L11.8496 1.59961"
-                        />
-                    </svg>
-                </button>
-            </div>
+                    <path d="M0.75 8.99902H19.25" />
+                    <path
+                        d="M11.8496 16.3996L19.2496 8.99961L11.8496 1.59961"
+                    />
+                </svg>
+            </button>
             <button
                 @click="handleOpenLightbox(null)"
                 class="absolute top-9 right-4 lg:top-10 lg:right-10 bg-neutral-800 rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center stroke-white"
@@ -141,10 +151,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 
 const props = defineProps(['photos']);
 const openedLightbox = ref(null);
+const slidesRefs = ref([]);
+const intersectionObserver = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                openedLightbox.value = Number(entry.target.getAttribute('photo-index'));
+            }
+        });
+    },
+    { threshold: 1 }
+);
 
 const onKeyDown = ({ code }) => {
     if (code === 'ArrowRight') nextPhoto();
@@ -153,10 +174,12 @@ const onKeyDown = ({ code }) => {
 
 onMounted(() => {
     window.addEventListener('keydown', onKeyDown);
+    slidesRefs.value.map((slideRef) => intersectionObserver.observe(slideRef));
 });
 
 onUnmounted(() => {
     window.addEventListener('keydown', onKeyDown);
+    intersectionObserver.disconnect();
 });
 
 const nextPhoto = () => {
@@ -174,4 +197,11 @@ const previousPhoto = () => {
 const handleOpenLightbox = (index) => {
     openedLightbox.value = index;
 };
+
+watch(openedLightbox, (newOpenedLightbox) => {
+    newOpenedLightbox !== null &&
+        slidesRefs.value[newOpenedLightbox].scrollIntoView({
+            behavior: 'smooth',
+        });
+});
 </script>
