@@ -276,7 +276,7 @@ class Artwork extends Model
     {
         return Attribute::get(function () {
             return $this->photos()
-                ->select(['id', 'description'])
+                ->select(['id', 'description', 'source'])
                 ->with([
                     'media' => function (MorphMany $query) {
                         $query
@@ -298,6 +298,7 @@ class Artwork extends Model
                             'srcSet' => $m->getSrcset(),
                             'url' => $m->getUrl(),
                             'description' => $photo->description,
+                            'source' => $photo->source,
                         ]
                     )
                 );
