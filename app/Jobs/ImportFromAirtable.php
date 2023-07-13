@@ -599,6 +599,7 @@ class ImportFromAirtable implements ShouldQueue
         });
 
         Cache::forget('artworks.stats');
+        Cache::forget('sitemap');
     }
 
     private function listRecords(string $tableName)

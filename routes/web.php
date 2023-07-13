@@ -5,6 +5,7 @@ use App\Models\Category;
 use App\Jobs\ImportFromAirtable;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtworkController;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +73,18 @@ Route::prefix('admin')
             return back()->with('import-dispatched', 'Import bol spustený');
         })->name('imports.create');
     });
+
+Route::get('/sitemap.xml', function () {
+    $view = Cache::rememberForever('sitemap', function () {
+        $artworks = Artwork::query()
+            ->presentable()
+            ->select('id', 'updated_at')
+            ->get();
+
+        return view('sitemap', [
+            'artworks' => $artworks,
+        ])->render();
+    });
+
+    return response($view)->header('Content-Type', 'text/xml');
+});

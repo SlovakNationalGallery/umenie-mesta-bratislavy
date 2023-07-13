@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Location;
+use App\Models\Photo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,5 +21,16 @@ class ArtworkFactory extends Factory
         return [
             'id' => fake()->uuid(),
         ];
+    }
+
+    public function presentable(): Factory
+    {
+        return $this->state(fn() => ['is_published' => true])
+            ->hasAttached(Location::factory(), [
+                'order' => 0,
+            ])
+            ->hasAttached(Photo::factory()->withMedia(), [
+                'order' => 0,
+            ]);
     }
 }
