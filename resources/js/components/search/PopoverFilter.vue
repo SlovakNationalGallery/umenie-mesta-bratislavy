@@ -38,7 +38,7 @@
                 :class="[
                     fullScreen
                         ? 'mt-5 w-[calc(100%-6rem)] flex-wrap grid grid-cols-6'
-                        : 'flex-col overflow-auto max-h-60 flex',
+                        : 'flex-col overflow-auto h-[19rem] flex',
                     'absolute z-10 p-6 bg-white drop-shadow-lg mt-3 gap-2',
                 ]"
             >

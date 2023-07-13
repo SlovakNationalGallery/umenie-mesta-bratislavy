@@ -1,10 +1,10 @@
 <template>
     <div
-        class="flex items-center justify-between py-1.5 px-2.5 mb-4 border border-neutral-700 rounded"
+        class="flex items-center justify-between py-1.5 px-2.5 mb-4 border border-neutral-300"
     >
         <input
             class="text-sm w-full focus:outline-0"
-            placeholder="Hľadať..."
+            :placeholder="placeholder"
             v-model="search"
         />
         <svg
@@ -40,5 +40,6 @@ const searchResults = computed(() => {
 
 const props = defineProps({
     options: Object,
+    placeholder: String,
 });
 </script>
