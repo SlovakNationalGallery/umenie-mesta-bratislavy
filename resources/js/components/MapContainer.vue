@@ -52,8 +52,8 @@ watch(query, async (newQuery) => {
             })
         )
         .then(({ data }) => {
-            console.log({ data });
             mapRef.value.getSource('artworks').setData(data);
+            if (!data.features.length) return;
             mapRef.value.fitBounds(
                 getBounds(
                     data.features.map((feature) => feature.geometry.coordinates)
@@ -130,6 +130,7 @@ const loaded = ([{ data }, map]) => {
             .setHTML(html)
             .addTo(map);
     } else {
+        if (!data.features.length) return;
         const bounds = getBounds(
             data.features.map((feature) => feature.geometry.coordinates)
         );
