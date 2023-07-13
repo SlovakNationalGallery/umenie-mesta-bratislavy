@@ -122,6 +122,9 @@
                         <a href="http://muop.bratislava.sk/" target="_blank">
                             <img src="{{ asset('images/muop_logo.png') }}" class="invert h-12 w-auto" />
                         </a>
+                        <a href="https://bratislavskykraj.sk/" target="_blank">
+                            <img src="{{ asset('images/bsk_logo.svg') }}" class="h-12 w-auto" />
+                        </a>
                     </div>
                     <div class="lg:flex gap-x-16">
                         <div>
