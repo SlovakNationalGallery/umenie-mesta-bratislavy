@@ -54,7 +54,7 @@
             >
                 <div class="absolute inset-4 flex flex-col mt-24">
                     <div
-                        class="flex h-full overflow-x-auto snap-mandatory snap-x gap-4"
+                        class="flex h-full overflow-x-auto snap-mandatory snap-x hide-scrollbar gap-4"
                     >
                         <div
                             v-for="(photo, i) in photos"
@@ -71,20 +71,26 @@
                                 />
                             </div>
                             <div
-                                v-if="openedLightbox !== null"
                                 class="mt-6 mx-6 pb-1 lg:pb-2 font-medium text-xl text-center text-neutral-800"
                             >
-                                {{ photos[openedLightbox].description }}
+                                {{
+                                    openedLightbox !== null &&
+                                    photos[openedLightbox]?.description
+                                }}
+                            </div>
+                            <div
+                                :class="[
+                                    {
+                                        invisible:
+                                            openedLightbox !== null &&
+                                            !photos[openedLightbox]?.source,
+                                    },
+                                    'mx-6 pb-10 lg:pb-20 font-medium text-sm text-center text-neutral-800',
+                                ]"
+                            >
+                                Zdroj: {{ photos[openedLightbox]?.source }}
                             </div>
                         </div>
-                    </div>
-                    <div
-                        :class="[
-                            { invisible: !photos[openedLightbox].source },
-                            'mx-6 pb-10 lg:pb-20 font-medium text-sm text-center text-neutral-800',
-                        ]"
-                    >
-                        Zdroj: {{ photos[openedLightbox].source }}
                     </div>
                 </div>
             </div>
@@ -160,7 +166,9 @@ const intersectionObserver = new IntersectionObserver(
     (entries, observer) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                openedLightbox.value = Number(entry.target.getAttribute('photo-index'));
+                openedLightbox.value = Number(
+                    entry.target.getAttribute('photo-index')
+                );
             }
         });
     },
