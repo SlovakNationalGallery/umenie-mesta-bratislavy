@@ -191,6 +191,7 @@ const clusterCountLayer = {
         'text-size': 16,
     },
     paint: {
+        'text-translate': [0, 2],
         'text-color': '#ffffff',
     },
 };
