@@ -17,6 +17,13 @@ export function stringifyUrl({ url, query }) {
     );
 }
 
+const defaultQuery = {
+    boroughs: [],
+    authors: [],
+    categories: [],
+    keywords: [],
+}
+
 export default {
     props: {
         initialFilters: {
@@ -30,10 +37,7 @@ export default {
             artworks: [],
             filters: {},
             query: {
-                boroughs: [],
-                authors: [],
-                categories: [],
-                keywords: [],
+                ...defaultQuery,
                 ...getParsedUrl().query,
             },
         };
@@ -49,6 +53,7 @@ export default {
             artworks: this.artworks,
             isFetching: this.isFetching,
             filterSelections: this.filterSelections,
+            removeAllSelections: this.removeAllSelections,
             removeSelection: this.removeSelection,
         });
     },
@@ -102,6 +107,9 @@ export default {
                 ...this.query,
                 [name]: this.query[name].filter((v) => v !== value),
             };
+        },
+        removeAllSelections() {
+            this.query = defaultQuery
         },
         removeSelection({ name, value }) {
             this.query = {

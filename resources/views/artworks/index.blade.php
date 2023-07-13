@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, ...controller }">
+    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, filterSelections, ...controller }">
         <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto relative">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
-                :active-count="query.boroughs.length + query.authors.length + query.categories.length + query.keywords.length">
-                <div class="bg-neutral-100 p-4 flex flex-col gap-y-3">
+                :active-count="query.boroughs.length + query.authors.length + query.categories.length + query.keywords.length"
+                @clear="controller.removeAllSelections">
+                <div class="bg-neutral-100 p-4 flex flex-col gap-y-3 grow">
                     <search.disclosure-filter label="Mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value" class="flex">
@@ -84,7 +85,6 @@
                         </search.filter-search>
                     </search.disclosure-filter>
                 </div>
-
             </search.mobile-filter-dialog>
 
             {{-- Desktop filter --}}
@@ -220,8 +220,8 @@
                             Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} diel</span>
                         </span>
                     </div>
-                    <div class="flex lg:-mx-4 gap-3 mt-4 lg:mt-10 flex-wrap">
-                        <button v-for="selection in controller.filterSelections"
+                    <div class="flex -mx-2 lg:-mx-4 gap-3 mt-10 flex-wrap">
+                        <button v-for="selection in filterSelections"
                             class="text-xs tracking-wide bg-neutral-100 flex items-center px-3 py-1"
                             @click="controller.removeSelection(selection)" v-key="`${selection.name}${selection.value}`">
                             @{{ selection.label }}
@@ -230,6 +230,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
+                        <button v-if="filterSelections.length" class="underline text-xs p-2" @click="controller.removeAllSelections">
+                            vymazať filtre
+                        </button>    
                     </div>
                     <artworks-masonry item-selector=".grid-item" class="-mx-2 mt-4 pb-10 lg:-mx-8">
                         <template v-slot:default>

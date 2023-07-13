@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div>
         <button
             type="button"
             @click="openModal"
@@ -21,10 +21,10 @@
             </svg>
             <span>Zobraziť filter</span>
             <div
-                v-if="props.activeCount"
+                v-if="activeCount"
                 class="mt-0.5 rounded-full bg-red-500 text-white flex h-6 w-6 text-sm items-center justify-center"
             >
-                {{ props.activeCount }}
+                {{ activeCount }}
             </div>
         </button>
     </div>
@@ -56,37 +56,57 @@
                         leave-to="opacity-0 scale-95"
                     >
                         <DialogPanel
-                            class="absolute inset-x-0 bottom-0 top-10 transform bg-white text-left align-middle shadow-xl transition-all"
+                            class="absolute flex flex-col inset-x-0 bottom-0 top-10 transform bg-white text-left align-middle shadow-xl transition-all"
                         >
                             <div class="flex justify-between items-center">
                                 <DialogTitle
                                     as="h3"
-                                    class="text-2xl font-semibold text-neutral-800 p-6"
+                                    class="text-2xl font-semibold text-neutral-800 p-5"
                                 >
                                     Filter diel
                                 </DialogTitle>
-                                <button
-                                    type="button"
-                                    @click="closeModal"
-                                    class="p-2"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.75"
-                                        stroke="currentColor"
-                                        class="w-8 h-8"
+                                <div class="flex items-center">
+                                    <button
+                                        class="underline text-xs p-2"
+                                        v-if="activeCount"
+                                        @click="$emit('clear')"
                                     >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    </svg>
-                                </button>
+                                        vymazať filtre
+                                    </button>
+                                    <button
+                                        type="button"
+                                        @click="closeModal"
+                                        class="p-2"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.75"
+                                            stroke="currentColor"
+                                            class="w-8 h-8"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                             <slot></slot>
+                            <div
+                                v-if="activeCount"
+                                class="bg-neutral-100 bottom-0 sticky left-0 right-0 width-screen py-2 px-4 drop-shadow-[0px_-3px_10px_rgba(0,0,0,0.15)]"
+                            >
+                                <button
+                                    @click="closeModal"
+                                    class="bg-red-500 uppercase text-white w-full text-center py-4 font-medium"
+                                >
+                                    zobraziť diela
+                                </button>
+                            </div>
                         </DialogPanel>
                     </TransitionChild>
                 </div>
