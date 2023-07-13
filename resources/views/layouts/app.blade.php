@@ -14,7 +14,6 @@
     <title>@yield('title', 'Umenie mesta Bratislavy')</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     @production
         {{-- prettier-ignore-start --}}
         <script type="text/javascript">
@@ -43,6 +42,7 @@
         gtag('js', new Date());
         gtag('config', 'UA-250179477-1');
         </script>
+        <script defer data-domain="umeniemesta.sk" src="https://plausible.io/js/script.js"></script>
         {{-- prettier-ignore-end --}}
     @endproduction
 </head>
