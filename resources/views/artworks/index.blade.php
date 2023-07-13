@@ -257,7 +257,7 @@
                                 </search.artworks-query-observer>
                             </div>
                         </template>
-                        <template v-slot:empty>
+                        <template v-slot:empty v-cloak>
                             <div v-if="artworks.length === 0"
                                 class="flex justify-center h-24 text-center text-neutral-500">
                                 Zadaným filtrom nevyhovujú žiadne diela.
