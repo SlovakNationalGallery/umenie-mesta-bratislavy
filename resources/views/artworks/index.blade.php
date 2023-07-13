@@ -238,7 +238,7 @@
                         <template v-slot:default>
                             @foreach ($artworks as $a)
                                 <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/3 p-2 lg:p-4"
-                                    imgSizes="19vw" />
+                                    imgSizes="(max-width: 640px) 50vw, 33vw" />
                             @endforeach
                         </template>
                         <template v-slot:controls="masonry">
