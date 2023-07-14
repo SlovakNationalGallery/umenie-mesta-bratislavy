@@ -66,6 +66,7 @@ watch(query, async (newQuery) => {
 onMounted(() => {
     const mapLoading = new Promise((resolve, reject) => {
         new mapboxgl.Map({
+            language: 'sk-SK',
             container: mapEl.value,
             style:
                 import.meta.env.VITE_MAPBOX_STYLE ||
