@@ -24,7 +24,7 @@ Route::get('/', function () {
         'artworks' => Artwork::published()
             ->has('coverPhotoMedia')
             ->with(['authors', 'coverPhotoMedia', 'yearBuilt'])
-            ->orderByDesc('created_at')
+            ->orderByDesc('is_promoted', 'created_at')
             ->take(4)
             ->get(),
 
