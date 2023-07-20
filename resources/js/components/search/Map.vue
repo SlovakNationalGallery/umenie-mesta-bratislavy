@@ -4,7 +4,27 @@
             class="relative lg:sticky top-0"
             :class="[expandedVertically ? 'h-screen' : 'h-[270px] lg:h-screen']"
         >
-            <MapContainer class="absolute inset-0" :query="query" />
+            <MapContainer class="absolute inset-0" :query="query">
+                <template v-slot:popup="{ feature }">
+                    <h1 class="font-medium mb-3 text-lg leading-[20px]">
+                        {{ feature.properties.name }}
+                    </h1>
+                    <div class="leading-tight space-y-2 text-sm">
+                        <p class="font-medium">
+                            {{ feature.properties.location_address }}
+                        </p>
+                        <p>{{ feature.properties.location_description }}</p>
+                        <p>
+                            <a
+                                class="underline hover:no-underline"
+                                :href="feature.properties.detail_url"
+                            >
+                                Otvoriť detail
+                            </a>
+                        </p>
+                    </div>
+                </template>
+            </MapContainer>
             <button
                 @click="toggleExpandedHorizontally"
                 class="hidden font-medium lg:block absolute bottom-12 p-3 right-4 bg-white rounded-sm drop-shadow"

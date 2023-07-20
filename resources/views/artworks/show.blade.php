@@ -177,9 +177,21 @@
     </div>
     @if ($artwork->currentLocation && $artwork->currentLocation->gps_lon && $artwork->currentLocation->gps_lat)
         <div class="h-[330px] lg:h-[500px]">
-            <map-container class="h-full" :cluster="false"
-                :center="[{{ $artwork->currentLocation->gps_lon }}, {{ $artwork->currentLocation->gps_lat }}]"
-                :zoom="16" highlight-id="{{ $artwork->id }}" />
+            <map-container class="h-full" :cluster="false" :zoom="16" highlight-id="{{ $artwork->id }}">
+                <template v-slot:popup="{ feature }">
+                    <h1 class="font-medium mb-3 text-lg">@{{ feature.properties.name }}</h1>
+                    <div class="leading-none space-y-2 text-sm">
+                        <p class="font-medium">@{{ feature.properties.location_address }}</p>
+                        <p>@{{ feature.properties.location_description }}</p>
+                        <p>
+                            <a class="underline hover:no-underline"
+                                :href=`https://www.google.com/maps/place/${feature.geometry.coordinates[1]},${feature.geometry.coordinates[0]}`>
+                                Otvoriť v Google Maps
+                            </a>
+                        </p>
+                    </div>
+                </template>
+            </map-container>
         </div>
     @endif
     <div class="pt-10 pb-6 px-4 max-w-screen-3xl lg:px-14 mx-auto">
@@ -190,20 +202,5 @@
                 <x-artwork-card :artwork="$a" class="grid-item w-1/2 sm:w-1/4 p-2 lg:p-4" />
             @endforeach
         </artworks-masonry>
-    </div>
-
-    <div class="hidden">
-        <article id="popup">
-            <h1 class="font-medium mb-3 text-lg">{{ $artwork->name }}</h1>
-            <div class="leading-none space-y-2 text-sm">
-                <p class="font-medium">{{ $artwork->currentLocation->address }}</p>
-                <p>{{ $artwork->currentLocation->description }}</p>
-                <p>
-                    <a class="underline hover:no-underline"
-                        href="https://www.google.com/maps/place/{{ $artwork->currentLocation->gps_lat }},{{ $artwork->currentLocation->gps_lon }}">Otvoriť
-                        v Google Maps</a>
-                </p>
-            </div>
-        </article>
     </div>
 @endsection
