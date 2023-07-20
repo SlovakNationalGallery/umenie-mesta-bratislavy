@@ -1,21 +1,25 @@
 <template>
     <div>
         <div class="h-full" ref="mapEl"></div>
-        <MapPopup v-if="mapRef" :map="mapRef" :feature="popupFeature" />
+        <div class="hidden">
+            <div ref="popup">
+                <slot
+                    v-if="popupFeature"
+                    name="popup"
+                    :feature="popupFeature"
+                ></slot>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
 import axios from 'axios';
 import mapboxgl from 'mapbox-gl';
-import { onMounted, ref, watch, computed, onUnmounted } from 'vue';
+import { onMounted, ref, watch, computed, onUnmounted, nextTick } from 'vue';
 import { stringifyUrl } from './search/FiltersController.vue';
-import MapPopup from './MapPopup.vue';
 
 const props = defineProps({
-    center: {
-        type: Array,
-    },
     zoom: {
         type: Number,
     },
@@ -38,6 +42,7 @@ const query = computed(() => props.query);
 const popupFeature = ref(null);
 const mapEl = ref(null);
 const mapRef = ref(null);
+const popup = ref(null);
 const resizeObserver = ref(null);
 const dataLoading = axios.get(
     `/api/artworks/map-points${window.location.search}`
@@ -97,7 +102,7 @@ const loaded = ([{ data }, map]) => {
         .addLayer(unclusteredPointsLayer)
         .addLayer(detailLayer)
         .on('click', 'clusters', zoomCluster)
-        .on('click', 'unclustered-points', openPopup)
+        .on('click', 'unclustered-points', (e) => openPopup(e.features[0]))
         .on('mouseenter', 'clusters', setCursorPointer)
         .on('mouseleave', 'clusters', unsetCursorPointer)
         .on('mouseenter', 'unclustered-points', setCursorPointer)
@@ -113,32 +118,33 @@ const loaded = ([{ data }, map]) => {
         .addControl(new mapboxgl.GeolocateControl(), 'top-right');
 
     map.scrollZoom.disable();
+    mapRef.value = map;
+    observeResize(map);
 
-    if (props.center) {
+    if (props.highlightId) {
+        const highlightedFeature = data.features.find(
+            (feature) => feature.properties.id === props.highlightId
+        );
+
+        if (!highlightedFeature) return;
+
         map.easeTo({
-            center: props.center,
+            center: highlightedFeature.geometry.coordinates,
             zoom: props.zoom,
             duration: 0,
         });
 
-        const html = document.querySelector('#popup').outerHTML;
-        new mapboxgl.Popup({
-            focusAfterOpen: false,
-            maxWidth: '315px',
-        })
-            .setLngLat(props.center)
-            .setHTML(html)
-            .addTo(map);
-    } else {
-        if (!data.features.length) return;
-        const bounds = getBounds(
-            data.features.map((feature) => feature.geometry.coordinates)
-        );
-        map.fitBounds(bounds, { padding: 50, duration: 0 });
+        openPopup(highlightedFeature);
+
+        return;
     }
 
-    observeResize(map);
-    mapRef.value = map;
+    if (!data.features.length) return;
+    const bounds = getBounds(
+        data.features.map((feature) => feature.geometry.coordinates)
+    );
+
+    map.fitBounds(bounds, { padding: 50, duration: 0 });
 };
 
 const getBounds = (points) => {
@@ -238,8 +244,17 @@ const zoomCluster = function (e) {
     );
 };
 
-const openPopup = function (e) {
-    popupFeature.value = e.features[0];
+const openPopup = function (feature) {
+    popupFeature.value = feature;
+    nextTick(() => {
+        new mapboxgl.Popup({
+            focusAfterOpen: false,
+            maxWidth: '315px',
+        })
+            .setLngLat(popupFeature.value.geometry.coordinates)
+            .setHTML(popup.value.outerHTML)
+            .addTo(mapRef.value);
+    });
 };
 
 const setCursorPointer = function () {
