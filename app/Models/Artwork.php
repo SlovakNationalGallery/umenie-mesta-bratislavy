@@ -229,7 +229,7 @@ class Artwork extends Model
     public function currentLocation()
     {
         return $this->hasOneDeepFromRelations($this->locations())
-            ->current()
+            ->orderByDesc('is_current')
             ->orderBy('artwork_location.order')
             ->limit(1);
     }
