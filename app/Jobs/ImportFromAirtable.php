@@ -214,6 +214,12 @@ class ImportFromAirtable implements ShouldQueue
             Keyword::whereNotIn('id', $keywords->pluck('id'))->delete();
             Location::whereNotIn('id', $locations->pluck('id'))->delete();
             Material::whereNotIn('id', $materials->pluck('id'))->delete();
+            // Cleanup media attached to deleted photos
+            Media::destroy(
+                Media::where('model_type', Photo::class)
+                    ->whereNotIn('model_id', $photos->pluck('id'))
+                    ->pluck('id')
+            );
             Photo::whereNotIn('id', $photos->pluck('id'))->delete();
             Proprietor::whereNotIn('id', $proprietors->pluck('id'))->delete();
             Registration::whereNotIn(
@@ -536,19 +542,6 @@ class ImportFromAirtable implements ShouldQueue
             });
         });
 
-        // Photo media (Airtable attachments)
-        $upstreamMediaAirtableIds = $photos
-            ->flatMap(fn($p) => $p['media'])
-            ->pluck('id');
-
-        // Cleanup media no longer in upstream
-        Media::destroy(
-            Media::whereNotIn(
-                'custom_properties->airtable_id',
-                $upstreamMediaAirtableIds
-            )->pluck('id')
-        );
-
         $photos->each(function ($upstreamPhoto) {
             $photo = Photo::find($upstreamPhoto['id']);
             $importedAirtableIds = $photo
@@ -563,6 +556,16 @@ class ImportFromAirtable implements ShouldQueue
             if ($importedAirtableIds == $upstreamAirtableIds) {
                 return;
             }
+
+            // Deletes
+            $deletedAirtableIds = $importedAirtableIds->diff(
+                $upstreamAirtableIds
+            );
+
+            $photo
+                ->media()
+                ->whereIn('custom_properties->airtable_id', $deletedAirtableIds)
+                ->each(fn($media) => $media->delete()); // Media::destroy does not work here for some reason
 
             // Inserts
             $unimportedAirtableIds = $upstreamAirtableIds->diff(
