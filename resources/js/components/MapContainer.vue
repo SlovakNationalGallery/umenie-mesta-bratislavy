@@ -129,8 +129,12 @@ const loaded = ([{ data }, map]) => {
 
         if (!highlightedFeature) return;
 
+        const [centerX, centerY] = highlightedFeature.geometry.coordinates;
         map.easeTo({
-            center: highlightedFeature.geometry.coordinates,
+            center: [
+                centerX,
+                parseFloat(centerY) + 0.0006, // adjust so that the popup fits
+            ],
             zoom: props.zoom,
             duration: 0,
         });
