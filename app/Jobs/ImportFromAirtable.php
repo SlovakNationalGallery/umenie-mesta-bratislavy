@@ -31,6 +31,11 @@ class ImportFromAirtable implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /**
+     * The number of seconds the job can run before timing out.
+     */
+    public $timeout = 5 * 60;
+
     protected static $tables = [
         'artworks' => [
             'id' => 'tblsQiI0KYuaDvPZ5',
