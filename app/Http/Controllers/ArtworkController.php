@@ -20,7 +20,7 @@ class ArtworkController extends Controller
             ->presentable()
             ->filteredBySearchRequest($request)
             ->with(['authors', 'coverPhotoMedia', 'yearBuilt'])
-            ->orderByDesc('created_at')
+            ->orderByDesc('is_promoted', 'created_at')
             ->paginate(12);
 
         return view('artworks.index', compact(['artworks', 'categories']));
