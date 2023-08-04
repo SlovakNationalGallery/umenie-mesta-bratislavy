@@ -57,7 +57,7 @@
                     <div>
                         <hr class="neutral-100 mt-6 lg:mt-8" />
 
-                        <h4 class="font-medium mt-6 lg:mt-8">Autori</h4>
+                        <h4 class="font-medium mt-6 lg:mt-8">Autorstvo</h4>
                         <ul>
                             @foreach ($artwork->authors as $author)
                                 <li>
@@ -69,19 +69,21 @@
                             @endforeach
                         </ul>
 
-                        <h4 class="font-medium mt-4 lg:mt-6">Spoluautori</h4>
-                        <ul>
-                            @foreach ($artwork->coauthors as $coauthor)
-                                <li>
-                                    <a href="{{ route('artworks.index', ['authors[]' => $coauthor->id]) }}"
-                                        class="underline">
-                                        {{ $coauthor->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @if (count($artwork->coauthors) > 0)
+                            <h4 class="font-medium mt-4 lg:mt-6">Spoluautorstvo</h4>
+                            <ul>
+                                @foreach ($artwork->coauthors as $coauthor)
+                                    <li>
+                                        <a href="{{ route('artworks.index', ['authors[]' => $coauthor->id]) }}"
+                                            class="underline">
+                                            {{ $coauthor->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
 
-                        <hr class="neutral-100 mt-6" />
+                        <hr class="neutral-100 mt-6 lg:mt-8" />
 
                         <h4 class="font-medium mt-8">Roky</h4>
                         <ul>
