@@ -51,6 +51,7 @@
         <div v-show="openedLightbox !== null" class="fixed inset-0 z-10">
             <div
                 class="absolute inset-0 h-full lg:px-10 bg-white/95 overflow-hidden"
+                @click="handleOpenLightbox(null)"
             >
                 <div class="absolute inset-4 flex flex-col mt-24">
                     <div
@@ -70,20 +71,22 @@
                                     class="object-contain w-full h-full"
                                 />
                             </div>
-                            <div
-                                class="mt-6 mx-6 pb-1 lg:pb-2 font-medium text-xl text-center text-neutral-800"
-                            >
-                                {{ photos[i]?.description }}
-                            </div>
-                            <div
-                                :class="[
-                                    {
-                                        invisible: !photos[i]?.source,
-                                    },
-                                    'mx-6 pb-10 lg:pb-20 font-medium text-sm text-center text-neutral-800',
-                                ]"
-                            >
-                                Zdroj: {{ photos[i]?.source }}
+                            <div @click.stop>
+                                <div
+                                    class="mt-6 mx-6 pb-1 lg:pb-2 font-medium text-xl text-center text-neutral-800"
+                                >
+                                    {{ photos[i]?.description }}
+                                </div>
+                                <div
+                                    :class="[
+                                        {
+                                            invisible: !photos[i]?.source,
+                                        },
+                                        'mx-6 pb-10 lg:pb-20 font-medium text-sm text-center text-neutral-800',
+                                    ]"
+                                >
+                                    Zdroj: {{ photos[i]?.source }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -173,6 +176,7 @@ const intersectionObserver = new IntersectionObserver(
 const onKeyDown = ({ code }) => {
     if (code === 'ArrowRight') nextPhoto();
     if (code === 'ArrowLeft') previousPhoto();
+    if (code === 'Escape') handleOpenLightbox(null);
 };
 
 onMounted(() => {
