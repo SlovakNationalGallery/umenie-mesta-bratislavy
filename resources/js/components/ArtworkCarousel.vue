@@ -73,22 +73,17 @@
                             <div
                                 class="mt-6 mx-6 pb-1 lg:pb-2 font-medium text-xl text-center text-neutral-800"
                             >
-                                {{
-                                    openedLightbox !== null &&
-                                    photos[openedLightbox]?.description
-                                }}
+                                {{ photos[i]?.description }}
                             </div>
                             <div
                                 :class="[
                                     {
-                                        invisible:
-                                            openedLightbox !== null &&
-                                            !photos[openedLightbox]?.source,
+                                        invisible: !photos[i]?.source,
                                     },
                                     'mx-6 pb-10 lg:pb-20 font-medium text-sm text-center text-neutral-800',
                                 ]"
                             >
-                                Zdroj: {{ photos[openedLightbox]?.source }}
+                                Zdroj: {{ photos[i]?.source }}
                             </div>
                         </div>
                     </div>
