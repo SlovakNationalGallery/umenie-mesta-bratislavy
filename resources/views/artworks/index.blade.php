@@ -74,9 +74,9 @@
                         <search.filter-search :options="options" placeholder="Zadajte kľúčové slovo"
                             v-slot="{ searchResults }">
                             <div v-for="option, index in options" :key="option.value" class="flex">
-                                <input type="checkbox" :id="'filters.keywords.' + index" name="categories"
+                                <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
                                     :value="option.value" @change="onCheckboxChange"
-                                    :checked="query.categories.includes(option.value)"
+                                    :checked="query.keywords.includes(option.value)"
                                     class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
                                 <label :for="'filters.keywords.' + index" class="whitespace-nowrap">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
