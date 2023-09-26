@@ -73,41 +73,34 @@
             <div class="mt-8 lg:mt-0">
                 <div class="prose mt-2 lg:text-2xl text-neutral-800">
                     <p>
-                        Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od druhej polovice
+                        Ambíciou projektu je vytvoriť dynamickú a otvorenú databázu, ktorá sa bude pravidelne dopĺňať o nové
+                        poznatky z výskumu, aktualizovať aj revidovať. Základným kritériom kurátorského výberu do databázy
+                        Umenia mesta Bratislavy GMB je tvorba profesionálnych autorov*iek (výtvarných umelcov*kýň,
+                        architektov*tiek, dizajnérov*iek a súvisiacich odborov) z obdobia po roku 1945 zastúpených v
+                        zbierkach GMB či v iných zbierkotvorných a výskumných inštitúciách. Pozornosť sa zameriava na
+                        najviac ohrozené diela, ktoré potrebujú ochranu a odborné postupy pri údržbe i obnove.
+                    </p>
+
+                    <p>Cieľom je prezentovať a popularizovať pestrú škálu umenia vo verejnom priestore od druhej polovice
                         20.&nbsp;storočia až po súčasnosť a priniesť čo najviac informácií o význame, okolnostiach vzniku a
                         príbehoch diel, o ich autoroch, použitých materiáloch či výtvarných technikách. Zámerom je tiež
-                        získať
-                        aktuálne údaje o stave a presnom umiestnení diel, ich GPS súradniciach, vlastníkoch a
+                        získať aktuálne údaje o stave a presnom umiestnení diel, ich GPS súradniciach, vlastníkoch a
                         správcoch. Pri väčšine diel vo verejnom priestore sú práve nejasné vlastnícke vzťahy príčinou
-                        chýbajúcej
-                        starostlivosti a nevhodného zaobchádzania.
-                    </p>
-
-                    <p>Ambíciou projektu je dynamická a otvorená databáza, ktorá sa bude pravidelne doplňovať
-                        o nové poznatky z výskumu, aktualizovať a revidovať. Základným kritériom pre kurátorského
-                        výberu do databázy UVP GMB je tvorba profesionálnych autorov (výtvarných umelcov, architektov,
-                        dizajnérov a
-                        súvisiacich odborov) z obdobia po roku 1945, zastúpených v zbierkach
-                        GMB aj iných zbierkotvorných a výskumných inštitúcií. Pozornosť sa zameriava na najviac
-                        ohrozené diela, ktoré potrebujú ochranu a odborné postupy pri údržbe a obnove.
-                        V ďalších rokoch je cieľom dopĺňať do databázy aj diela zo starších období.</p>
+                        chýbajúcej starostlivosti a nevhodného zaobchádzania.</p>
 
                     <p>
-                        Údaje v databáze sú tvorené tak, aby iba bolo možné postupne prepájať s <a
-                            href="https://www.webumenia.sk/" class="hover:text-red-500" target="_blank">Web umenia</a> a
-                        ďalšími
-                        registrami či katalógmi zameranými napríklad na galerijné a múzejne zbierky, modernú architektúru i
-                        národné kultúrne pamiatky a s databázami diel vo verejnom priestore v iných mestách.
+                        Údaje v databáze sú tvorené tak, aby sa postupne dali prepájať s <a href="https://www.webumenia.sk/"
+                            class="hover:text-red-500" target="_blank">Web umenia</a> a s ďalšími registrami či katalógmi
+                        zameranými napríklad na galerijné a múzejné zbierky, modernú architektúru i národné kultúrne
+                        pamiatky a s databázami diel vo verejnom priestore v iných mestách.
                     </p>
-
                     <p>
-                        GMB podniká potrebné kroky na zisťovanie autorov diel a archívnej fotodokumentácie.
-                        Dáta budú na webstránke pravidelne aktualizované.
+                        Galéria mesta Bratislavy podniká potrebné kroky na zisťovanie autorov diel a archívnej
+                        fotodokumentácie. Autorskoprávne nároky k dielam boli riadne vysporiadané. Údaje sa budú na
+                        webstránke pravidelne aktualizovať.
                     </p>
-
                     <p>
-                        Projekt sa realizuje vďaka finančnej podpore hlavného mesta SR Bratislava a Fondu na podporu
-                        umenia.
+                        Projekt sa realizuje vďaka finančnej podpore hlavného mesta SR Bratislava a Fondu na podporu umenia.
                     </p>
                 </div>
             </div>
@@ -129,18 +122,19 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Autorky koncepcie</dt>
-                    <dd class="col-span-3">Zoja Droppová, Katarína Trnovská</dd>
+                    <dd class="col-span-3">Zoja Droppová, Katarína Trnovská, Linda Blahová</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
-                    <dt class="font-medium col-span-2">Texty k dielam</dt>
-                    <dd class="col-span-3">Zoja Droppová (ZD), Sabina Jankovičová (SJ)</dd>
+                    <dt class="font-medium col-span-2">Texty o dielach</dt>
+                    <dd class="col-span-3">Zoja Droppová (ZD), Sabina Jankovičová (SJ), Nikoleta Bukovská (NB), Patrik Baxa
+                        (PB), Zuzana Zvarová (ZZ)</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Fotografie</dt>
                     <dd class="col-span-3">Matej Hakár, Jana Hamšíková, Andrej Kapcár, Zoja Droppová, Sabina Jankovičová;
                         archívy GMB, AMB, SNA. mestských častí; <a href="https://www.webumenia.sk/"
                             class="underline hover:text-red-500" target="_blank">webumenia.sk</a>;
-                        archívy bývalých umeleckých zväzov a fondov, projektových ústavov, autorov/iek diel a dedičov/iek.
+                        archívy bývalých umeleckých zväzov a fondov, projektových ústavov, autorov*iek diel a dedičov*iek.
                     </dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
@@ -150,11 +144,12 @@
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Vývoj databázy</dt>
                     <dd class="col-span-3">
-                        lab.SNG (Michal Čudrnák, Ernest Walzel, František Sebestyén, Rastislav Chynoranský, Igor Rjabinin)
+                        lab.SNG (Michal Čudrnák, Ernest Walzel, František Michal Sebestyén, Rastislav Chynoranský, Igor
+                        Rjabinin)
                     </dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
-                    <dt class="font-medium col-span-2">Používateľský prieskum</dt>
+                    <dt class="font-medium col-span-2">Používateľský prieskum, koordinácia vývoja</dt>
                     <dd class="col-span-3">Katarína Vass</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
@@ -172,11 +167,9 @@
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Poďakovanie</dt>
                     <dd class="col-span-3">Mestský ústav ochrany pamiatok, Slovenská národná galéria, Oddelenie kultúry
-                        magistrátu hl.
-                        mesta SR Bratislava, autori/ky diel, pamätníci/čky a dediči/ky</dd>
+                        magistrátu hl. mesta SR Bratislava, autori*ky diel, pamätníci*čky a dediči*ky.</dd>
                 </div>
             </dl>
         </div>
     </div>
 @endsection
-
