@@ -120,10 +120,34 @@
                             </svg>
                         </a>
                         <a href="http://muop.bratislava.sk/" target="_blank" class="flex-shrink-0">
-                            <img src="{{ asset('images/muop_logo.png') }}" class="object-contain invert h-12" />
+                            <img src="{{ asset('images/logos/muop_logo.png') }}" class="object-contain invert h-12" />
                         </a>
                         <a href="https://bratislavskykraj.sk/" target="_blank" class="flex-shrink-0">
-                            <img src="{{ asset('images/bsk_logo.svg') }}" class="h-10 lg:h-12" />
+                            <img src="{{ asset('images/logos/bsk_logo.svg') }}" class="h-10 lg:h-12" />
+                        </a>
+                    </div>
+                    <h3 class="text-xl mt-10 lg:mt-14 font-medium lg:text-3xl">Mediálny partneri</h3>
+                    <div class="flex mt-6 gap-x-10 gap-y-6 items-center flex-wrap h-15">
+                        <a href="https://artalk.cz" target="_blank">
+                            <img src="{{ asset('images/logos/arttalk_logo.png') }}" class="h-10 lg:h-12"  />
+                        </a>
+                        <a href="https://flashart.cz" target="_blank">
+                            <img src="{{ asset('images/logos/flashart_logo.png') }}" class="h-6 lg:h-10"  />
+                        </a>
+                        <a href="https://devin.rtvs.sk/" target="_blank">
+                            <img src="{{ asset('images/logos/devin_logo.png') }}" class="h-8 lg:h-10"  />
+                        </a>
+                        <a href="https://fm.rtvs.sk/" target="_blank">
+                            <img src="{{ asset('images/logos/fm_logo.png') }}" class="h-8 lg:h-10"  />
+                        </a>
+                        <a href="https://goout.net/sk/" target="_blank">
+                            <img src="{{ asset('images/logos/goout_logo.png') }}" class="h-6 lg:h-10"  />
+                        </a>
+                        <a href="http://www.inba.sk/" target="_blank">
+                            <img src="{{ asset('images/logos/inba_logo.png') }}" class="h-6 lg:h-10"  />
+                        </a>
+                        <a href="https://www.bkis.sk" target="_blank">
+                            <img src="{{ asset('images/logos/bkis_logo.png') }}" class="h-12 lg:h-14"  />
                         </a>
                     </div>
                     <div class="lg:flex gap-x-16">
