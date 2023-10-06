@@ -126,7 +126,7 @@
                             <img src="{{ asset('images/logos/bsk_logo.svg') }}" class="h-10 lg:h-12" />
                         </a>
                     </div>
-                    <h3 class="text-xl mt-10 lg:mt-14 font-medium lg:text-3xl">Mediálny partneri</h3>
+                    <h3 class="text-xl mt-10 lg:mt-14 font-medium lg:text-3xl">Mediálni partneri</h3>
                     <div class="flex mt-6 gap-x-10 gap-y-6 items-center flex-wrap h-15">
                         <a href="https://artalk.cz" target="_blank">
                             <img src="{{ asset('images/logos/arttalk_logo.png') }}" class="h-10 lg:h-12"  />
