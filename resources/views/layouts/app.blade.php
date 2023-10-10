@@ -134,6 +134,9 @@
                         <a href="https://flashart.cz" target="_blank">
                             <img src="{{ asset('images/logos/flashart_logo.png') }}" class="h-6 lg:h-10"  />
                         </a>
+                        <a href="https://rtvs.sk/" target="_blank">
+                            <img src="{{ asset('images/logos/rtvs_logo.png') }}" class="h-10 lg:h-12"  />
+                        </a>
                         <a href="https://devin.rtvs.sk/" target="_blank">
                             <img src="{{ asset('images/logos/devin_logo.png') }}" class="h-8 lg:h-10"  />
                         </a>
