@@ -44,7 +44,7 @@
                     <div class="lg:order-last">
                         <hr class="neutral-100 hidden lg:block lg:mt-8" />
 
-                        <div class="mt-4 flex gap-4 lg:mt-8">
+                        <div class="mt-4 flex flex-wrap gap-4 lg:mt-8">
                             @foreach ($artwork->keywords as $keyword)
                                 <a href="{{ route('artworks.index', ['keywords[]' => $keyword->id]) }}"
                                     class="px-2 py-1 border border-neutral-800">
