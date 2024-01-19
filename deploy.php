@@ -5,7 +5,6 @@ require 'recipe/laravel.php';
 
 // Config
 set('bin/php', 'php8.1');
-
 set(
     'repository',
     'git@github.com:SlovakNationalGallery/umenie-mesta-bratislavy.git'
