@@ -1,5 +1,6 @@
 {
     "singleQuote": true,
+    "plugins": ["@prettier/plugin-php", "@shufo/prettier-plugin-blade"],
     "overrides": [
         {
             "files": ["*.blade.php"],
