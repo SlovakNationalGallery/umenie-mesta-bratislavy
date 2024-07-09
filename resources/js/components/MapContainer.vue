@@ -151,7 +151,7 @@ const loaded = ([{ data }, map]) => {
         data.features.map((feature) => feature.geometry.coordinates),
     );
 
-    map.fitBounds(bounds, { padding: 50, duration: 0 });
+    map.fitBounds(bounds, { padding: 50, duration: 0, maxZoom: 16 });
 };
 
 const getBounds = (points) => {
