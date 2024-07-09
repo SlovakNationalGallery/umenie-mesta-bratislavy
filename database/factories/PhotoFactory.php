@@ -26,7 +26,9 @@ class PhotoFactory extends Factory
     {
         return $this->afterCreating(function (Photo $photo) {
             $photo
-                ->addMediaFromUrl($this->faker->imageUrl())
+                ->addMediaFromBase64(
+                    'R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+                )
                 ->toMediaCollection('photos');
         });
     }

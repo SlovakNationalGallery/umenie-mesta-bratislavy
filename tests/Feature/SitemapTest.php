@@ -21,12 +21,10 @@ class SitemapTest extends TestCase
             ->assertSee(route('artworks.index'));
     }
 
-    public function tests_litsts_presentable_artworks()
+    public function test_sitemap_lists_presentable_artworks()
     {
         $privateArtwork = Artwork::factory()->create();
-        $presentableArtwork = Artwork::factory()
-            ->presentable()
-            ->create();
+        $presentableArtwork = Artwork::factory()->presentable()->create();
 
         $this->get('/sitemap.xml')
             ->assertSee(route('artworks.show', $presentableArtwork))
