@@ -268,7 +268,7 @@ class Artwork extends Model
         return Attribute::get(
             fn() => Str::of($this->description)
                 ->replace("\n", "\n\n")
-                ->markdown(),
+                ->airtableMarkdown(),
         );
     }
 
