@@ -114,11 +114,11 @@
             <dl class="divide-neutral-400 divide-y mt-8 lg:mt-0">
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Odborná garantka</dt>
-                    <dd class="col-span-3">Zoja Droppová, droppova@gmb.sk</dd>
+                    <dd class="col-span-3">Zoja Droppová</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Koordinátorka projektu</dt>
-                    <dd class="col-span-3">Linda Blahová, blahova@gmb.sk</dd>
+                    <dd class="col-span-3">Linda Blahová, linda.blahova@gmb.sk</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Autorky koncepcie</dt>
@@ -126,14 +126,15 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Texty o dielach</dt>
-                    <dd class="col-span-3">Zoja Droppová (ZD), Sabina Jankovičová (SJ), Nikoleta Bukovská (NB), Patrik Baxa
-                        (PB), Zuzana Zvarová (ZZ)</dd>
+                    <dd class="col-span-3">Zoja Droppová (ZD), Sabina Jankovičová (SJ), Nikoleta Bukovská (NB), Zuzana
+                        Zvarová (ZZ), Patrik Baxa (PB), Vladimíra Büngerová (VB), Peter Kršák (PK)</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Fotografie</dt>
-                    <dd class="col-span-3">Matej Hakár, Jana Hamšíková, Andrej Kapcár, Zoja Droppová, Sabina Jankovičová;
-                        archívy GMB, AMB, SNA. mestských častí; <a href="https://www.webumenia.sk/"
-                            class="underline hover:text-red-500" target="_blank">webumenia.sk</a>;
+                    <dd class="col-span-3">Matej Hakár, Jana Hamšíková, Andrej Kapcár, Zoja Droppová, Monika Kováčová (BSK),
+                        Martin Kleibl, Pavel Vnuk, Peter Kršák, Sabina Jankovičová; archívy GMB, AMB, SNA; mestských častí;
+                        <a href="https://www.webumenia.sk/" class="underline hover:text-red-500"
+                            target="_blank">webumenia.sk</a>;
                         archívy bývalých umeleckých zväzov a fondov, projektových ústavov, autorov*iek diel a dedičov*iek.
                     </dd>
                 </div>
@@ -154,7 +155,7 @@
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Jazyková korektúra</dt>
-                    <dd class="col-span-3">Daniela Marsinová</dd>
+                    <dd class="col-span-3">Daniela Marsinová, Miroslava Kuracinová Valová</dd>
                 </div>
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Spolupráca na databáze</dt>
@@ -167,7 +168,8 @@
                 <div class="grid grid-cols-5 py-4">
                     <dt class="font-medium col-span-2">Poďakovanie</dt>
                     <dd class="col-span-3">Mestský ústav ochrany pamiatok, Slovenská národná galéria, Oddelenie kultúry
-                        magistrátu hl. mesta SR Bratislava, autori*ky diel, pamätníci*čky a dediči*ky.</dd>
+                        magistrátu hl. mesta SR Bratislava, Slovenský národný archív, Archív mesta Bratislavy, Archív
+                        Slovenskej technickej univerzity, autori*ky diel, pamätníci*čky a dediči*ky.</dd>
                 </div>
             </dl>
         </div>
