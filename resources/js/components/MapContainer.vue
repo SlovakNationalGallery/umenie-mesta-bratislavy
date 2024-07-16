@@ -45,7 +45,7 @@ const mapRef = ref(null);
 const popup = ref(null);
 const resizeObserver = ref(null);
 const dataLoading = axios.get(
-    `/api/artworks/map-points${window.location.search}`
+    `/api/artworks/map-points${window.location.search}`,
 );
 
 watch(query, async (newQuery) => {
@@ -54,16 +54,18 @@ watch(query, async (newQuery) => {
             stringifyUrl({
                 url: '/api/artworks/map-points',
                 query: newQuery,
-            })
+            }),
         )
         .then(({ data }) => {
             mapRef.value.getSource('artworks').setData(data);
             if (!data.features.length) return;
             mapRef.value.fitBounds(
                 getBounds(
-                    data.features.map((feature) => feature.geometry.coordinates)
+                    data.features.map(
+                        (feature) => feature.geometry.coordinates,
+                    ),
                 ),
-                { padding: 50, linear: true }
+                { padding: 50, linear: true },
             );
         });
 });
@@ -114,7 +116,7 @@ const loaded = ([{ data }, map]) => {
             new mapboxgl.NavigationControl({
                 showCompass: false,
             }),
-            'top-left'
+            'top-left',
         )
         .addControl(new mapboxgl.GeolocateControl(), 'top-right');
 
@@ -124,7 +126,7 @@ const loaded = ([{ data }, map]) => {
 
     if (props.highlightId) {
         const highlightedFeature = data.features.find(
-            (feature) => feature.properties.id === props.highlightId
+            (feature) => feature.properties.id === props.highlightId,
         );
 
         if (!highlightedFeature) return;
@@ -146,10 +148,10 @@ const loaded = ([{ data }, map]) => {
 
     if (!data.features.length) return;
     const bounds = getBounds(
-        data.features.map((feature) => feature.geometry.coordinates)
+        data.features.map((feature) => feature.geometry.coordinates),
     );
 
-    map.fitBounds(bounds, { padding: 50, duration: 0 });
+    map.fitBounds(bounds, { padding: 50, duration: 0, maxZoom: 16 });
 };
 
 const getBounds = (points) => {
@@ -245,7 +247,7 @@ const zoomCluster = function (e) {
                 center: features[0].geometry.coordinates,
                 zoom,
             });
-        }
+        },
     );
 };
 
