@@ -27,11 +27,11 @@ class Artwork extends Model
             'artworks.stats',
             fn() => [
                 'lastUpdate' => optional(
-                    self::orderByDesc('updated_at')->first()
+                    self::orderByDesc('updated_at')->first(),
                 )->updated_at,
                 'count' => self::published()->count(),
                 'locations' => Location::selectRaw(
-                    'count(id) as count, borough'
+                    'count(id) as count, borough',
                 )
                     ->current()
                     ->whereHas('artworks', function (Builder $query) {
@@ -42,7 +42,7 @@ class Artwork extends Model
                     ->groupBy('district')
                     ->collect() // Turn to Laravel collection
                     ->except(''), // Filter out locations with empty district
-            ]
+            ],
         );
     }
 
@@ -65,7 +65,7 @@ class Artwork extends Model
                 'artwork_location',
                 'artwork_location.artwork_id',
                 '=',
-                'artworks.id'
+                'artworks.id',
             )
             ->join('locations', function (JoinClause $join) {
                 $join
@@ -75,24 +75,24 @@ class Artwork extends Model
             })
             ->selectRaw(
                 'ST_Distance_Sphere(point(?, ?), point(locations.gps_lon, locations.gps_lat)) as distance',
-                [$otherArtworkLocation->gps_lon, $otherArtworkLocation->gps_lat]
+                [
+                    $otherArtworkLocation->gps_lon,
+                    $otherArtworkLocation->gps_lat,
+                ],
             );
     }
 
     // default scope for those artworks that we can actually display
     public function scopePresentable($query)
     {
-        $query
-            ->published()
-            ->has('coverPhotoMedia')
-            ->has('locations');
+        $query->published()->has('coverPhotoMedia')->has('locations');
     }
 
     public function scopeFilteredBySearchRequest($query, Request $request)
     {
         $request->whenFilled('boroughs', function ($boroughs) use ($query) {
             $query->whereHas('locations', function (Builder $query) use (
-                $boroughs
+                $boroughs,
             ) {
                 $query->current()->whereIn('borough', $boroughs);
             });
@@ -100,17 +100,17 @@ class Artwork extends Model
 
         $request->whenFilled('authors', function ($authorIds) use ($query) {
             $query->whereHas('authorsAndCoauthors', function (
-                Builder $query
+                Builder $query,
             ) use ($authorIds) {
                 $query->whereIn('id', $authorIds);
             });
         });
 
         $request->whenFilled('categories', function ($categoryIds) use (
-            $query
+            $query,
         ) {
             $query->whereHas('categories', function (Builder $query) use (
-                $categoryIds
+                $categoryIds,
             ) {
                 $query->whereIn('id', $categoryIds);
             });
@@ -118,7 +118,7 @@ class Artwork extends Model
 
         $request->whenFilled('keywords', function ($keywordIds) use ($query) {
             $query->whereHas('keywords', function (Builder $query) use (
-                $keywordIds
+                $keywordIds,
             ) {
                 $query->whereIn('id', $keywordIds);
             });
@@ -245,7 +245,7 @@ class Artwork extends Model
     {
         return $this->hasOneDeepFromRelations(
             $this->photos(),
-            (new Photo())->media()
+            (new Photo())->media(),
         )
             ->orderBy('artwork_photo.order')
             ->orderBy('media.order_column')
@@ -258,8 +258,8 @@ class Artwork extends Model
             fn() => $this->conditions->contains(
                 fn(Condition $condition) => str($condition->name)
                     ->trim()
-                    ->exactly('zničené, odstránené')
-            )
+                    ->exactly('zničené, odstránené'),
+            ),
         );
     }
 
@@ -268,7 +268,7 @@ class Artwork extends Model
         return Attribute::get(
             fn() => Str::of($this->description)
                 ->replace("\n", "\n\n")
-                ->markdown()
+                ->airtableMarkdown(),
         );
     }
 
@@ -299,8 +299,8 @@ class Artwork extends Model
                             'url' => $m->getUrl(),
                             'description' => $photo->description,
                             'source' => $photo->source,
-                        ]
-                    )
+                        ],
+                    ),
                 );
         });
     }
