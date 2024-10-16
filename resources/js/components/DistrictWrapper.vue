@@ -1,5 +1,5 @@
 <template>
-    <div class="pointer-events-none">
+    <div class="pointer-events-none group">
         <slot
             :handleHoverChange="handleHoverChange"
             :locationCount="locationCount"
@@ -13,7 +13,7 @@
         >
             <a
                 :href="filterURL"
-                v-if="!isHovered && locationCount"
+                v-if="locationCount"
                 :class="[
                     { 'w-[2.5rem] h-[2.5rem]': locationCount < 10 },
                     {
@@ -48,33 +48,25 @@
                 ></div>
             </a>
         </transition>
-        <transition
-            enter-from-class="opacity-0 translate-y-6"
-            leave-to-class="opacity-0 translate-y-6"
-            enter-active-class="transition-all ease-out duration-300"
-            leave-active-class="transition-all ease-out duration-300"
+        <div
+            class="opacity-0 lg:translate-y-0 lg:group-hover:translate-y-6 duration-200 translate-y-6 lg:group-hover:opacity-100 block rounded-lg absolute drop-shadow-md bg-white py-4 px-6 z-20 whitespace-nowrap left-1/2 top-1/2"
         >
-            <div
-                v-if="isHovered"
-                class="hidden lg:block rounded-lg absolute drop-shadow-md bg-white py-4 px-6 z-20 whitespace-nowrap left-1/2 top-1/2"
-            >
-                <h4 class="text-2xl font-medium">{{ name }}</h4>
-                <ul v-if="locations" class="text-xl pb-3">
-                    <li v-for="location in locations">
-                        {{ location.borough }}{{ ` (${location.count})` }}
-                    </li>
-                </ul>
-                <ul v-if="unProcessedBoroughs.length" class="text-xl">
-                    Pripravujeme:
-                    <li
-                        class="text-neutral-500"
-                        v-for="unProcessedBorough in unProcessedBoroughs"
-                    >
-                        {{ unProcessedBorough }}
-                    </li>
-                </ul>
-            </div>
-        </transition>
+            <h4 class="text-2xl font-medium">{{ name }}</h4>
+            <ul v-if="locations" class="text-xl pb-3">
+                <li v-for="location in locations">
+                    {{ location.borough }}{{ ` (${location.count})` }}
+                </li>
+            </ul>
+            <ul v-if="unProcessedBoroughs.length" class="text-xl">
+                Pripravujeme:
+                <li
+                    class="text-neutral-500"
+                    v-for="unProcessedBorough in unProcessedBoroughs"
+                >
+                    {{ unProcessedBorough }}
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -125,7 +117,4 @@ const unProcessedBoroughs = computed(() =>
                 .includes(district)
     )
 );
-
-const isHovered = ref(false);
-const handleHoverChange = (value) => (isHovered.value = value);
 </script>
