@@ -25,7 +25,7 @@
                             locationCount > 49 && locationCount < 100,
                     },
                     { 'w-[4.5rem] h-[4.5rem]': locationCount > 99 },
-                    'absolute text-white bg-red-500 left-1/4 top-1/2 rounded-full font-semibold flex justify-center items-center pointer-events-auto',
+                    'absolute text-white bg-red-500 z-10 left-1/4 top-1/2 rounded-full font-semibold flex justify-center items-center pointer-events-auto',
                 ]"
             >
                 <span class="absolute z-10 bg-red-500">{{
