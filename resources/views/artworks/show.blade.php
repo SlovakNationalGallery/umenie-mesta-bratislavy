@@ -10,13 +10,13 @@
 
 @section('content')
     <div class="mx-auto w-full max-w-screen-3xl px-4 lg:px-14">
-        <a href="{{ route('artworks.index') }}"
+        <back-button fallback="{{ route('artworks.index') }}"
             class="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-white stroke-neutral-800 stroke-2">
             <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20.25 8.99902H1.75" />
                 <path d="M9.15039 16.3996L1.75039 8.99961L9.15039 1.59961" />
             </svg>
-        </a>
+        </back-button>
     </div>
     <div class="mx-auto max-w-5xl bg-neutral-100 p-4 pt-0 lg:pb-0">
         <artwork-carousel :photos="{{ Js::from($artwork->photoMediaForCarousel) }}">

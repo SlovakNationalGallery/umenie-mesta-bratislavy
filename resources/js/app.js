@@ -15,6 +15,7 @@ import MobileFilterDialog from './components/search/MobileFilterDialog.vue';
 import SearchMap from './components/search/Map.vue';
 import ArtworkCarousel from './components/ArtworkCarousel.vue';
 import FilterSearch from './components/search/FilterSearch.vue';
+import BackButton from './components/BackButton.vue';
 
 const app = createApp({});
 app.component('headless.popover-group', PopoverGroup);
@@ -31,5 +32,6 @@ app.component('search.disclosure-filter', DisclosureFilter);
 app.component('search.filter-search', FilterSearch);
 app.component('search.artworks-query-observer', ArtworksQueryObserver);
 app.component('artwork-carousel', ArtworkCarousel);
+app.component('back-button', BackButton);
 
 app.mount('#app');
