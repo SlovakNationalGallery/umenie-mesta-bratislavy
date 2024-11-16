@@ -30,13 +30,16 @@ class Artwork extends Model
                     self::orderByDesc('updated_at')->first(),
                 )->updated_at,
                 'count' => self::published()->count(),
-                'locations' => Location::selectRaw(
-                    'count(id) as count, borough',
-                )
+                'locations' => Location::selectRaw('count(*) as count, borough')
                     ->current()
-                    ->whereHas('artworks', function (Builder $query) {
-                        $query->published();
-                    })
+                    ->join(
+                        'artwork_location',
+                        'locations.id',
+                        '=',
+                        'location_id',
+                    )
+                    ->join('artworks', 'artworks.id', '=', 'artwork_id')
+                    ->where('artworks.is_published', true)
                     ->groupBy('borough')
                     ->get()
                     ->groupBy('district')
