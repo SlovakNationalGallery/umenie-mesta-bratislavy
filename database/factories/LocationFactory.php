@@ -23,12 +23,17 @@ class LocationFactory extends Factory
             // min and max roughly fitting inside Bratislava region
             'gps_lat' => fake()->longitude(
                 $min = 48.0789028,
-                $max = 48.1876039
+                $max = 48.1876039,
             ),
             'gps_lon' => fake()->longitude(
                 $min = 16.9797442,
-                $max = 17.2548144
+                $max = 17.2548144,
             ),
         ];
+    }
+
+    public function current()
+    {
+        return $this->state(fn() => ['is_current' => true]);
     }
 }

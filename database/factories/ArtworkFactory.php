@@ -23,9 +23,14 @@ class ArtworkFactory extends Factory
         ];
     }
 
+    public function published()
+    {
+        return $this->state(fn() => ['is_published' => true]);
+    }
+
     public function presentable(): Factory
     {
-        return $this->state(fn() => ['is_published' => true])
+        return $this->published()
             ->hasAttached(Location::factory(), [
                 'order' => 0,
             ])
