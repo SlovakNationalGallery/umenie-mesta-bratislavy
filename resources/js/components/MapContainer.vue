@@ -92,6 +92,16 @@ onUnmounted(() => {
     resizeObserver.value.disconnect();
 });
 
+const onGeolocateControlLoaded = (ctrlGeolocate) => {
+    const ctrlGeolocateIcon = ctrlGeolocate.querySelector(
+        '.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon',
+    );
+
+    if (ctrlGeolocate) ctrlGeolocate.setAttribute('aria-label', 'Lokalizuj ma');
+    if (ctrlGeolocateIcon)
+        ctrlGeolocateIcon.setAttribute('title', 'Lokalizuj ma');
+};
+
 const loaded = ([{ data }, map]) => {
     map.addSource('artworks', {
         type: 'geojson',
@@ -119,6 +129,17 @@ const loaded = ([{ data }, map]) => {
             'top-left',
         )
         .addControl(new mapboxgl.GeolocateControl(), 'top-right');
+
+    const checkGeolocateControlLoaded = () => {
+        const el = document.querySelector('.mapboxgl-ctrl-geolocate');
+        if (el) {
+            onGeolocateControlLoaded(el);
+        } else {
+            setTimeout(checkGeolocateControlLoaded, 100);
+        }
+    };
+
+    checkGeolocateControlLoaded();
 
     map.scrollZoom.disable();
     mapRef.value = map;
