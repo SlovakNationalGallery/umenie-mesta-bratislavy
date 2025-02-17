@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, filterSelections, ...controller }">
+    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, filterSelections, isShowMoreOpen, changeShowMoreOpen, ...controller }">
         <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto relative">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
@@ -57,7 +57,7 @@
                     <search.disclosure-filter label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
                         <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
-                            <div v-for="option, index in options" :key="option.value" class="flex">
+                            <div v-if="options?.length" v-for="option, index in options" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.categories.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.categories.includes(option.value)"
@@ -66,6 +66,8 @@
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
                             </div>
+                            <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                            >Žiadne možnosti</span>
                         </div>
                     </search.disclosure-filter>
 
@@ -84,12 +86,45 @@
                             </div>
                         </search.filter-search>
                     </search.disclosure-filter>
+
+                    <search.disclosure-filter label="Materiál" :selected-count="query.material.length"
+                        :options="filters.material" v-slot="{ options }">
+                        <search.filter-search :options="options" placeholder="Zadajte materiál"
+                            v-slot="{ searchResults }">
+                            <div v-for="option, index in options" :key="option.value" class="flex">
+                                <input type="checkbox" :id="'filters.material.' + index" name="material"
+                                    :value="option.value" @change="onCheckboxChange"
+                                    :checked="query.material.includes(option.value)"
+                                    class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
+                                <label :for="'filters.material.' + index" class="whitespace-nowrap">
+                                    @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                </label>
+                            </div>
+                        </search.filter-search>
+                    </search.disclosure-filter>
+                    
+                    <search.disclosure-filter label="Stav" :selected-count="query.state.length"
+                        :options="filters.state" v-slot="{ options }">
+                        <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
+                            <div v-if="options?.length" v-for="option, index in options" :key="option.value" class="flex">
+                                <input type="checkbox" :id="'filters.state.' + index" name="state"
+                                    :value="option.value" @change="onCheckboxChange"
+                                    :checked="query.state.includes(option.value)"
+                                    class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
+                                <label :for="'filters.state.' + index" class="whitespace-nowrap">
+                                    @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                </label>
+                            </div>
+                            <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                            >Žiadne možnosti</span>
+                        </div>
+                    </search.disclosure-filter>
                 </div>
             </search.mobile-filter-dialog>
 
             {{-- Desktop filter --}}
             <div class="flex justify-between">
-                <headless.popover-group class="gap-x-1 hidden lg:flex">
+                <headless.popover-group class="gap-2 flex-wrap hidden lg:flex">
                     <search.popover-filter label="Mestská časť" :selected-count="query.boroughs.length"
                         :options="filters.boroughs" :full-screen="true" v-slot="{ options }">
                         <div v-for="option, index in options" :key="option.value"
@@ -123,6 +158,7 @@
                             </label>
                         </div>
                     </search.popover-filter>
+
                     <search.popover-filter label="Autori*ky / Spoluautori*ky" :selected-count="query.authors.length"
                         :options="filters.authors" v-slot="{ options }">
                         <search.filter-search :options="options" placeholder="Napíšte meno autora"
@@ -142,7 +178,7 @@
                     <search.popover-filter label="Druh diela" :selected-count="query.categories.length"
                         :options="filters.categories" v-slot="{ options }">
                         <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
-                            <div v-for="option, index in options" :key="option.value" class="flex">
+                            <div v-if="options?.length" v-for="option, index in options" :key="option.value" class="flex">
                                 <input type="checkbox" :id="'filters.categories.' + index" name="categories"
                                     :value="option.value" @change="onCheckboxChange"
                                     :checked="query.categories.includes(option.value)"
@@ -151,27 +187,72 @@
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
                             </div>
+                            <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                            >Žiadne možnosti</span>    
                         </div>
                     </search.popover-filter>
 
-                    <search.popover-filter label="Kľúčové slová" :selected-count="query.keywords.length"
-                        :options="filters.keywords" v-slot="{ options }">
-                        <search.filter-search :options="options" placeholder="Zadajte kľúčové slovo"
-                            v-slot="{ searchResults }">
-                            <div v-for="option, index in searchResults" :key="option.value" class="flex">
-                                <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
-                                    :value="option.value" @change="onCheckboxChange"
-                                    :checked="query.keywords.includes(option.value)"
-                                    class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
-                                <label :for="'filters.keywords.' + index" class="whitespace-nowrap pr-4">
-                                    @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
-                                </label>
-                            </div>
-                        </search.filter-search>
-                    </search.popover-filter>
+                    <template v-if="isShowMoreOpen">
+                        <search.popover-filter label="Kľúčové slová" :selected-count="query.keywords.length"
+                            :options="filters.keywords" v-slot="{ options }">
+                            <search.filter-search :options="options" placeholder="Zadajte kľúčové slovo"
+                                v-slot="{ searchResults }">
+                                <div v-for="option, index in searchResults" :key="option.value" class="flex">
+                                    <input type="checkbox" :id="'filters.keywords.' + index" name="keywords"
+                                        :value="option.value" @change="onCheckboxChange"
+                                        :checked="query.keywords.includes(option.value)"
+                                        class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
+                                    <label :for="'filters.keywords.' + index" class="whitespace-nowrap pr-4">
+                                        @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                    </label>
+                                </div>
+                            </search.filter-search>
+                        </search.popover-filter>
+
+                        <search.popover-filter label="Materiál" :selected-count="query.material.length"
+                            :options="filters.material" v-slot="{ options }">
+                            <search.filter-search :options="options" placeholder="Zadajte materiál"
+                                v-slot="{ searchResults }">
+                                <div v-for="option, index in searchResults" :key="option.value" class="flex">
+                                    <input type="checkbox" :id="'filters.material.' + index" name="material"
+                                        :value="option.value" @change="onCheckboxChange"
+                                        :checked="query.material.includes(option.value)"
+                                        class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
+                                    <label :for="'filters.material.' + index" class="whitespace-nowrap pr-4">
+                                        @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                    </label>
+                                </div>
+                            </search.filter-search>
+                        </search.popover-filter>
+
+                        <search.popover-filter label="Stav" :selected-count="query.state.length"
+                            :options="filters.state" v-slot="{ options }">
+                                <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
+                                    <div v-if="options?.length" v-for="option, index in options" :key="option.value" class="flex">
+                                        <input type="checkbox" :id="'filters.state.' + index" name="state"
+                                            :value="option.value" @change="onCheckboxChange"
+                                            :checked="query.state.includes(option.value)"
+                                            class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
+                                        <label :for="'filters.state.' + index" class="whitespace-nowrap pr-4">
+                                            @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
+                                        </label>
+                                    </div>
+                                    <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                                    >Žiadne možnosti</span>
+                                </div>
+                            </search.popover-filter>
+                    </template>
+
+                    <div class="flex items-center">
+                        <search.transition-opacity  mode="out-in">
+                            <button class="underline" v-on:click="changeShowMoreOpen(false)" v-if="isShowMoreOpen">Skryť filtre</button>
+                            <button class="underline" v-on:click="changeShowMoreOpen(true)" v-else>Viac filtrov</button>
+                            {{-- TODO: length of hidden filters --}}
+                        </transition-opacity>
+                    </div>
                 </headless.popover-group>
 
-                <div v-if="artworks.length" class="mt-5 hidden lg:block transition-opacity"
+                <div v-if="artworks.length" class="mt-5 hidden lg:block transition-opacity text-nowrap"
                     :class="{ 'opacity-50': isFetching }">
                     <span v-if="artworks.length === 1">
                         Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} dielo</span>

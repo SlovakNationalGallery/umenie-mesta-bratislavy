@@ -22,6 +22,8 @@ const defaultQuery = {
     authors: [],
     categories: [],
     keywords: [],
+    material: [],
+    state: []
 }
 
 export default {
@@ -40,6 +42,7 @@ export default {
                 ...defaultQuery,
                 ...getParsedUrl().query,
             },
+            isShowMoreOpen: false
         };
     },
     async created() {
@@ -55,6 +58,8 @@ export default {
             filterSelections: this.filterSelections,
             removeAllSelections: this.removeAllSelections,
             removeSelection: this.removeSelection,
+            changeShowMoreOpen: this.changeShowMoreOpen,
+            isShowMoreOpen: this.isShowMoreOpen
         });
     },
     computed: {
@@ -87,10 +92,25 @@ export default {
                     label: this.filters.keywords.find((f) => f.value === value)
                         .label,
                 })),
+                ...this.query.material.map((value) => ({
+                    name: 'material',
+                    value,
+                    label: this.filters.material.find((f) => f.value === value)
+                        .label,
+                })),
+                ...this.query.state.map((value) => ({
+                    name: 'state',
+                    value,
+                    label: this.filters.state.find((f) => f.value === value)
+                        .label,
+                })),
             ];
         },
     },
     methods: {
+        changeShowMoreOpen(value) {
+            this.isShowMoreOpen = value;
+        },
         onCheckboxChange(event) {
             const { name, value, checked } = event.target;
             if (checked) {

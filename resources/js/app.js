@@ -6,6 +6,7 @@ import HomeMap from './components/HomeMap.vue';
 import ArtworksMasonry from './components/ArtworksMasonry.vue';
 import PopoverFilter from './components/search/PopoverFilter.vue';
 import DisclosureFilter from './components/search/DisclosureFilter.vue';
+import TransitionOpacity from './components/search/TransitionOpacity.vue';
 import FiltersController from './components/search/FiltersController.vue';
 import LoadMore from './components/search/LoadMore.vue';
 import ArtworksQueryObserver from './components/search/ArtworksQueryObserver.vue';
@@ -31,7 +32,9 @@ app.component('search.popover-filter', PopoverFilter);
 app.component('search.disclosure-filter', DisclosureFilter);
 app.component('search.filter-search', FilterSearch);
 app.component('search.artworks-query-observer', ArtworksQueryObserver);
+app.component('search.transition-opacity', TransitionOpacity);
 app.component('artwork-carousel', ArtworkCarousel);
 app.component('back-button', BackButton);
+
 
 app.mount('#app');

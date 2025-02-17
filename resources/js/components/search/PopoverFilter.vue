@@ -1,6 +1,6 @@
 <template>
     <Popover v-slot="{ open }">
-        <PopoverButton class="py-4 px-5 outline-none text-lg bg-white">
+        <PopoverButton class="py-3.5 px-3 outline-none text-lg bg-white">
             <span class="flex gap-x-2 items-center">
                 {{ props.label }}
                 <div
