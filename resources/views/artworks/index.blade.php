@@ -119,6 +119,34 @@
                             >Žiadne možnosti</span>
                         </div>
                     </search.disclosure-filter>
+                    <headless.disclosure v-slot="{ open }">
+                        <headless.disclosure-button class="py-4 px-4 text-lg bg-white w-full">
+                            <span class="flex items-center justify-between">
+                                <div class="flex gap-x-2">
+                                    Časová os
+                                </div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    :class="['w-6 h-6', { 'rotate-180': open }]"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                    />
+                                </svg>
+                            </span>            
+                        </headless.disclosure-button>
+                        <headless.disclosure-panel
+                            class="p-6 bg-white flex flex-col gap-y-2 max-h-96 overflow-auto">
+                            <search.year-slider :min="20" :max="50" v-on:change="onYearChange">
+                            </search.year-slider>
+                        </headless.disclosure-panel>
+                    </headless.disclosure>
                 </div>
             </search.mobile-filter-dialog>
 
