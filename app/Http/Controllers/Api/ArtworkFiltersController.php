@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Condition;
 use App\Models\Keyword;
 use App\Models\Location;
 use App\Models\Material;
@@ -87,6 +88,18 @@ class ArtworkFiltersController extends Controller
                         'count' => $a->artworks_count,
                     ]
                 ),
+                'conditions' => Condition::query()
+                ->select('id', 'name')
+                ->withFilteredArtworksCount($request, facetField: 'conditions')
+                ->orderByDesc('artworks_count')
+                ->get()
+                ->map(
+                    fn($a) => [
+                        'value' => $a->id,
+                        'label' => $a->name,
+                        'count' => $a->artworks_count,
+                    ]
+                ),''
         ];
     }
 }

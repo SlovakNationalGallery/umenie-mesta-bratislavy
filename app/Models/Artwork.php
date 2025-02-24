@@ -127,6 +127,14 @@ class Artwork extends Model
              });
          });
 
+         $request->whenFilled('conditions', function ($conditionIds) use ($query) {
+            $query->whereHas('conditions', function (Builder $query) use (
+                 $conditionIds,
+             ) {
+                 $query->whereIn('id', $conditionIds);
+             });
+         });
+
         $request->whenFilled('keywords', function ($keywordIds) use ($query) {
             $query->whereHas('keywords', function (Builder $query) use (
                 $keywordIds,

@@ -23,7 +23,7 @@ const defaultQuery = {
     categories: [],
     keywords: [],
     materials: [],
-    state: []
+    conditions: [],
 }
 
 export default {
@@ -98,10 +98,10 @@ export default {
                     label: this.filters.materials.find((f) => f.value === value)
                         .label,
                 })),
-                ...this.query.state.map((value) => ({
-                    name: 'state',
+                ...this.query.conditions.map((value) => ({
+                    name: 'conditions',
                     value,
-                    label: this.filters.state.find((f) => f.value === value)
+                    label: this.filters.conditions.find((f) => f.value === value)
                         .label,
                 })),
             ];

@@ -103,15 +103,15 @@
                         </search.filter-search>
                     </search.disclosure-filter>
                     
-                    <search.disclosure-filter label="Stav" :selected-count="query.state.length"
-                        :options="filters.state" v-slot="{ options }">
+                    <search.disclosure-filter label="Stav" :selected-count="query.conditions.length"
+                        :options="filters.conditions" v-slot="{ options }">
                         <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
                             <div v-if="options?.length" v-for="option, index in options" :key="option.value" class="flex">
-                                <input type="checkbox" :id="'filters.state.' + index" name="state"
+                                <input type="checkbox" :id="'filters.conditions.' + index" name="conditions"
                                     :value="option.value" @change="onCheckboxChange"
-                                    :checked="query.state.includes(option.value)"
+                                    :checked="query.conditions.includes(option.value)"
                                     class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
-                                <label :for="'filters.state.' + index" class="whitespace-nowrap">
+                                <label :for="'filters.conditions.' + index" class="whitespace-nowrap">
                                     @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                 </label>
                             </div>
@@ -253,15 +253,15 @@
                             </search.filter-search>
                         </search.popover-filter>
 
-                        <search.popover-filter label="Stav" :selected-count="query.state.length"
-                            :options="filters.state" v-slot="{ options }">
+                        <search.popover-filter label="Stav" :selected-count="query.conditions.length"
+                            :options="filters.conditions" v-slot="{ options }">
                                 <div class="max-h-80 overflow-auto flex flex-col gap-y-2">
                                     <div v-if="options?.length" v-for="option, index in options" :key="option.value" class="flex">
-                                        <input type="checkbox" :id="'filters.state.' + index" name="state"
+                                        <input type="checkbox" :id="'filters.conditions.' + index" name="conditions"
                                             :value="option.value" @change="onCheckboxChange"
-                                            :checked="query.state.includes(option.value)"
+                                            :checked="query.conditions.includes(option.value)"
                                             class="text-red-500 h-6 w-6 border border-neutral-300 checked:border-none mr-2 focus:ring-0" />
-                                        <label :for="'filters.state.' + index" class="whitespace-nowrap pr-4">
+                                        <label :for="'filters.conditions.' + index" class="whitespace-nowrap pr-4">
                                             @{{ option.label }} <span class="font-semibold">(@{{ option.count }})</span>
                                         </label>
                                     </div>
