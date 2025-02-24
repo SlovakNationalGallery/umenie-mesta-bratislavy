@@ -22,7 +22,7 @@ const defaultQuery = {
     authors: [],
     categories: [],
     keywords: [],
-    material: [],
+    materials: [],
     state: []
 }
 
@@ -92,10 +92,10 @@ export default {
                     label: this.filters.keywords.find((f) => f.value === value)
                         .label,
                 })),
-                ...this.query.material.map((value) => ({
-                    name: 'material',
+                ...this.query.materials.map((value) => ({
+                    name: 'materials',
                     value,
-                    label: this.filters.material.find((f) => f.value === value)
+                    label: this.filters.materials.find((f) => f.value === value)
                         .label,
                 })),
                 ...this.query.state.map((value) => ({

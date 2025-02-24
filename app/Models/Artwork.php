@@ -119,6 +119,14 @@ class Artwork extends Model
             });
         });
 
+        $request->whenFilled('materials', function ($materialIds) use ($query) {
+            $query->whereHas('materials', function (Builder $query) use (
+                 $materialIds,
+             ) {
+                 $query->whereIn('id', $materialIds);
+             });
+         });
+
         $request->whenFilled('keywords', function ($keywordIds) use ($query) {
             $query->whereHas('keywords', function (Builder $query) use (
                 $keywordIds,
