@@ -135,13 +135,25 @@ class Artwork extends Model
              });
          });
 
-        $request->whenFilled('keywords', function ($keywordIds) use ($query) {
+        $request->whenFilled('keywords', function ($keywordIds) use ($query): void {
             $query->whereHas('keywords', function (Builder $query) use (
                 $keywordIds,
             ) {
                 $query->whereIn('id', $keywordIds);
             });
         });
+
+        $request->whenFilled('min_year', function ($minYear) use ($query): void {
+            $query->whereHas('years', function (Builder $query) use ($minYear) {
+                $query->where('years.latest', '>', $minYear);
+            });
+        });
+        
+        $request->whenFilled('max_year', function ($maxYear) use ($query): void {
+            $query->whereHas('years', function (Builder $query) use ($maxYear) {
+                $query->where('years.earliest', '<', $maxYear);
+            });
+        });    
     }
 
     public function authors()

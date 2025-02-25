@@ -9,6 +9,8 @@ use App\Models\Condition;
 use App\Models\Keyword;
 use App\Models\Location;
 use App\Models\Material;
+use App\Models\Year;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -88,7 +90,7 @@ class ArtworkFiltersController extends Controller
                         'count' => $a->artworks_count,
                     ]
                 ),
-                'conditions' => Condition::query()
+            'conditions' => Condition::query()
                 ->select('id', 'name')
                 ->withFilteredArtworksCount($request, facetField: 'conditions')
                 ->orderByDesc('artworks_count')
@@ -99,7 +101,35 @@ class ArtworkFiltersController extends Controller
                         'label' => $a->name,
                         'count' => $a->artworks_count,
                     ]
-                ),''
+                ),
+            'min_year' => Year::query()
+                ->select('id', 'earliest')
+                ->whereHas(
+                     'artworks',
+                     fn(Builder $query) => $query
+                         ->presentable()
+                         ->filteredBySearchRequest(
+                             Request::createFrom($request)->replace(
+                                 $request->except('min_year', 'max_year')
+                             )
+                         )
+                )
+                ->min(column: 'earliest')
+            ,
+            'max_year' => Year::query()
+                ->select('id', 'earliest')
+                ->whereHas(
+                     'artworks',
+                     fn(Builder $query) => $query
+                         ->presentable()
+                         ->filteredBySearchRequest(
+                             Request::createFrom($request)->replace(
+                                 $request->except('min_year', 'max_year')
+                             )
+                         )
+                )
+                ->max(column: 'latest')
+            ,                
         ];
     }
 }
