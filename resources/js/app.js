@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import './bootstrap';
-import { PopoverGroup, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
+import { PopoverGroup, Disclosure, DisclosureButton, DisclosurePanel, PopoverPanel, PopoverButton, Popover } from '@headlessui/vue';
 
 import HomeMap from './components/HomeMap.vue';
 import ArtworksMasonry from './components/ArtworksMasonry.vue';
@@ -21,6 +21,9 @@ import YearSlider from './components/search/YearSlider.vue';
 
 const app = createApp({});
 app.component('headless.popover-group', PopoverGroup);
+app.component('headless.popover', Popover);
+app.component('headless.popover-panel', PopoverPanel);
+app.component('headless.popover-button', PopoverButton);
 app.component('headless.disclosure', Disclosure);
 app.component('headless.disclosure-button', DisclosureButton);
 app.component('headless.disclosure-panel', DisclosurePanel);

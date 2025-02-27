@@ -274,7 +274,50 @@
                                     <span v-else class="text-neutral-500 italic whitespace-nowrap"
                                     >Žiadne možnosti</span>
                                 </div>
-                            </search.popover-filter>
+                        </search.popover-filter>
+                        <headless.popover v-slot="{ open }">
+                            <headless.popover-button class="py-3.5 px-3 outline-none text-lg bg-white">
+                                <span class="flex gap-x-2 items-center">
+                                    Roky
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        :class="['w-6 h-6', { 'rotate-180': open }]"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                        />
+                                    </svg>
+                                </span>
+                            </headless.popover-button>
+                    
+                            <transition
+                                enter-active-class="transition duration-200 ease-out"
+                                enter-from-class="translate-y-1 opacity-0"
+                                enter-to-class="translate-y-0 opacity-100"
+                                leave-active-class="transition duration-150 ease-in"
+                                leave-from-class="translate-y-0 opacity-100"
+                                leave-to-class="translate-y-1 opacity-0"
+                            >
+                                <headless.popover-panel
+                                    class="flex-col overflow-auto flex absolute z-10 p-6 bg-white drop-shadow-lg mt-3 gap-2">
+                                    <search.year-slider 
+                                        class="w-48"
+                                        :min="filters.min_year" 
+                                        :max="filters.max_year" 
+                                        :default-from="Number(query.min_year)" 
+                                        :default-to="Number(query.max_year)" 
+                                        @change="onYearChange" 
+                                        @reset="onResetYear">
+                                    </search.year-slider>    
+                                </headless.popover-panel>
+                            </transition>
+                        </headless.popover>                    
                     </template>
 
                     <div class="flex items-center">
