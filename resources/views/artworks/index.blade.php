@@ -123,7 +123,7 @@
                         <headless.disclosure-button class="py-4 px-4 text-lg bg-white w-full">
                             <span class="flex items-center justify-between">
                                 <div class="flex gap-x-2">
-                                    Časová os
+                                    Roky
                                     <div
                                         v-if="query.min_year || query.max_year"
                                         class="mt-0.5 rounded-full bg-red-500 text-white flex h-6 w-6 text-sm items-center justify-center"
@@ -345,7 +345,7 @@
                     </div>
                 </headless.popover-group>
 
-                <div v-if="artworks.length" class="mt-5 hidden lg:block transition-opacity text-nowrap"
+                <div v-if="artworks.length" class="pl-4 mt-5 hidden lg:block transition-opacity text-nowrap"
                     :class="{ 'opacity-50': isFetching }">
                     <span v-if="artworks.length === 1">
                         Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} dielo</span>
