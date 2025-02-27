@@ -149,6 +149,7 @@
                         <headless.disclosure-panel
                             class="p-6 bg-white flex flex-col gap-y-2 max-h-96 overflow-auto">
                             <search.year-slider 
+                                v-if="filters.min_year !== filters.max_year"
                                 :min="filters.min_year" 
                                 :max="filters.max_year" 
                                 :default-from="Number(query.min_year)" 
@@ -156,6 +157,8 @@
                                 @change="onYearChange" 
                                 @reset="onResetYear">
                             </search.year-slider>
+                            <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                            >Žiadne možnosti</span>    
                         </headless.disclosure-panel>
                     </headless.disclosure>
                 </div>
@@ -317,6 +320,7 @@
                                 <headless.popover-panel
                                     class="flex-col overflow-auto flex absolute z-10 p-6 bg-white drop-shadow-lg mt-3 gap-2">
                                     <search.year-slider 
+                                        v-if="filters.min_year !== filters.max_year"
                                         class="w-48"
                                         :min="filters.min_year" 
                                         :max="filters.max_year" 
@@ -324,7 +328,9 @@
                                         :default-to="Number(query.max_year)" 
                                         @change="onYearChange" 
                                         @reset="onResetYear">
-                                    </search.year-slider>    
+                                    </search.year-slider>
+                                    <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                                    >Žiadne možnosti</span>        
                                 </headless.popover-panel>
                             </transition>
                         </headless.popover>                    
