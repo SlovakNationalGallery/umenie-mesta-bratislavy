@@ -3,7 +3,8 @@
         <Slider
             :min="min"
             :max="max"
-            v-model="value"
+            :value="value"
+            @input="onSliderChange"
             :classes="sliderClasses"
             :tooltips="false"
         />
@@ -25,10 +26,7 @@
                 @change="onMinChange"
             />
         </div>
-        <button
-            @click="resetValues"
-            class="underline pt-4 text-xs"
-        >
+        <button @click="resetValues" class="underline pt-4 text-xs">
             Resetovať hodnoty
         </button>
     </div>
@@ -40,7 +38,9 @@ import Slider from '@vueform/slider';
 export default {
     props: {
         min: Number,
-        max: Number
+        max: Number,
+        defaultFrom: Number,
+        defaultTo: Number,
     },
     components: {
         Slider,
@@ -48,13 +48,17 @@ export default {
     emits: ['change', 'reset'],
     data() {
         return {
-            value: [this.min, this.max],
-            immediateValue: [this.min, this.max],
+            value: [this.defaultFrom || this.min, this.defaultTo || this.max],
+            immediateValue: [
+                this.defaultFrom || this.min,
+                this.defaultTo || this.max,
+            ],
             sliderClasses: {
                 target: 'relative box-border select-none touch-none tap-highlight-transparent touch-callout-none disabled:cursor-not-allowed',
                 horizontal: 'slider-horizontal h-0.5',
                 base: 'w-full h-full relative z-1 bg-gray-300 rounded',
-                connect: 'absolute z-1 top-0 right-0 transform-origin-0 transform-style-flat h-full w-full bg-red-500 cursor-pointer',
+                connect:
+                    'absolute z-1 top-0 right-0 transform-origin-0 transform-style-flat h-full w-full bg-red-500 cursor-pointer',
                 handle: 'absolute bg-red-500 rounded-full border-0 cursor-grab focus:outline-none w-6 h-6 -top-2.5 -right-2 focus:ring focus:ring-green-500 focus:ring-opacity-30',
                 tooltipHidden: 'slider-tooltip-hidden',
                 active: 'cursor-grabbing',
@@ -71,23 +75,20 @@ export default {
             this.value[1] = newMax;
             this.immediateValue[1] = newMax;
         },
-        value: {
-            handler(newValue) {
-                this.immediateValue = newValue;
-                this.$emit('change', newValue);
-            },
-            deep: true
-        }
     },
     methods: {
         sanitizeInput(val) {
-            const sanitized = val.replace(/[^-0-9]/g, '').replace(/(?!^)-/g, '');
-            return sanitized !== '' && !isNaN(sanitized) ? Number(sanitized) : null;
+            const sanitized = val
+                .replace(/[^-0-9]/g, '')
+                .replace(/(?!^)-/g, '');
+            return sanitized !== '' && !isNaN(sanitized)
+                ? Number(sanitized)
+                : null;
         },
         onMinInput(e) {
             const sanitized = this.sanitizeInput(e.target.value);
             if (sanitized !== null) {
-                this.immediateValue = [sanitized, this.immediateValue[1] ];
+                this.immediateValue = [sanitized, this.immediateValue[1]];
             }
         },
         onMaxInput(e) {
@@ -98,25 +99,46 @@ export default {
         },
         onMinChange(e) {
             const sanitized = this.sanitizeInput(e.target.value);
-            if (sanitized === null || sanitized < this.min || sanitized > this.max) {
-                this.value = [this.min, this.value[1]];
+            let newValue = [];
+            if (
+                sanitized === null ||
+                sanitized < this.min ||
+                sanitized > this.max
+            ) {
+                newValue = [this.min, this.value[1]];
             } else {
-                this.value = [sanitized, this.value[1]];
+                newValue = [sanitized, this.value[1]];
             }
+            this.value = newValue;
+            this.immediateValue = newValue;
+            this.$emit('change', newValue);
         },
         onMaxChange(e) {
             const sanitized = this.sanitizeInput(e.target.value);
-            if (sanitized === null || sanitized < this.min || sanitized > this.max) {
-                this.value = [this.value[0], this.max];
+            let newValue = [];
+            if (
+                sanitized === null ||
+                sanitized < this.min ||
+                sanitized > this.max
+            ) {
+                newValue = [this.value[0], this.max];
             } else {
-                this.value = [this.value[0], sanitized];
+                newValue = [this.value[0], sanitized];
             }
+            this.value = newValue;
+            this.immediateValue = newValue;
+            this.$emit('change', newValue);
+        },
+        onSliderChange(newValue) {
+            this.immediateValue = [...newValue];
+            this.value = [...newValue];
+            this.$emit('change', newValue);
         },
         resetValues() {
             this.value = [this.min, this.max];
             this.immediateValue = [this.min, this.max];
             this.$emit('reset');
-        }
-    }
+        },
+    },
 };
 </script>

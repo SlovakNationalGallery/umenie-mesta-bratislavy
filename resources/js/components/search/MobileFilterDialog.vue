@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 import {
     TransitionRoot,
     TransitionChild,
@@ -125,6 +125,7 @@ import {
     DialogTitle,
 } from '@headlessui/vue';
 
+defineEmits(['clear'])
 const props = defineProps({ activeCount: Number });
 
 const isOpen = ref(false);

@@ -24,6 +24,8 @@ const defaultQuery = {
     keywords: [],
     materials: [],
     conditions: [],
+    min_year: '',
+    max_year: '',
 };
 
 export default {
@@ -107,11 +109,12 @@ export default {
                         (f) => f.value === value,
                     ).label,
                 })),
-                ...(this.query.min_year
-                    ? { minYear: this.query.min_year }
-                    : []),
-                ...(this.query.max_year
-                    ? { maxYear: this.query.max_year }
+                ...(this.query.min_year && this.query.max_year
+                    ? [{
+                          name: 'years',
+                          value: [this.query.min_year, this.query.max_year],
+                          label: `${this.query.min_year} - ${this.query.max_year}`,
+                      }]
                     : []),
             ];
         },
@@ -124,15 +127,7 @@ export default {
             const oldQuery = this.query;
             const min = value[0];
             const max = value[1];
-
-            console.log(min);
-            console.log(max);
             this.query = { ...oldQuery, min_year: min, max_year: max };
-            // this.query = {
-            //     ...this.query,
-            //     min_year: value[0],
-            //     max_year: value[1],
-            // };
         },
         onResetYear() {
             const { min_year, max_year, ...rest } = this.query;
