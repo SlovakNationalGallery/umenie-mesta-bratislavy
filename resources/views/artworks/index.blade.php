@@ -124,6 +124,11 @@
                             <span class="flex items-center justify-between">
                                 <div class="flex gap-x-2">
                                     Časová os
+                                    <div
+                                        v-if="query.min_year || query.max_year"
+                                        class="mt-0.5 rounded-full bg-red-500 text-white flex h-6 w-6 text-sm items-center justify-center"
+                                    >
+                                    </div>
                                 </div>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +144,7 @@
                                         d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                                     />
                                 </svg>
-                            </span>            
+                            </span>
                         </headless.disclosure-button>
                         <headless.disclosure-panel
                             class="p-6 bg-white flex flex-col gap-y-2 max-h-96 overflow-auto">
@@ -279,6 +284,11 @@
                             <headless.popover-button class="py-3.5 px-3 outline-none text-lg bg-white">
                                 <span class="flex gap-x-2 items-center">
                                     Roky
+                                    <div
+                                        v-if="query.min_year || query.max_year"
+                                        class="mt-0.5 rounded-full bg-red-500 text-white flex h-6 w-6 text-sm items-center justify-center"
+                                    >
+                                    </div>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
