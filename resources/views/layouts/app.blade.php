@@ -125,8 +125,14 @@
                         <a href="https://bratislavskykraj.sk/" target="_blank" class="flex-shrink-0">
                             <img src="{{ asset('images/logos/bsk_logo.svg') }}" class="h-10 lg:h-12" />
                         </a>
+                        <a href="https://www.yit.sk/" target="_blank">
+                            <img src="{{ asset(path: 'images/logos/yit_logo.svg') }}" class="h-6 lg:h-8" />
+                        </a>
                         <a href="https://www.minv.sk/?sna" target="_blank">
                             <img src="{{ asset('images/logos/sna_logo.png') }}" class="h-12 lg:h-16" />
+                        </a>
+                        <a href="https://bratislava.sk/mesto-bratislava/archiv-mesta-bratislavy" target="_blank">
+                            <img src="{{ asset('images/logos/archiv_logo.svg') }}" class="h-12 lg:h-16" />
                         </a>
                     </div>
                     <h3 class="text-xl mt-10 lg:mt-14 font-medium lg:text-3xl">Mediálni partneri</h3>
