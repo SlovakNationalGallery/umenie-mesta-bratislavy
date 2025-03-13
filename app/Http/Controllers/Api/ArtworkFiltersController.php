@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Condition;
 use App\Models\Keyword;
 use App\Models\Location;
+use App\Models\Material;
+use App\Models\Year;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -62,7 +66,6 @@ class ArtworkFiltersController extends Controller
                         'count' => $a->artworks_count,
                     ]
                 ),
-
             'keywords' => Keyword::query()
                 ->select('id', 'keyword')
                 ->withFilteredArtworksCount($request, facetField: 'keywords')
@@ -75,6 +78,58 @@ class ArtworkFiltersController extends Controller
                         'count' => $a->artworks_count,
                     ]
                 ),
+            'materials' => Material::query()
+                ->select('id', 'name')
+                ->withFilteredArtworksCount($request, facetField: 'materials')
+                ->orderByDesc('artworks_count')
+                ->get()
+                ->map(
+                    fn($a) => [
+                        'value' => $a->id,
+                        'label' => $a->name,
+                        'count' => $a->artworks_count,
+                    ]
+                ),
+            'conditions' => Condition::query()
+                ->select('id', 'name')
+                ->withFilteredArtworksCount($request, facetField: 'conditions')
+                ->orderByDesc('artworks_count')
+                ->get()
+                ->map(
+                    fn($a) => [
+                        'value' => $a->id,
+                        'label' => $a->name,
+                        'count' => $a->artworks_count,
+                    ]
+                ),
+            'min_year' => Year::query()
+                ->select('id', 'earliest')
+                ->whereHas(
+                     'artworks',
+                     fn(Builder $query) => $query
+                         ->presentable()
+                         ->filteredBySearchRequest(
+                             Request::createFrom($request)->replace(
+                                 $request->except('min_year', 'max_year')
+                             )
+                         )
+                )
+                ->min(column: 'earliest')
+            ,
+            'max_year' => Year::query()
+                ->select('id', 'earliest')
+                ->whereHas(
+                     'artworks',
+                     fn(Builder $query) => $query
+                         ->presentable()
+                         ->filteredBySearchRequest(
+                             Request::createFrom($request)->replace(
+                                 $request->except('min_year', 'max_year')
+                             )
+                         )
+                )
+                ->max(column: 'latest')
+            ,                
         ];
     }
 }
