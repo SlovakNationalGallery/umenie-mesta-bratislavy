@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, artworks, isFetching, filterSelections, isShowMoreOpen, changeShowMoreOpen, ...controller }">
+    <search.filters-controller v-cloak v-slot="{ filters, query, onCheckboxChange, onYearChange, onResetYear, artworks, isFetching, filterSelections, isShowMoreOpen, changeShowMoreOpen, ...controller }">
         <div class="max-w-screen-3xl px-4 lg:px-14 mx-auto relative">
             {{-- Mobile filter --}}
             <search.mobile-filter-dialog
@@ -119,6 +119,48 @@
                             >Žiadne možnosti</span>
                         </div>
                     </search.disclosure-filter>
+                    <headless.disclosure v-slot="{ open }">
+                        <headless.disclosure-button class="py-4 px-4 text-lg bg-white w-full">
+                            <span class="flex items-center justify-between">
+                                <div class="flex gap-x-2">
+                                    Roky
+                                    <div
+                                        v-if="query.min_year || query.max_year"
+                                        class="mt-0.5 rounded-full bg-red-500 text-white flex h-6 w-6 text-sm items-center justify-center"
+                                    >
+                                    </div>
+                                </div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    :class="['w-6 h-6', { 'rotate-180': open }]"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                    />
+                                </svg>
+                            </span>
+                        </headless.disclosure-button>
+                        <headless.disclosure-panel
+                            class="p-6 bg-white flex flex-col gap-y-2 max-h-96 overflow-auto">
+                            <search.year-slider 
+                                v-if="filters.min_year !== filters.max_year"
+                                :min="filters.min_year" 
+                                :max="filters.max_year" 
+                                :default-from="Number(query.min_year)" 
+                                :default-to="Number(query.max_year)" 
+                                @change="onYearChange" 
+                                @reset="onResetYear">
+                            </search.year-slider>
+                            <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                            >Žiadne možnosti</span>    
+                        </headless.disclosure-panel>
+                    </headless.disclosure>
                 </div>
             </search.mobile-filter-dialog>
 
@@ -240,7 +282,58 @@
                                     <span v-else class="text-neutral-500 italic whitespace-nowrap"
                                     >Žiadne možnosti</span>
                                 </div>
-                            </search.popover-filter>
+                        </search.popover-filter>
+                        <headless.popover v-slot="{ open }">
+                            <headless.popover-button class="py-3.5 px-3 outline-none text-lg bg-white">
+                                <span class="flex gap-x-2 items-center">
+                                    Roky
+                                    <div
+                                        v-if="query.min_year || query.max_year"
+                                        class="mt-0.5 rounded-full bg-red-500 text-white flex h-6 w-6 text-sm items-center justify-center"
+                                    >
+                                    </div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        :class="['w-6 h-6', { 'rotate-180': open }]"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                        />
+                                    </svg>
+                                </span>
+                            </headless.popover-button>
+                    
+                            <transition
+                                enter-active-class="transition duration-200 ease-out"
+                                enter-from-class="translate-y-1 opacity-0"
+                                enter-to-class="translate-y-0 opacity-100"
+                                leave-active-class="transition duration-150 ease-in"
+                                leave-from-class="translate-y-0 opacity-100"
+                                leave-to-class="translate-y-1 opacity-0"
+                            >
+                                <headless.popover-panel
+                                    class="flex-col overflow-auto flex absolute z-10 p-6 bg-white drop-shadow-lg mt-3 gap-2">
+                                    <search.year-slider 
+                                        v-if="filters.min_year !== filters.max_year"
+                                        class="w-48"
+                                        :min="filters.min_year" 
+                                        :max="filters.max_year" 
+                                        :default-from="Number(query.min_year)" 
+                                        :default-to="Number(query.max_year)" 
+                                        @change="onYearChange" 
+                                        @reset="onResetYear">
+                                    </search.year-slider>
+                                    <span v-else class="text-neutral-500 italic whitespace-nowrap"
+                                    >Žiadne možnosti</span>        
+                                </headless.popover-panel>
+                            </transition>
+                        </headless.popover>                    
                     </template>
 
                     <div class="flex items-center">
@@ -252,7 +345,7 @@
                     </div>
                 </headless.popover-group>
 
-                <div v-if="artworks.length" class="mt-5 hidden lg:block transition-opacity text-nowrap"
+                <div v-if="artworks.length" class="pl-4 mt-5 hidden lg:block transition-opacity text-nowrap"
                     :class="{ 'opacity-50': isFetching }">
                     <span v-if="artworks.length === 1">
                         Filtrom zodpovedá <span class="font-semibold">@{{ artworks.length }} dielo</span>
@@ -302,15 +395,26 @@
                         </span>
                     </div>
                     <div class="flex -mx-2 lg:-mx-4 gap-3 mt-10 flex-wrap">
-                        <button v-for="selection in filterSelections"
-                            class="text-xs tracking-wide bg-neutral-100 flex items-center px-3 py-1"
-                            @click="controller.removeSelection(selection)" v-key="`${selection.name}${selection.value}`">
-                            @{{ selection.label }}
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-4 h-4 ml-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+                        <template v-for="selection in filterSelections">
+                            <button v-if="selection.name === 'years'"
+                                class="text-xs tracking-wide bg-neutral-100 flex items-center px-3 py-1"
+                                @click="onResetYear" v-key="`${selection.name}${selection.value}`">
+                                @{{ selection.label }}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" class="w-4 h-4 ml-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <button v-else
+                                class="text-xs tracking-wide bg-neutral-100 flex items-center px-3 py-1"
+                                @click="controller.removeSelection(selection)" v-key="`${selection.name}${selection.value}`">
+                                @{{ selection.label }}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" class="w-4 h-4 ml-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </template>
                         <button v-if="filterSelections.length" class="underline text-xs p-2" @click="controller.removeAllSelections">
                             vymazať filtre
                         </button>    

@@ -13,7 +13,7 @@ export function stringifyUrl({ url, query }) {
         { url, query },
         {
             arrayFormat: 'bracket',
-        }
+        },
     );
 }
 
@@ -24,7 +24,9 @@ const defaultQuery = {
     keywords: [],
     materials: [],
     conditions: [],
-}
+    min_year: '',
+    max_year: '',
+};
 
 export default {
     props: {
@@ -42,7 +44,7 @@ export default {
                 ...defaultQuery,
                 ...getParsedUrl().query,
             },
-            isShowMoreOpen: false
+            isShowMoreOpen: false,
         };
     },
     async created() {
@@ -53,13 +55,15 @@ export default {
             filters: this.filters,
             query: this.query,
             onCheckboxChange: this.onCheckboxChange,
+            onYearChange: this.onYearChange,
+            onResetYear: this.onResetYear,
             artworks: this.artworks,
             isFetching: this.isFetching,
             filterSelections: this.filterSelections,
             removeAllSelections: this.removeAllSelections,
             removeSelection: this.removeSelection,
             changeShowMoreOpen: this.changeShowMoreOpen,
-            isShowMoreOpen: this.isShowMoreOpen
+            isShowMoreOpen: this.isShowMoreOpen,
         });
     },
     computed: {
@@ -83,7 +87,7 @@ export default {
                     name: 'categories',
                     value,
                     label: this.filters.categories.find(
-                        (f) => f.value === value
+                        (f) => f.value === value,
                     ).label,
                 })),
                 ...this.query.keywords.map((value) => ({
@@ -101,15 +105,33 @@ export default {
                 ...this.query.conditions.map((value) => ({
                     name: 'conditions',
                     value,
-                    label: this.filters.conditions.find((f) => f.value === value)
-                        .label,
+                    label: this.filters.conditions.find(
+                        (f) => f.value === value,
+                    ).label,
                 })),
+                ...(this.query.min_year && this.query.max_year
+                    ? [{
+                          name: 'years',
+                          value: [this.query.min_year, this.query.max_year],
+                          label: `${this.query.min_year} - ${this.query.max_year}`,
+                      }]
+                    : []),
             ];
         },
     },
     methods: {
         changeShowMoreOpen(value) {
             this.isShowMoreOpen = value;
+        },
+        onYearChange(value) {
+            const oldQuery = this.query;
+            const min = value[0];
+            const max = value[1];
+            this.query = { ...oldQuery, min_year: min, max_year: max };
+        },
+        onResetYear() {
+            const { min_year, max_year, ...rest } = this.query;
+            this.query = { ...rest };
         },
         onCheckboxChange(event) {
             const { name, value, checked } = event.target;
@@ -129,7 +151,7 @@ export default {
             };
         },
         removeAllSelections() {
-            this.query = defaultQuery
+            this.query = defaultQuery;
         },
         removeSelection({ name, value }) {
             this.query = {
@@ -146,7 +168,7 @@ export default {
                         stringifyUrl({
                             url: '/api/artworks/filters',
                             query: this.query,
-                        })
+                        }),
                     )
                     .then(({ data }) => data);
 
@@ -156,7 +178,7 @@ export default {
                         stringifyUrl({
                             url: '/api/artworks',
                             query: this.query,
-                        })
+                        }),
                     )
                     .then(({ data }) => data);
 
@@ -180,13 +202,13 @@ export default {
                 },
                 {
                     arrayFormat: 'bracket',
-                }
+                },
             );
 
             window.history.replaceState(
                 newUrl,
                 '', // unused param
-                newUrl
+                newUrl,
             );
         },
     },
